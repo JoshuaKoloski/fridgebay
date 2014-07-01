@@ -26,15 +26,15 @@
           <button class="btn btn-default" onclick="shoppingApp.showView('item')">Items for fridge-bay </button>
       </div>
 
-      <div id="about-view" class="view">
-          <p>The purpose of this website is to instruct students on how to navigate through pages</p>
-          <button class="btn btn-default" onclick="shoppingApp.showView('shoppingList')">View your Shopping List now </button>
-          <button class="btn btn-default" onclick="shoppingApp.showView('welcome')">Home</button>
-      </div>
+     
 
       <div id="item-view" class="view">
-          <button class="btn btn-default" onclick="shoppingApp.showView('shoppingList')">View your Shopping List now </button>
-          <button class="btn btn-default" onclick="shoppingApp.showView('welcome')">Home</button>
+          <div class="checkbox-inline">
+              <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
+          </div>
+          <div id="a" class="checkbox-inline">
+              <button class="btn btn-default">Login</button>
+          </div>
         
               Bran-bay-single-item
 
@@ -130,8 +130,12 @@
       </div>
 
       <div id="login-view" class="view">
-          <button class="btn btn-default" onclick="shoppingApp.showView('shoppingList')">View your Shopping List now </button>
-          <button class="btn btn-default" onclick="shoppingApp.showView('welcome')">Home</button>
+          <div class="checkbox-inline">
+              <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
+          </div>
+          <div id="a" class="checkbox-inline">
+              <button class="btn btn-default">Login</button>
+          </div>
          
               Bran-bay-login-page
               <div class="container">
@@ -404,7 +408,7 @@
        </div>
    </div>
 
-   <div id="shoppingList-view" class="view">
+   
 	
 	<div class="input-group">
 		    <span class="input-group-btn" >
