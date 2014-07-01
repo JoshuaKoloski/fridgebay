@@ -410,66 +410,10 @@
 
 
 
-        <div class="input-group">
-            <span class="input-group-btn">
-                <button id="refreshBtn" class="btn btn-default" onclick="shoppingApp.reloadModel()">
-                    Refresh
-                </button>
-            </span>
-            <span> ...</span>
-            <span class="input-group-btn">
-                <button class="btn btn-default" onclick="shoppingApp.showView('welcome')">
-                    Home
-                </button>
-            </span>
-        </div>
-
-        <div class="panel">
-            <div id="totalprice"> TOTAL PRICE GOES HERE </div>
-        </div>
-
-        <div class="panel">
-
-            <input type="text" class="form-control" id="newItemName" placeholder="Enter new items here" onchange="shoppingApp.addItem(this)" />
-
-
-
-
-        </div>
-
-
-
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Description</th>
-                    <th>Item Price</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                    <th>Purchased</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody id="itemTableBody"></tbody>
-        </table>
-
-        <div class="checkbox-inline">
-            <label>
-                <input id="showCompleteCheckbox" type="checkbox" onclick="shoppingApp.refreshView()">
-                Show Purchased Items
-            </label>
-        </div>
-
-        <div class="checkbox-inline">
-            <label>
-                <input id="cutOffText" type="text" onchange="shoppingApp.refreshView()">
-                Cutoff
-            </label>
-        </div>
-    </div>
+       
 
     </div>
-    </div>
+    
 </body>
 <script>
     // this is the code that actually starts the JavaScript application!!
