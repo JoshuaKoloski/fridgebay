@@ -141,7 +141,7 @@
             <div class="container">
 
                 <table class="table table-striped">
-                    <col width="500px" />
+                    
                     <thead>
                         <tr class="text-center">
                             <td><h3>Login</h3></td>
@@ -245,49 +245,81 @@
         </div>
 
         <div id="home-view" class="view">
-            <div class="checkbox-inline">
-                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-            </div>
-            <div id="a" class="checkbox-inline">
-                <button class="btn btn-default">Login</button>
-            </div>
-            <div class="checkbox-inline">
-                <label id="place1"><input type=text placeholder="Search by Name">Name</label>
-            </div>
-            <div class="checkbox-inline">
-                <label id="place1"><input type=text placeholder="Search by Location" />Location</label>
-            </div>
-            <div class="checkbox-inline">
-                <label id="place1"><input type=text placeholder="Search by Price" />Price</label>
-            </div>
-            <ul id="place" class="nav nav-list">
-                <li class="nav-header">Categories</li>
-                <li class="active"><a href="#">Furniture</a></li>
-                <li><a href="#">Books</a></li>
-            </ul>
-            <div id="place">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Photo</th>
-                            <th>Price</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><label><input placeholder="Name of Item" /></label></td>
-                            <td><label><input placeholder="Upload Photo" /></label></td>
-                            <td><label><input placeholder="Price of Item" /></label></td>
-                            <td><label><input placeholder="Location of Item" /></label></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div id="place">
-                <button class="btn btn-info">Contact Us</button>
-            </div>
+            <div class="containter">
+                
+                <div class="col-lg-2">
+                    <div class="checkbox-inline">
+                        <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
+                    </div>
+               </div>
+                <div class="col-lg-offset-8 col-lg-2">
+                    <div  class="checkbox-inline">
+                        <button class="btn btn-default">Login</button>
+                    </div>
+               </div>
+                <div class="page-header">
+                    <h2 id="pos">HOME</h2>
+                </div>
+                <div id="pos">
+                    <div class="col-lg-4">
+                        <div class="checkbox-inline">
+                            <label ><input type=text class="form-control" placeholder="Search by Name"></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkbox-inline">
+                            <label ><input type=text class="form-control" placeholder="Search by Location" /></label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="checkbox-inline">
+                            <label ><input type=text class="form-control" placeholder="Search by Price" /></label>
+                        </div>
+                    </div>
+                </div>
+                    <div class="col-lg-2">
+                        <ul id="place" class="nav nav-list">
+
+                            <li class="nav-header">Categories</li>
+                            <li class="active"><a href="#">Furniture</a></li>
+                            <li><a href="#">Books</a></li>
+                            <li><a href="#">Vehicles</a></li>
+                            <li><a href="#">Electronics</a></li>
+                            <li><a href="#">Cutlery</a></li>
+                            <li><a href="#">Clothes</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div id="place" class="col-lg-10">
+                        <div class="panel panel-info">
+                            <div class="panel panel-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Photo</th>
+                                            <th>Price</th>
+                                            <th>Location</th>
+                                        </tr>
+                                    </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td><label>Name of Item</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>Price of Item</label></td>
+                                    <td><label>Location of Item</label></td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        </div>
+                         </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-info">Contact Us</button>
+                    </div>
+                </div>
         </div>
 
         <div id="profile-view" class="view">
