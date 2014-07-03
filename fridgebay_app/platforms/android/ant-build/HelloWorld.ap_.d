@@ -41,10 +41,14 @@
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/res \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/css \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/icon.png \
+/home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/plugins/com.manueldeveloper.speech-recognizer \
+/home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/plugins/com.manueldeveloper.speech-recognizer/www \
+/home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/plugins/com.manueldeveloper.speech-recognizer/www/speechrecognizer.js \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/js/model.js \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/js/view.js \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/js/jquery-2.1.1.min.js \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/js/index.js \
+/home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/js/speech.js \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/js/controller.js \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/img/logo.png \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/assets/www/spec/lib \

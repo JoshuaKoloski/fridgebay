@@ -1,4 +1,5 @@
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/ant-build/classes.dex : \
+/home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/ant-build/classes/com/manueldeveloper/SpeechRecognizer.class \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/ant-build/classes/com/phonegap/helloworld/R$attr.class \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/ant-build/classes/com/phonegap/helloworld/R.class \
 /home/josuel/Desktop/fridgebay/fridgebay_app/platforms/android/ant-build/classes/com/phonegap/helloworld/HelloWorld.class \
