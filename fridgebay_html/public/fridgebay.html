@@ -15,35 +15,77 @@
 </head>
 <body>
     <div class="container">
-        <div class="col-lg-2">
-            <div class="checkbox-inline">
-                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-            </div>
-        </div>
-        <div class="col-lg-offset-8 col-lg-2">
-            <div class="checkbox-inline">
-                <button class="btn btn-default">Login</button>
-            </div>
-        </div>
-        
-        
+    	<nav class="navbar">
+			<div class="col-lg-2">
+				<div class="checkbox-inline">
+					<button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
+				</div>
+			</div>
+			<div class="col-lg-offset-8 col-lg-2">
+				<div class="checkbox-inline">
+					<button class="btn btn-default" onclick="shoppingApp.showView('login')">Login</button>
+				</div>
+			</div>
+			<div class="col-lg-2">
+				<div class="checkbox-inline">
+					<button class="btn btn-default" onclick="shoppingApp.showView('welcome')">Welcome Page</button>
+				</div>
+			</div>
+        </nav>
 
         <div id="welcome-view" class="view">
-
             <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge-bay </button>
             <button class="btn btn-default" onclick="shoppingApp.showView('profile')">Profile page of fridge-bay </button>
             <button class="btn btn-default" onclick="shoppingApp.showView('form')">Form for fridge-bay </button>
             <button class="btn btn-default" onclick="shoppingApp.showView('login')">Login for fridge-bay </button>
             <button class="btn btn-default" onclick="shoppingApp.showView('item')">Items for fridge-bay </button>
+            <button class="btn btn-default" onclick="shoppingApp.showView('model')">fridge-bay sample model </button>
         </div>
 
-
+		<div id="model-view" class="view">
+			<div class="container">
+				<div class="panel panel-default">
+					<div class="panel-heading">Items</div>
+					<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Price</th>
+								<th>Category</th>
+								<th>Quantity</th>
+								<th>Location</th>
+								<th>Seller</th>
+								<th>Sell by</th>
+							</tr>
+						</thead>
+		
+						<tbody id="itemTableBodyItems">
+						</tbody>
+					</table>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Users</div>
+					<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+		
+						<tbody id="itemTableBodyUsers">
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
         <div id="item-view" class="view">
-          
-
-            Bran-bay-single-item
-
             <div class="container">
                 <table class="table">
                     <tbody>
@@ -136,9 +178,6 @@
         </div>
 
         <div id="login-view" class="view">
-           
-
-            Bran-bay-login-page
             <div class="container">
 
                 <table class="table table-striped">
@@ -246,9 +285,7 @@
         </div>
 
         <div id="home-view" class="view">
-            <div class="containter">
-                
-                
+            <div class="containter">           
                 <div class="page-header">
                     <h2 id="pos">HOME</h2>
                 </div>
@@ -327,62 +364,60 @@
         </div>
 
         <div id="profile-view" class="view">
-            
-            <div id="place" class="checkbox-line">
-                <img src="http://www.did.ie/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/t/7/t75549mlw-thor-50-50-fridge-freezer.jpg" alt="some_text" height="150" width="150">
-            </div>
-            <div id="pos" class="checkbox-line">
-                <label id="size">USERNAME</label>
-            </div>
-            <div id="pos" class="checkbox-line">
-                <label id="size1">EMAIL</label>
-            </div>
-            <div id="pos1" class="checkbox-line">
-                <label id="size1">PHONE</label>
-            </div>
-            <p></p>
-            <br><br>
-            <div class="checkbox-line" id="pos">
-                <button class="btn btn-warning">New Post</button>
-                <div class="checkbox-line" id="place">
+        	<div class="container"> 
+				<div id="place" class="checkbox-line">
+					<img src="http://www.did.ie/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/t/7/t75549mlw-thor-50-50-fridge-freezer.jpg" alt="some_text" height="150" width="150">
+				</div>
+				<div id="pos" class="checkbox-line">
+					<label id="size">USERNAME</label>
+				</div>
+				<div id="pos" class="checkbox-line">
+					<label id="size1">EMAIL</label>
+				</div>
+				<div id="pos1" class="checkbox-line">
+					<label id="size1">PHONE</label>
+				</div>
+				<p></p>
+				<br><br>
+				<div class="checkbox-line" id="pos">
+					<button class="btn btn-warning">New Post</button>
+					<div class="checkbox-line" id="place">
 
-                    <select>
-                        <option>On sale</option>
-                        <option>Interested In</option>
-                        <option>Item History</option>
-                    </select>
+						<select>
+							<option>On sale</option>
+							<option>Interested In</option>
+							<option>Item History</option>
+						</select>
 
-                </div>
-                <div class="checkbox-line">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Photo</th>
-                                <th>Price</th>
-                                <th>Location</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><label><input placeholder="Name" /></label></td>
-                                <td><label><input placeholder="Photo" /></label></td>
-                                <td><label><input placeholder="Price" /></label></td>
-                                <td><label><input placeholder="Location" /></label></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+					</div>
+					<div class="checkbox-line">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Photo</th>
+									<th>Price</th>
+									<th>Location</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><label><input placeholder="Name" /></label></td>
+									<td><label><input placeholder="Photo" /></label></td>
+									<td><label><input placeholder="Price" /></label></td>
+									<td><label><input placeholder="Location" /></label></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
             </div>
         </div>
+        
+        
         <div id="form-view" class="view">
-            <div class="checkbox-inline">
-                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-            </div>
-            <div id="a" class="checkbox-inline">
-                <button class="btn btn-default">Login</button>
-            </div>
-            <div>
+            
+            <div class="container">
                 <h1 id="pos">Post New Item for Sale </h1>
                 <form role="form">
                     <div>
@@ -438,10 +473,7 @@
 
             </div>
         </div>
-
-
-
-       
+      
 
     </div>
     

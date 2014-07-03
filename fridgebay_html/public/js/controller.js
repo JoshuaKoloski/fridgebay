@@ -97,11 +97,7 @@ var shoppingApp = (function($) {
 
     function start() {
         myList.loadModel();
-        console.log("myList = " + JSON.stringify(myList));
-        shoppingView.refreshView(myList);
         showView("welcome");
-
-
     }
 
     // here is were we decide what is visible to the outside!

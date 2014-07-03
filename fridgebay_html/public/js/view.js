@@ -5,14 +5,10 @@
 
 var shoppingView = (function($){
     
-    function refreshView(myData){
-        refreshTable(myData.items);
-        updateTitle(myData.user);
-        updateTotalPrice(myData);
-        
-        
+    function refreshView(myData){    	
+        refreshTableItems(myData.items);
+        refreshTableUsers(myData.users);
     }
-    
     
     // updates the title with the user's name
     function updateTitle(user){
@@ -54,38 +50,58 @@ var shoppingView = (function($){
     
     
     // redraw the table using the current model
-    function refreshTable(myItems){    
+    function refreshTableItems(myItems){    
                 var rows = "";
                 var len = myItems.length;
-                var filteredItems = filterItems(myItems);
-                var sortedItems = sortItems(filteredItems);
-                console.log("filteredItems = "+ JSON.stringify(filteredItems));
-                console.log("sortedItems = "+JSON.stringify(sortedItems));
                 
-                for(var n=0; n<sortedItems.length; n++){ 
-                    var item = sortedItems[n];
-                    rows = rows + itemToRow(item);
+                for(var n=0; n<len; n++){ 
+                    var item = myItems[n];
+                    rows = rows + itemToRowItems(item);
                 }
 
-                var itemTableBody = $("#itemTableBody").html(rows);
+                var itemTableBody = $("#itemTableBodyItems").html(rows);
 
     }
 
     // convert an item into an HTML tr element
-    function itemToRow(item){
+    function itemToRowItems(item){
         var row = 
-        "<tr><td>"+item.action+
-        "</td><td>"+ 
-            "<input type='text' value='"+item.price+"' sid='"+item.id+"' onchange='shoppingApp.editPrice(this)'>"+
-        "</td><td>"+
-            "<input type='text' value='"+item.quantity+"' sid='"+item.id+"' onchange='shoppingApp.editQuantity(this)'>"+
-        "</td><td>"+item.quantity * item.price +
-        "</td><td> <input type='checkbox' sid='"+item.id+"' onclick='shoppingApp.purchaseItem(this)' "+purchased(item)+ "> "+
-        "</td><td> <input type='checkbox' sid='"+item.id+"' onclick='shoppingApp.handleDeleteItem(this)'> "+  
+        "<tr><td>"+ item.name+
+        "</td><td>"+ item.price+
+        "</td><td>"+ item.catagory+
+        "</td><td>"+ item.quantity+
+        "</td><td>"+ item.location+
+        "</td><td>"+ item.seller+
+        "</td><td>"+ item.sell_by+
         "</td></tr>";
         return row;
     }
     
+    
+        
+    // redraw the table using the current model users~~~~
+    function refreshTableUsers(myItems){    
+                var rows = "";
+                var len = myItems.length;
+                
+                for(var n=0; n<len; n++){ 
+                    var item = myItems[n];
+                    rows = rows + itemToRowUsers(item);
+                }
+
+                var itemTableBody = $("#itemTableBodyUsers").html(rows);
+
+    }
+
+    // convert an item into an HTML tr element
+    function itemToRowUsers(item){
+        var row = 
+        "<tr><td>"+ item.name+
+        "</td><td>"+ item.phone+
+        "</td><td>"+ item.email+
+        "</td></tr>";
+        return row;
+    }
 
     
     function editted(item) {

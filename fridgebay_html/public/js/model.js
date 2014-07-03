@@ -20,14 +20,24 @@ ShoppingList.prototype.getElement = function(id){
 
 ShoppingList.prototype.loadModel = function() {
     var myList = this;
-    
-    // send request to the server for the items in the list
+
+    // add items
     $.ajax({
         type: "GET",
-        url: "/model/shopping",
+        url: "/model/items",
     }).done(function(items) {
         myList.items = items;
         items.map(function(x){x.id=x["_id"];});
+    });
+    
+     // add users
+    $.ajax({
+        type: "GET",
+        url: "/model/users",
+    }).done(function(users) {
+        myList.users = users;
+        users.map(function(x){x.id=x["_id"];});
+        console.log("MyList= "+JSON.stringify(myList));
         shoppingView.refreshView(myList);
     });
 };
@@ -37,7 +47,7 @@ ShoppingList.prototype.addElement = function(newItem){
     var myList = this;
     $.ajax({
         type: "POST",
-        url: "/model/shopping",
+        url: "/model/items",
         data: JSON.stringify(newItem),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
@@ -50,7 +60,7 @@ ShoppingList.prototype.updateElement = function(id,newItem){
     var myList = this;
     $.ajax({
         type: "PUT",
-        url: "/model/shopping/"+id,
+        url: "/model/fridgebay/"+id,
         data: JSON.stringify(newItem),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
@@ -63,7 +73,7 @@ ShoppingList.prototype.deleteElement = function(id){
     var myList = this;
     $.ajax({
         type: "DELETE",
-        url: "/model/shopping/"+id,
+        url: "/model/fridgebay/"+id,
     }).done(function(items) {
         myList.loadModel();
     });
