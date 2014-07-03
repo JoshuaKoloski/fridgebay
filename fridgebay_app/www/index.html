@@ -4,14 +4,28 @@
     <title></title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="css/fridgebaystyle.css">
+    <link rel="stylesheet" type="text/css" href="fridgebaystyle.css">
     <script src="js/jquery-2.1.1.min.js"></script>
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>
     <script src="js/controller.js"></script>
+
+
+
 </head>
 <body>
     <div class="container">
+        <div class="col-lg-2">
+            <div class="checkbox-inline">
+                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
+            </div>
+        </div>
+        <div class="col-lg-offset-8 col-lg-2">
+            <div class="checkbox-inline">
+                <button class="btn btn-default">Login</button>
+            </div>
+        </div>
+
 
 
         <div id="welcome-view" class="view">
@@ -22,13 +36,11 @@
             <button class="btn btn-default" onclick="shoppingApp.showView('login')">Login for fridge-bay </button>
             <button class="btn btn-default" onclick="shoppingApp.showView('item')">Items for fridge-bay </button>
         </div>
+
+
+
         <div id="item-view" class="view">
-            <div class="checkbox-inline">
-                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-            </div>
-            <div id="a" class="checkbox-inline">
-                <button class="btn btn-default">Login</button>
-            </div>
+
 
             Bran-bay-single-item
 
@@ -124,18 +136,13 @@
         </div>
 
         <div id="login-view" class="view">
-            <div class="checkbox-inline">
-                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-            </div>
-            <div id="a" class="checkbox-inline">
-                <button class="btn btn-default">Login</button>
-            </div>
+
 
             Bran-bay-login-page
             <div class="container">
 
                 <table class="table table-striped">
-                    
+
                     <thead>
                         <tr class="text-center">
                             <td><h3>Login</h3></td>
@@ -240,97 +247,87 @@
 
         <div id="home-view" class="view">
             <div class="containter">
-                
-                <div class="col-lg-2">
-                    <div class="checkbox-inline">
-                        <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-                    </div>
-               </div>
-                <div class="col-lg-offset-8 col-lg-2">
-                    <div  class="checkbox-inline">
-                        <button class="btn btn-default">Login</button>
-                    </div>
-               </div>
+
+
                 <div class="page-header">
                     <h2 id="pos">HOME</h2>
                 </div>
                 <div id="pos">
                     <div class="col-lg-4">
                         <div class="checkbox-inline">
-                            <label ><input type=text class="form-control" placeholder="Search by Name"></label>
+                            <label><input type=text class="form-control" placeholder="Search by Name"></label>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="checkbox-inline">
-                            <label ><input type=text class="form-control" placeholder="Search by Location" /></label>
+                            <label><input type=text class="form-control" placeholder="Search by Location" /></label>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="checkbox-inline">
-                            <label ><input type=text class="form-control" placeholder="Search by Price" /></label>
+                            <label><input type=text class="form-control" placeholder="Search by Price" /></label>
                         </div>
                     </div>
                 </div>
-                    <div class="col-lg-2">
-                        <ul id="place" class="nav nav-list">
+                <div class="col-lg-2">
+                    <ul id="place" class="nav nav-list">
 
-                            <li class="nav-header">Categories</li>
-                            <li class="active"><a href="#">Furniture</a></li>
-                            <li><a href="#">Books</a></li>
-                            <li><a href="#">Vehicles</a></li>
-                            <li><a href="#">Electronics</a></li>
-                            <li><a href="#">Cutlery</a></li>
-                            <li><a href="#">Clothes</a></li>
-                        </ul>
-                    </div>
-                    <div id="place" class="col-lg-10">                        
-                                <table class="table table-striped panel panel-info">
-                                    <thead id="color">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Photo</th>
-                                            <th>Price</th>
-                                            <th>Location</th>
-                                        </tr>
-                                    </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td><label>Name of Item</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>Price of Item</label></td>
-                                    <td><label>Location of Item</label></td>
-                                </tr>
-                                <tr>
-                                    <td><label>Name of Item</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>Price of Item</label></td>
-                                    <td><label>Location of Item</label></td>
-                                </tr>
-                                <tr>
-                                    <td><label>Name of Item</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>Price of Item</label></td>
-                                    <td><label>Location of Item</label></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                     
-                    
-                    <div>
-                        <button class="btn btn-info">Contact Us</button>
-                    </div>
+                        <li class="nav-header">Categories</li>
+                        <li class="active"><a href="#">Furniture</a></li>
+                        <li><a href="#">Books</a></li>
+                        <li><a href="#">Vehicles</a></li>
+                        <li><a href="#">Electronics</a></li>
+                        <li><a href="#">Cutlery</a></li>
+                        <li><a href="#">Clothes</a></li>
+                    </ul>
                 </div>
+
+
+
+
+                <div id="place" class="col-lg-10">
+                    <table class="table table-striped panel panel-info">
+                        <thead id="color">
+                            <tr>
+                                <th>Name</th>
+                                <th>Photo</th>
+                                <th>Price</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td><label>Name of Item</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>Price of Item</label></td>
+                                <td><label>Location of Item</label></td>
+                            </tr>
+                            <tr>
+                                <td><label>Name of Item</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>Price of Item</label></td>
+                                <td><label>Location of Item</label></td>
+                            </tr>
+                            <tr>
+                                <td><label>Name of Item</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>Price of Item</label></td>
+                                <td><label>Location of Item</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+                <div>
+                    <button class="btn btn-info">Contact Us</button>
+                </div>
+            </div>
         </div>
 
         <div id="profile-view" class="view">
-            <div class="checkbox-inline">
-                <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge bay</button>
-            </div>
-            <div id="a" class="checkbox-inline">
-                <button class="btn btn-default">Login</button>
-            </div>
+
             <div id="place" class="checkbox-line">
                 <img src="http://www.did.ie/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/t/7/t75549mlw-thor-50-50-fridge-freezer.jpg" alt="some_text" height="150" width="150">
             </div>
@@ -444,10 +441,10 @@
 
 
 
-       
+
 
     </div>
-    
+
 </body>
 <script>
     // this is the code that actually starts the JavaScript application!!
