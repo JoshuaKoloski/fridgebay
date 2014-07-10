@@ -1,12 +1,12 @@
 
 
-function ShoppingList(){
+function Information(){
   this.items = [],
   this.users = []
 };
 
 // we use the locally cached model to lookup elements...
-ShoppingList.prototype.getElement = function(id){
+Information.prototype.getElement = function(id){
     var item;
     var i;
     for(i=0; i<this.items.length; i++){
@@ -18,15 +18,15 @@ ShoppingList.prototype.getElement = function(id){
 };
 
 
-ShoppingList.prototype.loadModel = function() {
-    var myList = this;
+Information.prototype.loadModel = function() {
+    var myInfo = this;
 
     // add items
     $.ajax({
         type: "GET",
         url: "/model/items",
     }).done(function(items) {
-        myList.items = items;
+        myInfo.items = items;
         items.map(function(x){x.id=x["_id"];});
     });
     
@@ -35,14 +35,14 @@ ShoppingList.prototype.loadModel = function() {
         type: "GET",
         url: "/model/users",
     }).done(function(users) {
-        myList.users = users;
+        myInfo.users = users;
         users.map(function(x){x.id=x["_id"];});
-        console.log("MyList= "+JSON.stringify(myList));
-        shoppingView.refreshView(myList);
+	//Loads model information into the view
+        fridgeView.refreshView(myInfo);  
     });
 };
 
-ShoppingList.prototype.addElement = function(newItem){
+Information.prototype.addElement = function(newItem){
     console.log("sending "+JSON.stringify(newItem));
     var myList = this;
     $.ajax({
@@ -56,7 +56,7 @@ ShoppingList.prototype.addElement = function(newItem){
     });
 }
 
-ShoppingList.prototype.updateElement = function(id,newItem){
+Information.prototype.updateElement = function(id,newItem){
     var myList = this;
     $.ajax({
         type: "PUT",
@@ -69,7 +69,7 @@ ShoppingList.prototype.updateElement = function(id,newItem){
     });
 }
 
-ShoppingList.prototype.deleteElement = function(id){
+Information.prototype.deleteElement = function(id){
     var myList = this;
     $.ajax({
         type: "DELETE",
@@ -79,7 +79,7 @@ ShoppingList.prototype.deleteElement = function(id){
     });
 }
 
-ShoppingList.prototype.totalPrice = function(){
+Information.prototype.totalPrice = function(){
     var total=0;
     var item;
     var i;

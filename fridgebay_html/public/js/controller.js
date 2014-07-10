@@ -8,24 +8,16 @@
  VERSION 1.0.1 -- here is where we start adding some functionality
  **/
 
-var shoppingApp = (function($) {
+var fridgeApp = (function($) {
 
 
     // first create the model
-    var myList = new ShoppingList();
+    var myList = new Information();
     
     var showView = function(selected) {
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
     };
-
-
-    function handleDeleteItem(element) {
-        console.log("deleting item");
-        console.log(" with id " + element.getAttribute("sid"));
-        myList.deleteElement(element.getAttribute("sid"));
-
-    }
 
     function addItem(element) {
         var element = document.getElementById("newItemName");
@@ -39,46 +31,9 @@ var shoppingApp = (function($) {
         element.value="";
     }
     
-    function editPrice(element){
-        var itemId = element.getAttribute("sid");
-        var itemVal = element.value;
-        var item;
-        console.log("item "+itemId+" has value "+itemVal);
-        item = myList.getElement(itemId);
-        item.price = itemVal;
-        myList.updateElement(item.id,item);
-        refreshView();
-        
-    }
-    
-    function editQuantity(element){
-        var itemId = element.getAttribute("sid");
-        var itemVal = element.value;
-        var item;
-        console.log("item "+itemId+" has value "+itemVal);
-        item = myList.getElement(itemId);
-        item.quantity = itemVal;
-        myList.updateElement(item.id,item);
-        refreshView();
-        
-    }
-
-    function purchaseItem(element) {
-        var itemId = element.getAttribute("sid");
-        var item;
-        console.log("purchasing item "+itemId);
-        item = myList.getElement(itemId);
-        item.purchased= !item.purchased;
-        myList.updateElement(item.id,item);
-        refreshView();
-    }
-
-    function editItem(element) {
-        console.log("editing item "+element.getAttribute("sid"));
-    }
 
     function refreshView(){
-        shoppingView.refreshView(myList);
+        fridgeView.refreshView(myList);
     }
 
     function reloadModel(){
@@ -105,21 +60,14 @@ var shoppingApp = (function($) {
 
    
     // here is were we decide what is visible to the outside!
-    shoppingApp = {
+    fridgeApp = {
         start: start,
-    
-        addItem: addItem,
-        handleDeleteItem: handleDeleteItem,
         refreshView: refreshView,
-        purchaseItem: purchaseItem,
-        editItem: editItem,
         reloadModel: reloadModel,
-        editPrice: editPrice,
-        editQuantity: editQuantity,
         showView: showView
     }
 
-    return (shoppingApp);
+    return (fridgeApp);
 
 }(jQuery));
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>FridgeBay</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="fridgebaystyle.css">
@@ -18,31 +18,24 @@
 <body>
     <div class="container">
     	<div class="row">
-			<div class="col-lg-4">
-                <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="shoppingApp.showView('home')">
-				
-				
-			</div>
-            <div id="pos"class="text-center, col-lg-4">
-
-                <button class="dark_brown" onclick="shoppingApp.showView('welcome')">Welcome Page</button>
-
+            <div class="col-lg-4">
+                <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             </div>
-			<div class="col-lg-4">
-				
-                <button id="right" class="dark_brown" onclick="shoppingApp.showView('login')">Login</button>
-				
-			</div>
-			
-        </div>
+            <div id="pos"class="text-center, col-lg-4">
+                <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
+            </div>
+            <div class="col-lg-4">
+                <button id="right" class="dark_brown" onclick="fridgeApp.showView('login')">Login</button>
+            </div>
+	</div>
 
         <div id="welcome-view" class="view">
-            <button class="btn btn-default" onclick="shoppingApp.showView('home')">Home page of fridge-bay </button>
-            <button class="btn btn-default" onclick="shoppingApp.showView('profile')">Profile page of fridge-bay </button>
-            <button class="btn btn-default" onclick="shoppingApp.showView('form')">Form for fridge-bay </button>
-            <button class="btn btn-default" onclick="shoppingApp.showView('login')">Login for fridge-bay </button>
-            <button class="btn btn-default" onclick="shoppingApp.showView('item')">Items for fridge-bay </button>
-            <button class="btn btn-default" onclick="shoppingApp.showView('model')">fridge-bay sample model </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('home')">Home page of fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('profile')">Profile page of fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('form')">Form for fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('login')">Login for fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('item')">Items for fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('model')">fridge-bay sample model </button>
         </div>
 
 		<div id="model-view" class="view">
@@ -353,19 +346,19 @@
                              
                             <tbody id="color2">
                               
-                                <tr class="changeImageColor"onclick="shoppingApp.showView('item')">
+                                <tr class="changeImageColor"onclick="fridgeApp.showView('item')">
                                     <td><label>Fridge</label></td>
                                     <td><label>Upload Photo</label></td>
                                     <td><label>$50</label></td>
                                     <td><label>East</label></td>
                                 </tr>
-                                <tr class="changeImageColor" onclick="shoppingApp.showView('item')">
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
                                     <td><label>Abnormal Psych Textbook</label></td>
                                     <td><label>Upload Photo</label></td>
                                     <td><label>$60</label></td>
                                     <td><label>Village</label></td>
                                 </tr>
-                                <tr class="changeImageColor" onclick="shoppingApp.showView('item')">
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
                                     <td><label>Bike</label></td>
                                     <td><label>Upload Photo</label></td>
                                     <td><label>$70</label></td>
@@ -414,7 +407,7 @@
                 </div>
 				<p></p>
 				<br><br>
-                <div class="checkbox-line, text-center" onclick="shoppingApp.showView('form')">
+                <div class="checkbox-line, text-center" onclick="fridgeApp.showView('form')">
                     
                     <button class="btn btn-warning">New Post</button>
 
@@ -530,7 +523,7 @@
 </body>
 <script>
     // this is the code that actually starts the JavaScript application!!
-    // when the document has been fully loaded, all the shoppingApp.start() method
-    $(document).ready(shoppingApp.start());
+    // when the document has been fully loaded, all the fridgeApp.start() method
+    $(document).ready(fridgeApp.start());
 </script>
 </html>
