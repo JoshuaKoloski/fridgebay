@@ -1,20 +1,17 @@
 0 info it worked if it ends with ok
-1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
-1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
-1 verbose cli   'start' ]
-2 info using npm@1.4.9
-3 info using node@v0.10.28
-4 verbose node symlink C:\Program Files\nodejs\\node.exe
-5 error Error: ENOENT, open 'C:\Users\karine\Desktop\nodedemos\fridgebay\package.json'
-6 error If you need help, you may report this *entire* log,
-6 error including the npm and node versions, at:
-6 error     <http://github.com/npm/npm/issues>
-7 error System Windows_NT 6.2.9200
-8 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "start"
-9 error cwd C:\Users\karine\Desktop\nodedemos\fridgebay
-10 error node -v v0.10.28
-11 error npm -v 1.4.9
-12 error path C:\Users\karine\Desktop\nodedemos\fridgebay\package.json
-13 error code ENOENT
-14 error errno 34
-15 verbose exit [ 34, true ]
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 error Error: ENOENT, open '/Users/huyuanning/Desktop/test/fridgebay/package.json'
+5 error If you need help, you may report this *entire* log,
+5 error including the npm and node versions, at:
+5 error     <http://github.com/npm/npm/issues>
+6 error System Darwin 13.2.0
+7 error command "node" "/usr/local/bin/npm" "start"
+8 error cwd /Users/huyuanning/Desktop/test/fridgebay
+9 error node -v v0.10.29
+10 error npm -v 1.4.14
+11 error path /Users/huyuanning/Desktop/test/fridgebay/package.json
+12 error code ENOENT
+13 error errno 34
+14 verbose exit [ 34, true ]
