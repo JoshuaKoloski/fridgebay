@@ -53,8 +53,12 @@ var fridgeApp = (function($) {
     function start() {
         myList.loadModel();
         showView("welcome");
+       
+   
     }
+   
 
+   
     // here is were we decide what is visible to the outside!
     shoppingApp = {
         start: start,
@@ -63,7 +67,7 @@ var fridgeApp = (function($) {
         showView: showView
     }
 
-    return (shoppingApp);
+    return (fridgeApp);
 
 }(jQuery));
 

@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>FridgeBay</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="fridgebaystyle.css">
     <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap-min.js"></script>
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>
     <script src="js/controller.js"></script>
+   
 
 
 
 </head>
 <body>
     <div class="container">
-    	<nav class="navbar">
-			<div class="col-lg-2">
-				<div class="checkbox-inline">
-					<button class="btn btn-default" onclick="fridgeApp.showView('home')">Home page of fridge bay</button>
-				</div>
-			</div>
-			<div class="col-lg-offset-8 col-lg-2">
-				<div class="checkbox-inline">
-					<button class="btn btn-default" onclick="fridgeApp.showView('login')">Login</button>
-				</div>
-			</div>
-			<div class="col-lg-2">
-				<div class="checkbox-inline">
-					<button class="btn btn-default" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
-				</div>
-			</div>
-        </nav>
+    	<div class="row">
+            <div class="col-lg-4">
+                <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
+            </div>
+            <div id="pos"class="text-center, col-lg-4">
+                <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
+            </div>
+            <div class="col-lg-4">
+                <button id="right" class="dark_brown" onclick="fridgeApp.showView('login')">Login</button>
+            </div>
+	</div>
 
         <div id="welcome-view" class="view">
             <button class="btn btn-default" onclick="fridgeApp.showView('home')">Home page of fridge-bay </button>
@@ -43,7 +39,11 @@
         </div>
 
 		<div id="model-view" class="view">
+            
 			<div class="container">
+                <div class="page-header">
+                    <h1 id="heading_text">Model</h1>
+                </div>
 				<div class="panel panel-default">
 					<div class="panel-heading">Items</div>
 					<div class="panel-body">
@@ -86,7 +86,11 @@
 		</div>
 
         <div id="item-view" class="view">
+           
             <div class="container">
+                <div class="page-header">
+                    <h1 id="heading_text">Item</h1>
+                </div>
                 <table class="table">
                     <tbody>
                         <col width="150px" />
@@ -179,17 +183,19 @@
 
         <div id="login-view" class="view">
             <div class="container">
-
-                <table class="table table-striped">
+                <div class="page-header">
+                    <h1 id="heading_text">Account</h1>
+                </div>
+                <table class="table table-default">
                     
-                    <thead>
+                    <thead id="color">
                         <tr class="text-center">
                             <td><h3>Login</h3></td>
                             <td><h3>Register</h3></td>
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody id="color2">
                         <tr>
                             <td>
                                 <form class="form-horizontal" role="form">
@@ -197,7 +203,7 @@
                                         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
                                             <div class="input-group">
-                                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
                                                 <span class="input-group-addon">.edu</span>
                                             </div>
                                         </div>
@@ -205,7 +211,7 @@
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -219,7 +225,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-default">Sign in</button>
+                                            <button type="submit" class="dark_brown">Sign in</button>
                                         </div>
                                     </div>
                                 </form>
@@ -229,14 +235,14 @@
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputEmail3" placeholder="4-20 characters">
+                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="4-20 characters">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                                         <div class="col-sm-10">
                                             <div class="input-group">
-                                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
                                                 <span class="input-group-addon">.edu</span>
                                             </div>
                                         </div>
@@ -244,19 +250,19 @@
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Cell Phone</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputEmail3" placeholder="optional">
+                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="optional">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="inputEmail3" placeholder="6-20 characters">
+                                            <input type="password" class="form-control color5" id="inputEmail3" placeholder="6-20 characters">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="inputPassword3" class="col-sm-2 control-label">Verify Password</label>
                                         <div class="col-sm-10">
-                                            <input type="password" class="form-control" id="inputPassword3" placeholder="6-20 characters">
+                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="6-20 characters">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -273,7 +279,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="btn btn-default">Register</button>
+                                            <button type="submit" class="dark_brown">Register</button>
                                         </div>
                                     </div>
                                 </form>
@@ -287,43 +293,48 @@
         <div id="home-view" class="view">
             <div class="containter">           
                 <div class="page-header">
-                    <h2 id="pos">HOME</h2>
+                    <h1 id="heading_text">HOME</h1>
                 </div>
-                <div id="pos">
-                    <div class="col-lg-4">
-                        <div class="checkbox-inline">
-                            <label ><input type=text class="form-control" placeholder="Search by Name"></label>
+                <div class="row">
+                    
+                        <div class="col-lg-4">
+                            
+                                <label id="left"><input  type=text class="form-control color5" placeholder="Search by Name"></label>
+                           
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="checkbox-inline">
-                            <label ><input type=text class="form-control" placeholder="Search by Location" /></label>
+                        <div id="pos" class="col-lg-4">
+                            
+                                <label><input type=text class="form-control color5" placeholder="Search by Location" /></label>
+                           
                         </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="checkbox-inline">
-                            <label ><input type=text class="form-control" placeholder="Search by Price" /></label>
+                        <div class="col-lg-4">
+                            
+                                <label id="right"><input  type=text class="form-control color5" placeholder="Search by Price" /></label>
+                            
                         </div>
-                    </div>
+                    
                 </div>
+                <div class="row">
                     <div class="col-lg-2">
-                        <ul id="place" class="nav nav-list">
-
-                            <li class="nav-header">Categories</li>
-                            <li class="active"><a href="#">Furniture</a></li>
-                            <li><a href="#">Books</a></li>
-                            <li><a href="#">Vehicles</a></li>
-                            <li><a href="#">Electronics</a></li>
-                            <li><a href="#">Cutlery</a></li>
-                            <li><a href="#">Clothes</a></li>
+                        <ul id="place_left" class="nav nav-list nav-info">
+                            
+                            <li id="color3" class="nav-header">Categories</li>
+                            
+                            <li class="active"><a href="#"><span id="color4">Furniture</span></a></li>
+                            <li ><a href="#"><span id="color4">Books</span></a></li>
+                            <li><a href="#"><span id="color4">Vehicles</span></a></li>
+                            <li><a href="#"><span id="color4">Electronics</span></a></li>
+                            <li><a href="#"><span id="color4">Cutlery</span></a></li>
+                            <li><a href="#"><span id="color4">Clothes</span></a></li>
+                            
                         </ul>
                     </div>
                     
                         
                    
                     
-                    <div id="place" class="col-lg-10">                        
-                                <table class="table table-striped panel panel-info">
+                    <div id="place_right" class="col-lg-10" >                        
+                                <table class="table table-default panel panel-warning">
                                     <thead id="color">
                                         <tr>
                                             <th>Name</th>
@@ -332,85 +343,115 @@
                                             <th>Location</th>
                                         </tr>
                                     </thead>
-
-                            <tbody>
-                                <tr>
-                                    <td><label>Name of Item</label></td>
+                             
+                            <tbody id="color2">
+                              
+                                <tr class="changeImageColor"onclick="shoppingApp.showView('item')">
+                                    <td><label>Fridge</label></td>
                                     <td><label>Upload Photo</label></td>
-                                    <td><label>Price of Item</label></td>
-                                    <td><label>Location of Item</label></td>
+                                    <td><label>$50</label></td>
+                                    <td><label>East</label></td>
                                 </tr>
-                                <tr>
-                                    <td><label>Name of Item</label></td>
+                                <tr class="changeImageColor" onclick="shoppingApp.showView('item')">
+                                    <td><label>Abnormal Psych Textbook</label></td>
                                     <td><label>Upload Photo</label></td>
-                                    <td><label>Price of Item</label></td>
-                                    <td><label>Location of Item</label></td>
+                                    <td><label>$60</label></td>
+                                    <td><label>Village</label></td>
                                 </tr>
-                                <tr>
-                                    <td><label>Name of Item</label></td>
+                                <tr class="changeImageColor" onclick="shoppingApp.showView('item')">
+                                    <td><label>Bike</label></td>
                                     <td><label>Upload Photo</label></td>
-                                    <td><label>Price of Item</label></td>
-                                    <td><label>Location of Item</label></td>
+                                    <td><label>$70</label></td>
+                                    <td><label>Gosman</label></td>
                                 </tr>
+                                  
                             </tbody>
                         </table>
                     </div>
-                     
+                </div>
                     
-                    <div>
-                        <button class="btn btn-info">Contact Us</button>
+                    <div class="col-lg-offset-4"id="bottom">
+                        <button id="bottom" class="dark_brown">Contact Us</button>
                     </div>
                 </div>
+                
         </div>
 
         <div id="profile-view" class="view">
         	<div class="container"> 
-				<div id="place" class="checkbox-line">
+                <div class="page-header">
+                    <h1 id="heading_text">Profile</h1>
+                </div>
+				<div id="doublePadding" class="checkbox-line">
 					<img src="http://www.did.ie/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/t/7/t75549mlw-thor-50-50-fridge-freezer.jpg" alt="some_text" height="150" width="150">
 				</div>
-				<div id="pos" class="checkbox-line">
-					<label id="size">USERNAME</label>
+      
+				<div  class="checkbox-line">
+                    <dl class="dl-horizontal">
+                        <dt>USERNAME</dt>
+                        <dd>josh234</dd>
+                    </dl>
+					
 				</div>
-				<div id="pos" class="checkbox-line">
-					<label id="size1">EMAIL</label>
-				</div>
-				<div id="pos1" class="checkbox-line">
-					<label id="size1">PHONE</label>
-				</div>
+                <div  class="checkbox-line">
+                    <dl class="dl-horizontal">
+                        <dt>EMAIL</dt>
+                        <dd>josh@brandeis.edu</dd>
+                    </dl>
+                </div>
+                <div  class="checkbox-line">
+                    <dl class="dl-horizontal">
+                        <dt>PHONE</dt>
+                        <dd>215-856-3456</dd>
+                    </dl>
+                </div>
 				<p></p>
 				<br><br>
-				<div class="checkbox-line" id="pos">
-					<button class="btn btn-warning">New Post</button>
-					<div class="checkbox-line" id="place">
+                <div class="checkbox-line, text-center" onclick="shoppingApp.showView('form')">
+                    
+                    <button class="btn btn-warning">New Post</button>
 
-						<select>
-							<option>On sale</option>
-							<option>Interested In</option>
-							<option>Item History</option>
-						</select>
+                </div>
+                <div class="row">
 
-					</div>
-					<div class="checkbox-line">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Photo</th>
-									<th>Price</th>
-									<th>Location</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><label><input placeholder="Name" /></label></td>
-									<td><label><input placeholder="Photo" /></label></td>
-									<td><label><input placeholder="Price" /></label></td>
-									<td><label><input placeholder="Location" /></label></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+                    
+                    <div class="dropdown">
+                        <button data-toggle="dropdown" class="dropdown-toggle">
+                            On Sale
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" >
+                            <li><a href="#">Interested In</a></li>
+                            <li><a href="#">Item History</a></li>
+                            <li  class="divider"></li>
+                            <li><a href="#">Your History</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+                <div id="place" >
+                    <table class="table table-default panel panel-warning">
+
+                        <thead id="color">
+                            <tr>
+                                <th>Name</th>
+                                <th>Photo</th>
+                                <th>Price</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="color2">
+                            <tr>
+
+                                <td><label>Name of Item</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>Price of Item</label></td>
+                                <td><label>Loaction of Item</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+				
             </div>
         </div>
         
@@ -418,7 +459,9 @@
         <div id="form-view" class="view">
             
             <div class="container">
-                <h1 id="pos">Post New Item for Sale </h1>
+                <div class="page-header">
+                    <h1 id="heading_text">Post an Item</h1>
+                </div>
                 <form role="form">
                     <div>
                         <label for="itemName">Item Name</label>
