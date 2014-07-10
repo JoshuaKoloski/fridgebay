@@ -1,11 +1,6 @@
 #!/usr/bin/env node --harmony
 
 /***
- firstServer.js
- This is a simple server illustrating middleware and basic REST functionality
- This demo also adds the mongo database connection, but everything is in one file
- on the server side. We will break this out so that it has model/view/controller on
- the server and client in the next demo...
  ***/
 
 'use strict';
@@ -15,7 +10,7 @@ var app = express();
 
 var monk = require('monk');
 
-var db = monk('129.64.233.161/fridgebay');
+var db = monk('129.64.236.209/fridgebay');
 
 
 

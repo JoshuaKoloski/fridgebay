@@ -60,7 +60,7 @@ var fridgeApp = (function($) {
 
    
     // here is were we decide what is visible to the outside!
-    shoppingApp = {
+    fridgeApp = {
         start: start,
         refreshView: refreshView,
         reloadModel: reloadModel,
