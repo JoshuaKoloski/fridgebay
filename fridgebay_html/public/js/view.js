@@ -47,7 +47,7 @@ var fridgeView = (function($){
 
         for(var n=0; n<len; n++){ 
             var user = myUsers[n];
-            rows = rows + usersToRow(item);
+            rows = rows + usersToRow(user);
         }
 
         var itemTableBody = $("#itemTableBodyUsers").html(rows);
