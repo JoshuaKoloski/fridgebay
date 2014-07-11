@@ -170,6 +170,14 @@
     position:absolute;
     top:300px;
 }
+.bottom{
+    
+    padding-top:5%;
+    
+    margin-left:auto;
+    margin-right:auto;
+    
+}
 #right
 {
     float:right;
@@ -180,10 +188,12 @@
 }
 #middle
 {
+    
     margin-left:auto;
     margin-right:auto;
+    
 }
-#place_left
+.place_left
 {
    padding-top:50px;
    float:left;
