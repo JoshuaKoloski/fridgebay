@@ -18,6 +18,15 @@ var fridgeApp = (function($) {
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
     };
+    
+    function showAlert() {
+        console.log("clicked");
+        alert("You have 2 new messages");
+    }
+    function showHelp() {
+        console.log("clicked");
+        alert("If you want to make a new post, click 'New Post'\nIf you want to buy an item, search through the list of items and sort by categories.");
+    }
 
     function addItem(element) {
         var element = document.getElementById("newItemName");
@@ -62,6 +71,8 @@ var fridgeApp = (function($) {
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
+        showAlert: showAlert,
+        showHelp: showHelp,
         refreshView: refreshView,
         reloadModel: reloadModel,
         showView: showView

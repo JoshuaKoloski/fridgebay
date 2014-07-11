@@ -19,16 +19,28 @@
 <body>
     <div class="container">
     	<div class="row">
-            <div class="col-lg-4">
+           
+            <div class="col-lg-2">
                 <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             </div>
-            <div id="pos"class="text-center, col-lg-4">
+            <div class="col-lg-2">
+                <span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span>
+            </div>
+            <div id="pos"class=" col-lg-2">
                 <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
             </div>
-            <div class="col-lg-4">
-                <button id="right" class="dark_brown" onclick="fridgeApp.showView('login')">Login</button>
+            <div class="col-lg-2 text-center">
+                <span class="redButton"  onclick="fridgeApp.showAlert()">Notifications</span>
             </div>
-	</div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-1">
+                <button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button>
+            </div>
+            <div class="col-lg-1">
+                <button  class="dark_brown" onclick="fridgeApp.showView('login')">Login</button>
+            </div>
+	  </div>
+       
 
         <div id="welcome-view" class="view">
             <button class="btn btn-default" onclick="fridgeApp.showView('home')">Home page of fridge-bay </button>
@@ -383,76 +395,94 @@
                 <div class="page-header">
                     <h1 id="heading_text">Profile</h1>
                 </div>
-				<div id="doublePadding" class="checkbox-line">
-					<img src="http://www.did.ie/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/t/7/t75549mlw-thor-50-50-fridge-freezer.jpg" alt="some_text" height="150" width="150">
-				</div>
-      
-				<div  class="checkbox-line">
-                    <dl class="dl-horizontal">
-                        <dt>USERNAME</dt>
-                        <dd>josh234</dd>
-                    </dl>
-					
-				</div>
-                <div  class="checkbox-line">
-                    <dl class="dl-horizontal">
-                        <dt>EMAIL</dt>
-                        <dd>josh@brandeis.edu</dd>
-                    </dl>
-                </div>
-                <div  class="checkbox-line">
-                    <dl class="dl-horizontal">
-                        <dt>PHONE</dt>
-                        <dd>215-856-3456</dd>
-                    </dl>
-                </div>
-				<p></p>
-				<br><br>
                 <div class="checkbox-line, text-center" onclick="fridgeApp.showView('form')">
-                    
                     <button class="btn btn-warning">New Post</button>
-
+                </div>
+                <div class="dropdown pull-right">
+                    <button data-toggle="dropdown" class="dropdown-toggle pull-right">
+                        On Sale
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#">Interested In</a></li>
+                        <li><a href="#">Item History</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Your History</a></li>
+                    </ul>
+                </div>
                 </div>
                 <div class="row">
+                    <div class="col-lg-4">
+                        <div id="doublePadding" class="checkbox-line">
+                            <img src="josh.jpg" alt="some_text" height="200" width="350">
+                        </div>
 
-                    
-                    <div class="dropdown">
-                        <button data-toggle="dropdown" class="dropdown-toggle">
-                            On Sale
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" >
-                            <li><a href="#">Interested In</a></li>
-                            <li><a href="#">Item History</a></li>
-                            <li  class="divider"></li>
-                            <li><a href="#">Your History</a></li>
-                        </ul>
+
+                        <table id="profileInfo"class="table table-default">
+                            <tbody>
+                                <tr>
+                                    <td><b>Username</b></td>
+                                    <td class ="white">joshuakoloski1234
+                                    <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td class="white">j@brandeis.edu
+                                        <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Phone</b></td>
+                                    <td class="white">765-978-1234
+                                        <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <div>
+                        <form action="">
+                            <label><input type="radio" name="option" value="email">  Email</label><br>
+                            <label><input type="radio" name="option" value="phone">  Phone</label>
+                        </form>
+                     </div>
+                    </div>
+                    <div id="doublePadding" class="col-lg-8">
+                        <table class="table table-default panel panel-warning">
+                            <thead id="color">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Price</th>
+                                    <th>Location</th>
+                                </tr>
+
+                            </thead>
+                            <tbody id="color2">
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')"> 
+                                    <td><label>Fridge</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>$50</label></td>
+                                    <td><label>East</label></td>
+                                    
+                                </tr>
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><label>Abnormal Psych Textbook</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>$60</label></td>
+                                    <td><label>Village</label></td>
+                                </tr>
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><label>Bike</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>$70</label></td>
+                                    <td><label>Gosman</label></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
                     </div>
                     
-                </div>
-                <div id="place" >
-                    <table class="table table-default panel panel-warning">
-
-                        <thead id="color">
-                            <tr>
-                                <th>Name</th>
-                                <th>Photo</th>
-                                <th>Price</th>
-                                <th>Location</th>
-                            </tr>
-                        </thead>
-                        <tbody id="color2">
-                            <tr>
-
-                                <td><label>Name of Item</label></td>
-                                <td><label>Upload Photo</label></td>
-                                <td><label>Price of Item</label></td>
-                                <td><label>Loaction of Item</label></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-				
+               </div>
+	
             </div>
         </div>
         
