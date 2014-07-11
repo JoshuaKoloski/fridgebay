@@ -1,12 +1,3 @@
-/**
- demo.js
- This provides the model and controller for the shopping list app!
- It is written entirely in JavaScript with no use of AngularJS
- but it does just jQuery to handle the ajax calls in a browser independent manner...
- and it uses jQuery to access and modify the HTML file index.html
- 
- VERSION 1.0.1 -- here is where we start adding some functionality
- **/
 
 var fridgeApp = (function($) {
 
@@ -27,7 +18,10 @@ var fridgeApp = (function($) {
         console.log("clicked");
         alert("If you want to make a new post, click 'New Post'\nIf you want to buy an item, search through the list of items and sort by categories.");
     }
-
+    function verifySubmission(){
+        showView("home");
+        alert("Your Message has been submitted");
+    }
     function addItem(element) {
         var element = document.getElementById("newItemName");
 
@@ -73,6 +67,7 @@ var fridgeApp = (function($) {
         start: start,
         showAlert: showAlert,
         showHelp: showHelp,
+        verifySubmission: verifySubmission,
         refreshView: refreshView,
         reloadModel: reloadModel,
         showView: showView

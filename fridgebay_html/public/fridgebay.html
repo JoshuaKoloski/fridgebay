@@ -460,30 +460,34 @@
                     <table class="table table-default panel panel-warning">
                         <thead id="color">
                             <tr>
+                                <th></th>
                                 <th>Name</th>
-                                <th>Photo</th>
                                 <th>Price</th>
-                                <th>Location</th>
+                                <th>University</th>
+                                <th> Condtion</th>
                             </tr>
                         </thead>
                         <tbody id="color2">
-                            <tr class="changeImageColor"onclick="fridgeApp.showView('item')">
+                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><img src="http://www.o-digital.com/uploads/2227/2283-1/Mini_Fridge_KC_50D_145.jpg" height="130" width="130"></td>
                                 <td><label>Fridge</label></td>
-                                <td><label>Upload Photo</label></td>
                                 <td><label>$50</label></td>
-                                <td><label>East</label></td>
+                                <td><label>Brandeis</label></td>
+                                <td><label>Good </label></td>
                             </tr>
                             <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                <td><label>Abnormal Psych Textbook</label></td>
-                                <td><label>Upload Photo</label></td>
-                                <td><label>$60</label></td>
-                                <td><label>Village</label></td>
+                                <td><img src="http://images.canadianlisted.com/nlarge/20psych-by-spencer-rathus-textbook-mru-uofc_6927178.jpg" height="130" width="130"></td>
+                                <td><label>Psych Textbook</label></td>
+                                <td><label>$80</label></td>
+                                <td><label>Bentley</label></td>
+                                <td> <label>Slightly Used</label> </td>
                             </tr>
                             <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTuqIIy1EYrqDUxpHErRVksqWADOsLP7zy-gUZV9lmpYDx7BNJg1w" height="130" width="130"></td>
                                 <td><label>Bike</label></td>
-                                <td><label>Upload Photo</label></td>
-                                <td><label>$70</label></td>
-                                <td><label>Gosman</label></td>
+                                <td><label>$40</label></td>
+                                <td><label>Brandeis</label></td>
+                                <td><label>Like New</label></td>
                             </tr>
                         </tbody>
                     </table>
@@ -587,8 +591,7 @@
 	
             </div>
         </div>
-        
-        
+                
         <div id="form-view" class="view">
             
             <div class="container">
@@ -650,12 +653,18 @@
             </div>
             
         </div>
+<!--Contact Us Page -->
         <div id="contact-view" class="view">
             <h1 id="heading_text">Anything to Say?</h1>
-            <div>
+            <div class="container">
                 <textarea class="form-control" cols="10" rows="10" id="itemDesc" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
+                <div>
+                    <button class="dark_brown" onclick="fridgeApp.verifySubmission()"> Submit </button>
+                </div>
             </div>
+            
         </div>
+<!--Contact Us Button-->
         <div class="text-center bottom">
             <button id="middle" class="dark_brown" onclick="fridgeApp.showView('contact')">Contact Us</button>
         </div>
