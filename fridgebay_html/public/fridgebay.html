@@ -30,7 +30,7 @@
                 <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
             </div>
             <div class="col-lg-2 text-center">
-                <span class="redButton"  onclick="fridgeApp.showAlert()">Notifications</span>
+                <button type="button"  class="redButton" data-toggle="popover" title="Notification" data-content="You have been contacted by a seller">1</button>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-lg-1">
@@ -335,11 +335,13 @@
                             </li>
                             <div id="collapseFurniture" class="panel-collapse collapse out">
                                 <div class="panel-body">
-                                    <li id=""><span id="color4"> Table </span></li>
+                                    
+                                    <li><span id="color4"> Table </span></li>
                                     <li><span id="color4"> Chairs</span></li>
                                     <li><span id="color4"> Shelves</span></li>
                                     <li><span id="color4"> Drawers</span></li>
                                     <li><span id="color4"> Others </span></li>
+                                    
                                 </div>
                             </div>
                             <li>
