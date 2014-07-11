@@ -302,93 +302,198 @@
                 </table>
             </div>
         </div>
-
-        <div id="home-view" class="view">
-            <div class="containter">           
-                <div class="page-header">
-                    <h1 id="heading_text">HOME</h1>
+<!-- HomePage -->
+    <div id="home-view" class="view">
+        <div class="containter">           
+            <div class="page-header">
+                <h1 id="heading_text">HOME</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label id="left"><input  type=text class="form-control color5" placeholder="Search by Name"></label>
                 </div>
-                <div class="row">
-                    
-                        <div class="col-lg-4">
-                            
-                                <label id="left"><input  type=text class="form-control color5" placeholder="Search by Name"></label>
-                           
+                <div id="pos" class="col-lg-4">
+                    <label><input type=text class="form-control color5" placeholder="Search by University" /></label>
+                </div>
+                <div class="col-lg-4">
+                    <label id="right"><input  type=number class="form-control color5" placeholder="Search by Price" /></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <ul id="place_left" class="nav nav-list nav-info">
+                        <div id="accordion">
+                            <li id="color3" class="nav-header">
+                                Categories
+                            </li>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFurniture">
+                                    <span id="color4">
+                                        Furniture
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseFurniture" class="panel-collapse collapse out">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Table </span></li>
+                                    <li><span id="color4"> Chairs</span></li>
+                                    <li><span id="color4"> Shelves</span></li>
+                                    <li><span id="color4"> Drawers</span></li>
+                                    <li><span id="color4"> Others </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseVehicle">
+                                    <span id="color4">
+                                        Vehicle
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseVehicle" class="panel-collapse collapse out">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Bike </span></li>
+                                    <li><span id="color4"> Car</span></li>
+                                    <li><span id="color4"> Motorcycle</span></li>
+                                    <li><span id="color4"> Boat </span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseAppliances">
+                                    <span id="color4">
+                                        Appliances
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseAppliances" class="panel-collapse collapse out">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Fridge </span></li>
+                                    <li><span id="color4"> Microwave</span></li>
+                                    <li><span id="color4"> Coffe Maker</span></li>
+                                    <li><span id="color4"> Oven </span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseElectronics">
+                                    <span id="color4">
+                                        Electronics
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseElectronics" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Computer </span></li>
+                                    <li><span id="color4"> TV</span></li>
+                                    <li><span id="color4"> Media Player</span></li>
+                                    <li><span id="color4"> Phone</span></li>
+                                    <li><span id="color4"> Game Systems</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseClothing">
+                                    <span id="color4">
+                                        Clothing
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseClothing" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Shirts</span></li>
+                                    <li><span id="color4"> Pants</span></li>
+                                    <li><span id="color4"> Shoes</span></li>
+                                    <li><span id="color4"> Hats</span></li>
+                                    <li><span id="color4"> Sweaters</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSupplies">
+                                    <span id="color4">
+                                        Supplies
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseSupplies" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Pens/Pencils</span></li>
+                                    <li><span id="color4"> Notebooks</span></li>
+                                    <li><span id="color4"> Folders</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">
+                                    <span id="color4">
+                                        Books
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseBooks" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Textbooks </span></li>
+                                    <li><span id="color4"> Novels</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBedding">
+                                    <span id="color4">
+                                        Bedding
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseBedding" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Sheets </span></li>
+                                    <li><span id="color4"> Pillow Cases</span></li>
+                                    <li><span id="color4"> Mattress Padding</span></li>
+                                    <li><span id="color4"> Comforters</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
                         </div>
-                        <div id="pos" class="col-lg-4">
-                            
-                                <label><input type=text class="form-control color5" placeholder="Search by Location" /></label>
-                           
-                        </div>
-                        <div class="col-lg-4">
-                            
-                                <label id="right"><input  type=text class="form-control color5" placeholder="Search by Price" /></label>
-                            
-                        </div>
-                    
+                    </ul>
                 </div>
-                <div class="row">
-                    <div class="col-lg-2">
-                        <ul id="place_left" class="nav nav-list nav-info">
-                            
-                            <li id="color3" class="nav-header">Categories</li>
-                            
-                            <li class="active"><a href="#"><span id="color4">Furniture</span></a></li>
-                            <li ><a href="#"><span id="color4">Books</span></a></li>
-                            <li><a href="#"><span id="color4">Vehicles</span></a></li>
-                            <li><a href="#"><span id="color4">Electronics</span></a></li>
-                            <li><a href="#"><span id="color4">Cutlery</span></a></li>
-                            <li><a href="#"><span id="color4">Clothes</span></a></li>
-                            
-                        </ul>
-                    </div>
-                    
-                        
-                   
-                    
-                    <div id="place_right" class="col-lg-10" >                        
-                                <table class="table table-default panel panel-warning">
-                                    <thead id="color">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Photo</th>
-                                            <th>Price</th>
-                                            <th>Location</th>
-                                        </tr>
-                                    </thead>
-                             
-                            <tbody id="color2">
-                              
-                                <tr class="changeImageColor"onclick="fridgeApp.showView('item')">
-                                    <td><label>Fridge</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>$50</label></td>
-                                    <td><label>East</label></td>
-                                </tr>
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><label>Abnormal Psych Textbook</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>$60</label></td>
-                                    <td><label>Village</label></td>
-                                </tr>
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><label>Bike</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>$70</label></td>
-                                    <td><label>Gosman</label></td>
-                                </tr>
-                                  
-                            </tbody>
-                        </table>
-                    </div>
+                <div id="place_right" class="col-lg-10" >                        
+                    <table class="table table-default panel panel-warning">
+                        <thead id="color">
+                            <tr>
+                                <th>Name</th>
+                                <th>Photo</th>
+                                <th>Price</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody id="color2">
+                            <tr class="changeImageColor"onclick="fridgeApp.showView('item')">
+                                <td><label>Fridge</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>$50</label></td>
+                                <td><label>East</label></td>
+                            </tr>
+                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><label>Abnormal Psych Textbook</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>$60</label></td>
+                                <td><label>Village</label></td>
+                            </tr>
+                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><label>Bike</label></td>
+                                <td><label>Upload Photo</label></td>
+                                <td><label>$70</label></td>
+                                <td><label>Gosman</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                    
-                    <div class="col-lg-offset-4"id="bottom">
-                        <button id="bottom" class="dark_brown">Contact Us</button>
-                    </div>
-                </div>
-                
+            </div>
+            <div class="col-lg-offset-4"id="bottom">
+                <button id="bottom" class="dark_brown">Contact Us</button>
+            </div>
         </div>
+</div>
 
         <div id="profile-view" class="view">
         	<div class="container"> 
