@@ -22,7 +22,7 @@
             <div class="col-lg-4">
                 <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             </div>
-            <div id="pos"class="text-center, col-lg-4">
+            <div id="pos" class="text-center, col-lg-4">
                 <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
             </div>
             <div class="col-lg-4">
@@ -477,9 +477,6 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-offset-4"id="bottom">
-                <button id="bottom" class="dark_brown">Contact Us</button>
-            </div>
         </div>
 </div>
 
@@ -622,8 +619,15 @@
 
             </div>
         </div>
-      
-
+    </div>
+    <div id="contact-view" class="view">
+        <h1 id="heading_text">Anything to Say?</h1>
+        <div>
+            <textarea class="form-control" cols="10" rows="10" id="itemDesc" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
+        </div>
+    </div>
+    <div  class="col-lg-offset-4" id="bottom">
+        <button id="bottom" class="dark_brown" onclick="fridgeApp.showView('contact')">Contact Us</button>
     </div>
     
 </body>
