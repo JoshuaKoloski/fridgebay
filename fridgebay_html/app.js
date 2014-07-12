@@ -12,10 +12,10 @@ var monk = require('monk');
 
 var db = monk('/fridgebay');
 
-app.use(logfmt.requestLogger());
+
 // serve static content from the public folder 
 app.use("/", express.static(__dirname + '/public'));
-
+app.use(logfmt.requestLogger());
 
 // parse the bodies of all other queries as json
 app.use(bodyParser.json());
