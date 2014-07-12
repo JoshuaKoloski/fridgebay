@@ -17,7 +17,6 @@
     "url": "https://github.com/stevenjc/fridgebay"
   },
   "keywords": [
-    "example",
     "heroku"
   ],
   "bugs": {
@@ -25,6 +24,6 @@
   },
   "homepage": "https://github.com/stevenjc/fridgebay",
   "engines": {
-    "node": "0.10.x"
+    "node": "0.10.29"
   }
 }
