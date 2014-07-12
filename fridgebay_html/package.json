@@ -1,15 +1,30 @@
 {
-  "name": "simpleRest",
+  "name": "FridgeBay",
   "version": "0.1.1",
-  "description": "Simple Example of REST webserver managing an array of JSON literals",
-  "author": "Tim Hickey <tjhickey@brandeis.edu> (http://www.cs.brandeis.edu/~tim)",
+  "author": "Steven Colon, Yuanning Hu, and Joshua Koloski",
   "scripts": {
     "start": "node --harmony ./app.js"
   },
   "dependencies": {
     "body-parser": "^1.4.3",
-    "express": "^4.4.4",
+    "express": "^4.6.0",
+    "logfmt": "^1.1.2",
     "mongodb": "^1.4.7",
     "monk": "^0.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stevenjc/fridgebay"
+  },
+  "keywords": [
+    "example",
+    "heroku"
+  ],
+  "bugs": {
+    "url": "https://github.com/stevenjc/fridgebay/issues"
+  },
+  "homepage": "https://github.com/stevenjc/fridgebay",
+  "engines": {
+    "node": "0.10.x"
   }
 }

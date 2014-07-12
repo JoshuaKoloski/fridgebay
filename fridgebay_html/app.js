@@ -7,12 +7,12 @@
 var express = require('express');
 var bodyParser = require('body-parser'); // this allows us to pass JSON values to the server (see app.put below)
 var app = express();
-
+// var logfmt = require("logfmt");
 var monk = require('monk');
 
 var db = monk('/fridgebay');
 
-
+// app.use(logfmt.requestLogger());
 // serve static content from the public folder 
 app.use("/", express.static(__dirname + '/public'));
 
