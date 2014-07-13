@@ -9,14 +9,12 @@ var bodyParser = require('body-parser'); // this allows us to pass JSON values t
 var app = express();
 var logfmt = require("logfmt");
 var monk = require('monk');
-
 var db = monk('/fridgebay');
 
 
 // serve static content from the public folder 
 app.use("/", express.static(__dirname + '/public'));
 app.use(logfmt.requestLogger());
-
 // parse the bodies of all other queries as json
 app.use(bodyParser.json());
 
@@ -80,10 +78,7 @@ app.delete('/model/:collection/:id', function(req, res) {
     });
     res.json(200, {});
 });
-
-
-// listen on port 3000
-var port = 3000;
-app.listen(port, function() {
-    console.log("server is listening on port " + port);
+//Sets port to 3000 for local host while using the port that heroku dynamically sets 
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });

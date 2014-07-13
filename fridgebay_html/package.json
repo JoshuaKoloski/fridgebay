@@ -8,6 +8,7 @@
   "dependencies": {
     "body-parser": "^1.4.3",
     "express": "^4.6.0",
+    "http": "0.0.0",
     "logfmt": "^1.1.2",
     "mongodb": "^1.4.7",
     "monk": "^0.9.0"
