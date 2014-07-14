@@ -11,7 +11,7 @@ var fridgeView = (function($){
         updateCategoryOptions();
     }
     
-    function updateCategoryOptions(category){
+    function updateCategoryOptions(){
     	
     	var furniture = {
     		table : "Table",
@@ -232,7 +232,8 @@ var fridgeView = (function($){
     }
     
     fridgeView={
-        refreshView: refreshView
+        refreshView: refreshView,
+        updateCategoryOptions: updateCategoryOptions,
     };
     
     return(fridgeView);
