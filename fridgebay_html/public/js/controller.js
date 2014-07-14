@@ -106,9 +106,7 @@ var fridgeApp = (function($) {
 				}
 
 				document.getElementById("img_"+divNum).innerHTML = newImage.outerHTML;
-				alert("Converted Base64 version is "+document.getElementById("img_"+divNum).innerHTML);
 				console.log("Converted Base64 version is "+document.getElementById("img_"+divNum).innerHTML);
-				console.log(JSON.stringify(srcData));
 			}
 			fileReader.readAsDataURL(fileToLoad);
 		}

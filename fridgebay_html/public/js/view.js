@@ -88,64 +88,56 @@ var fridgeView = (function($){
     	};
 		
 		var selectSub = $("#itemSubCategory");
+		$("#itemSubCategory").empty();
 		if ($("#itemMainCategory").val() == 'furniture') {
-			$("#itemSubCategory").empty();
 			$.each(furniture, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'appliances') {
-			$("#itemSubCategory").empty();
 			$.each(appliances, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'vehicles') {
-			$("#itemSubCategory").empty();
 			$.each(vehicles, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'electronics') {
-			$("#itemSubCategory").empty();
 			$.each(electronics, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'cutlery') {
-			$("#itemSubCategory").empty();
 			$.each(cutlery, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'supplies') {
-			$("#itemSubCategory").empty();
 			$.each(supplies, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'books') {
-			$("#itemSubCategory").empty();
 			$.each(books, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'clothes') {
-			$("#itemSubCategory").empty();
 			$.each(clothes, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
 				);
 			});
 		} else if ($("#itemMainCategory").val() == 'bed') {
-			$("#itemSubCategory").empty();
 			$.each(bed, function(val, text) {
 				selectSub.append(
 					$('<option></option>').val(val).html(text)
@@ -200,9 +192,6 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.main_category+
         "</td><td>"+ item.sub_category+
-        "</td><td>"+ item.seller+
-        "</td><td>" + item.sell_by+
-        "</td><td>" + item.university +
         "</td></tr>";
         return row;
     }
