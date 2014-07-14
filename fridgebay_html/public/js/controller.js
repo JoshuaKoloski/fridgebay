@@ -22,7 +22,29 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
-    
+
+    $(function () {
+        $('#notify').popover(
+        {
+            trigger: 'hover',
+            html: true,
+
+            content: 'you have 1 new notification',
+            
+        });
+    });
+    function addItem(element) {
+        var element = document.getElementById("newItemName");
+
+        console.log("new item " + element.value);
+        myList.addElement({
+            action: element.value,
+            price: 0,
+            quantity: 0
+        });
+        element.value="";
+    }
+
     function refreshView(){
         fridgeView.refreshView(myList);
     }

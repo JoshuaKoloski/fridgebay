@@ -1,12 +1,12 @@
 
 
-function ShoppingList(){
+function Information(){
   this.items = [],
   this.users = []
 };
 
 // we use the locally cached model to lookup elements...
-ShoppingList.prototype.getElement = function(id){
+Information.prototype.getElement = function(id){
     var item;
     var i;
     for(i=0; i<this.items.length; i++){
@@ -18,26 +18,36 @@ ShoppingList.prototype.getElement = function(id){
 };
 
 
-ShoppingList.prototype.loadModel = function() {
-    var myList = this;
-    
-    // send request to the server for the items in the list
+Information.prototype.loadModel = function() {
+    var myInfo = this;
+
+    // add items
     $.ajax({
         type: "GET",
-        url: "/model/shopping",
+        url: "/model/items",
     }).done(function(items) {
-        myList.items = items;
+        myInfo.items = items;
         items.map(function(x){x.id=x["_id"];});
-        shoppingView.refreshView(myList);
+    });
+    
+     // add users
+    $.ajax({
+        type: "GET",
+        url: "/model/users",
+    }).done(function(users) {
+        myInfo.users = users;
+        users.map(function(x){x.id=x["_id"];});
+	//Loads model information into the view
+        fridgeView.refreshView(myInfo);  
     });
 };
 
-ShoppingList.prototype.addElement = function(newItem){
+Information.prototype.addElement = function(newItem){
     console.log("sending "+JSON.stringify(newItem));
     var myList = this;
     $.ajax({
         type: "POST",
-        url: "/model/shopping",
+        url: "/model/items",
         data: JSON.stringify(newItem),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
@@ -46,11 +56,11 @@ ShoppingList.prototype.addElement = function(newItem){
     });
 }
 
-ShoppingList.prototype.updateElement = function(id,newItem){
+Information.prototype.updateElement = function(id,newItem){
     var myList = this;
     $.ajax({
         type: "PUT",
-        url: "/model/shopping/"+id,
+        url: "/model/fridgebay/"+id,
         data: JSON.stringify(newItem),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
@@ -59,17 +69,17 @@ ShoppingList.prototype.updateElement = function(id,newItem){
     });
 }
 
-ShoppingList.prototype.deleteElement = function(id){
+Information.prototype.deleteElement = function(id){
     var myList = this;
     $.ajax({
         type: "DELETE",
-        url: "/model/shopping/"+id,
+        url: "/model/fridgebay/"+id,
     }).done(function(items) {
         myList.loadModel();
     });
 }
 
-ShoppingList.prototype.totalPrice = function(){
+Information.prototype.totalPrice = function(){
     var total=0;
     var item;
     var i;

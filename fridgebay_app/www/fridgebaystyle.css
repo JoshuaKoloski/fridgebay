@@ -217,71 +217,11 @@
 	text-align: center;
 	text-transform: uppercase;
 }
-#doublePadding .text-center p{
-    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
-	font-weight: normal;
-    font-size: 2.5em;
-    color:#572f04;
-	letter-spacing: .2em;
-	line-height: 1.1em;
-	margin:0px;
-	text-align: center;
-	text-transform: uppercase;
-    padding-bottom:10px;
-}
-#place_right #doublePadding p{
-    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
-	font-weight: normal;
-    font-size: 2.5em;
-    color:#572f04;
-	letter-spacing: .2em;
-	line-height: 1.1em;
-	margin:0px;
-	text-align: center;
-	text-transform: uppercase;
-    padding-bottom:10px;
-}
-#place div p{
-    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
-	font-weight: normal;
-    font-size: 2.5em;
-    color:#572f04;
-	letter-spacing: .2em;
-	line-height: 1.1em;
-	margin:0px;
-	text-align: center;
-	text-transform: uppercase;
-    padding-bottom:10px;
-}
 .changeImageColor:hover{
     background-color:#d4990d;
 }
 .changeImage:hover {
      opacity:.4;
 }
-#doublePadding div h2{
-    position:absolute;
-    color:red;
-    clear:none;
-    left:362px;
-    top:88.5px;
-    font-weight:bold;
-    font-style:italic;
-}
-#place div h2{
-    position:absolute;
-    color:red;
-    clear:none;
-    left:462px;
-    top:94px;
-    font-weight:bold;
-    font-style:italic;
-}
-.relative{
-    position:relative;
-}
-.clear{display:block;}
-
-
 
 
