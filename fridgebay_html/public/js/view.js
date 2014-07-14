@@ -8,7 +8,152 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
+        updateCategoryOptions();
     }
+    
+    function updateCategoryOptions(category){
+    	
+    	var furniture = {
+    		table : "Table",
+    		chair : "Chair",
+    		shelves : "Shelves",
+    		bookcase : "Bookcase",
+    		drawer : "Drawer",
+    		other : "Other"
+    	};
+    	
+    	var appliances = {
+    		fridge : "Fridge",
+    		microwave : "Microwave",
+    		oven : "Oven",
+    		coffee_maker : "Coffee Maker",
+    		other : "Other"
+    	};
+    	
+    	var vehicles = {
+    		bike : "Bike",
+    		car : "Car",
+    		motorcycle : "Motocycle",
+    		boat : "Boat",
+    		other : "Other"
+    	};
+    	
+    	var electronics = {
+    		computer : "Computer",
+    		tv : "TV",
+    		media_player : "Media Player",
+    		phone : "Phone",
+    		charger : "Charger",
+    		gaming_system : "Gaming System",
+    		other : "Other"
+    	};
+    	
+    	var cutlery = {
+    		dishes : "Dishes",
+    		blender : "Blender",
+    		mixer : "Mixer",
+    		other : "Other"
+    	};
+    	
+    	var supplies = {
+    		scissors : "Scissors",
+    		pen_pencil : "Pen/Pencil",
+    		notebook : "Notebook",
+    		binder : "Binder",
+    		folder : "Folder",
+    		other : "Other"
+    	};
+    	
+    	var books = {
+    		sciences : "Sciences",
+    		arts : "Arts",
+    		math : "Math",
+    		novel : "Novel",
+    		other : "Other"
+    		
+    	};
+    	
+    	var clothes = {
+    		shoes : "Shoes",
+    		shirts : "Shirt",
+    		pants : "Pants",
+    		other : "Other"
+    	};
+    	
+    	var bed = {
+    		sheet : "Sheet",
+    		pillowcase : "Pillowcase",
+    		padding : "Padding",
+    		other : "Other"
+    	};
+		
+		var selectSub = $("#itemSubCategory");
+		if ($("#itemMainCategory").val() == 'furniture') {
+			$("#itemSubCategory").empty();
+			$.each(furniture, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'appliances') {
+			$("#itemSubCategory").empty();
+			$.each(appliances, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'vehicles') {
+			$("#itemSubCategory").empty();
+			$.each(vehicles, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'electronics') {
+			$("#itemSubCategory").empty();
+			$.each(electronics, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'cutlery') {
+			$("#itemSubCategory").empty();
+			$.each(cutlery, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'supplies') {
+			$("#itemSubCategory").empty();
+			$.each(supplies, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'books') {
+			$("#itemSubCategory").empty();
+			$.each(books, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'clothes') {
+			$("#itemSubCategory").empty();
+			$.each(clothes, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		} else if ($("#itemMainCategory").val() == 'bed') {
+			$("#itemSubCategory").empty();
+			$.each(bed, function(val, text) {
+				selectSub.append(
+					$('<option></option>').val(val).html(text)
+				);
+			});
+		}
+    }
+    
     
     // redraw the table using the current model
     function refreshTableItems(myItems){    
@@ -28,18 +173,19 @@ var fridgeView = (function($){
     function itemToRow(item){
         var row = 
         "<tr><td>"+ item.name+
-        "</td><td>"+ item.price+
-        "</td><td>"+ item.catagory+
-        "</td><td>"+ item.quantity+
-        "</td><td>"+ item.location+
         "</td><td>"+ item.seller+
+        "</td><td>"+ item.price+
+        "</td><td>"+ item.quantity+
+        "</td><td>"+ item.university+
+        "</td><td>"+ item.location+
         "</td><td>"+ item.sell_by+
+        "</td><td>"+ item.condition+
+        "</td><td>"+ item.main_category+
+        "</td><td>"+ item.sub_category+
         "</td></tr>";
         return row;
     }
     
-    
-        
     // redraw the table using the current model users~~~~
     function refreshTableUsers(myUsers){    
         var rows = "";

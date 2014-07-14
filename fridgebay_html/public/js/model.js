@@ -1,9 +1,12 @@
 
 
 function Information(){
-  this.items = [],
-  this.users = []
+  this.items = [];
+  this.users = [];
+  this.currentUser = "Lucy";
+  
 };
+
 
 // we use the locally cached model to lookup elements...
 Information.prototype.getElement = function(id){

@@ -22,19 +22,7 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
-    function addItem(element) {
-        var element = document.getElementById("newItemName");
-
-        console.log("new item " + element.value);
-        myList.addElement({
-            action: element.value,
-            price: 0,
-            quantity: 0
-        });
-        element.value="";
-    }
     
-
     function refreshView(){
         fridgeView.refreshView(myList);
     }
@@ -43,6 +31,66 @@ var fridgeApp = (function($) {
         myList.loadModel();
         refreshView();
     }
+    
+    function addItem() {
+    	
+    	var imageArray = [];
+    	
+    	for (i = 0; i < 3; i++){
+    		if (document.getElementById("img_"+i).innerHTML != ""){
+    			imageArray[imageArray.length] = document.getElementById("img_"+i).innerHTML;
+    			console.log("true");
+    		} else {
+    			console.log("false");
+    		}
+
+    	}
+    	console.log("images = "+ imageArray);
+    	
+        myList.addElement({
+        	seller: myList.currentUser,
+        	images: imageArray,
+        	main_category: $("#itemMainCategory").val(),
+        	sub_category: $("#itemSubCategory").val(),
+            name: $("#itemName").val(),
+            price: $("#itemPrice").val(),
+            quantity: $("#itemQuantity").val(),
+            condition: $("#itemCondition").val(),
+            sell_by: $("#itemSellBy").val(),
+            university: $("#itemUniversity").val(),
+            location: $("#itemLocation").val(),
+            description: $("#itemDesc").val(),   
+        });
+    }
+    
+    function encodeImageFileAsURL(divNum){
+
+		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
+		if (filesSelected.length > 0)
+		{
+			var fileToLoad = filesSelected[0];
+
+			var fileReader = new FileReader();
+
+			fileReader.onload = function(fileLoadedEvent) {
+				var srcData = fileLoadedEvent.target.result; // <--- data: base64
+
+				var newImage = document.createElement('img');
+				newImage.src = srcData;
+				if(newImage.width > newImage.height) { 
+					newImage.width = 250;
+				} else {
+					newImage.height = 250;
+				}
+
+				document.getElementById("img_"+divNum).innerHTML = newImage.outerHTML;
+				alert("Converted Base64 version is "+document.getElementById("img_"+divNum).innerHTML);
+				console.log("Converted Base64 version is "+document.getElementById("img_"+divNum).innerHTML);
+				console.log(JSON.stringify(srcData));
+			}
+			fileReader.readAsDataURL(fileToLoad);
+		}
+	}
     
     function initEventListeners(){
         $(window).on('hashchange', function(event){
@@ -59,12 +107,12 @@ var fridgeApp = (function($) {
        
    
     }
-   
-
-   
+  
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
+        addItem: addItem,
+        encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
         showHelp: showHelp,
         verifySubmission: verifySubmission,

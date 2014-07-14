@@ -12,7 +12,6 @@ var monk = require('monk');
 
 var db = monk('/fridgebay');
 
-
 // serve static content from the public folder 
 app.use("/", express.static(__dirname + '/public'));
 
