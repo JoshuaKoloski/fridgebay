@@ -18,28 +18,32 @@
 </head>
 <body>
     <div class="container">
-    	<div class="row">
-           
-            <div class="col-lg-2">
-                <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
-            </div>
-            <div class="col-lg-2">
-                <span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span>
-            </div>
-            <div id="pos"class=" col-lg-2">
-                <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
-            </div>
-            <div class="col-lg-2 text-center">
-                <button type="button"  class="redButton" data-toggle="popover" title="Notification" data-content="You have been contacted by a seller">1</button>
-            </div>
-            <div class="col-lg-2"></div>
-            <div class="col-lg-1">
-                <button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button>
-            </div>
-            <div class="col-lg-1">
-                <button  class="dark_brown" onclick="fridgeApp.showView('login')">Login</button>
-            </div>
-	  </div>
+        <div class="row">
+            <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
+            <nav class="navbar navbar-warning pull-right clear" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            
+                            <li><span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span></li>
+                            <li><button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button></li>
+                            <li><button id="example" type="button" class="redButton">1</button></li>
+                            <li><button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button></li>
+                            <li><button class="dark_brown" onclick="fridgeApp.showView('login')">Login</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
        
 
         <div id="welcome-view" class="view">
@@ -57,6 +61,17 @@
                 <div class="page-header">
                     <h1 id="heading_text">Model</h1>
                 </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label id="left"><input id="nameCutoff" type=text class="form-control color5" placeholder="Search by Name" onchange="fridgeApp.refreshView()"></label>
+                    </div>
+                    <div id="pos" class="col-lg-4">
+                        <label><input id="schoolCutoff" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"  /></label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label id="right"><input id="priceCutoff" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()" /></label>
+                    </div>
+                </div>
 				<div class="panel panel-default">
 					<div class="panel-heading">Items</div>
 					<div class="panel-body">
@@ -70,6 +85,7 @@
 								<th>Location</th>
 								<th>Seller</th>
 								<th>Sell by</th>
+                                <th>University</th>
 							</tr>
 						</thead>
 		
@@ -126,37 +142,37 @@
 									  <!-- Wrapper for slides -->
 									  <div class="carousel-inner">
 										<div class="item active">
-										  <img src="http://www.mealprepmondays.com/wp-content/uploads/2013/07/fridge-freezer21.jpg" alt="...">
+										  <img src="http://www.mealprepmondays.com/wp-content/uploads/2013/07/fridge-freezer21.jpg" alt="..." height="600" width="600" >
 										  <div class="carousel-caption">
 											...
 										  </div>
 										</div>
 										<div class="item">
-										  <img src="http://www.soundstore.ie/images/productImages//Zoom/Belling_BL250WH_White_Freestanding_Fridge.jpg" alt="...">
+                                            <img src="http://www.soundstore.ie/images/productImages//Zoom/Belling_BL250WH_White_Freestanding_Fridge.jpg" alt="..." height="600" width="600">
 										  <div class="carousel-caption">
 											...
 										  </div>
 										</div>
 										<div class="item">
-										  <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQyuEgXsyXZXKn4hR8ruBY2YHUI3Q5B_GtT4pXushbzwakc82VM" alt="...">
+                                            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQyuEgXsyXZXKn4hR8ruBY2YHUI3Q5B_GtT4pXushbzwakc82VM" alt="..." height="600" width="600">
 										  <div class="carousel-caption">
 											...
 										  </div>
 										</div>
 										<div class="item">
-										  <img src="http://thebrandterminus.in/assets/images/1341737354_411794204_1-Gambar--SAMSUNG-Kulkas-SBS-2-Pintu-RSA1NTTS.jpg" alt="...">
+                                            <img src="http://thebrandterminus.in/assets/images/1341737354_411794204_1-Gambar--SAMSUNG-Kulkas-SBS-2-Pintu-RSA1NTTS.jpg" alt="..." height="600" width="600">
 										  <div class="carousel-caption">
 											...
 										  </div>
 										</div>
 										<div class="item">
-										  <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="...">
+                                            <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="..." height="600" width="600">
 										  <div class="carousel-caption">
 											...
 										  </div>
 										</div>
 										<div class="item">
-										  <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="...">
+                                            <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="..." height="600" width="600">
 										  <div class="carousel-caption">
 											...
 										  </div>
@@ -343,13 +359,13 @@
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <label id="left"><input  type=text class="form-control color5" placeholder="Search by Name"></label>
+                    <label id="left"><input   type=text class="form-control color5" placeholder="Search by Name"></label>
                 </div>
                 <div id="pos" class="col-lg-4">
                     <label><input type=text class="form-control color5" placeholder="Search by University" /></label>
                 </div>
                 <div class="col-lg-4">
-                    <label id="right"><input  type=number class="form-control color5" placeholder="Search by Price" /></label>
+                    <label id="right"><input id="priceCutoff" type=number class="form-control color5" placeholder="Search by Price" /></label>
                 </div>
             </div>
             <div class="row">
@@ -491,41 +507,50 @@
                         
                     </ul>
                 </div>
-                <div id="place_right" class="col-lg-10" >                        
-                    <table class="table table-default panel panel-warning">
-                        <thead id="color">
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>University</th>
-                                <th> Condtion</th>
-                            </tr>
-                        </thead>
-                        <tbody id="color2">
-                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                <td><img src="http://www.o-digital.com/uploads/2227/2283-1/Mini_Fridge_KC_50D_145.jpg" height="130" width="130"></td>
-                                <td><label>Fridge</label></td>
-                                <td><label>$50</label></td>
-                                <td><label>Brandeis</label></td>
-                                <td><label>Good </label></td>
-                            </tr>
-                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                <td><img src="http://images.canadianlisted.com/nlarge/20psych-by-spencer-rathus-textbook-mru-uofc_6927178.jpg" height="130" width="130"></td>
-                                <td><label>Psych Textbook</label></td>
-                                <td><label>$80</label></td>
-                                <td><label>Bentley</label></td>
-                                <td> <label>Slightly Used</label> </td>
-                            </tr>
-                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                <td><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTuqIIy1EYrqDUxpHErRVksqWADOsLP7zy-gUZV9lmpYDx7BNJg1w" height="130" width="130"></td>
-                                <td><label>Bike</label></td>
-                                <td><label>$40</label></td>
-                                <td><label>Brandeis</label></td>
-                                <td><label>Like New</label></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="place" class="col-lg-10" > 
+                    <div class="text-center">
+                        <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37"> llie's nest</p>
+                    </div>
+                    <div>
+                        <center><img class="realtive" src="nest1.png" alt="owl" width="200" height="100"><h2>3</h2></center>
+
+                    </div> 
+                    <div >                 
+                        <table class="table table-default panel panel-warning">
+                            <thead id="color">
+                                <tr>
+                                    <th></th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>University</th>
+                                    <th> Condtion</th>
+                                </tr>
+                            </thead>
+                            <tbody id="color2">
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><img src="http://www.o-digital.com/uploads/2227/2283-1/Mini_Fridge_KC_50D_145.jpg" height="60" width="60"></td>
+                                    <td><label>Fridge</label></td>
+                                    <td><label >$50</label></td>
+                                    <td><label>Brandeis</label></td>
+                                    <td><label>Good </label></td>
+                                </tr>
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><img src="http://images.canadianlisted.com/nlarge/20psych-by-spencer-rathus-textbook-mru-uofc_6927178.jpg" height="60" width="60"></td>
+                                    <td><label>Psych Textbook</label></td>
+                                    <td><label >$80</label></td>
+                                    <td><label>Bentley</label></td>
+                                    <td> <label>Slightly Used</label> </td>
+                                </tr>
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTuqIIy1EYrqDUxpHErRVksqWADOsLP7zy-gUZV9lmpYDx7BNJg1w" height="60" width="60"></td>
+                                    <td><label>Bike</label></td>
+                                    <td><label >$40</label></td>
+                                    <td><label>Brandeis</label></td>
+                                    <td><label>Like New</label></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -539,18 +564,7 @@
                 <div class="checkbox-line, text-center" onclick="fridgeApp.showView('form')">
                     <button class="btn btn-warning">New Post</button>
                 </div>
-                <div class="dropdown pull-right">
-                    <button data-toggle="dropdown" class="dropdown-toggle pull-right">
-                        On Sale
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                        <li><a href="#">Interested In</a></li>
-                        <li><a href="#">Item History</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Your History</a></li>
-                    </ul>
-                </div>
+               
                 </div>
                 <div class="row">
                     <div class="col-lg-4">
@@ -587,6 +601,26 @@
                      </div>
                     </div>
                     <div id="doublePadding" class="col-lg-8">
+                        
+                        <div class="text-center">
+                            <p>Your Nest</p>
+                        </div>
+                        <div>
+                            <center><img class="realtive"src="nest1.png" alt="owl" width="200" height="100"><h2>3</h2></center>
+
+                        </div>
+                        <div class="dropdown pull-right">
+                            <button data-toggle="dropdown" class="dropdown-toggle dark_brown pull-right" >
+                                Interested In
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right">
+                                <li><a href="#">Interested In</a></li>
+                                <li><a href="#">Selling</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Your History</a></li>
+                            </ul>
+                        </div>
                         <table class="table table-default panel panel-warning">
                             <thead id="color">
                                 <tr>
@@ -597,7 +631,7 @@
                                 </tr>
 
                             </thead>
-                            <tbody id="color2">
+                            <tbody  id="color2">
                                 <tr class="changeImageColor" onclick="fridgeApp.showView('item')"> 
                                     <td><label>Fridge</label></td>
                                     <td><label>Upload Photo</label></td>

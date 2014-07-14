@@ -14,14 +14,32 @@ var fridgeView = (function($){
     function refreshTableItems(myItems){    
         var rows = "";
         var len = myItems.length;
-        
-        for(var n=0; n<len; n++){ 
-            var item = myItems[n];
+        var filteredItems = filterItems(myItems);
+        console.log("filteredItems = "+ JSON.stringify(filteredItems));
+        for(var n=0; n<filteredItems.length; n++){ 
+            var item = filteredItems[n];
             rows = rows + itemToRow(item);
         }
 
         var itemTableBody = $("#itemTableBodyItems").html(rows);
 
+    }
+
+    function filterItems(items) {
+        var n;
+        var item;
+        var newItems = [];
+        var price = $("#priceCutoff").val() || 0;
+        var name = $("#nameCutoff").val();
+        for (n = 0; n < items.length; n++) {
+            item = items[n];
+            if (item.price >= price) {
+                if ((item.name).match((name))) {
+                    newItems.push(item);
+                }
+            }
+            return newItems;
+        }
     }
 
     // convert an item into an HTML tr element
@@ -33,7 +51,8 @@ var fridgeView = (function($){
         "</td><td>"+ item.quantity+
         "</td><td>"+ item.location+
         "</td><td>"+ item.seller+
-        "</td><td>"+ item.sell_by+
+        "</td><td>" + item.sell_by+
+        "</td><td>" + item.university +
         "</td></tr>";
         return row;
     }
