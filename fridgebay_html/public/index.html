@@ -362,20 +362,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-4">
-                    <label class="left"><input   type=text class="form-control color5" placeholder="Search by Name"></label>
+                    <label class="left"><input id="nameCutoffHome" type=text class="form-control color5" placeholder="Search by Name"  onchange="fridgeApp.refreshView()"></label>
                 </div>
-                <div  class="col-lg-4 pos">
-                    <label><input type=text class="form-control color5" placeholder="Search by University" /></label>
+                <div class="col-lg-4 pos">
+                    <label><input id="schoolCutoffHome" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"></label>
                 </div>
                 <div class="col-lg-4">
-                    <label class="right"><input id="priceCutoff" type=number class="form-control color5" placeholder="Search by Price" /></label>
+                    <label class="right"><input id="priceCutoffHome" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-2">
                     <ul id="accordion" class="nav nav-list nav-info place_left">
                         
-                            <li class="color3" class="nav-header">
+                            <li class="nav-header color3">
                                 Categories
                             </li>
                             <li>
@@ -421,7 +421,7 @@
                             </li>
                             <div id="collapseAppliances" class="panel-collapse collapse out">
                                 <div class="panel-body">
-                                    <li><span class="color4"> Fridge </span></li>
+                                    <li><span class="color4" > Fridge </span></li>
                                     <li><span class="color4"> Microwave</span></li>
                                     <li><span class="color4"> Coffe Maker</span></li>
                                     <li><span class="color4"> Oven </span></li>
@@ -486,7 +486,7 @@
                             </li>
                             <div id="collapseBooks" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    <li><span class="color4"> Textbooks </span></li>
+                                    <li  id="textbook"><span  class="color4" > Textbooks </span></li>
                                     <li><span class="color4"> Novels</span></li>
                                     <li><span class="color4"> Other </span></li>
                                 </div>
@@ -515,7 +515,7 @@
                         <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37"> llie's nest</p>
                     </div>
                     <div>
-                        <center><img class="realtive" src="nest1.png" alt="owl" width="200" height="100"><h2>3</h2></center>
+                        <center><img  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber"></h2></center>
 
                     </div> 
                     <div >                 
@@ -529,7 +529,8 @@
                                     <th> Condtion</th>
                                 </tr>
                             </thead>
-                            <tbody class="color2">
+                            <tbody id="homeTableBody"class="color2">
+                                <!--
                                 <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
                                     <td><img src="http://www.o-digital.com/uploads/2227/2283-1/Mini_Fridge_KC_50D_145.jpg" height="60" width="60"></td>
                                     <td><label>Fridge</label></td>
@@ -551,6 +552,7 @@
                                     <td><label>Brandeis</label></td>
                                     <td><label>Like New</label></td>
                                 </tr>
+                                -->
                             </tbody>
                         </table>
                     </div>
@@ -609,7 +611,7 @@
                             <p>Your Nest</p>
                         </div>
                         <div>
-                            <center><img class="realtive" src="nest1.png" alt="owl" width="200" height="100"><h2>3</h2></center>
+                            <center><img src="nest1.png" alt="owl" width="200" height="100"><h2>3</h2></center>
 
                         </div>
                         <div class="dropdown pull-right">

@@ -22,6 +22,7 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
+    
 
     $(function () {
         $('#notify').popover(
@@ -48,6 +49,7 @@ var fridgeApp = (function($) {
     function refreshView(){
         fridgeView.refreshView(myList);
     }
+   
 
     function reloadModel(){
         myList.loadModel();

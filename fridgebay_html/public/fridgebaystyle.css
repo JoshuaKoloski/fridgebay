@@ -149,9 +149,10 @@
 .bottom{
     
     padding-top:5%;
-    
     margin-left:auto;
     margin-right:auto;
+   
+
     
 }
 .right
@@ -253,9 +254,7 @@
     font-weight:bold;
     font-style:italic;
 }
-.relative{
-    position:relative;
-}
+
 .clear{display:block;}
 
 
