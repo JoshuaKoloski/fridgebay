@@ -81,10 +81,21 @@ var fridgeApp = (function($) {
             sellBy: $("#itemSellBy").val(),
             university: $("#itemUniversity").val(),
             location: $("#itemLocation").val(),
-            description: $("#itemDesc").val(),   
+            description: $("#itemDesc").val() 
         });
     }
-    
+    function clearForm(){
+        $("#itemMainCategory").val(""),
+        $("#itemSubCategory").val(""),
+        $("#itemName").val(""),
+        $("#itemPrice").val(""),
+        $("#itemQuantity").val(""),
+        $("#itemCondition").val(""),
+        $("#itemSellBy").val(""),
+        $("#itemUniversity").val(""),
+        $("#itemLocation").val(""),
+        $("#itemDesc").val("")
+    }
     function encodeImageFileAsURL(divNum){
 
 		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
