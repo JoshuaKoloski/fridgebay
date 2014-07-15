@@ -38,18 +38,24 @@ var itemsSchema = mongoose.Schema({
         price: Number,
         description: String,
         condition: String,
-        catagory: String,
+        category: String,
         subcatagory: String,
         location: String,
         quantity: Number,
         sellBy: Date,
         status: Boolean, 
         seller: String,
-        university: String
+        university: String,
+        interested: Number
 });
 
 var usersSchema = mongoose.Schema({
-    
+    email: String,
+    phone: String,
+    username: String,
+    nest: Array,
+    contact: Boolean,
+    sell: Array
 });
 
 var item = mongoose.model('items', itemsSchema);
@@ -104,16 +110,16 @@ app.post('/model/:collection', function(req, res) {
     }).save();
 });
 
-// // delete a particular item from the model
-// app.delete('/model/:collection/:id', function(req, res) {
-//     var id = req.params.id;
-//     console.log("deleting " + id);
-//     var collection = db.get(req.params.collection);
-//     collection.remove({
-//         _id: id
-//     });
-//     res.json(200, {});
-// });
+// delete a particular item from the model
+app.delete('/model/:collection/:id', function(req, res) {
+    var id = req.params.id;
+    console.log("deleting " + id);
+    var collection = db.get(req.params.collection);
+    collection.remove({
+        _id: id
+    });
+    res.json(200, {});
+});
 
 
 
