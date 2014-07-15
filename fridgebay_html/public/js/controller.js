@@ -74,8 +74,8 @@ var fridgeApp = (function($) {
         myList.addElement({
             seller: myList.currentUser,
             images: imageArray,
-            category: $("#itemMainCategory").val(),
-            subcategory: $("#itemSubCategory").val(),
+            category: $("#itemMainCategory").text(),
+            subcategory: $("#itemMainCategory").text(),
             name: $("#itemName").val(),
             price: $("#itemPrice").val(),
             quantity: $("#itemQuantity").val(),

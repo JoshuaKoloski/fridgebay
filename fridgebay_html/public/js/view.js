@@ -162,7 +162,6 @@ var fridgeView = (function($){
         for(var n=0; n<filteredModelItems.length; n++){ 
             var item = filteredModelItems[n];
             rows = rows + itemToRow(item);
-            
         }
         console.log("model length= " + filteredHomeItems.length);
         for (var n = 0; n < filteredHomeItems.length; n++) {
@@ -182,6 +181,7 @@ var fridgeView = (function($){
     }
 
     function filterModelItems(items) {
+        
         var n;
         var item;
         var newItems = [];
@@ -190,6 +190,9 @@ var fridgeView = (function($){
         console.log(name);
         for (n = 0; n < items.length; n++) {
             item = items[n];
+            console.log("item is equal to " + JSON.stringify(item));
+            console.log("item category is " + JSON.stringify(item.category));
+            console.log("item name is " + JSON.stringify(item.name));
             if(price != 0){
                 if (item.price <= price) {
                     if ((item.name.toLowerCase()).match((name))) {
@@ -203,6 +206,7 @@ var fridgeView = (function($){
             }
         }
         return newItems;
+        
     }
     function filterHomeItems(items) {
         var n;
@@ -211,13 +215,20 @@ var fridgeView = (function($){
         var price = $("#priceCutoffHome").val() || 0;
         var name = $("#nameCutoffHome").val();
         var university = $("#schoolCutoffHome").val();
-        
+        var clicked = $("textbook").prop(clicked);
+
         for (n = 0; n < items.length; n++) {
             item = items[n];
             if (item.price <= price || price==0) {
                 if ((item.name).match((name))) {
-                    if((item.university).match((university))){
-                        newItems.push(item);
+                    if ((item.university).match((university))) {
+                        if (!clicked) {
+                            newItems.push(item);
+                        } else {
+                            if ((item.category).match(("textbook"))) {
+                                newItems.push(item);
+                            }
+                        }
                     }
                 }
             } 
