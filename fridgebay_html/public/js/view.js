@@ -186,12 +186,19 @@ var fridgeView = (function($){
         var item;
         var newItems = [];
         var price = $("#priceCutoff").val() || 0;
-        var name = $("#nameCutoff").val();
+        var name = $("#nameCutoff").val().toLowerCase();
+        console.log(name);
         for (n = 0; n < items.length; n++) {
             item = items[n];
-            if (item.price >= price) {
-                if ((item.name).match((name))) {
-                    newItems.push(item);
+            if(price != 0){
+                if (item.price <= price) {
+                    if ((item.name.toLowerCase()).match((name))) {
+                        newItems.push(item);
+                    }
+                }
+            }else{
+                if ((item.name.toLowerCase()).match((name))) {
+                        newItems.push(item);
                 }
             }
         }

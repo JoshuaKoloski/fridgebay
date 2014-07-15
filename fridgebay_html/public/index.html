@@ -674,100 +674,100 @@
                 </div>
                 
                 <table class="table">
-                    <tbody class="color2">
-                        <tr>
-                            <td width="600px">
-                                <form class="form-inline" role="form">
-                                    <div class="form-group">
-                                        <label>Choose Item Main Category</label>
-                                        <select class="form-control" id="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
-                                            <option value=furniture> Furniture </option>
-                                            <option value=appliances> Appliances </option>
-                                            <option value=vehicles> Vehicles </option>
-                                            <option value=electronics> Electronics </option>
-                                            <option value=cutlery> Cutlery </option>
-                                            <option value=supplies> Supplies </option>
-                                            <option value=books> Books </option>
-                                            <option value=clothes> Clothes </option>
-                                            <option value=bed> Bed </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>and Sub Category</label>
-                                        <select class="form-control" id="itemSubCategory">
-                                            <option value=table> Table </option>
-                                            <option value=chair> Chair </option>
-                                            <option value=shelves> Shelves </option>
-                                            <option value=bookcase> Bookcase </option>
-                                            <option value=drawer> Drawer </option>
-                                            <option value=other> Other </option>
-                                        </select>
-                                    </div>
-                                </form>
-                                <br />
-                                <div class="panel color" >
-                                    <div class="panel-heading color" ><label>Add up to 3 pictures for your item.</label></div>
-                                    <div class="panel-body color2">
-                                        <input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg" />
-                                        <div id="img_0"></div>
-                                        <input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg" />
-                                        <div id="img_1"></div>
-                                        <input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg" />
-                                        <div id="img_2"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <form role="form">
-                                    <div>
-                                        <label>Item Name</label>
-                                        <input type="text" class="form-control" id="itemName" />
-                                    </div>
-                                    <div>
-                                        <label>Price</label>
-                                        <input type="number" class="form-control" id="itemPrice" />
-                                    </div>
-                                    <div>
-                                        <label>Condition</label>
-                                        <select class="form-control" id="itemCondition">
-                                            <!--Dropdown Menu for Condition -->
-                                            <option>Brand New</option>
-                                            <option>Like New</option>
-                                            <option>Slightly Used</option>
-                                            <option>Good</option>
-                                            <option>Damaged</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label>University</label>
-                                        <input type="text" class="form-control" id="itemUniversity" />
-                                    </div>
-                                    <div>
-                                        <label>Location</label>
-                                        <input type="text" class="form-control" id="itemLocation" />
-                                    </div>
-                                    <div>
-                                        <label>Quantity</label>
-                                        <input type="number" class="form-control" id="itemQuantity" />
-                                    </div>
-                                    <div>
-                                        <label>Desired Sell-By Date</label>
-                                        <input type="Date" class="form-control" id="itemSellBy" />
-                                    </div>
-                                    <div>
-                                        <label for="itemDesc">Description</label>
-                                    </div>
-                                    <div>
-                                        <textarea class="form-control" rows="4" id="itemDesc"></textarea>
-                                    </div>
-                                    <div class="place_right">
-                                        <button type="submit" class="dark_brown" onclick="fridgeApp.addItem()">Submit</button>
-                                    </div>
-                                </form>
-                            </td>
-
-                        </tr>
-                    </tbody>
+                	<tbody id="color2">
+						<tr>
+							<td width="600px">	
+								<form class="form-inline" role="form">
+									<div class="form-group">
+										<label>Choose Item Main Category</label>
+										<select class="form-control" id="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
+											<option value=furniture> Furniture </option>
+											<option value=appliances> Appliances </option>
+											<option value=vehicles> Vehicles </option>
+											<option value=electronics> Electronics </option>
+											<option value=cutlery> Cutlery </option>
+											<option value=supplies> Supplies </option>
+											<option value=books> Books </option>
+											<option value=clothes> Clothes </option>
+											<option value=bed> Bed </option>
+										</select>
+									</div>							
+									<div class="form-group">
+										<label>and Sub Category</label>
+										<select class="form-control" id="itemSubCategory">
+											<option value=table> Table </option>
+											<option value=chair> Chair </option>
+											<option value=shelves> Shelves </option>
+											<option value=bookcase> Bookcase </option>
+											<option value=drawer> Drawer </option>
+											<option value=other> Other </option>
+										</select>
+									</div>
+								</form>
+								<br/>
+								<div class="panel" id="color">
+									<div class="panel-heading" id="color"><lable>Add up to 3 pictures for your item.</lable></div>
+									<div class="panel-body" id="color2">			
+										<input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg"/>
+										<div id="img_0"></div>
+										<input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg"/>
+										<div id="img_1"></div>
+										<input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg"/>
+										<div id="img_2"></div>
+									</div>
+								</div>
+							</td>
+							<td>
+								<form role="form">
+									<div>
+										<label>Item Name</label>
+										<input type="text" class="form-control" id="itemName" />
+									</div>
+									<div>
+										<label>Price</label>
+										<input type="number" class="form-control" id="itemPrice" />
+									</div>
+									<div>
+										<label>Condition</label>
+										<select class="form-control" id="itemCondition">
+											<!--Dropdown Menu for Condition -->
+											<option>Brand New</option>
+											<option>Like New</option>
+											<option>Slightly Used</option>
+											<option>Good</option>
+											<option>Damaged</option>
+										</select>
+									</div>
+									<div>
+										<label>University</label>
+										<input type="text" class="form-control" id="itemUniversity" />
+									</div>
+									<div>
+										<label>Location</label>
+										<input type="text" class="form-control" id="itemLocation" />
+									</div>
+									<div>
+										<label>Quantity</label>
+										<input type="number" class="form-control" id="itemQuantity" />
+									</div>
+									<div>
+										<label>Desired Sell-By Date</label>
+										<input type="Date" class="form-control" id="itemSellBy" />
+									</div>
+									<div>
+										<label for="itemDesc">Description</label>
+									</div>
+									<div>
+										<textarea class="form-control" rows="4" id="itemDesc"></textarea>
+									</div>
+									<div id="place_right">
+									<button type="submit" class="dark_brown" onclick="fridgeApp.addItem(), fridgeApp.showView('home')">Submit</button>
+									</div>
+								</form>
+							</td>
+				
+						</tr>
+                	</tbody>
                 </table>
 
             </div>

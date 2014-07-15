@@ -72,15 +72,15 @@ var fridgeApp = (function($) {
     	console.log("images = "+ imageArray);
     	
         myList.addElement({
-        	seller: myList.currentUser,
-        	images: imageArray,
-        	main_category: $("#itemMainCategory").val(),
-        	sub_category: $("#itemSubCategory").val(),
+            seller: myList.currentUser,
+            images: imageArray,
+            category: $("#itemMainCategory").val(),
+            subcategory: $("#itemSubCategory").val(),
             name: $("#itemName").val(),
             price: $("#itemPrice").val(),
             quantity: $("#itemQuantity").val(),
             condition: $("#itemCondition").val(),
-            sell_by: $("#itemSellBy").val(),
+            sellBy: $("#itemSellBy").val(),
             university: $("#itemUniversity").val(),
             location: $("#itemLocation").val(),
             description: $("#itemDesc").val(),   
