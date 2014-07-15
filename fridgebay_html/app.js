@@ -112,14 +112,18 @@ app.post('/model/:collection', function(req, res) {
 });
 
 // delete a particular item from the model
-app.delete('/model/:collection/:id', function(req, res) {
-    mongoose.model(req.params.collection).find({_id:req.params.id}, function(err, item){
-        mongoose.model(req.params.collection).remove(function (err, item) {
-            if (err) return handleError(err);
-            console.log("Deleting item: " + item);
-        })
-    })
+// app.delete('/model/:collection/:id', function(req, res) {
+//     mongoose.model(req.params.collection).remove({_id:req.params.id}, function(err, item){
+//         if (err) return handleError(err);
+//         console.log("Deleting item: " + item);
+//     })
+// });
+
+app.delete('/model/:collection/:id', function (req, res) {
+    id = req.params.id;
+    mongoose.model(req.params.collection).remove({_id:id})
 });
+  
 
 
 

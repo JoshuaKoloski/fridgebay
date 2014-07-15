@@ -188,6 +188,7 @@ var fridgeView = (function($){
 
     // convert an item into an HTML tr element
     function itemToRow(item){
+        id = item._id;
         var row = 
         "<tr><td>"+ item.name+
         "</td><td>"+ item.seller+
@@ -199,6 +200,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
+        "</td><td>" + "<button class='btn btn-default' type='button' sid="+item.id+"onclick='fridgeApp.deleteItem(this)>Delete</button>"+
         "</td></tr>";
         return row;
     }

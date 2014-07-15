@@ -96,6 +96,12 @@ var fridgeApp = (function($) {
         $("#itemLocation").val(""),
         $("#itemDesc").val("")
     }
+    function deleteItem(element){
+        console.log("deleting item");
+        console.log(" with id " + element.getAttribute("sid"));
+        myList.deleteElement(element.getAttribute("sid"));
+        reloadModel();
+    }
     function encodeImageFileAsURL(divNum){
 
 		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
