@@ -45,11 +45,17 @@ var itemsSchema = mongoose.Schema({
         sellBy: Date,
         status: Boolean, 
         seller: String,
-        university: String
+        university: String,
+        interested: Number
 });
 
 var usersSchema = mongoose.Schema({
-    
+    email: String,
+    phone: String,
+    username: String,
+    nest: Array,
+    contact: Boolean,
+    sell: Array
 });
 
 var item = mongoose.model('items', itemsSchema);
@@ -100,7 +106,8 @@ app.post('/model/:collection', function(req, res) {
         sellBy: req.body.sellBy,
         status: req.body.status, 
         seller: req.body.seller,
-        university: req.body.university
+        university: req.body.university,
+        interested: 0
     }).save();
 });
 
