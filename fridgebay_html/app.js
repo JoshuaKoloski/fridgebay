@@ -99,26 +99,26 @@ app.post('/model/:collection', function(req, res) {
         price: req.body.price,
         description: req.body.description,
         condition: req.body.condition,
-        catagory: req.body.catagory,
-        subcatagory: req.body.subcatagory,
+        category: req.body.category,
+        subcategory: req.body.subcategory,
         location: req.body.location,
         quantity: req.body.quantity,
         sellBy: req.body.sellBy,
         status: req.body.status, 
         seller: req.body.seller,
-        university: req.body.university
+        university: req.body.university,
+        interested: 0
     }).save();
 });
 
 // delete a particular item from the model
 app.delete('/model/:collection/:id', function(req, res) {
-    var id = req.params.id;
-    console.log("deleting " + id);
-    var collection = db.get(req.params.collection);
-    collection.remove({
-        _id: id
-    });
-    res.json(200, {});
+    mongoose.model(req.params.collection).find({_id:req.params.id}, function(err, item){
+        mongoose.model(req.params.collection).remove(function (err, item) {
+            if (err) return handleError(err);
+            console.log("Deleting item: " + item);
+        })
+    })
 });
 
 

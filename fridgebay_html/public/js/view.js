@@ -247,10 +247,10 @@ var fridgeView = (function($){
         "</td><td>"+ item.quantity+
         "</td><td>"+ item.university+
         "</td><td>"+ item.location+
-        "</td><td>"+ item.sell_by+
+        "</td><td>"+ item.sellBy+
         "</td><td>"+ item.condition+
-        "</td><td>"+ item.main_category+
-        "</td><td>"+ item.sub_category+
+        "</td><td>"+ item.category+
+        "</td><td>"+ item.subcategory+
         "</td></tr>";
         return row;
     }
