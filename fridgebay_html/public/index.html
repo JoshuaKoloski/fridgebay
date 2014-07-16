@@ -675,7 +675,6 @@
                 <div class="page-header">
                     <h1 class="heading_text">Post an Item</h1>
                 </div>
-                
                 <table class="table table-default panel panel-warning">
                     <tbody class="color2">
                         <tr>
@@ -764,17 +763,14 @@
                                         <textarea class="form-control" rows="4" id="itemDesc"></textarea>
                                     </div>
                                     <div >
-                                        <center><button type="submit" class="dark_brown" onclick="fridgeApp.addItem(), fridgeApp.showView('home'), fridgeApp.refreshView()">Submit</button></center>
+                                        <center><button type="submit" class="dark_brown" onclick="fridgeApp.addItem(), fridgeApp.showView('home'), fridgeApp.reloadModel()">Submit</button></center>
                                     </div>
                                 </form>
                             </td>
-
                         </tr>
                     </tbody>
                 </table>
-
             </div>
-            
         </div>
 <!--Contact Us Page -->
         <div id="contact-view" class="view">
