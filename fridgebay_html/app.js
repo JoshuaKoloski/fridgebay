@@ -10,7 +10,6 @@ var app = express();
 var logfmt = require("logfmt");
 var mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
-// var db = monk('/fridgebay');
 
 // serve static content from the public folder 
 app.use("/", express.static(__dirname + '/public'));
@@ -18,7 +17,7 @@ app.use(logfmt.requestLogger());
 // parse the bodies of all other queries as json
 app.use(bodyParser.json());
 
-
+//Uri allows access to the mongo database on the heroku server
 var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
@@ -28,10 +27,11 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-//Define Schema for model 
+
 db.once('open', function callback () {
     console.log("Database connected");
 });
+//Define Schemas for model 
 var itemsSchema = mongoose.Schema({
         images: Array,
         name: String,
@@ -121,8 +121,11 @@ app.post('/model/:collection', function(req, res) {
 // });
 
 app.delete('/model/:collection/:id', function (req, res) {
-    id = req.params.id;
-    mongoose.model(req.params.collection).remove({_id:id})
+    var id = req.params.id;
+    mongoose.model(req.params.collection).remove({_id:id}, function( err, item ){
+        if(err) throw err;
+        else console.log("Deleting Item: ID_" + req.params.id);
+    })
 });
   
 
