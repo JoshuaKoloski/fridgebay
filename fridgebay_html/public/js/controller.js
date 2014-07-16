@@ -90,17 +90,11 @@ var fridgeApp = (function($) {
             description: $("#itemDesc").val() 
         });
     }
-    function clearForm(){
-        $("#itemMainCategory").val(""),
-        $("#itemSubCategory").val(""),
-        $("#itemName").val(""),
-        $("#itemPrice").val(""),
-        $("#itemQuantity").val(""),
-        $("#itemCondition").val(""),
-        $("#itemSellBy").val(""),
-        $("#itemUniversity").val(""),
-        $("#itemLocation").val(""),
-        $("#itemDesc").val("")
+    function deleteItem(element){
+        console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
+        myList.deleteElement(element.getAttribute("sid"));
+        reloadModel();
+        alert("Item was successfully deleted");
     }
     function encodeImageFileAsURL(divNum){
 
@@ -156,7 +150,8 @@ var fridgeApp = (function($) {
         verifySubmission: verifySubmission,
         refreshView: refreshView,
         reloadModel: reloadModel,
-        showView: showView
+        showView: showView,
+        deleteItem: deleteItem
     }
 
     return (fridgeApp);
