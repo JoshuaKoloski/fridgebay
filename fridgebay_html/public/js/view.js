@@ -9,6 +9,7 @@ var fridgeView = (function($){
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
         updateCategoryOptions();
+        
 
     }
     function refresh(myData, category) {
@@ -155,6 +156,7 @@ var fridgeView = (function($){
     function refreshTableItems(myItems){    
         var rows = "";
         var rowsHome = "";
+        var itemsArr = [];
         var len = myItems.length;
         var filteredModelItems = filterModelItems(myItems);
         var filteredHomeItems = filterHomeItems(myItems);
@@ -167,14 +169,24 @@ var fridgeView = (function($){
         console.log("model length= " + filteredHomeItems.length);
         for (var n = 0; n < filteredHomeItems.length; n++) {
             var item = filteredHomeItems[n];
-            
+            itemsArr.push(item);
+            console.log("item = " + JSON.stringify(item));
             rowsHome = rowsHome + homeItemToRow(item);
         }
-
+        
         var itemTableBody = $("#itemTableBodyItems").html(rows);
         var itemTablebody = $("#homeTableBody").html(rowsHome);
+        
         showNumber(len);
 
+    }
+
+
+    function refreshItemItems(item){
+
+        var rowsItem="";
+        rowsItem = rowsItem + itemItemToRow(item); 
+        var itemTableBody= $("#tableBody").html(rowsItem)
     }
    
     function showNumber(length) {  
@@ -260,14 +272,27 @@ var fridgeView = (function($){
         "</td></tr>";
         return row;
     }
+    //converts item into html on home table
     function homeItemToRow(item) {
-        var row =
-        "<tr class='changeImageColor'><td><label>" + 
+        var row=
+        "<tr class='changeImageColor' onclick=fridgeView.refreshItemItems(item)><td><label>" + 
         "</label></td><td><label>" + item.name +
         "</label></td><td><label>" + item.price +
         "</label></td><td><label>" + item.university +
         "</label></td><td><label>" + item.condition +
         "</label></td></tr>";
+        return row;
+    }
+    //converts item into html on item table
+    function itemItemToRow(item) {
+        var row =
+        "<tr><td><label>Item Name</label></td><td><label>" + item.name + "</label></td></tr>"+
+        "<tr><td><label>University</label></td><td><label>" + item.university + "</label></td></tr>"+
+        "<tr><td><label>Location</label></td><td><label>" + item.location + "</label></td></tr>"+
+        "<tr><td><label>Price</label></td><td><label>$" + item.price + "</label></td></tr>"+
+        "<tr><td><label>Quantity</label></td><td><label>" + item.quantity + "</label></td></tr>"+
+        "<tr><td><label>Condition</label></td><td><label>" + item.condition + "</label></td></tr>"+
+        "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
     
@@ -299,6 +324,7 @@ var fridgeView = (function($){
         refreshView: refreshView,
         refresh: refresh,
         updateCategoryOptions: updateCategoryOptions,
+        refreshItemItems:refreshItemItems
 
     };
     

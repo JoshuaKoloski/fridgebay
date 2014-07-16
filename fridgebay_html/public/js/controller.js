@@ -23,6 +23,7 @@ var fridgeApp = (function($) {
         alert("Your Message has been submitted");
     }
     
+  
 
     $(function () {
         $('#notify').popover(
