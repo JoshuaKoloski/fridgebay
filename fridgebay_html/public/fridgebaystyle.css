@@ -149,9 +149,10 @@
 .bottom{
     
     padding-top:5%;
-    
     margin-left:auto;
     margin-right:auto;
+   
+
     
 }
 .right
@@ -231,9 +232,11 @@
 }
 .changeImageColor:hover{
     background-color:#d4990d;
+    
 }
 .changeImage:hover {
      opacity:.4;
+     cursor:pointer;
 }
 .doublePadding div h2{
     position:absolute;
@@ -248,15 +251,51 @@
     position:absolute;
     color:red;
     clear:none;
-    left:462px;
+    left:451.75px;
     top:94px;
     font-weight:bold;
     font-style:italic;
 }
-.relative{
-    position:relative;
-}
+
 .clear{display:block;}
+
+#accordion div div li:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+#accordion .nav-header:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+.scroll{
+    overflow-y:scroll;
+    overflow-x:hidden;
+    height:400px;
+    width:100%;
+}
+.scroll::-webkit-scrollbar{
+    width:12px;
+}
+.scroll::-webkit-scrollbar:hover{
+    border-color: #572f04;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0), 0 0 20px rgba(179, 94, 43, 0.8);/*changed*/
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.0), 0 0 20px rgba(179, 94, 43, 0.8);/*changed*/
+}
+
+.scroll::-webkit-scrollbar-track{
+    -webkit-box-shadow: inset 0 0 6px rgba(156, 109, 41, 0.8); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(159, 112, 44, 0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(156, 109, 41, 0.8); 
+}
+
+
 
 
 

@@ -9,6 +9,10 @@ var fridgeView = (function($){
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
         updateCategoryOptions();
+
+    }
+    function refresh(myData, category) {
+        filterCategory(myData.items, category);
     }
     
     function updateCategoryOptions(){
@@ -150,19 +154,35 @@ var fridgeView = (function($){
     // redraw the table using the current model
     function refreshTableItems(myItems){    
         var rows = "";
+        var rowsHome = "";
         var len = myItems.length;
-        var filteredItems = filterItems(myItems);
-        console.log("filteredItems = "+ JSON.stringify(filteredItems));
-        for(var n=0; n<filteredItems.length; n++){ 
-            var item = filteredItems[n];
+        var filteredModelItems = filterModelItems(myItems);
+        var filteredHomeItems = filterHomeItems(myItems);
+        //console.log("filteredItems = " + JSON.stringify(filteredModelItems));
+        //console.log("filteredItems = " + JSON.stringify(filteredHomeItems));
+        for(var n=0; n<filteredModelItems.length; n++){ 
+            var item = filteredModelItems[n];
             rows = rows + itemToRow(item);
+        }
+        console.log("model length= " + filteredHomeItems.length);
+        for (var n = 0; n < filteredHomeItems.length; n++) {
+            var item = filteredHomeItems[n];
+            
+            rowsHome = rowsHome + homeItemToRow(item);
         }
 
         var itemTableBody = $("#itemTableBodyItems").html(rows);
+        var itemTablebody = $("#homeTableBody").html(rowsHome);
+        showNumber(len);
 
     }
+   
+    function showNumber(length) {  
+        $("#showNumber").html(length);
+    }
 
-    function filterItems(items) {
+    function filterModelItems(items) {
+        
         var n;
         var item;
         var newItems = [];
@@ -184,7 +204,45 @@ var fridgeView = (function($){
             }
         }
         return newItems;
+        
     }
+    function filterCategory(items, category) {
+        var n;
+        var item;
+        var newItems = [];
+        for (n = 0; n < items.length; n++) {
+            item = items[n];
+            console.log("category= " + item.subcategory);
+            if (item.subcategory.match(category)) {
+                newItems.push(item);
+            }
+        }
+        refreshTableItems(newItems);
+    }
+
+    function filterHomeItems(items) {
+        var n;
+        var item;
+        var newItems = [];
+        var price = $("#priceCutoffHome").val() || 0;
+        var name = $("#nameCutoffHome").val();
+        var university = $("#schoolCutoffHome").val();
+        
+
+        for (n = 0; n < items.length; n++) {
+            item = items[n];
+            if (item.price <= price || price==0) {
+                if ((item.name).match((name))) {
+                    if ((item.university).match((university))) {
+                        newItems.push(item)
+                    }
+                }
+            } 
+        }
+        
+        return newItems;
+    }
+    
 
     // convert an item into an HTML tr element
     function itemToRow(item){
@@ -202,6 +260,16 @@ var fridgeView = (function($){
         "</td><td>"+ item.subcategory+
         "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.deleteItem(this)'>Delete</button>"+
         "</td></tr>";
+        return row;
+    }
+    function homeItemToRow(item) {
+        var row =
+        "<tr class='changeImageColor'><td><label>" + 
+        "</label></td><td><label>" + item.name +
+        "</label></td><td><label>" + item.price +
+        "</label></td><td><label>" + item.university +
+        "</label></td><td><label>" + item.condition +
+        "</label></td></tr>";
         return row;
     }
     
@@ -231,7 +299,9 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
+        refresh: refresh,
         updateCategoryOptions: updateCategoryOptions,
+
     };
     
     return(fridgeView);

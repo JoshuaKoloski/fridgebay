@@ -22,6 +22,7 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
+    
 
     $(function () {
         $('#notify').popover(
@@ -45,15 +46,19 @@ var fridgeApp = (function($) {
         element.value="";
     }
 
-    function refreshView(){
+    function refreshView() {
         fridgeView.refreshView(myList);
+    }
+    function refresh(category) {
+        fridgeView.refresh(myList, category);
     }
 
     function reloadModel(){
         myList.loadModel();
         refreshView();
     }
-    
+   
+
     function addItem() {
     	
     	var imageArray = [];
@@ -148,6 +153,7 @@ var fridgeApp = (function($) {
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
+        refresh: refresh,
         addItem: addItem,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
