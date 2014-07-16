@@ -83,11 +83,12 @@ app.get('/model/:collection', function(req, res) {
 
 // change an item in the model
 app.put('/model/:collection/:id', function(req, res) {
-    var collection = db.get(req.params.collection);
-    collection.update({
-        "_id": req.params.id
-    }, req.body);
-    res.json(200, {});
+//     var collection = db.get(req.params.collection);
+//     collection.update({
+//         "_id": req.params.id
+//     }, req.body);
+//     res.json(200, {});
+    Tank.update({ _id: id }, { $set: { size: 'large' }}, callback);
 });
 
 //Add new item to database
