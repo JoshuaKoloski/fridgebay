@@ -46,16 +46,19 @@ var fridgeApp = (function($) {
         element.value="";
     }
 
-    function refreshView(){
+    function refreshView() {
         fridgeView.refreshView(myList);
     }
-   
+    function refresh(category) {
+        fridgeView.refresh(myList, category);
+    }
 
     function reloadModel(){
         myList.loadModel();
         refreshView();
     }
-    
+   
+
     function addItem() {
     	
     	var imageArray = [];
@@ -74,8 +77,8 @@ var fridgeApp = (function($) {
         myList.addElement({
             seller: myList.currentUser,
             images: imageArray,
-            category: $("#itemMainCategory").text(),
-            subcategory: $("#itemMainCategory").text(),
+            category: $("#itemMainCategory").val(),
+            subcategory: $("#itemSubCategory").val(),
             name: $("#itemName").val(),
             price: $("#itemPrice").val(),
             quantity: $("#itemQuantity").val(),
@@ -133,6 +136,7 @@ var fridgeApp = (function($) {
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
+        refresh: refresh,
         addItem: addItem,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,

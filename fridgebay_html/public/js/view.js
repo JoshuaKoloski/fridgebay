@@ -9,10 +9,11 @@ var fridgeView = (function($){
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
         updateCategoryOptions();
-        
-        
+
     }
-    
+    function refresh(myData, category) {
+        filterCategory(myData.items, category);
+    }
     
     function updateCategoryOptions(){
     	
@@ -190,9 +191,6 @@ var fridgeView = (function($){
         console.log(name);
         for (n = 0; n < items.length; n++) {
             item = items[n];
-            console.log("item is equal to " + JSON.stringify(item));
-            console.log("item category is " + JSON.stringify(item.category));
-            console.log("item name is " + JSON.stringify(item.name));
             if(price != 0){
                 if (item.price <= price) {
                     if ((item.name.toLowerCase()).match((name))) {
@@ -208,6 +206,20 @@ var fridgeView = (function($){
         return newItems;
         
     }
+    function filterCategory(items, category) {
+        var n;
+        var item;
+        var newItems = [];
+        for (n = 0; n < items.length; n++) {
+            item = items[n];
+            console.log("category= " + item.subcategory);
+            if (item.subcategory.match(category)) {
+                newItems.push(item);
+            }
+        }
+        refreshTableItems(newItems);
+    }
+
     function filterHomeItems(items) {
         var n;
         var item;
@@ -215,20 +227,14 @@ var fridgeView = (function($){
         var price = $("#priceCutoffHome").val() || 0;
         var name = $("#nameCutoffHome").val();
         var university = $("#schoolCutoffHome").val();
-        var clicked = $("textbook").prop(clicked);
+        
 
         for (n = 0; n < items.length; n++) {
             item = items[n];
             if (item.price <= price || price==0) {
                 if ((item.name).match((name))) {
                     if ((item.university).match((university))) {
-                        if (!clicked) {
-                            newItems.push(item);
-                        } else {
-                            if ((item.category).match(("textbook"))) {
-                                newItems.push(item);
-                            }
-                        }
+                        newItems.push(item)
                     }
                 }
             } 
@@ -256,7 +262,7 @@ var fridgeView = (function($){
     }
     function homeItemToRow(item) {
         var row =
-        "<tr><td><label>" + 
+        "<tr class='changeImageColor'><td><label>" + 
         "</label></td><td><label>" + item.name +
         "</label></td><td><label>" + item.price +
         "</label></td><td><label>" + item.university +
@@ -291,8 +297,9 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
+        refresh: refresh,
         updateCategoryOptions: updateCategoryOptions,
-       
+
     };
     
     return(fridgeView);
