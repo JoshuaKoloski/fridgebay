@@ -530,30 +530,6 @@
                             
                             <tbody id="homeTableBody" class="color2">
                                 
-                                <!--
->>>>>>> 649b84ba24ca64ba586a8ebd5570768275e4e455
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><img src="http://www.o-digital.com/uploads/2227/2283-1/Mini_Fridge_KC_50D_145.jpg" height="60" width="60"></td>
-                                    <td><label>Fridge</label></td>
-                                    <td><label>$50</label></td>
-                                    <td><label>Brandeis</label></td>
-                                    <td><label>Good </label></td>
-                                </tr>
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><img src="http://images.canadianlisted.com/nlarge/20psych-by-spencer-rathus-textbook-mru-uofc_6927178.jpg" height="60" width="60"></td>
-                                    <td><label>Psych Textbook</label></td>
-                                    <td><label>$80</label></td>
-                                    <td><label>Bentley</label></td>
-                                    <td> <label>Slightly Used</label> </td>
-                                </tr>
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTuqIIy1EYrqDUxpHErRVksqWADOsLP7zy-gUZV9lmpYDx7BNJg1w" height="60" width="60"></td>
-                                    <td><label>Bike</label></td>
-                                    <td><label>$40</label></td>
-                                    <td><label>Brandeis</label></td>
-                                    <td><label>Like New</label></td>
-                                </tr>
-                                -->
                             </tbody>
                         </table>
                     </div>
@@ -769,11 +745,115 @@
                 </table>
             </div>
         </div>
+<!--Edit Item Page -->
+        <div id="form-view" class="view">
+            
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="heading_text">Post an Item</h1>
+                </div>
+                <table class="table table-default panel panel-warning">
+                    <tbody class="color2">
+                        <tr>
+                            <td width="600px">
+                                <form class="form-inline" role="form">
+                                    <div class="form-group">
+                                        <label>Choose Item Main Category</label>
+                                        <select class="form-control" id="editMainCategory" onchange="fridgeView.updateCategoryOptions()">
+                                            <option value="furniture"> Furniture </option>
+                                            <option value="appliances"> Appliances </option>
+                                            <option value="vehicles"> Vehicles </option>
+                                            <option value="electronics"> Electronics </option>
+                                            <option value="cutlery"> Cutlery </option>
+                                            <option value="supplies"> Supplies </option>
+                                            <option value="books"> Books </option>
+                                            <option value="clothes"> Clothes </option>
+                                            <option value="bed"> Bed </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>and Sub Category</label>
+                                        <select class="form-control" id="editSubCategory">
+                                            <option value="table"> Table </option>
+                                            <option value="chair"> Chair </option>
+                                            <option value="shelves"> Shelves </option>
+                                            <option value="bookcase"> Bookcase </option>
+                                            <option value="drawer"> Drawer </option>
+                                            <option value="other"> Other </option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <br />
+                                <div class="panel color">
+                                    <div class="panel-heading color" ><label>Add up to 3 pictures for your item.</label></div>
+                                    <div class="panel-body color2">
+                                        <input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg" />
+                                        <div id="img_0"></div><br>
+                                        <input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg" />
+                                        <div id="img_1"></div><br>
+                                        <input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg" />
+                                        <div id="img_2"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <form role="form">
+                                    <div>
+                                        <label>Item Name</label>
+                                        <input type="text" class="form-control" id="editName" />
+                                    </div>
+                                    <div>
+                                        <label>Price</label>
+                                        <input type="number" class="form-control" id="editPrice" />
+                                    </div>
+                                    <div>
+                                        <label>Condition</label>
+                                        <select class="form-control" id="editCondition">
+                                            <!--Dropdown Menu for Condition -->
+                                            <option>Brand New</option>
+                                            <option>Like New</option>
+                                            <option>Slightly Used</option>
+                                            <option>Good</option>
+                                            <option>Damaged</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label>University</label>
+                                        <input type="text" class="form-control" id="editUniversity" />
+                                    </div>
+                                    <div>
+                                        <label>Location</label>
+                                        <input type="text" class="form-control" id="editLocation" />
+                                    </div>
+                                    <div>
+                                        <label>Quantity</label>
+                                        <input type="number" class="form-control" id="editQuantity" />
+                                    </div>
+                                    <div>
+                                        <label>Desired Sell-By Date</label>
+                                        <input type="Date" class="form-control" id="editSellBy" />
+                                    </div>
+                                    <div>
+                                        <label for="editDesc">Description</label>
+                                    </div>
+                                    <div>
+                                        <textarea class="form-control" rows="4" id="editDesc"></textarea>
+                                    </div>
+                                    <div >
+                                        <center><button type="submit" class="dark_brown" onclick="fridgeApp.updateItem()">Submit</button></center>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 <!--Contact Us Page -->
         <div id="contact-view" class="view">
             <h1 class="heading_text">Anything to Say?</h1>
             <div class="container">
-                <textarea class="form-control" cols="10" rows="10" id="itemDesc" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
+                <textarea class="form-control" cols="10" rows="10" id="message" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
                 <div>
                     <button class="dark_brown" onclick="fridgeApp.verifySubmission()"> Submit </button>
                 </div>

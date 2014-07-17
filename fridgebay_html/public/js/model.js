@@ -20,6 +20,16 @@ Information.prototype.getElement = function(id){
     }
 };
 
+Information.prototype.searchById = function searchById(id){
+    var myList = this;
+    var len = myList.items.length;
+    for(i=0; i< len; i++){
+        item = myList.items[i];
+        if(item.id = id){
+            return item;
+        }
+    }
+};
 
 Information.prototype.loadModel = function() {
     var myInfo = this;
@@ -63,7 +73,7 @@ Information.prototype.updateElement = function(id,newItem){
     var myList = this;
     $.ajax({
         type: "PUT",
-        url: "/model/fridgebay/"+id,
+        url: "/model/items/"+id,
         data: JSON.stringify(newItem),
         contentType: "application/json; charset=utf-8",
         dataType: "json"

@@ -1,9 +1,12 @@
 
 
 function Information(){
-  this.items = [],
-  this.users = []
+  this.items = [];
+  this.users = [];
+  this.currentUser = "Lucy";
+  
 };
+
 
 // we use the locally cached model to lookup elements...
 Information.prototype.getElement = function(id){
@@ -73,22 +76,10 @@ Information.prototype.deleteElement = function(id){
     var myList = this;
     $.ajax({
         type: "DELETE",
-        url: "/model/fridgebay/"+id,
+        url: "/model/items/"+id,
     }).done(function(items) {
         myList.loadModel();
     });
 }
 
-Information.prototype.totalPrice = function(){
-    var total=0;
-    var item;
-    var i;
-    for(i=0; i<this.items.length; i++){
-        item = this.items[i];
-        if (item.purchased){
-            total += item.price*item.quantity;
-        }
-    }
-    return total;
-}
     

@@ -31,6 +31,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
     console.log("Database connected");
 });
+
 //Define Schemas for model 
 var itemsSchema = mongoose.Schema({
         images: Array,
@@ -83,12 +84,23 @@ app.get('/model/:collection', function(req, res) {
 
 // change an item in the model
 app.put('/model/:collection/:id', function(req, res) {
-//     var collection = db.get(req.params.collection);
-//     collection.update({
-//         "_id": req.params.id
-//     }, req.body);
-//     res.json(200, {});
-    Tank.update({ _id: id }, { $set: { size: 'large' }}, callback);
+    mongoose.model(req.params.collection).findByIdAndUpdate(req.params.id, { $set: { 
+        images: req.body.images,
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        condition: req.body.condition,
+        category: req.body.category,
+        subcategory: req.body.subcategory,
+        location: req.body.location,
+        quantity: req.body.quantity,
+        sellBy: req.body.sellBy,
+        status: req.body.status, 
+        university: req.body.university,
+    }}, function (err, item) {
+        if (err) return handleError(err);
+        res.send(item);
+    });
 });
 
 //Add new item to database
@@ -112,14 +124,7 @@ app.post('/model/:collection', function(req, res) {
     }).save();
 });
 
-// delete a particular item from the model
-// app.delete('/model/:collection/:id', function(req, res) {
-//     mongoose.model(req.params.collection).remove({_id:req.params.id}, function(err, item){
-//         if (err) return handleError(err);
-//         console.log("Deleting item: " + item);
-//     })
-// });
-
+//Deletes an item from the database
 app.delete('/model/:collection/:id', function (req, res) {
     var id = req.params.id;
     mongoose.model(req.params.collection).remove({_id:id}, function( err, item ){

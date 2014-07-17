@@ -259,6 +259,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
         "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.deleteItem(this)'>Delete</button>"+
+        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
         "</td></tr>";
         return row;
     }

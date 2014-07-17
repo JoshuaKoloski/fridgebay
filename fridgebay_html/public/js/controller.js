@@ -29,7 +29,6 @@ var fridgeApp = (function($) {
         {
             trigger: 'hover',
             html: true,
-
             content: 'you have 1 new notification',
             
         });
@@ -89,8 +88,41 @@ var fridgeApp = (function($) {
             description: $("#itemDesc").val() 
         });
     }
+    //loads edit page for an item
+    function loadEdit(element){
+        id = element.getAttribute("sid");
+        item = myList.searchById(id);
+        $("#editMainCategory") = item.category;
+        $("#editSubCategory")= item.subCategory;
+        $("#editName") = item.name;
+        $("#editPrice") = item.price;
+        $("#editQuantity") = item.quantity;
+        $("#editCondition")= item.condition;
+        $("#ediSellBy") = item.sellBy;
+        $("#editUniversity") = item.university;
+        $("#editLocation") = item.location;
+        $("#editDesc") = item.description;
+        showView("edit");
+    }
+    function updateItem(element){
+        console.log("CTRL Activated: Updating item with id " + element.getAttribute("sid"));
+        loadEdit(element);
+        myList.updateElement({
+            images: imageArray,
+            category: $("#editMainCategory").val(),
+            subcategory: $("#editSubCategory").val(),
+            name: $("#editName").val(),
+            price: $("#editPrice").val(),
+            quantity: $("#editQuantity").val(),
+            condition: $("#editCondition").val(),
+            sellBy: $("#ediSellBy").val(),
+            university: $("#editUniversity").val(),
+            location: $("#editLocation").val(),
+            description: $("#editDesc").val() 
+        });
+        reloadModel();
+    }
     function deleteItem(element){
-        console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
         myList.deleteElement(element.getAttribute("sid"));
         reloadModel();
         alert("Item was successfully deleted");
@@ -134,8 +166,6 @@ var fridgeApp = (function($) {
     function start() {
         myList.loadModel();
         showView("welcome");
-       
-   
     }
   
     // here is were we decide what is visible to the outside!
@@ -150,7 +180,8 @@ var fridgeApp = (function($) {
         refreshView: refreshView,
         reloadModel: reloadModel,
         showView: showView,
-        deleteItem: deleteItem
+        deleteItem: deleteItem,
+        updateItem: updateItem
     }
 
     return (fridgeApp);
