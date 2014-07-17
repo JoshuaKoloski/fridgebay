@@ -127,7 +127,7 @@
 						<tr>
 							<td width="600px">
 								<div class="panel color2" >
-									<div class="panel-heading color" >
+									<div id="panel_heading"class="panel-heading color" >
 										<label>Appliances > Fridge</label>
 									</div>
 									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -192,14 +192,12 @@
 								</div>
 							</td>
 							<td>
-								<div class="list-group">
-								  	<div class="list-group-item color2">
-										<h4 class="list-group-item-heading">Status: Unsold</h4>
-										<p class="list-group-item-text">This is my item.</p>
+								<div class="list-group panel panel-warning">
+								  	<div id="status" class="list-group-item color6">
+										
 								  	</div>
-								  	<div class="list-group-item color2" >
-										<h4 class="list-group-item-heading">Sell by 06/06/2015</h4>
-										<p class="list-group-item-text">Seller is Kuuku Ku.</p>
+								  	<div id="sell_by"class="list-group-item color6" >
+										
 								  	</div>
 								  	<div class="list-group-item color2" >
 										<p class="list-group-item-text">
@@ -345,140 +343,140 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-2">
+                <div class="col-lg-2 ">
                     <ul id="accordion" class="nav nav-list nav-info place_left">
-                            <li class="nav-header color3" onclick="fridgeApp.refreshView()">
-                                Categories
-                            </li>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFurniture">
-                                    <span class="color4">
-                                        Furniture
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseFurniture" class="panel-collapse collapse out">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('table')"><span class="color4"> Table </span></li>
-                                    <li onclick="fridgeApp.refresh('chair')"><span class="color4"> Chairs</span></li>
-                                    <li onclick="fridgeApp.refresh('shelves')"><span class="color4"> Shelves</span></li>
-                                    <li onclick="fridgeApp.refresh('drawers')"><span class="color4"> Drawers</span></li>
-                                    <li onclick="fridgeApp.refresh('others')"><span class="color4"> Others </span></li>
-                                    
-                                </div>
+                        <li class="nav-header color3" onclick="fridgeApp.refreshView()">
+                            Categories
+                        </li>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFurniture">
+                                <span class="color4">
+                                    Furniture
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseFurniture" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('table')"><span class="color4"> Table </span></li>
+                                <li onclick="fridgeApp.refresh('chair')"><span class="color4"> Chairs</span></li>
+                                <li onclick="fridgeApp.refresh('shelves')"><span class="color4"> Shelves</span></li>
+                                <li onclick="fridgeApp.refresh('drawers')"><span class="color4"> Drawers</span></li>
+                                <li onclick="fridgeApp.refresh('others')"><span class="color4"> Others </span></li>
+
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseVehicle">
-                                    <span class="color4">
-                                        Vehicle
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseVehicle" class="panel-collapse collapse out">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('bike')"><span class="color4"> Bike </span></li>
-                                    <li onclick="fridgeApp.refresh('car')"><span class="color4"> Car</span></li>
-                                    <li onclick="fridgeApp.refresh('motorcycle')"><span class="color4"> Motorcycle</span></li>
-                                    <li onclick="fridgeApp.refresh('boat')"><span class="color4"> Boat </span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseVehicle">
+                                <span class="color4">
+                                    Vehicle
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseVehicle" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('bike')"><span class="color4"> Bike </span></li>
+                                <li onclick="fridgeApp.refresh('car')"><span class="color4"> Car</span></li>
+                                <li onclick="fridgeApp.refresh('motorcycle')"><span class="color4"> Motorcycle</span></li>
+                                <li onclick="fridgeApp.refresh('boat')"><span class="color4"> Boat </span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseAppliances">
-                                    <span class="color4">
-                                        Appliances
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseAppliances" class="panel-collapse collapse out">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('fridge')"><span class="color4"> Fridge </span></li>
-                                    <li onclick="fridgeApp.refresh('microwave')"><span class="color4"> Microwave</span></li>
-                                    <li onclick="fridgeApp.refresh('coffee_maker')"><span class="color4"> Coffee Maker</span></li>
-                                    <li onclick="fridgeApp.refresh('oven')"><span class="color4"> Oven </span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseAppliances">
+                                <span class="color4">
+                                    Appliances
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseAppliances" class="panel-collapse collapse out">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('fridge')"><span class="color4"> Fridge </span></li>
+                                <li onclick="fridgeApp.refresh('microwave')"><span class="color4"> Microwave</span></li>
+                                <li onclick="fridgeApp.refresh('coffee_maker')"><span class="color4"> Coffee Maker</span></li>
+                                <li onclick="fridgeApp.refresh('oven')"><span class="color4"> Oven </span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseElectronics">
-                                    <span class="color4">
-                                        Electronics
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseElectronics" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('computer')"><span class="color4"> Computer </span></li>
-                                    <li onclick="fridgeApp.refresh('tv')"><span class="color4"> TV</span></li>
-                                    <li onclick="fridgeApp.refresh('media_player')"><span class="color4"> Media Player</span></li>
-                                    <li onclick="fridgeApp.refresh('phone')"><span class="color4"> Phone</span></li>
-                                    <li onclick="fridgeApp.refresh('game_systems')"><span class="color4"> Game Systems</span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseElectronics">
+                                <span class="color4">
+                                    Electronics
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseElectronics" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('computer')"><span class="color4"> Computer </span></li>
+                                <li onclick="fridgeApp.refresh('tv')"><span class="color4"> TV</span></li>
+                                <li onclick="fridgeApp.refresh('media_player')"><span class="color4"> Media Player</span></li>
+                                <li onclick="fridgeApp.refresh('phone')"><span class="color4"> Phone</span></li>
+                                <li onclick="fridgeApp.refresh('game_systems')"><span class="color4"> Game Systems</span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseClothing">
-                                    <span class="color4">
-                                        Clothing
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseClothing" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('shirts')"><span class="color4"> Shirts</span></li>
-                                    <li onclick="fridgeApp.refresh('pants')"><span class="color4"> Pants</span></li>
-                                    <li onclick="fridgeApp.refresh('shoes')"><span class="color4"> Shoes</span></li>
-                                    <li onclick="fridgeApp.refresh('hats')"><span class="color4"> Hats</span></li>
-                                    <li onclick="fridgeApp.refresh('sweaters')"><span class="color4"> Sweaters</span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseClothing">
+                                <span class="color4">
+                                    Clothing
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseClothing" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('shirts')"><span class="color4"> Shirts</span></li>
+                                <li onclick="fridgeApp.refresh('pants')"><span class="color4"> Pants</span></li>
+                                <li onclick="fridgeApp.refresh('shoes')"><span class="color4"> Shoes</span></li>
+                                <li onclick="fridgeApp.refresh('hats')"><span class="color4"> Hats</span></li>
+                                <li onclick="fridgeApp.refresh('sweaters')"><span class="color4"> Sweaters</span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSupplies">
-                                    <span class="color4">
-                                        Supplies
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseSupplies" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('pens_pencils')"><span class="color4"> Pens/Pencils</span></li>
-                                    <li onclick="fridgeApp.refresh('notebooks')"><span class="color4"> Notebooks</span></li>
-                                    <li onclick="fridgeApp.refresh('folders')"><span class="color4"> Folders</span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSupplies">
+                                <span class="color4">
+                                    Supplies
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseSupplies" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('pens_pencils')"><span class="color4"> Pens/Pencils</span></li>
+                                <li onclick="fridgeApp.refresh('notebooks')"><span class="color4"> Notebooks</span></li>
+                                <li onclick="fridgeApp.refresh('folders')"><span class="color4"> Folders</span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">
-                                    <span class="color4">
-                                        Books
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseBooks" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('textbooks')"><span class="color4"> Textbooks </span></li>
-                                    <li onclick="fridgeApp.refresh('novels')"><span class="color4"> Novels</span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">
+                                <span class="color4">
+                                    Books
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseBooks" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('textbooks')"><span class="color4"> Textbooks </span></li>
+                                <li onclick="fridgeApp.refresh('novels')"><span class="color4"> Novels</span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                            <li>
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBedding">
-                                    <span class="color4">
-                                        Bedding
-                                    </span>
-                                </a>
-                            </li>
-                            <div id="collapseBedding" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <li onclick="fridgeApp.refresh('sheets')"><span class="color4"> Sheets </span></li>
-                                    <li onclick="fridgeApp.refresh('pillow_cases')"><span class="color4"> Pillow Cases</span></li>
-                                    <li onclick="fridgeApp.refresh('mattress_padding')"><span class="color4"> Mattress Padding</span></li>
-                                    <li onclick="fridgeApp.refresh('comforters')"><span class="color4"> Comforters</span></li>
-                                    <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                                </div>
+                        </div>
+                        <li>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseBedding">
+                                <span class="color4">
+                                    Bedding
+                                </span>
+                            </a>
+                        </li>
+                        <div id="collapseBedding" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <li onclick="fridgeApp.refresh('sheets')"><span class="color4"> Sheets </span></li>
+                                <li onclick="fridgeApp.refresh('pillow_cases')"><span class="color4"> Pillow Cases</span></li>
+                                <li onclick="fridgeApp.refresh('mattress_padding')"><span class="color4"> Mattress Padding</span></li>
+                                <li onclick="fridgeApp.refresh('comforters')"><span class="color4"> Comforters</span></li>
+                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
                             </div>
-                        
+                        </div>
+
                     </ul>
                 </div>
                 <div  class="col-lg-10 place" > 
@@ -498,6 +496,7 @@
                                     <th>Price</th>
                                     <th>University</th>
                                     <th> Condtion</th>
+                                    <th>View</th>
                                 </tr>
                             </thead>
                             

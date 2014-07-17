@@ -182,11 +182,33 @@ var fridgeView = (function($){
     }
 
 
-    function refreshItemItems(item){
+    function refreshItemItems(id, myList) {
+        var list = myList.items;
+        console.log("myList[1]= " + JSON.stringify(list[1]));
+        var element;
+        for (var i = 0; i < list.length; i++) {
+            
+            if (list[i]._id == id) {
+                element = list[i];
+            }
+        }
+        
+        fridgeApp.showView('item');
 
-        var rowsItem="";
-        rowsItem = rowsItem + itemItemToRow(item); 
-        var itemTableBody= $("#tableBody").html(rowsItem)
+        var rowsItem = "";
+        var heading = "";
+        var status = "";
+        var sell = "";
+
+        rowsItem = rowsItem + itemItemToRow(element);
+        heading = heading + headingText(element);
+        status = status + statusText(element);
+        sell = sell + sellText(element);
+
+        var itemTableBody = $("#tableBody").html(rowsItem);
+        var itemHeader = $("#panel_heading").html(heading);
+        var itemStatus= $("#status").html(status);
+        var itemSell = $("#sell_by").html(sell);
     }
    
     function showNumber(length) {  
@@ -270,18 +292,22 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
-        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.deleteItem(this)'>Delete</button>"+
+        "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
         "</td></tr>";
         return row;
     }
     //converts item into html on home table
     function homeItemToRow(item) {
+        
+
+
         var row=
-        "<tr class='changeImageColor' onclick=fridgeView.refreshItemItems(item)><td><label>" + 
+        "<tr id='tableRow'class='changeImageColor' sid'"+item._id+" 'onclick='fridgeApp.pass(this)'><td><label>" + 
         "</label></td><td><label>" + item.name +
         "</label></td><td><label>" + item.price +
         "</label></td><td><label>" + item.university +
         "</label></td><td><label>" + item.condition +
+        "</label></td><td>"+"<button class='dark_brown' type='button' sid='" + item._id + "' onclick='fridgeApp.pass(this)'>View</button><label>" + 
         "</label></td></tr>";
         return row;
     }
@@ -295,6 +321,29 @@ var fridgeView = (function($){
         "<tr><td><label>Quantity</label></td><td><label>" + item.quantity + "</label></td></tr>"+
         "<tr><td><label>Condition</label></td><td><label>" + item.condition + "</label></td></tr>"+
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
+        return row;
+    }
+    function headingText(item) {
+        var row =
+        "<label>" + item.category + " -> " + item.subcategory + "</label>";
+        return row;
+    }
+    function statusText(item) {
+        var s;
+        if (item.status){
+            s="SOLD";
+        } else {
+            s="UNSOLD";
+        }
+        var row=
+        "<h4 class='list-group-item-heading pos'><label>Status: " +s+"</label></h4>";
+		
+        return row;
+    }
+    function sellText(item) {
+        var row =
+        "<h4 class='list-group-item-heading pos'><label>Sell by "+item.sellBy+"</label></h4>"+
+		"<p class='list-group-item-text pos'><label>Seller is "+item.seller+"</p><label>";
         return row;
     }
     
