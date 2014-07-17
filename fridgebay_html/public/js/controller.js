@@ -5,7 +5,8 @@ var fridgeApp = (function($) {
     // first create the model
     var myList = new Information();
     
-    var showView = function(selected) {
+    var showView = function (selected) {
+        console.log("VIEW IS SHOWN");
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
     };
@@ -88,6 +89,7 @@ var fridgeApp = (function($) {
             description: $("#itemDesc").val() 
         });
     }
+
     //loads edit page for an item
     function loadEdit(element){
         id = element.getAttribute("sid");
@@ -121,6 +123,9 @@ var fridgeApp = (function($) {
             description: $("#editDesc").val() 
         });
         reloadModel();
+    function pass(element) {
+        console.log("element= " + element.getAttribute("sid"));
+        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
     }
     function deleteItem(element){
         myList.deleteElement(element.getAttribute("sid"));
@@ -180,8 +185,13 @@ var fridgeApp = (function($) {
         refreshView: refreshView,
         reloadModel: reloadModel,
         showView: showView,
+<<<<<<< HEAD
         deleteItem: deleteItem,
         updateItem: updateItem
+=======
+        pass:pass,
+        deleteItem: deleteItem
+>>>>>>> 6d4d26f410c230859334b0da0a2668d402b8218d
     }
 
     return (fridgeApp);

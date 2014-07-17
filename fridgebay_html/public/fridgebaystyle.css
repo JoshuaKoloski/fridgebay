@@ -47,6 +47,9 @@
 {
     color:#d4871d;
 }
+.color6{
+    background-color:#d4730a;
+}
 .dark_brown
 {
     display: inline-block;
@@ -251,7 +254,7 @@
     position:absolute;
     color:red;
     clear:none;
-    left:451.75px;
+    left:455px;
     top:94px;
     font-weight:bold;
     font-style:italic;
@@ -294,6 +297,7 @@
     background: rgba(159, 112, 44, 0.8); 
     -webkit-box-shadow: inset 0 0 6px rgba(156, 109, 41, 0.8); 
 }
+
 
 
 
