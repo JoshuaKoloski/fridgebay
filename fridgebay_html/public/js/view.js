@@ -8,9 +8,8 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
-        updateCategoryOptions();
     }
-    
+        
     function updateCategoryOptions(){
     	
     	var furniture = {
@@ -199,9 +198,21 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
+        "</td><td>"+ displayImages(item.images) +
+        "</td><td>"+ item.description +
+        "</td><td>"+ item.status+
+        "</td><td>"+ item.interested+
         "</td></tr>";
         return row;
     }
+    
+  	function displayImages(images){
+  		var imgs = "";
+  		for (var i = 0; i < images.length; i++) {
+			imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg width=100>"
+		}
+		return imgs;
+  	}
     
     // redraw the table using the current model users~~~~
     function refreshTableUsers(myUsers){    

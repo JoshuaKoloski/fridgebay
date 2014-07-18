@@ -88,6 +88,10 @@
 								<th>Condition</th>
 								<th>Main Category</th>
 								<th>Sub Category</th>
+								<th>ImageID</th>
+								<th>Desc</th>
+								<th>Status</th>
+								<th>Interested</th>
 							</tr>
 						</thead>
 		
@@ -675,10 +679,10 @@
                 	<tbody id="color2">
 						<tr>
 							<td width="600px">	
-								<form class="form-inline" role="form">
-									<div class="form-group">
+								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
+									<div>
 										<label>Choose Item Main Category</label>
-										<select class="form-control" id="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
+										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
 											<option value="furniture"> Furniture </option>
 											<option value="appliances"> Appliances </option>
 											<option value="vehicles"> Vehicles </option>
@@ -692,7 +696,7 @@
 									</div>							
 									<div class="form-group">
 										<label>and Sub Category</label>
-										<select class="form-control" id="itemSubCategory">
+										<select class="form-control" id="itemSubCategory" name="itemSubCategory">
 											<option value="table"> Table </option>
 											<option value="chair"> Chair </option>
 											<option value="shelves"> Shelves </option>
@@ -701,33 +705,36 @@
 											<option value="other"> Other </option>
 										</select>
 									</div>
-								</form>
 								<br/>
 								<div class="panel" id="color">
 									<div class="panel-heading" id="color"><lable>Add up to 3 pictures for your item.</lable></div>
-									<div class="panel-body" id="color2">			
-										<input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg"/>
-										<div id="img_0"></div>
-										<input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg"/>
+									<div class="panel-body" id="color2">
+									
+													
+										
+										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(1)">
 										<div id="img_1"></div>
-										<input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg"/>
+										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(2)">
 										<div id="img_2"></div>
+										<input type="file" id="inputFileToLoad_3" name="image_3" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(3)">
+										<div id="img_3"></div>
+
+										
 									</div>
 								</div>
 							</td>
 							<td>
-								<form role="form">
 									<div>
 										<label>Item Name</label>
-										<input type="text" class="form-control" id="itemName" />
+										<input type="text" class="form-control" id="itemName" name="itemName"/>
 									</div>
 									<div>
 										<label>Price</label>
-										<input type="number" class="form-control" id="itemPrice" />
+										<input type="number" class="form-control" id="itemPrice" name="itemPrice"/>
 									</div>
 									<div>
 										<label>Condition</label>
-										<select class="form-control" id="itemCondition">
+										<select class="form-control" id="itemCondition" name="itemCondition">
 											<!--Dropdown Menu for Condition -->
 											<option>Brand New</option>
 											<option>Like New</option>
@@ -738,32 +745,34 @@
 									</div>
 									<div>
 										<label>University</label>
-										<input type="text" class="form-control" id="itemUniversity" />
+										<input type="text" class="form-control" id="itemUniversity" name="itemUniversity"/>
 									</div>
 									<div>
 										<label>Location</label>
-										<input type="text" class="form-control" id="itemLocation" />
+										<input type="text" class="form-control" id="itemLocation" name="itemLocation"/>
 									</div>
 									<div>
 										<label>Quantity</label>
-										<input type="number" class="form-control" id="itemQuantity" />
+										<input type="number" class="form-control" id="itemQuantity" name="itemQuantity"/>
 									</div>
 									<div>
 										<label>Desired Sell-By Date</label>
-										<input type="Date" class="form-control" id="itemSellBy" />
+										<input type="Date" class="form-control" id="itemSellBy" name="itemSellBy"/>
 									</div>
 									<div>
 										<label for="itemDesc">Description</label>
 									</div>
 									<div>
-										<textarea class="form-control" rows="4" id="itemDesc"></textarea>
+										<textarea class="form-control" rows="4" id="itemDesc" name="itemDesc"></textarea>
 									</div>
-									<div id="place_right">
-									<button type="submit" class="dark_brown" onclick="fridgeApp.addItem(), fridgeApp.showView('home'), fridgeApp.reloadModel(), fridgeApp.clearForm()">Submit</button>
+									<div>
+										<input type="hidden" id="itemSeller" name="itemSeller"/>
+									</div>
+									<div class="place_right">
+										<input type="submit" class="dark_brown" type="submit"/>
 									</div>
 								</form>
 							</td>
-				
 						</tr>
                 	</tbody>
                 </table>
@@ -789,19 +798,7 @@
     </div>
 </body>
 <script>
-	//check if the uploaded file is a picture.
-    function check() {
-		var ext = document.f.pic.value;
-	  		ext = ext.substring(ext.length-3,ext.length);
-	  		ext = ext.toLowerCase();
-	  		if(ext != 'jpg') {
-				alert('You selected a .'+ext+
-			  		' file; please select a .jpg file instead!');
-				return false; }
-	  		else
-				return true;
-	}
-
+	$("#itemSeller").val(fridgeApp.getUser()); 
     // this is the code that actually starts the JavaScript application!!
     // when the document has been fully loaded, all the fridgeApp.start() method
     $(document).ready(fridgeApp.start());

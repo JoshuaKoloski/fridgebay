@@ -33,6 +33,11 @@ var fridgeApp = (function($) {
             
         });
     });
+    
+    function submitImg(){
+  		$("#myForm").submit();
+    }
+    
     function addItem(element) {
         var element = document.getElementById("newItemName");
 
@@ -53,37 +58,7 @@ var fridgeApp = (function($) {
         myList.loadModel();
         refreshView();
     }
-    
-    function addItem() {
-    	
-    	var imageArray = [];
-    	
-    	for (i = 0; i < 3; i++){
-    		if (document.getElementById("img_"+i).innerHTML != ""){
-    			imageArray[imageArray.length] = document.getElementById("img_"+i).innerHTML;
-    			console.log("true");
-    		} else {
-    			console.log("false");
-    		}
-
-    	}
-    	console.log("images = "+ imageArray);
-    	
-        myList.addElement({
-            seller: myList.currentUser,
-            images: imageArray,
-            category: $("#itemMainCategory").val(),
-            subcategory: $("#itemSubCategory").val(),
-            name: $("#itemName").val(),
-            price: $("#itemPrice").val(),
-            quantity: $("#itemQuantity").val(),
-            condition: $("#itemCondition").val(),
-            sellBy: $("#itemSellBy").val(),
-            university: $("#itemUniversity").val(),
-            location: $("#itemLocation").val(),
-            description: $("#itemDesc").val() 
-        });
-    }
+        
     function clearForm(){
         $("#itemMainCategory").val(""),
         $("#itemSubCategory").val(""),
@@ -96,6 +71,8 @@ var fridgeApp = (function($) {
         $("#itemLocation").val(""),
         $("#itemDesc").val("")
     }
+    
+		
     function encodeImageFileAsURL(divNum){
 
 		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
@@ -132,19 +109,21 @@ var fridgeApp = (function($) {
         });
     }
 
+	function getUser(){
+		return myList.currentUser;
+	}
+
     function start() {
         myList.loadModel();
-        showView("welcome");
-       
-   
+        showView('home');
     }
   
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
-        addItem: addItem,
-        encodeImageFileAsURL: encodeImageFileAsURL,
+        getUser: getUser,
         showAlert: showAlert,
+        encodeImageFileAsURL: encodeImageFileAsURL,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,
