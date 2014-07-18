@@ -10,6 +10,7 @@
     "bson": "^0.2.9",
     "cloudinary": "^1.0.10",
     "express": "^4.6.0",
+    "form-data": "^0.1.4",
     "logfmt": "^1.1.2",
     "mongodb": "^1.4.7",
     "mongodb-uri": "^0.9.7",

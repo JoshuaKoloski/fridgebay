@@ -35,6 +35,11 @@ var fridgeApp = (function($) {
             
         });
     });
+    
+    function submitImg(){
+  		$("#myForm").submit();
+    }
+    
     function addItem(element) {
         var element = document.getElementById("newItemName");
 
@@ -50,6 +55,7 @@ var fridgeApp = (function($) {
     function refreshView() {
         fridgeView.refreshView(myList);
     }
+    
     function refresh(category) {
         fridgeView.refresh(myList, category);
     }
@@ -58,47 +64,13 @@ var fridgeApp = (function($) {
         myList.loadModel();
         refreshView();
     }
-   
 
-    function addItem() {
-    	
-    	var imageArray = [];
-    	
-    	for (i = 0; i < 3; i++){
-    		if (document.getElementById("img_"+i).innerHTML != ""){
-    			imageArray[imageArray.length] = document.getElementById("img_"+i).innerHTML;
-    			console.log("true");
-    		} else {
-    			console.log("false");
-    		}
-
-    	}
-    	console.log("images = "+ imageArray);
-    	
-
-    	myList.addElement({
-            
-            seller: myList.currentUser,
-            images: imageArray,
-            category: $("#itemMainCategory").val(),
-            subcategory: $("#itemSubCategory").val(),
-            name: $("#itemName").val(),
-            price: $("#itemPrice").val(),
-            quantity: $("#itemQuantity").val(),
-            condition: $("#itemCondition").val(),
-            sellBy: $("#itemSellBy").val(),
-            university: $("#itemUniversity").val(),
-            location: $("#itemLocation").val(),
-            description: $("#itemDesc").val(),
-           
-    	});
-    	//console.log("date= " + date);
-    }
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
         fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
         
     }
+    
     function deleteItem(element){
         var c = confirm("Are you sure you want to delete this item?")
         if (c) {
@@ -110,6 +82,7 @@ var fridgeApp = (function($) {
         }
        
     }
+    
     function encodeImageFileAsURL(divNum){
 
 		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
@@ -146,20 +119,23 @@ var fridgeApp = (function($) {
         });
     }
 
+	function getUser(){
+		return myList.currentUser;
+	}
+
     function start() {
         myList.loadModel();
-        showView("welcome");
-       
-   
+        showView('home');
     }
   
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
+        getUser: getUser,
         refresh: refresh,
-        addItem: addItem,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
+        encodeImageFileAsURL: encodeImageFileAsURL,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,

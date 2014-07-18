@@ -8,14 +8,12 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
-        updateCategoryOptions();
-        
-
     }
+    
     function refresh(myData, category) {
         filterCategory(myData.items, category);
     }
-    
+        
     function updateCategoryOptions(){
     	
     	var furniture = {
@@ -314,15 +312,17 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
+        "</td><td>"+ displayImages(item.images) +
+        "</td><td>"+ item.description +
+        "</td><td>"+ item.status+
+        "</td><td>"+ item.interested+
         "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
         "</td></tr>";
         return row;
     }
+    
     //converts item into html on home table
     function homeItemToRow(item) {
-        
-
-
         var row=
         "<tr id='tableRow'class='changeImageColor' sid'"+item._id+" 'onclick='fridgeApp.pass(this)'><td><label>" + 
         "</label></td><td><label>" + item.name +
@@ -334,6 +334,7 @@ var fridgeView = (function($){
         "</label></td></tr>";
         return row;
     }
+    
     //converts item into html on item table
     function itemItemToRow(item) {
         var row =
@@ -346,11 +347,13 @@ var fridgeView = (function($){
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
+    
     function headingText(item) {
         var row =
         "<label>" + item.category + " -> " + item.subcategory + "</label>";
         return row;
     }
+    
     function statusText(item) {
         var s;
         if (item.status){
@@ -363,12 +366,21 @@ var fridgeView = (function($){
 		
         return row;
     }
+    
     function sellText(item) {
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+item.sellBy+"</span></label></h4>"+
 		"<p class='list-group-item-text pos'><label>Seller is <span class='font'>"+item.seller+"</span></p><label>";
         return row;
     }
+    
+  	function displayImages(images){
+  		var imgs = "";
+  		for (var i = 0; i < images.length; i++) {
+			imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg width=100>"
+		}
+		return imgs;
+  	}
     
     // redraw the table using the current model users~~~~
     function refreshTableUsers(myUsers){    
