@@ -481,7 +481,7 @@
                 </div>
                 <div  class="col-lg-10 place" > 
                     <div class="text-center">
-                        <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37"> llie's nest</p>
+                        <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37">llie's nest</p>
                     </div>
                     <div>
                         <center><img  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber"></h2></center>
@@ -496,7 +496,8 @@
                                     <th>Price</th>
                                     <th>University</th>
                                     <th> Condtion</th>
-                                    <th>View</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             
@@ -528,6 +529,14 @@
                                 -->
                             </tbody>
                         </table>
+                    </div>
+                    <div class="border_circle pull-right">
+                        <div >
+                            <label>
+                                <input id="showCompleteCheckbox" type="checkbox" onclick="fridgeApp.refreshView()">
+                                Show All Items
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -674,6 +683,7 @@
                                             <option value="other"> Other </option>
                                         </select>
                                     </div>
+                                    
                                 </form>
                                 <br />
                                 <div class="panel color">
@@ -741,6 +751,7 @@
                 </table>
             </div>
         </div>
+
 <!--Contact Us Page -->
         <div id="contact-view" class="view">
             <h1 class="heading_text">Anything to Say?</h1>

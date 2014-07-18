@@ -150,27 +150,49 @@ var fridgeView = (function($){
 			});
 		}
     }
+
+    function sortItems(items) {
+        var sortedItems = items.slice();  // make a copy of items
+        
+        sortedItems.sort();
+        sortedItems.reverse();
+        var recentItems = [];
+        for (var i = 0; i < 10; i++) {
+            if (sortedItems[i] != null) {
+                recentItems[i] = sortedItems[i];
+            } else { break;}
+        }
+        var showComplete = $("#showCompleteCheckbox").prop("checked");
+        if(showComplete){
+            console.log("returning all items");
+            return sortedItems;
+        } else {
+            console.log("returning recent items");
+            return recentItems;
+        }
+    }
     
     
     // redraw the table using the current model
     function refreshTableItems(myItems){    
         var rows = "";
         var rowsHome = "";
-        var itemsArr = [];
         var len = myItems.length;
         var filteredModelItems = filterModelItems(myItems);
         var filteredHomeItems = filterHomeItems(myItems);
+        var sortedModelItems = sortItems(filteredModelItems);
+        var sortedHomeItems = sortItems(filteredHomeItems);
+        
         //console.log("filteredItems = " + JSON.stringify(filteredModelItems));
         //console.log("filteredItems = " + JSON.stringify(filteredHomeItems));
-        for(var n=0; n<filteredModelItems.length; n++){ 
-            var item = filteredModelItems[n];
+        for(var n=0; n<sortedModelItems.length; n++){ 
+            var item = sortedModelItems[n];
             rows = rows + itemToRow(item);
         }
         console.log("model length= " + filteredHomeItems.length);
-        for (var n = 0; n < filteredHomeItems.length; n++) {
-            var item = filteredHomeItems[n];
-            itemsArr.push(item);
-            console.log("item = " + JSON.stringify(item));
+        for (var n = 0; n < sortedHomeItems.length; n++) {
+            var item = sortedHomeItems[n];
+            //console.log("item = " + JSON.stringify(item));
             rowsHome = rowsHome + homeItemToRow(item);
         }
         
@@ -307,7 +329,8 @@ var fridgeView = (function($){
         "</label></td><td><label>" + item.price +
         "</label></td><td><label>" + item.university +
         "</label></td><td><label>" + item.condition +
-        "</label></td><td>"+"<button class='dark_brown' type='button' sid='" + item._id + "' onclick='fridgeApp.pass(this)'>View</button><label>" + 
+        "</label></td><td>" + "<button class='dark_brown' type='button' sid='" + item._id + "' onclick='fridgeApp.pass(this)'>View</button><label>" +
+        "</td><td>" + "<span class='glyphicon glyphicon-remove changeImage'  sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'></span>" +
         "</label></td></tr>";
         return row;
     }
@@ -336,14 +359,14 @@ var fridgeView = (function($){
             s="UNSOLD";
         }
         var row=
-        "<h4 class='list-group-item-heading pos'><label>Status: " +s+"</label></h4>";
+        "<h4 class='list-group-item-heading pos border'><label>Status: <span class='font'>" + s + "</span></label></h4>";
 		
         return row;
     }
     function sellText(item) {
         var row =
-        "<h4 class='list-group-item-heading pos'><label>Sell by "+item.sellBy+"</label></h4>"+
-		"<p class='list-group-item-text pos'><label>Seller is "+item.seller+"</p><label>";
+        "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+item.sellBy+"</span></label></h4>"+
+		"<p class='list-group-item-text pos'><label>Seller is <span class='font'>"+item.seller+"</span></p><label>";
         return row;
     }
     

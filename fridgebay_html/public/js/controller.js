@@ -75,7 +75,9 @@ var fridgeApp = (function($) {
     	}
     	console.log("images = "+ imageArray);
     	
-        myList.addElement({
+
+    	myList.addElement({
+            
             seller: myList.currentUser,
             images: imageArray,
             category: $("#itemMainCategory").val(),
@@ -87,8 +89,10 @@ var fridgeApp = (function($) {
             sellBy: $("#itemSellBy").val(),
             university: $("#itemUniversity").val(),
             location: $("#itemLocation").val(),
-            description: $("#itemDesc").val() 
-        });
+            description: $("#itemDesc").val(),
+           
+    	});
+    	//console.log("date= " + date);
     }
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
@@ -96,10 +100,15 @@ var fridgeApp = (function($) {
         
     }
     function deleteItem(element){
-        console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
-        myList.deleteElement(element.getAttribute("sid"));
-        reloadModel();
-        alert("Item was successfully deleted");
+        var c = confirm("Are you sure you want to delete this item?")
+        if (c) {
+            console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
+            myList.deleteElement(element.getAttribute("sid"));
+            reloadModel();
+        } else {
+            console.log("delete canceled");
+        }
+       
     }
     function encodeImageFileAsURL(divNum){
 
