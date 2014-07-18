@@ -5,7 +5,8 @@ var fridgeApp = (function($) {
     // first create the model
     var myList = new Information();
     
-    var showView = function(selected) {
+    var showView = function (selected) {
+        console.log("VIEW IS SHOWN");
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
     };
@@ -22,6 +23,7 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
+    
 
     $(function () {
         $('#notify').popover(
@@ -50,29 +52,32 @@ var fridgeApp = (function($) {
         element.value="";
     }
 
-    function refreshView(){
+    function refreshView() {
         fridgeView.refreshView(myList);
+    }
+    
+    function refresh(category) {
+        fridgeView.refresh(myList, category);
     }
 
     function reloadModel(){
         myList.loadModel();
         refreshView();
     }
+
+    function pass(element) {
+        console.log("element= " + element.getAttribute("sid"));
+        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
         
-    function clearForm(){
-        $("#itemMainCategory").val(""),
-        $("#itemSubCategory").val(""),
-        $("#itemName").val(""),
-        $("#itemPrice").val(""),
-        $("#itemQuantity").val(""),
-        $("#itemCondition").val(""),
-        $("#itemSellBy").val(""),
-        $("#itemUniversity").val(""),
-        $("#itemLocation").val(""),
-        $("#itemDesc").val("")
     }
     
-		
+    function deleteItem(element){
+        console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
+        myList.deleteElement(element.getAttribute("sid"));
+        reloadModel();
+        alert("Item was successfully deleted");
+    }
+    
     function encodeImageFileAsURL(divNum){
 
 		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
@@ -122,13 +127,17 @@ var fridgeApp = (function($) {
     fridgeApp = {
         start: start,
         getUser: getUser,
+        refresh: refresh,
+        encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,
         reloadModel: reloadModel,
-        showView: showView
+        showView: showView,
+        pass:pass,
+        deleteItem: deleteItem
     }
 
     return (fridgeApp);

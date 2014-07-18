@@ -99,7 +99,7 @@ Information.prototype.deleteElement = function(id){
     var myList = this;
     $.ajax({
         type: "DELETE",
-        url: "/model/fridgebay/"+id,
+        url: "/model/items/"+id,
     }).done(function(items) {
         myList.loadModel();
     });

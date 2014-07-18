@@ -10,8 +10,8 @@ var app = express();
 var logfmt = require("logfmt");
 var mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
-var fs = require('fs');
 var cloudinary = require('cloudinary');
+
 
 app.use(express.bodyParser());
 // serve static content from the public folder 
@@ -20,6 +20,8 @@ app.use(logfmt.requestLogger());
 // parse the bodies of all other queries as json
 app.use(bodyParser.json());
 
+
+//Uri allows access to the mongo database on the heroku server
 var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
 
@@ -29,10 +31,11 @@ var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 
-//Define Schema for model 
+
 db.once('open', function callback () {
     console.log("Database connected");
 });
+//Define Schemas for model 
 var itemsSchema = mongoose.Schema({
         images: Array,
         name: String,
@@ -78,60 +81,44 @@ cloudinary.config({
 //this post uploads an item and saves it
 app.post('/uploadItem', function(req, res) {
 
-	console.log('File upload path: ' + req.files.image_1.path);
-	console.log('File upload size: ' + req.files.image_1.size);
-	console.log('File upload path: ' + req.files.image_2.path);
-	console.log('File upload size: ' + req.files.image_2.size);
-	console.log(JSON.stringify(req.files));
-	console.log(req.body);
-
 	var images = [];
 	
-		cloudinary.uploader.upload(req.files.image_1.path, function(result) { 
-			if (req.files.image_1.size != 0) {
-				images[images.length] = result.public_id;
-			}
+	cloudinary.uploader.upload(req.files.image_1.path, function(result) { 
+		if (req.files.image_1.size != 0) {
+			images[images.length] = result.public_id;
+		}
 
-			console.log(images);
-			
-		
-			
-				cloudinary.uploader.upload(req.files.image_2.path, function(result) { 
-					if (req.files.image_2.size != 0) {
+			cloudinary.uploader.upload(req.files.image_2.path, function(result) { 
+				if (req.files.image_2.size != 0) {
+					images[images.length] = result.public_id;
+				}
+
+				cloudinary.uploader.upload(req.files.image_3.path, function(result) { 
+					if (req.files.image_3.size != 0) {
 						images[images.length] = result.public_id;
 					}
-					console.log(images);
-			
-					
-					cloudinary.uploader.upload(req.files.image_3.path, function(result) { 
-						if (req.files.image_3.size != 0) {
-							images[images.length] = result.public_id;
-						}
-						console.log(images);
-			
-						new item({
-							images: images,
-							name: req.body.itemName,
-							price: req.body.itemPrice,
-							description: req.body.itemDesc,
-							condition: req.body.itemCondition,
-							category: req.body.itemMainCategory,
-							subcategory: req.body.itemSubCategory,
-							location: req.body.itemLocation,
-							quantity: req.body.itemQuantity,
-							sellBy: req.body.itemSellBy,
-							status: false,
-							seller: req.body.itemSeller,
-							university: req.body.itemUniversity,
-							interested: 0
-						}).save();
-			
-						res.redirect('/');
-					})
-				})
-			
-		});
-	
+
+					new item({
+						images: images,
+						name: req.body.itemName,
+						price: req.body.itemPrice,
+						description: req.body.itemDesc,
+						condition: req.body.itemCondition,
+						category: req.body.itemMainCategory,
+						subcategory: req.body.itemSubCategory,
+						location: req.body.itemLocation,
+						quantity: req.body.itemQuantity,
+						sellBy: req.body.itemSellBy,
+						status: false,
+						seller: req.body.itemSeller,
+						university: req.body.itemUniversity,
+						interested: 0
+					}).save();
+		
+					res.redirect('/');
+			})
+		})			
+	});
 });
 
 
@@ -152,11 +139,12 @@ app.get('/model/:collection', function(req, res) {
 
 // change an item in the model
 app.put('/model/:collection/:id', function(req, res) {
-    var collection = db.get(req.params.collection);
-    collection.update({
-        "_id": req.params.id
-    }, req.body);
-    res.json(200, {});
+//     var collection = db.get(req.params.collection);
+//     collection.update({
+//         "_id": req.params.id
+//     }, req.body);
+//     res.json(200, {});
+    Tank.update({ _id: id }, { $set: { size: 'large' }}, callback);
 });
 
 //Add new item to database
@@ -182,14 +170,21 @@ app.post('/model/:collection', function(req, res) {
 });
 
 // delete a particular item from the model
-app.delete('/model/:collection/:id', function(req, res) {
-    mongoose.model(req.params.collection).find({_id:req.params.id}, function(err, item){
-        mongoose.model(req.params.collection).remove(function (err, item) {
-            if (err) return handleError(err);
-            console.log("Deleting item: " + item);
-        })
+// app.delete('/model/:collection/:id', function(req, res) {
+//     mongoose.model(req.params.collection).remove({_id:req.params.id}, function(err, item){
+//         if (err) return handleError(err);
+//         console.log("Deleting item: " + item);
+//     })
+// });
+
+app.delete('/model/:collection/:id', function (req, res) {
+    var id = req.params.id;
+    mongoose.model(req.params.collection).remove({_id:id}, function( err, item ){
+        if(err) throw err;
+        else console.log("Deleting Item: ID_" + req.params.id);
     })
 });
+  
 
 //Sets port to 3000 for local host while using the port that heroku dynamically sets 
 app.listen(process.env.PORT || 3000, function(){
