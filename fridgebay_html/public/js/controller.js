@@ -36,22 +36,6 @@ var fridgeApp = (function($) {
         });
     });
     
-    function submitImg(){
-  		$("#myForm").submit();
-    }
-    
-    function addItem(element) {
-        var element = document.getElementById("newItemName");
-
-        console.log("new item " + element.value);
-        myList.addElement({
-            action: element.value,
-            price: 0,
-            quantity: 0
-        });
-        element.value="";
-    }
-
     function refreshView() {
         fridgeView.refreshView(myList);
     }
