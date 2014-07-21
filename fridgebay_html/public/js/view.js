@@ -22,7 +22,7 @@ var fridgeView = (function($){
     		shelves : "Shelves",
     		bookcase : "Bookcase",
     		drawer : "Drawer",
-    		other : "Other"
+    		otherFurniture : "Other"
     	};
     	
     	var appliances = {
@@ -30,7 +30,7 @@ var fridgeView = (function($){
     		microwave : "Microwave",
     		oven : "Oven",
     		coffee_maker : "Coffee Maker",
-    		other : "Other"
+    		otherAppliances : "Other"
     	};
     	
     	var vehicles = {
@@ -38,7 +38,7 @@ var fridgeView = (function($){
     		car : "Car",
     		motorcycle : "Motocycle",
     		boat : "Boat",
-    		other : "Other"
+    		otherVehicles : "Other"
     	};
     	
     	var electronics = {
@@ -48,14 +48,14 @@ var fridgeView = (function($){
     		phone : "Phone",
     		charger : "Charger",
     		gaming_system : "Gaming System",
-    		other : "Other"
+    		otherElectronics : "Other"
     	};
     	
     	var cutlery = {
     		dishes : "Dishes",
     		blender : "Blender",
     		mixer : "Mixer",
-    		other : "Other"
+    		otherCutlery : "Other"
     	};
     	
     	var supplies = {
@@ -64,7 +64,7 @@ var fridgeView = (function($){
     		notebook : "Notebook",
     		binder : "Binder",
     		folder : "Folder",
-    		other : "Other"
+    		otherSupplies : "Other"
     	};
     	
     	var books = {
@@ -72,22 +72,25 @@ var fridgeView = (function($){
     		arts : "Arts",
     		math : "Math",
     		novel : "Novel",
-    		other : "Other"
+    		otherBooks : "Other"
     		
     	};
     	
     	var clothes = {
     		shoes : "Shoes",
-    		shirts : "Shirt",
+    		shirt : "Shirt",
     		pants : "Pants",
-    		other : "Other"
+    		hat : "Hat",
+    		sweater: "Sweater",
+    		otherClothes : "Other"
     	};
     	
     	var bed = {
     		sheet : "Sheet",
-    		pillowcase : "Pillowcase",
+    		pillow_case : "Pillow Case",
     		padding : "Padding",
-    		other : "Other"
+    		comforter: "Comforter",
+    		otherBed : "Other"
     	};
 		
 		var selectSub = $("#itemSubCategory");

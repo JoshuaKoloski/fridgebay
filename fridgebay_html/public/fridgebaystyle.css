@@ -50,6 +50,9 @@
 .color6{
     background-color:#d4730a;
 }
+.color7{
+    background-color:#efcd9e;
+}
 
 .border_circle{
     text-align:center;
@@ -282,6 +285,14 @@
     cursor:pointer;
 }
 #accordion .nav-header:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+div div div div div ul li:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+div div div div div h4 a span:hover{
     text-decoration:underline;
     cursor:pointer;
 }
