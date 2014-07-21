@@ -72,52 +72,57 @@
                         <label class="right"><input id="priceCutoff" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()" /></label>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                        <div class="panel-heading">Items</div>
-                        <div class="panel-body">
-                        <table class="table table-striped">
-                                <thead>
-                                        <tr>
-                                                <th>Name</th>
-                                                <th>Seller</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>University</th>
-                                                <th>Location</th>
-                                                <th>Sell by</th>
-                                                <th>Condition</th>
-                                                <th>Main Category</th>
-                                                <th>Sub Category</th>
-                                                <th>Delete</th>
-                                        </tr>
-                                </thead>
-                                <tbody id="itemTableBodyItems">
-                                </tbody>
-                        </table>
-                        </div>
-                </div>
-                <div class="panel panel-default">
-                        <div class="panel-heading">Users</div>
-                        <div class="panel-body">
-                        <table class="table table-striped">
-                                <thead>
-                                        <tr>
-                                                <th>Name</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                        </tr>
-                                </thead>
 
-                                <tbody id="itemTableBodyUsers">
-                                </tbody>
-                        </table>
-                        </div>
-                </div>
-        </div>
-</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Items</div>
+					<div class="panel-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Seller</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>University</th>
+									<th>Location</th>
+									<th>Sell by</th>
+									<th>Condition</th>
+									<th>Main Category</th>
+									<th>Sub Category</th>
+									<th>Images</th>
+									<th>Desc</th>
+									<th>Status</th>
+									<th>Interested</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+		
+							<tbody id="itemTableBodyItems">
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Users</div>
+					<div class="panel-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody id="itemTableBodyUsers">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div id="item-view" class="view">
-           
+
+        <div id="item-view" class="view">        
             <div class="container">
                 <div class="page-header">
                     <h1 class="heading_text">Item</h1>
@@ -127,60 +132,31 @@
 						<tr>
 							<td width="600px">
 								<div class="panel color2" >
-									<div id="panel_heading"class="panel-heading color" >
-										<label>Appliances > Fridge</label>
+									<div id="item_category"class="panel-heading color" >
+										<label>main category -> subcategory </label>
 									</div>
 									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 									  <!-- Indicators -->
-									  <ol class="carousel-indicators">
-										<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="3"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="4"></li>
-										<li data-target="#carousel-example-generic" data-slide-to="5"></li>
-									  </ol>
+									  <span id="item_images">
+										  <ol class="carousel-indicators">
+											<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+											<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+											<li data-target="#carousel-example-generic" data-slide-to="2"></li>	
+										  </ol>
 
-									  <!-- Wrapper for slides -->
-									  <div class="carousel-inner">
-										<div class="item active">
-										  <img src="http://www.mealprepmondays.com/wp-content/uploads/2013/07/fridge-freezer21.jpg" alt="..." height="600" width="600" >
-										  <div class="carousel-caption">
-											...
+										  <!-- Wrapper for slides -->
+										  <div class="carousel-inner">
+											<div class="item active">
+												<img src="http://asia.olympus-imaging.com/products/dslr/e510/sample/images/sample_05.jpg" alt="No picture" width="600" >
+											</div>
+											<div class="item">
+												<img src="http://whatdigitalcamera.media.ipcdigital.co.uk/11133/000007b5c/8f84/Panasonic-G6-review-sample-image-1.jpg" alt="No picture" width="600">
+											</div>
+											<div class="item">
+												<img src="http://www.sabisabi.com/images/13Dec11---Aperture-priority---Richard-de-Gouveia-.jpg" alt="No picture" width="600">
+											</div>	
 										  </div>
-										</div>
-										<div class="item">
-                                            <img src="http://www.soundstore.ie/images/productImages//Zoom/Belling_BL250WH_White_Freestanding_Fridge.jpg" alt="..." height="600" width="600">
-										  <div class="carousel-caption">
-											...
-										  </div>
-										</div>
-										<div class="item">
-                                            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQyuEgXsyXZXKn4hR8ruBY2YHUI3Q5B_GtT4pXushbzwakc82VM" alt="..." height="600" width="600">
-										  <div class="carousel-caption">
-											...
-										  </div>
-										</div>
-										<div class="item">
-                                            <img src="http://thebrandterminus.in/assets/images/1341737354_411794204_1-Gambar--SAMSUNG-Kulkas-SBS-2-Pintu-RSA1NTTS.jpg" alt="..." height="600" width="600">
-										  <div class="carousel-caption">
-											...
-										  </div>
-										</div>
-										<div class="item">
-                                            <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="..." height="600" width="600">
-										  <div class="carousel-caption">
-											...
-										  </div>
-										</div>
-										<div class="item">
-                                            <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="..." height="600" width="600">
-										  <div class="carousel-caption">
-											...
-										  </div>
-										</div>
-									  </div>
-
+									  </span>			  
 									  <!-- Controls -->
 									  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 										<span class="glyphicon glyphicon-chevron-left"></span>
@@ -193,16 +169,16 @@
 							</td>
 							<td>
 								<div class="list-group panel panel-warning">
-								  	<div id="status" class="list-group-item color6">
+								  	<div id="item_status" class="list-group-item color6">
 										
 								  	</div>
-								  	<div id="sell_by"class="list-group-item color6" >
+								  	<div id="item_sellBy"class="list-group-item color6" >
 										
 								  	</div>
 								  	<div class="list-group-item color2" >
 										<p class="list-group-item-text">
 											<table class="table">
-												<tbody id="tableBody" class="color">
+												<tbody id="item_tableBody" class="color">
 													
 												</tbody>	
 											</table>
@@ -344,144 +320,178 @@
             </div>
             <div class="row">
                 <div class="col-lg-2 ">
-                    <ul id="accordion" class="nav nav-list nav-info place_left">
-                        <li class="nav-header color3" onclick="fridgeApp.refreshView()">
-                            Categories
-                        </li>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFurniture">
-                                <span class="color4">
-                                    Furniture
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseFurniture" class="panel-collapse collapse out">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('table')"><span class="color4"> Table </span></li>
-                                <li onclick="fridgeApp.refresh('chair')"><span class="color4"> Chairs</span></li>
-                                <li onclick="fridgeApp.refresh('shelves')"><span class="color4"> Shelves</span></li>
-                                <li onclick="fridgeApp.refresh('drawers')"><span class="color4"> Drawers</span></li>
-                                <li onclick="fridgeApp.refresh('others')"><span class="color4"> Others </span></li>
-
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseVehicle">
-                                <span class="color4">
-                                    Vehicle
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseVehicle" class="panel-collapse collapse out">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('bike')"><span class="color4"> Bike </span></li>
-                                <li onclick="fridgeApp.refresh('car')"><span class="color4"> Car</span></li>
-                                <li onclick="fridgeApp.refresh('motorcycle')"><span class="color4"> Motorcycle</span></li>
-                                <li onclick="fridgeApp.refresh('boat')"><span class="color4"> Boat </span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseAppliances">
-                                <span class="color4">
-                                    Appliances
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseAppliances" class="panel-collapse collapse out">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('fridge')"><span class="color4"> Fridge </span></li>
-                                <li onclick="fridgeApp.refresh('microwave')"><span class="color4"> Microwave</span></li>
-                                <li onclick="fridgeApp.refresh('coffee_maker')"><span class="color4"> Coffee Maker</span></li>
-                                <li onclick="fridgeApp.refresh('oven')"><span class="color4"> Oven </span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseElectronics">
-                                <span class="color4">
-                                    Electronics
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseElectronics" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('computer')"><span class="color4"> Computer </span></li>
-                                <li onclick="fridgeApp.refresh('tv')"><span class="color4"> TV</span></li>
-                                <li onclick="fridgeApp.refresh('media_player')"><span class="color4"> Media Player</span></li>
-                                <li onclick="fridgeApp.refresh('phone')"><span class="color4"> Phone</span></li>
-                                <li onclick="fridgeApp.refresh('game_systems')"><span class="color4"> Game Systems</span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseClothing">
-                                <span class="color4">
-                                    Clothing
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseClothing" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('shirts')"><span class="color4"> Shirts</span></li>
-                                <li onclick="fridgeApp.refresh('pants')"><span class="color4"> Pants</span></li>
-                                <li onclick="fridgeApp.refresh('shoes')"><span class="color4"> Shoes</span></li>
-                                <li onclick="fridgeApp.refresh('hats')"><span class="color4"> Hats</span></li>
-                                <li onclick="fridgeApp.refresh('sweaters')"><span class="color4"> Sweaters</span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSupplies">
-                                <span class="color4">
-                                    Supplies
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseSupplies" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('pens_pencils')"><span class="color4"> Pens/Pencils</span></li>
-                                <li onclick="fridgeApp.refresh('notebooks')"><span class="color4"> Notebooks</span></li>
-                                <li onclick="fridgeApp.refresh('folders')"><span class="color4"> Folders</span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">
-                                <span class="color4">
-                                    Books
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseBooks" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('textbooks')"><span class="color4"> Textbooks </span></li>
-                                <li onclick="fridgeApp.refresh('novels')"><span class="color4"> Novels</span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-                        <li>
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseBedding">
-                                <span class="color4">
-                                    Bedding
-                                </span>
-                            </a>
-                        </li>
-                        <div id="collapseBedding" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <li onclick="fridgeApp.refresh('sheets')"><span class="color4"> Sheets </span></li>
-                                <li onclick="fridgeApp.refresh('pillow_cases')"><span class="color4"> Pillow Cases</span></li>
-                                <li onclick="fridgeApp.refresh('mattress_padding')"><span class="color4"> Mattress Padding</span></li>
-                                <li onclick="fridgeApp.refresh('comforters')"><span class="color4"> Comforters</span></li>
-                                <li onclick="fridgeApp.refresh('other')"><span class="color4"> Other </span></li>
-                            </div>
-                        </div>
-
-                    </ul>
+                	<div class="panel-group" id="category_collapse">
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseFurniture">
+							  		Furniture
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseFurniture" class="panel-collapse collapse in">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('table')"><span class="color4"> Table </span></li>
+									<li onclick="fridgeApp.refresh('chair')"><span class="color4"> Chair</span></li>
+									<li onclick="fridgeApp.refresh('shelves')"><span class="color4"> Shelves</span></li>
+									<li onclick="fridgeApp.refresh('bookcase')"><span class="color4"> Bookcase</span></li>
+									<li onclick="fridgeApp.refresh('drawer')"><span class="color4"> Drawer</span></li>
+									<li onclick="fridgeApp.refresh('otherFurniture')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseAppliances">
+							  		Appliances
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseAppliances" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('fridge')"><span class="color4"> Fridge</span></li>
+									<li onclick="fridgeApp.refresh('microwave')"><span class="color4"> Microwave</span></li>
+									<li onclick="fridgeApp.refresh('coffee_maker')"><span class="color4"> Coffee Maker</span></li>
+									<li onclick="fridgeApp.refresh('oven')"><span class="color4"> Oven</span></li>
+									<li onclick="fridgeApp.refresh('otherAppliances')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseVehicles">
+							  		Vehicles
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseVehicles" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('bike')"><span class="color4"> Bike</span></li>
+									<li onclick="fridgeApp.refresh('car')"><span class="color4"> Car</span></li>
+									<li onclick="fridgeApp.refresh('motorcycle')"><span class="color4"> Motorcycle</span></li>
+									<li onclick="fridgeApp.refresh('boat')"><span class="color4"> Boat</span></li>
+									<li onclick="fridgeApp.refresh('otherVehicles')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div> 	
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseElectronics">
+							  		Electronics
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseElectronics" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('computer')"><span class="color4"> Computer</span></li>
+									<li onclick="fridgeApp.refresh('tv')"><span class="color4"> TV</span></li>
+									<li onclick="fridgeApp.refresh('media_player')"><span class="color4"> Media Player</span></li>
+									<li onclick="fridgeApp.refresh('phone')"><span class="color4"> Phone</span></li>
+									<li onclick="fridgeApp.refresh('charger')"><span class="color4"> Charger</span></li>
+									<li onclick="fridgeApp.refresh('gaming_system')"><span class="color4"> Gaming Systems</span></li>
+									<li onclick="fridgeApp.refresh('otherElectronics')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseCutlery">
+							  		Cutlery
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseCutlery" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('dishes')"><span class="color4"> Dishes</span></li>
+									<li onclick="fridgeApp.refresh('blender')"><span class="color4"> Blender</span></li>
+									<li onclick="fridgeApp.refresh('mixer')"><span class="color4"> Mixer</span></li>
+									<li onclick="fridgeApp.refresh('otherCutlery')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseSupplies">
+							  		Supplies
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseSupplies" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('scissors')"><span class="color4"> Scissors</span></li>
+									<li onclick="fridgeApp.refresh('pen_pencil')"><span class="color4"> Pen/Pencil</span></li>
+									<li onclick="fridgeApp.refresh('notebook')"><span class="color4"> Notebook</span></li>
+									<li onclick="fridgeApp.refresh('binder')"><span class="color4"> Binder</span></li>
+									<li onclick="fridgeApp.refresh('folder')"><span class="color4"> Folder</span></li>
+									<li onclick="fridgeApp.refresh('otherSupplies')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseBooks">
+							  		Books
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseBooks" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('sciences')"><span class="color4"> Sciences</span></li>
+									<li onclick="fridgeApp.refresh('arts')"><span class="color4"> Arts</span></li>
+									<li onclick="fridgeApp.refresh('math')"><span class="color4"> Math</span></li>
+									<li onclick="fridgeApp.refresh('novel')"><span class="color4"> Novel</span></li>
+									<li onclick="fridgeApp.refresh('otherBooks')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseClothes">
+							  		Clothes
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseClothes" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('shoes')"><span class="color4"> Shoes</span></li>
+									<li onclick="fridgeApp.refresh('shirt')"><span class="color4"> Shirt</span></li>
+									<li onclick="fridgeApp.refresh('pants')"><span class="color4"> Pants</span></li>
+									<li onclick="fridgeApp.refresh('hat')"><span class="color4"> Hat</span></li>
+									<li onclick="fridgeApp.refresh('sweater')"><span class="color4"> Sweater</span></li>
+									<li onclick="fridgeApp.refresh('otherClothes')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					  	<div class="panel panel-default">
+							<div class="panel-heading">
+						  		<h4 class="panel-title">
+									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseBed">
+							  		Bed
+									</a>
+						  		</h4>
+							</div>
+							<div id="collapseBed" class="panel-collapse collapse">
+								<div class="panel-body">
+									<li onclick="fridgeApp.refresh('sheet')"><span class="color4"> Sheet</span></li>
+									<li onclick="fridgeApp.refresh('pillow_case')"><span class="color4"> Pillow Case</span></li>
+									<li onclick="fridgeApp.refresh('padding')"><span class="color4"> Padding</span></li>
+									<li onclick="fridgeApp.refresh('comforter')"><span class="color4"> Comforter</span></li>
+									<li onclick="fridgeApp.refresh('otherBed')"><span class="color4"> Other</span></li>
+								</div>
+							</div>
+					  	</div>
+					</div>
                 </div>
                 <div  class="col-lg-10 place" > 
                     <div class="text-center">
-                        <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37"> llie's nest</p>
+                        <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37">llie's nest</p>
                     </div>
                     <div>
                         <center><img  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber"></h2></center>
@@ -496,14 +506,22 @@
                                     <th>Price</th>
                                     <th>University</th>
                                     <th> Condtion</th>
-                                    <th>View</th>
+                                    <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             
                             <tbody id="homeTableBody" class="color2">
-                                
                             </tbody>
                         </table>
+                    </div>
+                    <div class="border_circle pull-right">
+                        <div >
+                            <label>
+                                <input id="showCompleteCheckbox" type="checkbox" onclick="fridgeApp.refreshView()">
+                                Show All Items
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -620,100 +638,104 @@
                 <div class="page-header">
                     <h1 class="heading_text">Post an Item</h1>
                 </div>
-                <table class="table table-default panel panel-warning">
-                    <tbody class="color2">
-                        <tr>
-                            <td width="600px">
-                                <form class="form-inline" role="form">
-                                    <div class="form-group">
-                                        <label>Choose Item Main Category</label>
-                                        <select class="form-control" id="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
-                                            <option value="furniture"> Furniture </option>
-                                            <option value="appliances"> Appliances </option>
-                                            <option value="vehicles"> Vehicles </option>
-                                            <option value="electronics"> Electronics </option>
-                                            <option value="cutlery"> Cutlery </option>
-                                            <option value="supplies"> Supplies </option>
-                                            <option value="books"> Books </option>
-                                            <option value="clothes"> Clothes </option>
-                                            <option value="bed"> Bed </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>and Sub Category</label>
-                                        <select class="form-control" id="itemSubCategory">
-                                            <option value="table"> Table </option>
-                                            <option value="chair"> Chair </option>
-                                            <option value="shelves"> Shelves </option>
-                                            <option value="bookcase"> Bookcase </option>
-                                            <option value="drawer"> Drawer </option>
-                                            <option value="other"> Other </option>
-                                        </select>
-                                    </div>
-                                </form>
-                                <br />
-                                <div class="panel color">
-                                    <div class="panel-heading color" ><label>Add up to 3 pictures for your item.</label></div>
-                                    <div class="panel-body color2">
-                                        <input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg" />
-                                        <div id="img_0"></div><br>
-                                        <input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg" />
-                                        <div id="img_1"></div><br>
-                                        <input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg" />
-                                        <div id="img_2"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <form role="form">
-                                    <div>
-                                        <label>Item Name</label>
-                                        <input type="text" class="form-control" id="itemName" />
-                                    </div>
-                                    <div>
-                                        <label>Price</label>
-                                        <input type="number" class="form-control" id="itemPrice" />
-                                    </div>
-                                    <div>
-                                        <label>Condition</label>
-                                        <select class="form-control" id="itemCondition">
-                                            <!--Dropdown Menu for Condition -->
-                                            <option>Brand New</option>
-                                            <option>Like New</option>
-                                            <option>Slightly Used</option>
-                                            <option>Good</option>
-                                            <option>Damaged</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label>University</label>
-                                        <input type="text" class="form-control" id="itemUniversity" />
-                                    </div>
-                                    <div>
-                                        <label>Location</label>
-                                        <input type="text" class="form-control" id="itemLocation" />
-                                    </div>
-                                    <div>
-                                        <label>Quantity</label>
-                                        <input type="number" class="form-control" id="itemQuantity" />
-                                    </div>
-                                    <div>
-                                        <label>Desired Sell-By Date</label>
-                                        <input type="Date" class="form-control" id="itemSellBy" />
-                                    </div>
-                                    <div>
-                                        <label for="itemDesc">Description</label>
-                                    </div>
-                                    <div>
-                                        <textarea class="form-control" rows="4" id="itemDesc"></textarea>
-                                    </div>
-                                    <div >
-                                        <center><button type="submit" class="dark_brown" onclick="fridgeApp.addItem(),  fridgeApp.reloadModel(), fridgeApp.showView('home')">Submit</button></center>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
+
+   
+                <table class="table">
+                	<tbody>
+						<tr>
+							<td width="600px">	
+								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
+									<div>
+										<label>Choose Item Main Category</label>
+										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
+											<option value="furniture"> Furniture </option>
+											<option value="appliances"> Appliances </option>
+											<option value="vehicles"> Vehicles </option>
+											<option value="electronics"> Electronics </option>
+											<option value="cutlery"> Cutlery </option>
+											<option value="supplies"> Supplies </option>
+											<option value="books"> Books </option>
+											<option value="clothes"> Clothes </option>
+											<option value="bed"> Bed </option>
+										</select>
+									</div>							
+									<div class="form-group">
+										<label>and Sub Category</label>
+										<select class="form-control" id="itemSubCategory" name="itemSubCategory">
+											<option value="table"> Table </option>
+											<option value="chair"> Chair </option>
+											<option value="shelves"> Shelves </option>
+											<option value="bookcase"> Bookcase </option>
+											<option value="drawer"> Drawer </option>
+											<option value="otherFurniture"> Other </option>
+										</select>
+									</div>
+								<br/>
+								<div class="panel">
+									<div class="panel-heading" id="color"><lable>Add up to 3 pictures for your item.</lable></div>
+									<div class="panel-body">										
+										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(1)">
+										<div id="img_1"></div>
+										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(2)">
+										<div id="img_2"></div>
+										<input type="file" id="inputFileToLoad_3" name="image_3" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(3)">
+										<div id="img_3"></div>										
+									</div>
+								</div>
+							</td>
+							<td>
+									<div>
+										<label>Item Name</label>
+										<input type="text" class="form-control" id="itemName" name="itemName"/>
+									</div>
+									<div>
+										<label>Price</label>
+										<input type="number" class="form-control" id="itemPrice" name="itemPrice"/>
+									</div>
+									<div>
+										<label>Condition</label>
+										<select class="form-control" id="itemCondition" name="itemCondition">
+											<!--Dropdown Menu for Condition -->
+											<option>Brand New</option>
+											<option>Like New</option>
+											<option>Slightly Used</option>
+											<option>Good</option>
+											<option>Damaged</option>
+										</select>
+									</div>
+									<div>
+										<label>University</label>
+										<input type="text" class="form-control" id="itemUniversity" name="itemUniversity"/>
+									</div>
+									<div>
+										<label>Location</label>
+										<input type="text" class="form-control" id="itemLocation" name="itemLocation"/>
+									</div>
+									<div>
+										<label>Quantity</label>
+										<input type="number" class="form-control" id="itemQuantity" name="itemQuantity"/>
+									</div>
+									<div>
+										<label>Desired Sell-By Date</label>
+										<input type="Date" class="form-control" id="itemSellBy" name="itemSellBy"/>
+									</div>
+									<div>
+										<label for="itemDesc">Description</label>
+									</div>
+									<div>
+										<textarea class="form-control" rows="4" id="itemDesc" name="itemDesc"></textarea>
+									</div>
+									<div>
+										<input type="hidden" id="itemSeller" name="itemSeller"/>
+									</div>
+									<div class="place_right">
+										<input type="submit" class="dark_brown" type="submit"/>
+									</div>
+								</form>
+							</td>
+						</tr>
+                	</tbody>
+
                 </table>
             </div>
         </div>
@@ -839,19 +861,8 @@
     </div>
 </body>
 <script>
-	//check if the uploaded file is a picture.
-    function check() {
-		var ext = document.f.pic.value;
-	  		ext = ext.substring(ext.length-3,ext.length);
-	  		ext = ext.toLowerCase();
-	  		if(ext != 'jpg') {
-				alert('You selected a .'+ext+
-			  		' file; please select a .jpg file instead!');
-				return false; }
-	  		else
-				return true;
-	}
-
+	$("#itemSeller").val(fridgeApp.getUser()); 
+	
     // this is the code that actually starts the JavaScript application!!
     // when the document has been fully loaded, all the fridgeApp.start() method
     $(document).ready(fridgeApp.start());

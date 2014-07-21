@@ -34,21 +34,11 @@ var fridgeApp = (function($) {
             
         });
     });
-    function addItem(element) {
-        var element = document.getElementById("newItemName");
-
-        console.log("new item " + element.value);
-        myList.addElement({
-            action: element.value,
-            price: 0,
-            quantity: 0
-        });
-        element.value="";
-    }
-
+    
     function refreshView() {
         fridgeView.refreshView(myList);
     }
+    
     function refresh(category) {
         fridgeView.refresh(myList, category);
     }
@@ -57,8 +47,6 @@ var fridgeApp = (function($) {
         myList.loadModel();
         refreshView();
     }
-   
-
     function addItem() {
     	
     	var imageArray = [];
@@ -125,15 +113,23 @@ var fridgeApp = (function($) {
         });
         reloadModel();
     }
+
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
         fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
     }
+    
     function deleteItem(element){
-        myList.deleteElement(element.getAttribute("sid"));
-        reloadModel();
-        alert("Item was successfully deleted");
+        var c = confirm("Are you sure you want to delete this item?")
+        if (c) {
+            console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
+            myList.deleteElement(element.getAttribute("sid"));
+            reloadModel();
+        } else {
+            console.log("delete canceled");
+        }
     }
+    
     function encodeImageFileAsURL(divNum){
 
 		var filesSelected = document.getElementById("inputFileToLoad_"+divNum).files;
@@ -170,18 +166,23 @@ var fridgeApp = (function($) {
         });
     }
 
+	function getUser(){
+		return myList.currentUser;
+	}
+
     function start() {
         myList.loadModel();
-        showView("welcome");
+        showView('home');
     }
   
     // here is were we decide what is visible to the outside!
     fridgeApp = {
         start: start,
+        getUser: getUser,
         refresh: refresh,
-        addItem: addItem,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
+        encodeImageFileAsURL: encodeImageFileAsURL,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,

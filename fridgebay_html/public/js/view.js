@@ -8,14 +8,12 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
-        updateCategoryOptions();
-        
-
     }
+    
     function refresh(myData, category) {
         filterCategory(myData.items, category);
     }
-    
+        
     function updateCategoryOptions(){
     	
     	var furniture = {
@@ -24,7 +22,7 @@ var fridgeView = (function($){
     		shelves : "Shelves",
     		bookcase : "Bookcase",
     		drawer : "Drawer",
-    		other : "Other"
+    		otherFurniture : "Other"
     	};
     	
     	var appliances = {
@@ -32,7 +30,7 @@ var fridgeView = (function($){
     		microwave : "Microwave",
     		oven : "Oven",
     		coffee_maker : "Coffee Maker",
-    		other : "Other"
+    		otherAppliances : "Other"
     	};
     	
     	var vehicles = {
@@ -40,7 +38,7 @@ var fridgeView = (function($){
     		car : "Car",
     		motorcycle : "Motocycle",
     		boat : "Boat",
-    		other : "Other"
+    		otherVehicles : "Other"
     	};
     	
     	var electronics = {
@@ -50,14 +48,14 @@ var fridgeView = (function($){
     		phone : "Phone",
     		charger : "Charger",
     		gaming_system : "Gaming System",
-    		other : "Other"
+    		otherElectronics : "Other"
     	};
     	
     	var cutlery = {
     		dishes : "Dishes",
     		blender : "Blender",
     		mixer : "Mixer",
-    		other : "Other"
+    		otherCutlery : "Other"
     	};
     	
     	var supplies = {
@@ -66,7 +64,7 @@ var fridgeView = (function($){
     		notebook : "Notebook",
     		binder : "Binder",
     		folder : "Folder",
-    		other : "Other"
+    		otherSupplies : "Other"
     	};
     	
     	var books = {
@@ -74,22 +72,25 @@ var fridgeView = (function($){
     		arts : "Arts",
     		math : "Math",
     		novel : "Novel",
-    		other : "Other"
+    		otherBooks : "Other"
     		
     	};
     	
     	var clothes = {
     		shoes : "Shoes",
-    		shirts : "Shirt",
+    		shirt : "Shirt",
     		pants : "Pants",
-    		other : "Other"
+    		hat : "Hat",
+    		sweater: "Sweater",
+    		otherClothes : "Other"
     	};
     	
     	var bed = {
     		sheet : "Sheet",
-    		pillowcase : "Pillowcase",
+    		pillow_case : "Pillow Case",
     		padding : "Padding",
-    		other : "Other"
+    		comforter: "Comforter",
+    		otherBed : "Other"
     	};
 		
 		var selectSub = $("#itemSubCategory");
@@ -150,27 +151,49 @@ var fridgeView = (function($){
 			});
 		}
     }
+
+    function sortItems(items) {
+        var sortedItems = items.slice();  // make a copy of items
+        
+        sortedItems.sort();
+        sortedItems.reverse();
+        var recentItems = [];
+        for (var i = 0; i < 10; i++) {
+            if (sortedItems[i] != null) {
+                recentItems[i] = sortedItems[i];
+            } else { break;}
+        }
+        var showComplete = $("#showCompleteCheckbox").prop("checked");
+        if(showComplete){
+            console.log("returning all items");
+            return sortedItems;
+        } else {
+            console.log("returning recent items");
+            return recentItems;
+        }
+    }
     
     
     // redraw the table using the current model
     function refreshTableItems(myItems){    
         var rows = "";
         var rowsHome = "";
-        var itemsArr = [];
         var len = myItems.length;
         var filteredModelItems = filterModelItems(myItems);
         var filteredHomeItems = filterHomeItems(myItems);
+        var sortedModelItems = sortItems(filteredModelItems);
+        var sortedHomeItems = sortItems(filteredHomeItems);
+        
         //console.log("filteredItems = " + JSON.stringify(filteredModelItems));
         //console.log("filteredItems = " + JSON.stringify(filteredHomeItems));
-        for(var n=0; n<filteredModelItems.length; n++){ 
-            var item = filteredModelItems[n];
+        for(var n=0; n<sortedModelItems.length; n++){ 
+            var item = sortedModelItems[n];
             rows = rows + itemToRow(item);
         }
         console.log("model length= " + filteredHomeItems.length);
-        for (var n = 0; n < filteredHomeItems.length; n++) {
-            var item = filteredHomeItems[n];
-            itemsArr.push(item);
-            console.log("item = " + JSON.stringify(item));
+        for (var n = 0; n < sortedHomeItems.length; n++) {
+            var item = sortedHomeItems[n];
+            //console.log("item = " + JSON.stringify(item));
             rowsHome = rowsHome + homeItemToRow(item);
         }
         
@@ -195,20 +218,11 @@ var fridgeView = (function($){
         
         fridgeApp.showView('item');
 
-        var rowsItem = "";
-        var heading = "";
-        var status = "";
-        var sell = "";
-
-        rowsItem = rowsItem + itemItemToRow(element);
-        heading = heading + headingText(element);
-        status = status + statusText(element);
-        sell = sell + sellText(element);
-
-        var itemTableBody = $("#tableBody").html(rowsItem);
-        var itemHeader = $("#panel_heading").html(heading);
-        var itemStatus= $("#status").html(status);
-        var itemSell = $("#sell_by").html(sell);
+        $("#item_tableBody").html(itemItemToRow(element));
+        $("#item_category").html(headingText(element));
+        $("#item_images").html(imagesText(element));
+        $("#item_status").html(statusText(element));
+        $("#item_sellBy").html(sellText(element));
     }
    
     function showNumber(length) {  
@@ -292,11 +306,20 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
+<<<<<<< HEAD
         "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.deleteItem(this)'>Delete</button>"+
         "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
+=======
+        "</td><td>"+ displayImages(item.images) +
+        "</td><td>"+ item.description +
+        "</td><td>"+ item.status+
+        "</td><td>"+ item.interested+
+        "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
+>>>>>>> ad317acc68235cde3712c527771f07b4011bfee7
         "</td></tr>";
         return row;
     }
+    
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
@@ -305,10 +328,12 @@ var fridgeView = (function($){
         "</label></td><td><label>" + item.price +
         "</label></td><td><label>" + item.university +
         "</label></td><td><label>" + item.condition +
-        "</label></td><td>"+"<button class='dark_brown' type='button' sid='" + item._id + "' onclick='fridgeApp.pass(this)'>View</button><label>" + 
+        "</label></td><td>" + "<button class='dark_brown' type='button' sid='" + item._id + "' onclick='fridgeApp.pass(this)'>View</button><label>" +
+        "</td><td>" + "<span class='glyphicon glyphicon-remove changeImage'  sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'></span>" +
         "</label></td></tr>";
         return row;
     }
+    
     //converts item into html on item table
     function itemItemToRow(item) {
         var row =
@@ -321,11 +346,53 @@ var fridgeView = (function($){
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
+    
+    function imagesText(item){    
+    	if (item.images.length == 0) {
+    		return "<img src='http://atrium.ipet.gr/atrium_catalogue/images/large_noImage.gif' alt='No picture' width=600 height=450>";
+    	} else if (item.images.length == 1) {
+    		return "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>";
+    	} else if (item.images.length == 2) {
+    		return ""+
+    		"<ol class='carousel-indicators'>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+			"</ol>"+
+			"<div class='carousel-inner'>"+
+				"<div class='item active'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+				"<div class='item'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+			"</div>";
+    	} else { //item.images.length == 3
+    		return ""+
+    		"<ol class='carousel-indicators'>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=2></li>"+
+			"</ol>"+
+			"<div class='carousel-inner'>"+
+				"<div class='item active'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+				"</div>"+ 
+				"<div class='item'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+				"<div class='item'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[2]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+			"</div>";
+    	}
+    }
+    
     function headingText(item) {
         var row =
         "<label>" + item.category + " -> " + item.subcategory + "</label>";
         return row;
     }
+    
     function statusText(item) {
         var s;
         if (item.status){
@@ -334,16 +401,25 @@ var fridgeView = (function($){
             s="UNSOLD";
         }
         var row=
-        "<h4 class='list-group-item-heading pos'><label>Status: " +s+"</label></h4>";
+        "<h4 class='list-group-item-heading pos border'><label>Status: <span class='font'>" + s + "</span></label></h4>";
 		
         return row;
     }
+    
     function sellText(item) {
         var row =
-        "<h4 class='list-group-item-heading pos'><label>Sell by "+item.sellBy+"</label></h4>"+
-		"<p class='list-group-item-text pos'><label>Seller is "+item.seller+"</p><label>";
+        "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+item.sellBy+"</span></label></h4>"+
+		"<p class='list-group-item-text pos'><label>Seller is <span class='font'>"+item.seller+"</span></p><label>";
         return row;
     }
+    
+  	function displayImages(images){
+  		var imgs = "";
+  		for (var i = 0; i < images.length; i++) {
+			imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg alt='No picture' width=100>"
+		}
+		return imgs;
+  	}
     
     // redraw the table using the current model users~~~~
     function refreshTableUsers(myUsers){    

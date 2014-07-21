@@ -43,6 +43,7 @@ Information.prototype.loadModel = function() {
     }).done(function(items) {
         myInfo.items = items;
         items.map(function(x){x.id=x["_id"];});
+        console.log(JSON.stringify(items));
     });
     
      // add users
@@ -55,6 +56,7 @@ Information.prototype.loadModel = function() {
 	//Loads model information into the view
         fridgeView.refreshView(myInfo);  
     });
+
 };
 
 Information.prototype.addElement = function(newItem){
@@ -70,6 +72,27 @@ Information.prototype.addElement = function(newItem){
         myList.loadModel();
     });
 }
+
+Information.prototype.uploadImg = function(newImg) {
+
+        $.ajax({
+            type:'POST',
+            url: '/uploadImg',
+            data: newImg,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                console.log("success");
+                console.log(data);
+            },
+            error: function(data){
+                console.log("error");
+                console.log(data);
+            }
+        });
+}
+
 
 Information.prototype.updateElement = function(id,newItem){
     var myList = this;
