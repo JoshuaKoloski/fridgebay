@@ -306,16 +306,12 @@ var fridgeView = (function($){
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
-<<<<<<< HEAD
-        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.deleteItem(this)'>Delete</button>"+
-        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
-=======
         "</td><td>"+ displayImages(item.images) +
         "</td><td>"+ item.description +
         "</td><td>"+ item.status+
         "</td><td>"+ item.interested+
         "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
->>>>>>> ad317acc68235cde3712c527771f07b4011bfee7
+        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
         "</td></tr>";
         return row;
     }
