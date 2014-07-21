@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FridgeBay</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="fridgebaystyle.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/bootstrap-min.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
+   
+
+
+
+</head>
+<body>
+    <div class="container">
+    	<div class="row">
+           
+            <div class="col-lg-2">
+                <img class="changeImage"src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
+            </div>
+            <div class="col-lg-2">
+                <span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span>
+            </div>
+            <div id="pos"class=" col-lg-2">
+                <button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button>
+            </div>
+            <div class="col-lg-2 text-center">
+                <span class="redButton"  onclick="fridgeApp.showAlert()">Notifications</span>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-1">
+                <button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button>
+            </div>
+            <div class="col-lg-1">
+                <button  class="dark_brown" onclick="fridgeApp.showView('login')">Login</button>
+            </div>
+	  </div>
+       
+
+        <div id="welcome-view" class="view">
+            <button class="btn btn-default" onclick="fridgeApp.showView('home')">Home page of fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('profile')">Profile page of fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('form')">Form for fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('login')">Login for fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('item')">Items for fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('model')">fridge-bay sample model </button>
+        </div>
+
+		<div id="model-view" class="view">
+            
+			<div class="container">
+                <div class="page-header">
+                    <h1 id="heading_text">Model</h1>
+                </div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Items</div>
+					<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Price</th>
+								<th>Category</th>
+								<th>Quantity</th>
+								<th>Location</th>
+								<th>Seller</th>
+								<th>Sell by</th>
+							</tr>
+						</thead>
+		
+						<tbody id="itemTableBodyItems">
+						</tbody>
+					</table>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Users</div>
+					<div class="panel-body">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Phone</th>
+								<th>Email</th>
+							</tr>
+						</thead>
+		
+						<tbody id="itemTableBodyUsers">
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <div id="item-view" class="view">
+           
+            <div class="container">
+                <div class="page-header">
+                    <h1 id="heading_text">Item</h1>
+                </div>
+                <table class="table">
+                	<tbody id="color2">
+						<tr>
+							<td width="600px">
+								<div class="panel" id="color2">
+									<div class="panel-heading" id="color">
+										<lable>Appliances > Fridge</lable>
+									</div>
+									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+									  <!-- Indicators -->
+									  <ol class="carousel-indicators">
+										<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+										<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+										<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+										<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+										<li data-target="#carousel-example-generic" data-slide-to="4"></li>
+										<li data-target="#carousel-example-generic" data-slide-to="5"></li>
+									  </ol>
+
+									  <!-- Wrapper for slides -->
+									  <div class="carousel-inner">
+										<div class="item active">
+										  <img src="http://www.mealprepmondays.com/wp-content/uploads/2013/07/fridge-freezer21.jpg" alt="...">
+										  <div class="carousel-caption">
+											...
+										  </div>
+										</div>
+										<div class="item">
+										  <img src="http://www.soundstore.ie/images/productImages//Zoom/Belling_BL250WH_White_Freestanding_Fridge.jpg" alt="...">
+										  <div class="carousel-caption">
+											...
+										  </div>
+										</div>
+										<div class="item">
+										  <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQyuEgXsyXZXKn4hR8ruBY2YHUI3Q5B_GtT4pXushbzwakc82VM" alt="...">
+										  <div class="carousel-caption">
+											...
+										  </div>
+										</div>
+										<div class="item">
+										  <img src="http://thebrandterminus.in/assets/images/1341737354_411794204_1-Gambar--SAMSUNG-Kulkas-SBS-2-Pintu-RSA1NTTS.jpg" alt="...">
+										  <div class="carousel-caption">
+											...
+										  </div>
+										</div>
+										<div class="item">
+										  <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="...">
+										  <div class="carousel-caption">
+											...
+										  </div>
+										</div>
+										<div class="item">
+										  <img src="http://www.chimicare.org/curiosita/wp-content/uploads/2010/02/frigorifero.jpg" alt="...">
+										  <div class="carousel-caption">
+											...
+										  </div>
+										</div>
+									  </div>
+
+									  <!-- Controls -->
+									  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left"></span>
+									  </a>
+									  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right"></span>
+									  </a>
+									</div>
+								</div>
+							</td>
+							<td>
+								<div class="list-group">
+								  	<div class="list-group-item" id="color2">
+										<h4 class="list-group-item-heading">Status: Unsold</h4>
+										<p class="list-group-item-text">This is my item.</p>
+								  	</div>
+								  	<div class="list-group-item" id="color2">
+										<h4 class="list-group-item-heading">Sell by 06/06/2015</h4>
+										<p class="list-group-item-text">Seller is Kuuku Ku.</p>
+								  	</div>
+								  	<div class="list-group-item" id="color2">
+										<p class="list-group-item-text">
+											<table class="table">
+												<tbody id="color">
+													<tr>
+														<td>Item Name</td>
+														<td>Fridge</td>
+													</tr>
+													<tr>
+														<td>University</td>
+														<td>Brandeis University</td>
+													</tr>
+													<tr>
+														<td>Location</td>
+														<td>SCC</td>
+													</tr>
+													<tr>
+														<td>Price</td>
+														<td>$80.00</td>
+													</tr>
+													<tr>
+														<td>Quantity</td>
+														<td>1</td>
+													</tr>
+													<tr>
+														<td>Condition</td>
+														<td>Brand New</td>
+													</tr>
+													<tr>
+														<td>Description</td>
+														<td>Red and cute</td>
+													</tr>
+												</tbody>	
+											</table>
+										</p>
+								  	</div>
+								</div>							
+							</td>				
+						</tr>
+                	</tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="login-view" class="view">
+            <div class="container">
+                <div class="page-header">
+                    <h1 id="heading_text">Account</h1>
+                </div>
+                <table class="table table-default">
+                    
+                    <thead id="color">
+                        <tr class="text-center">
+                            <td><h3>Login</h3></td>
+                            <td><h3>Register</h3></td>
+                        </tr>
+                    </thead>
+
+                    <tbody id="color2">
+                        <tr>
+                            <td>
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
+                                                <span class="input-group-addon">.edu</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="dark_brown">Sign in</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="4-20 characters">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
+                                                <span class="input-group-addon">.edu</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Cell Phone</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="optional">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control color5" id="inputEmail3" placeholder="6-20 characters">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Verify Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="6-20 characters">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions">Use Email as my Public Contact Information
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions">Use Phone Number as my Public Contact Information
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">t-us
+                                            <button type="submit" class="dark_brown">Register</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<!-- HomePage -->
+    <div id="home-view" class="view">
+        <div class="containter">           
+            <div class="page-header">
+                <h1 id="heading_text">HOME</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <label id="left"><input  type=text class="form-control color5" placeholder="Search by Name"></label>
+                </div>
+                <div id="pos" class="col-lg-4">
+                    <label><input type=text class="form-control color5" placeholder="Search by University" /></label>
+                </div>
+                <div class="col-lg-4">
+                    <label id="right"><input  type=number class="form-control color5" placeholder="Search by Price" /></label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <ul id="accordion" class="nav nav-list nav-info place_left">
+                        
+                            <li id="color3" class="nav-header">
+                                Categories
+                            </li>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFurniture">
+                                    <span id="color4">
+                                        Furniture
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseFurniture" class="panel-collapse collapse out">
+                                <div class="panel-body">
+                                    <li id=""><span id="color4"> Table </span></li>
+                                    <li><span id="color4"> Chairs</span></li>
+                                    <li><span id="color4"> Shelves</span></li>
+                                    <li><span id="color4"> Drawers</span></li>
+                                    <li><span id="color4"> Others </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseVehicle">
+                                    <span id="color4">
+                                        Vehicle
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseVehicle" class="panel-collapse collapse out">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Bike </span></li>
+                                    <li><span id="color4"> Car</span></li>
+                                    <li><span id="color4"> Motorcycle</span></li>
+                                    <li><span id="color4"> Boat </span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseAppliances">
+                                    <span id="color4">
+                                        Appliances
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseAppliances" class="panel-collapse collapse out">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Fridge </span></li>
+                                    <li><span id="color4"> Microwave</span></li>
+                                    <li><span id="color4"> Coffe Maker</span></li>
+                                    <li><span id="color4"> Oven </span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseElectronics">
+                                    <span id="color4">
+                                        Electronics
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseElectronics" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Computer </span></li>
+                                    <li><span id="color4"> TV</span></li>
+                                    <li><span id="color4"> Media Player</span></li>
+                                    <li><span id="color4"> Phone</span></li>
+                                    <li><span id="color4"> Game Systems</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseClothing">
+                                    <span id="color4">
+                                        Clothing
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseClothing" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Shirts</span></li>
+                                    <li><span id="color4"> Pants</span></li>
+                                    <li><span id="color4"> Shoes</span></li>
+                                    <li><span id="color4"> Hats</span></li>
+                                    <li><span id="color4"> Sweaters</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseSupplies">
+                                    <span id="color4">
+                                        Supplies
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseSupplies" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Pens/Pencils</span></li>
+                                    <li><span id="color4"> Notebooks</span></li>
+                                    <li><span id="color4"> Folders</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBooks">
+                                    <span id="color4">
+                                        Books
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseBooks" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Textbooks </span></li>
+                                    <li><span id="color4"> Novels</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                            <li>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseBedding">
+                                    <span id="color4">
+                                        Bedding
+                                    </span>
+                                </a>
+                            </li>
+                            <div id="collapseBedding" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <li><span id="color4"> Sheets </span></li>
+                                    <li><span id="color4"> Pillow Cases</span></li>
+                                    <li><span id="color4"> Mattress Padding</span></li>
+                                    <li><span id="color4"> Comforters</span></li>
+                                    <li><span id="color4"> Other </span></li>
+                                </div>
+                            </div>
+                        
+                    </ul>
+                </div>
+                <div id="place_right" class="col-lg-10" >                        
+                    <table class="table table-default panel panel-warning">
+                        <thead id="color">
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>University</th>
+                                <th> Condtion</th>
+                            </tr>
+                        </thead>
+                        <tbody id="color2">
+                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><img src="http://www.o-digital.com/uploads/2227/2283-1/Mini_Fridge_KC_50D_145.jpg" height="130" width="130"></td>
+                                <td><label>Fridge</label></td>
+                                <td><label>$50</label></td>
+                                <td><label>Brandeis</label></td>
+                                <td><label>Good </label></td>
+                            </tr>
+                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><img src="http://images.canadianlisted.com/nlarge/20psych-by-spencer-rathus-textbook-mru-uofc_6927178.jpg" height="130" width="130"></td>
+                                <td><label>Psych Textbook</label></td>
+                                <td><label>$80</label></td>
+                                <td><label>Bentley</label></td>
+                                <td> <label>Slightly Used</label> </td>
+                            </tr>
+                            <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                <td><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTuqIIy1EYrqDUxpHErRVksqWADOsLP7zy-gUZV9lmpYDx7BNJg1w" height="130" width="130"></td>
+                                <td><label>Bike</label></td>
+                                <td><label>$40</label></td>
+                                <td><label>Brandeis</label></td>
+                                <td><label>Like New</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+
+        <div id="profile-view" class="view">
+        	<div class="container"> 
+                <div class="page-header">
+                    <h1 id="heading_text">Profile</h1>
+                </div>
+                <div class="checkbox-line, text-center" onclick="fridgeApp.showView('form')">
+                    <button class="btn btn-warning">New Post</button>
+                </div>
+                <div class="dropdown pull-right">
+                    <button data-toggle="dropdown" class="dropdown-toggle pull-right">
+                        On Sale
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        <li><a href="#">Interested In</a></li>
+                        <li><a href="#">Item History</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#">Your History</a></li>
+                    </ul>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div id="doublePadding" class="checkbox-line">
+                            <img src="josh.jpg" alt="some_text" height="200" width="350">
+                        </div>
+
+
+                        <table id="profileInfo"class="table table-default">
+                            <tbody>
+                                <tr>
+                                    <td><b>Username</b></td>
+                                    <td class ="white">joshuakoloski1234
+                                    <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><b>Email</b></td>
+                                    <td class="white">j@brandeis.edu
+                                        <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Phone</b></td>
+                                    <td class="white">765-978-1234
+                                        <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <div>
+                        <form action="">
+                            <label><input type="radio" name="option" value="email">  Email</label><br>
+                            <label><input type="radio" name="option" value="phone">  Phone</label>
+                        </form>
+                     </div>
+                    </div>
+                    <div id="doublePadding" class="col-lg-8">
+                        <table class="table table-default panel panel-warning">
+                            <thead id="color">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Photo</th>
+                                    <th>Price</th>
+                                    <th>Location</th>
+                                </tr>
+
+                            </thead>
+                            <tbody id="color2">
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')"> 
+                                    <td><label>Fridge</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>$50</label></td>
+                                    <td><label>East</label></td>
+                                    
+                                </tr>
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><label>Abnormal Psych Textbook</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>$60</label></td>
+                                    <td><label>Village</label></td>
+                                </tr>
+                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
+                                    <td><label>Bike</label></td>
+                                    <td><label>Upload Photo</label></td>
+                                    <td><label>$70</label></td>
+                                    <td><label>Gosman</label></td>
+                                </tr>
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                    
+               </div>
+	
+            </div>
+        </div>
+                
+        <div id="form-view" class="view">
+            
+            <div class="container">
+                <div class="page-header">
+                    <h1 id="heading_text">Post an Item</h1>
+                </div>
+                
+                <table class="table">
+                	<tbody id="color2">
+						<tr>
+							<td width="600px">	
+								<form class="form-inline" role="form">
+									<div class="form-group">
+										<label>Choose Item Main Category</label>
+										<select class="form-control" id="itemMainCategory">
+									
+										</select>
+									</div>							
+									<div class="form-group">
+										<label>and Sub Category</label>
+										<select class="form-control" id="itemSubCategory">
+									
+										</select>
+									</div>
+								</form>
+								<br/>
+								<div class="panel" id="color">
+									<div class="panel-heading" id="color"><lable>Add up to 6 pictures for your item.</lable></div>
+									<div class="panel-body" id="color2">
+										<img src="..." alt="Click to add a Picture" class="img-thumbnail" width="180px">
+										<img src="..." alt="Click to add a Picture" class="img-thumbnail" width="180px">
+										<img src="..." alt="Click to add a Picture" class="img-thumbnail" width="180px">
+										<img src="..." alt="Click to add a Picture" class="img-thumbnail" width="180px">
+										<img src="..." alt="Click to add a Picture" class="img-thumbnail" width="180px">
+										<img src="..." alt="Click to add a Picture" class="img-thumbnail" width="180px">
+									</div>
+								</div>
+							</td>
+							<td>
+								<form role="form">
+									<div>
+										<label for="itemName">Item Name</label>
+										<input type="text" class="form-control" id="itemName" />
+									</div>
+									<div>
+										<label>Price</label>
+										<input type="number" class="form-control" id="itemName" />
+									</div>
+									<div>
+										<label>Condition</label>
+										<select class="form-control" id="itemCondition">
+											<!--Dropdown Menu for Condition -->
+											<option>Brand New</option>
+											<option>Like New</option>
+											<option>Slightly Used</option>
+											<option>Good</option>
+											<option>Damaged</option>
+										</select>
+									</div>
+									<div>
+										<label>University</label>
+										<input type="text" class="form-control" id="itemUniversity" />
+									</div>
+									<div>
+										<label>Location</label>
+										<input type="text" class="form-control" id="itemLocation" />
+									</div>
+									<div>
+										<label>Quantity</label>
+										<input type="number" class="form-control" id="itemQuantity" />
+									</div>
+									<div>
+										<label>Desired Sell-By Date</label>
+										<input type="Date" class="form-control" id="itemSellBy" />
+									</div>
+									<div>
+										<label for="itemDesc">Description</label>
+									</div>
+									<div>
+										<textarea class="form-control" rows="4" id="itemDesc"></textarea>
+									</div>
+									<div id="place_right">
+									<button type="submit" class="dark_brown">Submit</button>
+									</div>
+								</form>
+							</td>
+				
+						</tr>
+                	</tbody>
+                </table>
+
+            </div>
+            
+        </div>
+<!--Contact Us Page -->
+        <div id="contact-view" class="view">
+            <h1 id="heading_text">Anything to Say?</h1>
+            <div class="container">
+                <textarea class="form-control" cols="10" rows="10" id="itemDesc" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
+                <div>
+                    <button class="dark_brown" onclick="fridgeApp.verifySubmission()"> Submit </button>
+                </div>
+            </div>
+            
+        </div>
+<!--Contact Us Button-->
+        <div class="text-center bottom">
+            <button id="middle" class="dark_brown" onclick="fridgeApp.showView('contact')">Contact Us</button>
+        </div>
+    </div>
+</body>
+<script>
+    // this is the code that actually starts the JavaScript application!!
+    // when the document has been fully loaded, all the fridgeApp.start() method
+    $(document).ready(fridgeApp.start());
+</script>
+</html>
