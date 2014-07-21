@@ -9,11 +9,7 @@ var fridgeView = (function($){
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
     }
-    
-    function refresh(myData, category) {
-        filterCategory(myData.items, category);
-    }
-        
+
     function updateCategoryOptions(){
     	
     	var furniture = {
@@ -47,7 +43,7 @@ var fridgeView = (function($){
     		media_player : "Media Player",
     		phone : "Phone",
     		charger : "Charger",
-    		gaming_system : "Gaming System",
+    		gaming_systems : "Gaming Systems",
     		otherElectronics : "Other"
     	};
     	
@@ -201,7 +197,6 @@ var fridgeView = (function($){
         var itemTablebody = $("#homeTableBody").html(rowsHome);
         
         showNumber(len);
-
     }
 
 
@@ -254,17 +249,27 @@ var fridgeView = (function($){
             }
         }
         return newItems;
-        
     }
-    function filterCategory(items, category) {
-        var n;
-        var item;
+    
+    function filterMainCategory(myData, maincategory){
+    	var items = myData.items;
+    	var newItems = [];
+    	console.log("filtering main category= " + maincategory);
+    	for (var n = 0; n < items.length; n++) {
+    		if (items[n].category.match(maincategory)) {
+    			newItems.push(items[n]);
+    		}
+    	}
+    	refreshTableItems(newItems);
+    }
+    
+    function filterSubCategory(myData, subcategory) {
+    	var items = myData.items;
         var newItems = [];
-        for (n = 0; n < items.length; n++) {
-            item = items[n];
-            console.log("category= " + item.subcategory);
-            if (item.subcategory.match(category)) {
-                newItems.push(item);
+        console.log("filtering subcategory= " + subcategory);
+        for (var n = 0; n < items.length; n++) {
+            if (items[n].subcategory.match(subcategory)) {
+                newItems.push(items[n]);
             }
         }
         refreshTableItems(newItems);
@@ -449,7 +454,8 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
-        refresh: refresh,
+        filterMainCategory: filterMainCategory,
+        filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,
         refreshItemItems:refreshItemItems
 

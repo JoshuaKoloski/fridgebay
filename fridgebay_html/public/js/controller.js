@@ -39,8 +39,12 @@ var fridgeApp = (function($) {
         fridgeView.refreshView(myList);
     }
     
-    function refresh(category) {
-        fridgeView.refresh(myList, category);
+    function filterMainCategory(maincategory) {
+        fridgeView.filterMainCategory(myList, maincategory);
+    }
+    
+    function filterSubCategory(subcategory) {
+        fridgeView.filterSubCategory(myList, subcategory);
     }
 
     function reloadModel(){
@@ -113,7 +117,8 @@ var fridgeApp = (function($) {
     fridgeApp = {
         start: start,
         getUser: getUser,
-        refresh: refresh,
+        filterMainCategory: filterMainCategory,
+        filterSubCategory: filterSubCategory,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
         encodeImageFileAsURL: encodeImageFileAsURL,
