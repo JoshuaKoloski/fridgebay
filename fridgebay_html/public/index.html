@@ -360,6 +360,7 @@
                                 </span>
                             </a>
                         </li>
+                        
                         <div id="collapseFurniture" class="panel-collapse collapse out">
                             <div class="panel-body">
                                 <li onclick="fridgeApp.refresh('table')"><span class="color4"> Table </span></li>
@@ -509,8 +510,8 @@
                             <tbody id="homeTableBody" class="color2">
                             </tbody>
                         </table>
-                    </div>
-                    <div class="border_circle pull-right">
+                    </div>f
+                    <div class="border_circle pull-left">
                         <div >
                             <label>
                                 <input id="showCompleteCheckbox" type="checkbox" onclick="fridgeApp.refreshView()">
@@ -635,13 +636,13 @@
                 </div>
 
    
-                <table class="table">
-                	<tbody>
+                <table class="table table-default panel panel-warning" >
+                	<tbody class="color2">
 						<tr>
 							<td width="600px">	
 								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
 									<div>
-										<label>Choose Item Main Category</label>
+										<label>Main Category</label>
 										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
 											<option value="furniture"> Furniture </option>
 											<option value="appliances"> Appliances </option>
@@ -655,7 +656,7 @@
 										</select>
 									</div>							
 									<div class="form-group">
-										<label>and Sub Category</label>
+										<label>Sub Category</label>
 										<select class="form-control" id="itemSubCategory" name="itemSubCategory">
 											<option value="table"> Table </option>
 											<option value="chair"> Chair </option>
@@ -666,9 +667,9 @@
 										</select>
 									</div>
 								<br/>
-								<div class="panel">
-									<div class="panel-heading" id="color"><lable>Add up to 3 pictures for your item.</lable></div>
-									<div class="panel-body">										
+								<div class="panel" >
+									<div class="panel-heading color"><label class="color">Add up to 3 pictures for your item.</label></div>
+									<div class="panel-body color6">										
 										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(1)">
 										<div id="img_1"></div>
 										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(2)">
@@ -712,7 +713,7 @@
 									</div>
 									<div>
 										<label>Desired Sell-By Date</label>
-										<input type="Date" class="form-control" id="itemSellBy" name="itemSellBy"/>
+										<input type="date" class="form-control" id="itemSellBy" name="itemSellBy"/>
 									</div>
 									<div>
 										<label for="itemDesc">Description</label>

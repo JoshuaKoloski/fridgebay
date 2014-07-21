@@ -219,6 +219,7 @@ var fridgeView = (function($){
         var heading = "";
         var status = "";
         var sell = "";
+        
 
         rowsItem = rowsItem + itemItemToRow(element);
         heading = heading + headingText(element);
@@ -308,7 +309,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.quantity+
         "</td><td>"+ item.university+
         "</td><td>"+ item.location+
-        "</td><td>"+ item.sellBy+
+        "</td><td type='date'>"+ item.sellBy+
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
@@ -366,11 +367,16 @@ var fridgeView = (function($){
 		
         return row;
     }
+
     
     function sellText(item) {
+        var sellBy = new Date(item.sellBy);
+        var temp = sellBy.toString();
+        var date = temp.slice(0, 15);
+        
         var row =
-        "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+item.sellBy+"</span></label></h4>"+
-		"<p class='list-group-item-text pos'><label>Seller is <span class='font'>"+item.seller+"</span></p><label>";
+        "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
         return row;
     }
     

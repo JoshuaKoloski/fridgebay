@@ -56,7 +56,7 @@
     border: 2px solid #572f04;
     
     background: #d4730a;
-    width: 230px;
+    width: 145px;
     border-radius: 25px;
     display: inline-block;
   
@@ -318,13 +318,11 @@
     border-color:#572f04;
     padding:10px;
 }
-.shadow{
-    text-shadow: 0 0 10px #fff, 0 0 20px #572f04, 0 0 30px #572f04, 0 0 40px #572f04, 0 0 70px #572f04, 0 0 80px #572f04, 0 0 100px #572f04, 0 0 150px #572f04;
-}
+
 .font{
     font-style:italic;
    
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0 0 6px #fff;
 }
 
 
