@@ -218,20 +218,11 @@ var fridgeView = (function($){
         
         fridgeApp.showView('item');
 
-        var rowsItem = "";
-        var heading = "";
-        var status = "";
-        var sell = "";
-
-        rowsItem = rowsItem + itemItemToRow(element);
-        heading = heading + headingText(element);
-        status = status + statusText(element);
-        sell = sell + sellText(element);
-
-        var itemTableBody = $("#tableBody").html(rowsItem);
-        var itemHeader = $("#panel_heading").html(heading);
-        var itemStatus= $("#status").html(status);
-        var itemSell = $("#sell_by").html(sell);
+        $("#item_tableBody").html(itemItemToRow(element));
+        $("#item_category").html(headingText(element));
+        $("#item_images").html(imagesText(element));
+        $("#item_status").html(statusText(element));
+        $("#item_sellBy").html(sellText(element));
     }
    
     function showNumber(length) {  
@@ -351,6 +342,46 @@ var fridgeView = (function($){
         return row;
     }
     
+    function imagesText(item){    
+    	if (item.images.length == 0) {
+    		return "<img src='http://atrium.ipet.gr/atrium_catalogue/images/large_noImage.gif' alt='No picture' width=600 height=450>";
+    	} else if (item.images.length == 1) {
+    		return "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>";
+    	} else if (item.images.length == 2) {
+    		return ""+
+    		"<ol class='carousel-indicators'>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+			"</ol>"+
+			"<div class='carousel-inner'>"+
+				"<div class='item active'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+				"<div class='item'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+			"</div>";
+    	} else { //item.images.length == 3
+    		return ""+
+    		"<ol class='carousel-indicators'>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+				"<li data-target='#carousel-example-generic' data-slide-to=2></li>"+
+			"</ol>"+
+			"<div class='carousel-inner'>"+
+				"<div class='item active'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+				"</div>"+ 
+				"<div class='item'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+				"<div class='item'>"+
+					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[2]+".jpg alt='No picture' width=600>"+
+				"</div>"+
+			"</div>";
+    	}
+    }
+    
     function headingText(item) {
         var row =
         "<label>" + item.category + " -> " + item.subcategory + "</label>";
@@ -380,7 +411,7 @@ var fridgeView = (function($){
   	function displayImages(images){
   		var imgs = "";
   		for (var i = 0; i < images.length; i++) {
-			imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg width=100>"
+			imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg alt='No picture' width=100>"
 		}
 		return imgs;
   	}
