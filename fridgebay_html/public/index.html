@@ -690,7 +690,7 @@
 									</div>
 									<div>
 										<label>Price</label>
-										<input type="number" class="form-control" id="itemPrice" name="itemPrice"/>
+										<input type="number" class="form-control" id="itemPrice" name="itemPrice" min="0"/>
 									</div>
 									<div>
 										<label>Condition</label>
@@ -713,7 +713,7 @@
 									</div>
 									<div>
 										<label>Quantity</label>
-										<input type="number" class="form-control" id="itemQuantity" name="itemQuantity"/>
+										<input type="number" class="form-control" id="itemQuantity" name="itemQuantity" min="1"/>
 									</div>
 									<div>
 										<label>Desired Sell-By Date</label>
@@ -729,13 +729,12 @@
 										<input type="hidden" id="itemSeller" name="itemSeller"/>
 									</div>
 									<div class="place_right">
-										<input type="submit" class="dark_brown" type="submit"/>
+										<input type="submit" class="dark_brown" type="submit" onclick="fridgeApp.reloadModel()"/>
 									</div>
 								</form>
 							</td>
 						</tr>
                 	</tbody>
-
                 </table>
             </div>
         </div>
@@ -758,8 +757,7 @@
     </div>
 </body>
 <script>
-	$("#itemSeller").val(fridgeApp.getUser()); 
-	
+	$("#itemSeller").val(fridgeApp.getUser()); 		
     // this is the code that actually starts the JavaScript application!!
     // when the document has been fully loaded, all the fridgeApp.start() method
     $(document).ready(fridgeApp.start());
