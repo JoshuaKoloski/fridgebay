@@ -31,8 +31,7 @@ var fridgeApp = (function($) {
             trigger: 'hover',
             html: true,
 
-            content: 'you have 1 new notification',
-            
+            content: 'you have 1 new notification',           
         });
     });
     
@@ -51,8 +50,7 @@ var fridgeApp = (function($) {
 
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
-        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
-        
+        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);   
     }
     
     function deleteItem(element){
@@ -60,11 +58,10 @@ var fridgeApp = (function($) {
         if (c) {
             console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
             myList.deleteElement(element.getAttribute("sid"));
-            reloadModel();
         } else {
             console.log("delete canceled");
         }
-       
+        reloadModel();
     }
     
     function encodeImageFileAsURL(divNum){

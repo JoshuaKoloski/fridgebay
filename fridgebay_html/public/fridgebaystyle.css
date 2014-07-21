@@ -336,6 +336,25 @@ div div div div div h4 a span:hover{
     text-shadow: 0 0 6px #fff;
 }
 
+div div div .dark{
+    
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+   background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding-bottom:12px;
+  color:white;
+  background-color:#572f04;
+}
+
 
 
 
