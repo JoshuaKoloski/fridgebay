@@ -299,9 +299,6 @@ var fridgeView = (function($){
     }
     //converts item into html on home table
     function homeItemToRow(item) {
-        
-
-
         var row=
         "<tr id='tableRow'class='changeImageColor' sid'"+item._id+" 'onclick='fridgeApp.pass(this)'><td><label>" + 
         "</label></td><td><label>" + item.name +

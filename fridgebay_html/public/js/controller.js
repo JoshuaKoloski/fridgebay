@@ -92,18 +92,19 @@ var fridgeApp = (function($) {
 
     //loads edit page for an item
     function loadEdit(element){
+        console.log("Loading Edit Page");
         id = element.getAttribute("sid");
         item = myList.searchById(id);
-        $("#editMainCategory") = item.category;
-        $("#editSubCategory")= item.subCategory;
-        $("#editName") = item.name;
-        $("#editPrice") = item.price;
-        $("#editQuantity") = item.quantity;
-        $("#editCondition")= item.condition;
-        $("#ediSellBy") = item.sellBy;
-        $("#editUniversity") = item.university;
-        $("#editLocation") = item.location;
-        $("#editDesc") = item.description;
+        document.getElementById("#editMainCategory").innerHTML = item.category;
+        document.getElementById("#editSubCategory")= item.subCategory;
+        document.getElementById("#editName") = item.name;
+        document.getElementById("#editPrice") = item.price;
+        document.getElementById("#editQuantity") = item.quantity;
+        document.getElementById("#editCondition")= item.condition;
+        document.getElementById("#ediSellBy") = item.sellBy;
+        document.getElementById("#editUniversity") = item.university;
+        document.getElementById("#editLocation") = item.location;
+        document.getElementById("#editDesc") = item.description;
         showView("edit");
     }
     function updateItem(element){
@@ -117,12 +118,13 @@ var fridgeApp = (function($) {
             price: $("#editPrice").val(),
             quantity: $("#editQuantity").val(),
             condition: $("#editCondition").val(),
-            sellBy: $("#ediSellBy").val(),
+            sellBy: $("#editSellBy").val(),
             university: $("#editUniversity").val(),
             location: $("#editLocation").val(),
             description: $("#editDesc").val() 
         });
         reloadModel();
+    }
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
         fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
@@ -185,14 +187,11 @@ var fridgeApp = (function($) {
         refreshView: refreshView,
         reloadModel: reloadModel,
         showView: showView,
-<<<<<<< HEAD
         deleteItem: deleteItem,
-        updateItem: updateItem
-=======
+        updateItem: updateItem,
         pass:pass,
         deleteItem: deleteItem
->>>>>>> 6d4d26f410c230859334b0da0a2668d402b8218d
-    }
+    };
 
     return (fridgeApp);
 

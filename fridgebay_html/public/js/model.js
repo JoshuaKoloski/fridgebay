@@ -20,13 +20,15 @@ Information.prototype.getElement = function(id){
     }
 };
 
-Information.prototype.searchById = function searchById(id){
+Information.prototype.searchById = function (id){
     var myList = this;
     var len = myList.items.length;
     for(i=0; i< len; i++){
         item = myList.items[i];
-        if(item.id = id){
+        if(item._id == id){
             return item;
+            console.log("found Item");
+            break;
         }
     }
 };
