@@ -190,7 +190,8 @@ var fridgeApp = (function($) {
         deleteItem: deleteItem,
         updateItem: updateItem,
         pass:pass,
-        deleteItem: deleteItem
+        deleteItem: deleteItem,
+        getUser: getUser
     };
 
     return (fridgeApp);

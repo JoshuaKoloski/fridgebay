@@ -1,7 +1,6 @@
 ﻿body
 {
     background-color:#efcd9e;
-    
 }
 
 .red
@@ -65,7 +64,7 @@
 
 .dark_brown
 {
-    display: inline-block;
+  display: inline-block;
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
@@ -202,14 +201,14 @@
 .heading_text
 {
     font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
-	font-weight: normal;
+    font-weight: normal;
     font-size: 3.75em;
     color:#572f04;
-	letter-spacing: .2em;
-	line-height: 1.1em;
-	margin:0px;
-	text-align: center;
-	text-transform: uppercase;
+    letter-spacing: .2em;
+    line-height: 1.1em;
+    margin:0px;
+    text-align: center;
+    text-transform: uppercase;
 }
 .doublePadding .text-center p{
     font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
