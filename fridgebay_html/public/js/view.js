@@ -236,7 +236,6 @@ var fridgeView = (function($){
         var newItems = [];
         var price = $("#priceCutoff").val() || 0;
         var name = $("#nameCutoff").val().toLowerCase();
-        console.log(name);
         for (n = 0; n < items.length; n++) {
             item = items[n];
             if(price != 0){

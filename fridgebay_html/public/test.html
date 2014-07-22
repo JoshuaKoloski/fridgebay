@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>FridgeBay</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/themes/mobile_1.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.3/jquery.mobile.structure-1.4.3.min.css" /> 
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script> 
+    <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script> 
+    <link rel="stylesheet" type="text/css" href="css/mobile_theme.css" />
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/mobile_controller.js"></script>
+    <script src="js/mobile_view.js"></script>
+    <link rel="shortcut icon"  href="cartoon_owl.png" />
+</head>
+<body>
+<!--HomePage -->
+    <div data-role="page" id="home">
+        <div id="header">
+        </div>
+        <div data-role="content">
+            <div role="main" class="ui-content">
+                <ul data-role="listview" id="itemView">
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+<!-- Contact Us Page -->
+    <div data-role="page" id="contact">
+        <div data-role="panel" id ="menu">
+            <ul data-role="listview">
+                <li><a href="#home">Homepage</a></li>
+                <li> Login </li>
+                <li> About </li>
+                <li> Help </li>
+                <li id="contact_button"><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+        <div data-role="header" id="head">
+            <a href="#menu" data-icon="grid">Menu</a>
+            <h1>Anything to Say?</h1>
+        </div>
+        <div data-role="content">
+            <div role="main" class="ui-content">
+                <input type="text" id="contact_message" value="Briefly explain any issues that you have encountered.">
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(mobileFridgeApp.start();
+</script>
+</html>
