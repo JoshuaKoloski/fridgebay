@@ -49,13 +49,16 @@
 .color6{
     background-color:#d4730a;
 }
+.color7{
+    background-color:#efcd9e;
+}
 
 .border_circle{
     text-align:center;
     border: 2px solid #572f04;
     
     background: #d4730a;
-    width: 230px;
+    width: 145px;
     border-radius: 25px;
     display: inline-block;
   
@@ -284,6 +287,14 @@
     text-decoration:underline;
     cursor:pointer;
 }
+div div div div div ul li:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
+div div div div div h4 a span:hover{
+    text-decoration:underline;
+    cursor:pointer;
+}
 .scroll{
     overflow-y:scroll;
     overflow-x:hidden;
@@ -317,13 +328,30 @@
     border-color:#572f04;
     padding:10px;
 }
-.shadow{
-    text-shadow: 0 0 10px #fff, 0 0 20px #572f04, 0 0 30px #572f04, 0 0 40px #572f04, 0 0 70px #572f04, 0 0 80px #572f04, 0 0 100px #572f04, 0 0 150px #572f04;
-}
+
 .font{
     font-style:italic;
    
-    text-shadow: 0 0 10px #fff;
+    text-shadow: 0 0 6px #fff;
+}
+
+div div div .dark{
+    
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+   background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding-bottom:12px;
+  color:white;
+  background-color:#572f04;
 }
 
 

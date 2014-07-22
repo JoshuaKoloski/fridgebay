@@ -21,11 +21,41 @@
 <!--HomePage -->
     <div data-role="page" id="home">
         <div id="header">
+            <div data-role='panel' id ='menu'>
+                <ul data-role='listview'> 
+                    <li><a href='#home'>Homepage</a></li>
+                    <li> Login </li>
+                    <li> About </li>
+                    <li> Help </li>
+                    <li><a href='#contact'>Contact Us</a></li>
+                </ul> 
+            </div>
+            <div data-role='header' id='head'>
+                <a href='#menu' data-icon='grid'>Menu</a>
+                <h1> FridgeBay </h1>
+            </div>
         </div>
         <div data-role="content">
             <div role="main" class="ui-content">
                 <ul data-role="listview" id="itemView">
-                    
+                    <li>
+                        <image src="cartoon_owl.png">
+                        <h1> Item Name </h1>
+                        <p> Price </p>
+                        <p> Condition </p>
+                    </li>
+                    <li>
+                        <image src="cartoon_owl.png">
+                        <h1> Item Name </h1>
+                        <p> Price </p>
+                        <p> Condition </p>
+                    </li>
+                    <li>
+                        <image src="cartoon_owl.png">
+                        <h1> Item Name </h1>
+                        <p> Price </p>
+                        <p> Condition </p>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -53,6 +83,6 @@
     </div>
 </body>
 <script>
-    $(document).ready(mobileFridgeApp.start();
+    $(document).ready(mobileFridgeApp.loadHeader("FridgeBay");
 </script>
 </html>

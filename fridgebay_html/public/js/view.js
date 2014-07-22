@@ -9,11 +9,7 @@ var fridgeView = (function($){
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
     }
-    
-    function refresh(myData, category) {
-        filterCategory(myData.items, category);
-    }
-        
+
     function updateCategoryOptions(){
     	
     	var furniture = {
@@ -47,7 +43,7 @@ var fridgeView = (function($){
     		media_player : "Media Player",
     		phone : "Phone",
     		charger : "Charger",
-    		gaming_system : "Gaming System",
+    		gaming_systems : "Gaming Systems",
     		otherElectronics : "Other"
     	};
     	
@@ -201,7 +197,6 @@ var fridgeView = (function($){
         var itemTablebody = $("#homeTableBody").html(rowsHome);
         
         showNumber(len);
-
     }
 
 
@@ -218,11 +213,13 @@ var fridgeView = (function($){
         
         fridgeApp.showView('item');
 
+
         $("#item_tableBody").html(itemItemToRow(element));
         $("#item_category").html(headingText(element));
         $("#item_images").html(imagesText(element));
         $("#item_status").html(statusText(element));
         $("#item_sellBy").html(sellText(element));
+
     }
    
     function showNumber(length) {  
@@ -251,17 +248,27 @@ var fridgeView = (function($){
             }
         }
         return newItems;
-        
     }
-    function filterCategory(items, category) {
-        var n;
-        var item;
+    
+    function filterMainCategory(myData, maincategory){
+    	var items = myData.items;
+    	var newItems = [];
+    	console.log("filtering main category= " + maincategory);
+    	for (var n = 0; n < items.length; n++) {
+    		if (items[n].category.match(maincategory)) {
+    			newItems.push(items[n]);
+    		}
+    	}
+    	refreshTableItems(newItems);
+    }
+    
+    function filterSubCategory(myData, subcategory) {
+    	var items = myData.items;
         var newItems = [];
-        for (n = 0; n < items.length; n++) {
-            item = items[n];
-            console.log("category= " + item.subcategory);
-            if (item.subcategory.match(category)) {
-                newItems.push(item);
+        console.log("filtering subcategory= " + subcategory);
+        for (var n = 0; n < items.length; n++) {
+            if (items[n].subcategory.match(subcategory)) {
+                newItems.push(items[n]);
             }
         }
         refreshTableItems(newItems);
@@ -301,7 +308,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.quantity+
         "</td><td>"+ item.university+
         "</td><td>"+ item.location+
-        "</td><td>"+ item.sellBy+
+        "</td><td type='date'>"+ item.sellBy+
         "</td><td>"+ item.condition+
         "</td><td>"+ item.category+
         "</td><td>"+ item.subcategory+
@@ -400,11 +407,16 @@ var fridgeView = (function($){
 		
         return row;
     }
+
     
     function sellText(item) {
+        var sellBy = new Date(item.sellBy);
+        var temp = sellBy.toString();
+        var date = temp.slice(0, 15);
+        
         var row =
-        "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+item.sellBy+"</span></label></h4>"+
-		"<p class='list-group-item-text pos'><label>Seller is <span class='font'>"+item.seller+"</span></p><label>";
+        "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
         return row;
     }
     
@@ -442,7 +454,8 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
-        refresh: refresh,
+        filterMainCategory: filterMainCategory,
+        filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,
         refreshItemItems:refreshItemItems
 

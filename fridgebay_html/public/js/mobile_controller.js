@@ -15,7 +15,7 @@ var mobileFridgeApp = (function($) {
     function start() {
         myList.loadModel();
         loadHeader("FridgeBay");
-        refresh();
+        
     }
   
     // here is were we decide what is visible to the outside!
