@@ -11,12 +11,13 @@
     <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="css/mobile_theme.css" />
     <script src="js/model.js"></script>
-    <script src="js/view.js"></script>
-    <script src="js/controller.js"></script>
+  <!--  <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>-->
     <script src="js/mobile_controller.js"></script>
     <script src="js/mobile_view.js"></script>
     <link rel="shortcut icon"  href="cartoon_owl.png" />
 </head>
+
 <body>
 <!--HomePage -->
     <div data-role="page" id="home">
@@ -38,24 +39,7 @@
         <div data-role="content">
             <div role="main" class="ui-content">
                 <ul data-role="listview" id="itemView">
-                    <li>
-                        <image src="cartoon_owl.png">
-                        <h1> Item Name </h1>
-                        <p> Price </p>
-                        <p> Condition </p>
-                    </li>
-                    <li>
-                        <image src="cartoon_owl.png">
-                        <h1> Item Name </h1>
-                        <p> Price </p>
-                        <p> Condition </p>
-                    </li>
-                    <li>
-                        <image src="cartoon_owl.png">
-                        <h1> Item Name </h1>
-                        <p> Price </p>
-                        <p> Condition </p>
-                    </li>
+                   
                 </ul>
             </div>
         </div>
@@ -83,6 +67,6 @@
     </div>
 </body>
 <script>
-    $(document).ready(mobileFridgeApp.loadHeader("FridgeBay");
+    $(document).ready(mobileFridgeApp.start())
 </script>
 </html>

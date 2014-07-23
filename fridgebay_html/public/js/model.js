@@ -43,7 +43,6 @@ Information.prototype.loadModel = function() {
     }).done(function(items) {
         myInfo.items = items;
         items.map(function(x){x.id=x["_id"];});
-        console.log(JSON.stringify(items));
     });
     
      // add users
@@ -54,7 +53,8 @@ Information.prototype.loadModel = function() {
         myInfo.users = users;
         users.map(function(x){x.id=x["_id"];});
 	//Loads model information into the view
-        fridgeView.refreshView(myInfo);  
+    /*    fridgeView.refreshView(myInfo); */ 
+        mobileFridgeView.refreshView(myInfo);
     });
 
 };

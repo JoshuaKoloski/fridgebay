@@ -10,11 +10,13 @@ var mobileFridgeApp = (function($) {
     }
     
     function refresh(){
+        console.log("Refreshing Home Page");
         mobileFridgeView.refreshItemsHome(myList.items);
     }
     function start() {
         myList.loadModel();
-        loadHeader("FridgeBay");
+        console.log("Model Loaded")
+//         loadHeader("FridgeBay");;
         
     }
   
@@ -22,7 +24,7 @@ var mobileFridgeApp = (function($) {
     mobileFridgeApp = {
         start: start,
         loadHeader: loadHeader,
-        
+        refresh: refresh
     };
 
     return (mobileFridgeApp);

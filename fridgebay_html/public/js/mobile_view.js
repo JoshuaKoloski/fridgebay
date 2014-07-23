@@ -1,6 +1,10 @@
 
 var mobileFridgeView = (function($){
     
+    function refreshView(myData){           
+        refreshItemsHome(myData.items);
+    }
+    
     function header(text){
         var head = "<div data-role='panel' id ='menu'>" +
             "<ul data-role='listview'>" +
@@ -28,16 +32,18 @@ var mobileFridgeView = (function($){
     }
     
     function itemToRow(item){
-        var row = "<li><img src='cartoon_owl.png'>"+
-            "<h1>+"item.name"+</h1>"+
+        var row = "<li> <img src='cartoon_owl.png'>" +
+            "<h1>"+item.name+"</h1>"+
             "<p>"+ item.price +"<p>" +
             "<p>"+item.condition+"</p>"+
-            "</li>";
+            "</li>" + " "
         return row;
     }
+    
     mobileFridgeView={
         header: header,
-        refreshItemsHome: refreshItemsHome
+        refreshItemsHome: refreshItemsHome,
+        refreshView: refreshView
     };
     
     return(mobileFridgeView);
