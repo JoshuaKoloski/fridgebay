@@ -65,7 +65,6 @@ var fridgeApp = (function($) {
         } else {
             console.log("delete canceled");
         }
-        reloadModel();
     }
     
     function encodeImageFileAsURL(divNum){
@@ -130,7 +129,6 @@ var fridgeApp = (function($) {
         pass:pass,
         deleteItem: deleteItem
     }
-
     return (fridgeApp);
 
 }(jQuery));
