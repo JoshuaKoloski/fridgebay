@@ -411,6 +411,7 @@ var fridgeView = (function($){
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
         return row;
     }
+    
     //Displays all images for the item
     function displayImages(images){
             var imgs = "";
@@ -419,6 +420,7 @@ var fridgeView = (function($){
             }
             return imgs;
     }
+    
     //Displays a single image of the item
     function displayImage(images){
             var img = "";
