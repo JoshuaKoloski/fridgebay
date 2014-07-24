@@ -116,7 +116,16 @@ var fridgeApp = (function($) {
         });
         reloadModel();
     }
-
+    function imageTextAlign(){
+        $(document).ready(function(){
+            var coordinates = $("#nestImage").offset();
+            console.log("Image Coordinates:{Top: "+ coordinates.top + ", Left: " + coordinates.left + "} ");
+            coordinates.top += 17;
+            coordinates.left += 65;
+            console.log("Text Coordinates:{Top: "+ coordinates.top + ", Left: " + coordinates.left + "} ");
+            $("#showNumber").offset({top: coordinates.top, left: coordinates.left});
+        });
+    }
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
         fridgeView.refreshItemItems(element.getAttribute("sid"), myList);   
@@ -175,6 +184,7 @@ var fridgeApp = (function($) {
     function start() {
         myList.loadModel();
         showView('home');
+        imageTextAlign();
         enableSpeech();
     }
     
@@ -304,7 +314,8 @@ var fridgeApp = (function($) {
         updateItem: updateItem,
         pass:pass,
         getUser: getUser,
-        deleteItem: deleteItem
+        deleteItem: deleteItem,
+        imageTextAlign: imageTextAlign
     }
 
     return (fridgeApp);
