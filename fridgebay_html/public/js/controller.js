@@ -110,6 +110,115 @@ var fridgeApp = (function($) {
     function start() {
         myList.loadModel();
         showView('home');
+        enableSpeech();
+    }
+    
+    function enableSpeech() {	
+		if (annyang) {
+			var commands = {
+				'show speech instructions': function () {
+					$('#speechInstructions').removeClass("hidden");
+					tts("Speech instructions showed.")
+				},
+				'post an item': function () {		 
+					showView('form');
+					tts("Fill the form and click submit to post an item.") 
+				},
+				'back to home page': function () {
+					showView('home');
+					tts("You are now at home page.")
+				},
+				'go to login page': function () {		 
+					showView('login');
+					tts("You can login or register now.") 
+				},
+				'search by university *school': function (school) {
+					$('#schoolCutoffHome').val(school);
+					refreshView();
+					tts("Here are items from university "+school+".");
+				},
+				'search by price *number': function (number) {
+					$('#priceCutoffHome').val(number);
+					refreshView();
+					tts("Here are items cheaper than "+number+" dollars.");
+				},
+				'search by name *name': function (name) {
+					$('#nameCutoffHome').val(name);
+					refreshView();
+					tts("Here are items containing the name "+name+".");
+				},
+				'search by category *category': function (category) {
+					var categoryId = category.substring(0,1).toUpperCase()+category.substring(1);
+					$('.collapse').removeClass("in");
+					$('#collapse'+categoryId).addClass("in");
+					filterMainCategory(category);
+					tts("Here are items in the "+category+" category.");
+				},
+				'search by sub category *subcategory': function (subcategory) {
+					filterSubCategory(subcategory);
+					tts("Here are items in the "+subcategory+" sub category.");
+				},
+			};
+			
+			annyang.addCommands(commands);
+			initializeCallbacks();
+			annyang.debug();
+	
+			//ADD callbacks
+			function initializeCallbacks () {
+				annyang.addCallback('start', function () {
+				  $('.myStateText').text('Listening...');
+				});
+
+				annyang.addCallback('end', function () {
+				  $('.myStateText').text('Listening section ended!');
+				});
+
+				annyang.addCallback('error', function () {
+				  $('.myErrorText').text('There was an error!');
+				});
+
+				annyang.addCallback('result', function () {
+				  $('.myStateText').text('Got a result!');
+				});
+			}
+	
+			// pass a context to a global function
+			annyang.addCallback('errorNetwork', notConnected, this);
+
+			function notConnected () {
+				console.error("Help, there's no internet connection!");
+			}
+		}
+		
+		var isRecording = false;
+		$('.myStartButton').click(function () {
+			if (annyang) {
+				if (isRecording) {			
+					annyang.abort(); //stop listening
+					tts("Speech interaction ended. See you next time!");
+					isRecording = false;
+					$('.myStartButton').text("Start speech interaction!");
+					$('.myStartButton').removeClass('btn-danger');		// turn off red class
+					$('.myStartButton').addClass('btn-primary');
+				} else {
+					annyang.start({autoRestart: true}); //start listening
+					tts("Hi, I am ollie speech assistant. What can I help you? Say. Show speech instructions, for more information.");
+					isRecording = true;
+					$('.myStartButton').text("End speech interaction!");
+					$('.myStartButton').removeClass('btn-primary');		// turn on red class
+					$('.myStartButton').addClass('btn-danger');
+				}
+			} else {
+				$('#unsupported').removeClass("hidden");
+			}
+		})
+    }
+    
+    function tts(text) {
+    	var msg = new SpeechSynthesisUtterance(text);
+    	msg.lang = 'en-US';
+		speechSynthesis.speak(msg);
     }
   
     // here is were we decide what is visible to the outside!

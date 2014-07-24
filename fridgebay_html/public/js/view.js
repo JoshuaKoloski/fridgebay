@@ -280,15 +280,15 @@ var fridgeView = (function($){
         var item;
         var newItems = [];
         var price = $("#priceCutoffHome").val() || 0;
-        var name = $("#nameCutoffHome").val();
-        var university = $("#schoolCutoffHome").val();
+        var name = $("#nameCutoffHome").val().toLowerCase();
+        var university = $("#schoolCutoffHome").val().toLowerCase();
         
 
         for (n = 0; n < items.length; n++) {
             item = items[n];
             if (item.price <= price || price==0) {
-                if ((item.name).match((name))) {
-                    if ((item.university).match((university))) {
+                if ((item.name.toLowerCase()).match((name))) {
+                    if ((item.university.toLowerCase()).match((university))) {
                         newItems.push(item)
                     }
                 }
