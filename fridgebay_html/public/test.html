@@ -11,8 +11,8 @@
     <script src="http://code.jquery.com/mobile/1.4.3/jquery.mobile-1.4.3.min.js"></script> 
     <link rel="stylesheet" type="text/css" href="css/mobile_theme.css" />
     <script src="js/model.js"></script>
-  <!--  <script src="js/view.js"></script>
-    <script src="js/controller.js"></script>-->
+    <script src="js/view.js"></script>
+    <script src="js/controller.js"></script>
     <script src="js/mobile_controller.js"></script>
     <script src="js/mobile_view.js"></script>
     <link rel="shortcut icon"  href="cartoon_owl.png" />
@@ -22,6 +22,7 @@
 <!--HomePage -->
     <div data-role="page" id="home">
         <div id="header">
+        <!--Menu Options -->
             <div data-role='panel' id ='menu'>
                 <ul data-role='listview'> 
                     <li><a href='#home'>Homepage</a></li>
@@ -32,14 +33,76 @@
                 </ul> 
             </div>
             <div data-role='header' id='head'>
-                <a href='#menu' data-icon='grid'>Menu</a>
+                <a href='#menu' data-icon='bars'>Menu</a>
                 <h1> FridgeBay </h1>
+                <a href="#categories" data-icon="search" class="ui-btn-right">Categories</a>
+            </div>
+        <!--Category Options -->
+            <div data-role="panel" id="categories" data-position="right" data-display="overlay">
+                <div data-role="collapsible-set">
+                    <input type="button" value="Show All" id="showAll">
+                    <div data-role="collapsible">
+                        <h1 id="furniture">Furniture</h1>
+                        <ul data-role="listview">
+                            <li id="table"> Table </li>
+                            <li id="chair"> Chair </li>
+                            <li id="bookCase"> Book Case </li>
+                            <li id="shelves"> Shelves </li>
+                            <li id="drawer"> Drawer </li>
+                            <li id="f_other"> Other </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h1 id="Appliances">Appliances</h1>
+                        <ul data-role="listview">
+                            <li id="fridge"> Fridge </li>
+                            <li id="microwave"> Microwave </li>
+                            <li id="oven"> Oven </li>
+                            <li id="coffeeMaker"> Coffee Maker </li>
+                            <li id="a_other"> Other </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h1 id="vehicles">Vehicles</h1>
+                        <ul data-role="listview">
+                            <li id="bike"> Bike </li>
+                            <li id="car"> Car </li>
+                            <li id="motorcycle"> Motorcycle </li>
+                            <li id="boat"> Boat </li>
+                            <li id="v_other"> Other </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h1 id="electronics">Electronics</h1>
+                        <ul data-role="listview">
+                            <li id="computer"> Computer </li>
+                            <li id="tv"> TV </li>
+                            <li id="media_player"> Media Player </li>
+                            <li id="phone"> Phone </li>
+                            <li id="charger"> Charger </li>
+                            <li id="gaming_systems"> Gaming Systems </li>
+                            <li id="e_other"> Other </li>
+                        </ul>
+                    </div>
+                    <div data-role="collapsible">
+                        <h1 id="cutlery">Cutlery</h1>
+                        <ul data-role="listview">
+                            <li id="dishes"> Dishes </li>
+                            <li id="blender"> Blender</li>
+                            <li id="mixer"> Mixer </li>
+                            <li id="c_other"> Other </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
+        <form>
+            <input type="text" data-type="search" id="filterable-input" placeholder="Search for Item" >
+        </form>
         <div data-role="content">
             <div role="main" class="ui-content">
-                <ul data-role="listview" id="itemView">
-                   
+                <ul data-role="listview" id="itemView" data-filter-reveal="false" data-filter="true" data-input="#filterable-input" >
+
                 </ul>
             </div>
         </div>
@@ -56,12 +119,12 @@
             </ul>
         </div>
         <div data-role="header" id="head">
-            <a href="#menu" data-icon="grid">Menu</a>
+            <a href="#menu" data-icon="bars">Menu</a>
             <h1>Anything to Say?</h1>
         </div>
         <div data-role="content">
             <div role="main" class="ui-content">
-                <input type="text" id="contact_message" value="Briefly explain any issues that you have encountered.">
+                <input type="text" id="contact_message" placeholder="Briefly explain any issues that you have encountered.">
             </div>
         </div>
     </div>

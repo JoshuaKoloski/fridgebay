@@ -159,6 +159,7 @@ app.put('/model/:collection/:id', function(req, res) {
     });
 });
 
+
 //Add new item to database
 app.post('/model/:collection', function(req, res) {
     console.log("post ... " + JSON.stringify(req.body));
@@ -181,16 +182,23 @@ app.post('/model/:collection', function(req, res) {
     }).save();
 });
 
-//Deletes an item from the database
+// delete a particular item from the model
 app.delete('/model/:collection/:id', function (req, res) {
     var id = req.params.id;
-    mongoose.model(req.params.collection).remove({_id:id}, function( err, item ){
-        if(err) throw err;
-        else console.log("Deleting Item: ID_" + req.params.id);
+    //delete item images from cloudinary
+    mongoose.model(req.params.collection).find({_id:id}, function( err, item ){
+        for (var i=0; i<item[0].images.length; i++) {
+        	cloudinary.uploader.destroy(item[0].images[i], function(result) { console.log(result) });
+        }
     })
+    //delete item from database
+    mongoose.model(req.params.collection).remove({_id:id}, function( err, item ){
+		if(err) throw err;
+		else console.log("Deleting Item: ID_" + req.params.id);
+	})
+    res.json(200, {});
 });
   
-
 //Sets port to 3000 for local host while using the port that heroku dynamically sets 
 app.listen(process.env.PORT || 3000, function(){
   console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);

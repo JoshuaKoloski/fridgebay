@@ -321,18 +321,16 @@ var fridgeView = (function($){
         "</td></tr>";
         return row;
     }
-    
+
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<tr id='tableRow'class='changeImageColor' sid'"+item._id+" 'onclick='fridgeApp.pass(this)'><td><label>" + 
-        "</label></td><td><label>" + item.name +
-        "</label></td><td><label>" + item.price +
-        "</label></td><td><label>" + item.university +
-        "</label></td><td><label>" + item.condition +
-        "</label></td><td>" + "<button class='dark_brown' type='button' sid='" + item._id + "' onclick='fridgeApp.pass(this)'>View</button><label>" +
-        "</td><td>" + "<span class='glyphicon glyphicon-remove changeImage'  sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'></span>" +
-        "</label></td></tr>";
+        "<div class='col-sm-5 col-md-6 panel panel-default'>"+displayImage(item.images)+
+        "<div class='panel-body'>"+
+        "Name: "+ item.name +
+        "<div> Price: $"+ item.price +
+        "</div><div>University: " + item.university +
+        "</div></div></div>"
         return row;
     }
     
@@ -419,14 +417,25 @@ var fridgeView = (function($){
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
         return row;
     }
-    
-  	function displayImages(images){
-  		var imgs = "";
-  		for (var i = 0; i < images.length; i++) {
-			imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg alt='No picture' width=100>"
-		}
-		return imgs;
-  	}
+    //Displays all images for the item
+    function displayImages(images){
+            var imgs = "";
+            for (var i = 0; i < images.length; i++) {
+                    imgs += "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+images[i]+".jpg alt='No picture' width=100>"
+            }
+            return imgs;
+    }
+    //Displays a single image of the item
+    function displayImage(images){
+            var img = "";
+            if(images.length != 0){
+                img += "<img class='img-responsive' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image'/>";
+            }else{
+                img += "<img class='img-responsive' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'/>";
+            }
+            console.log(img)
+            return img;
+    }
     
     // redraw the table using the current model users~~~~
     function refreshTableUsers(myUsers){    
@@ -457,8 +466,8 @@ var fridgeView = (function($){
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,
-        refreshItemItems:refreshItemItems
-
+        refreshItemItems:refreshItemItems,
+        displayImage: displayImage
     };
     
     return(fridgeView);

@@ -7,7 +7,6 @@ function Information(){
   
 };
 
-
 // we use the locally cached model to lookup elements...
 Information.prototype.getElement = function(id){
     var item;
@@ -33,8 +32,14 @@ Information.prototype.searchById = function (id){
     }
 };
 
+
 Information.prototype.loadModel = function() {
-    var myInfo = this;
+    this.loadItems();
+    this.loadUsers();
+};
+
+Information.prototype.loadItems = function() {
+	var myInfo = this;
 
     // add items
     $.ajax({
@@ -43,9 +48,15 @@ Information.prototype.loadModel = function() {
     }).done(function(items) {
         myInfo.items = items;
         items.map(function(x){x.id=x["_id"];});
-    });
-    
-     // add users
+        fridgeView.refreshView(myInfo);
+        //mobileFridgeView.refreshView(myInfo);
+    })
+}
+
+Information.prototype.loadUsers = function() {
+	var myInfo = this;
+	
+	// add users
     $.ajax({
         type: "GET",
         url: "/model/users",
@@ -53,12 +64,11 @@ Information.prototype.loadModel = function() {
         myInfo.users = users;
         users.map(function(x){x.id=x["_id"];});
 	//Loads model information into the view
-    /*    fridgeView.refreshView(myInfo); */ 
-        mobileFridgeView.refreshView(myInfo);
+        fridgeView.refreshView(myInfo); 
     });
+}
 
-};
-
+//this is not being used, but reserved for possible future usage.
 Information.prototype.addElement = function(newItem){
     console.log("sending "+JSON.stringify(newItem));
     var myList = this;
@@ -69,30 +79,9 @@ Information.prototype.addElement = function(newItem){
         contentType: "application/json; charset=utf-8",
         dataType: "json"
     }).done(function(items) {
-        myList.loadModel();
+        myList.loadItems();
     });
 }
-
-Information.prototype.uploadImg = function(newImg) {
-
-        $.ajax({
-            type:'POST',
-            url: '/uploadImg',
-            data: newImg,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-                console.log("success");
-                console.log(data);
-            },
-            error: function(data){
-                console.log("error");
-                console.log(data);
-            }
-        });
-}
-
 
 Information.prototype.updateElement = function(id,newItem){
     var myList = this;
@@ -103,7 +92,7 @@ Information.prototype.updateElement = function(id,newItem){
         contentType: "application/json; charset=utf-8",
         dataType: "json"
     }).done(function(items) {
-        myList.loadModel();
+        myList.loadItems();
     });
 }
 
@@ -113,7 +102,7 @@ Information.prototype.deleteElement = function(id){
         type: "DELETE",
         url: "/model/items/"+id,
     }).done(function(items) {
-        myList.loadModel();
+        myList.loadItems();
     });
 }
 

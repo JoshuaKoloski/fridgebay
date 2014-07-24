@@ -16,7 +16,9 @@
     <link href="fonts/glyphicons-halflings-regular.svg" rel="stylesheet"/>
     <link href="fonts/glyphicons-halflings-regular.eot" rel="stylesheet"/>
     <link href="fonts/glyphicons-halflings-regular.eot" rel="stylesheet"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <div class="container-fluid">
@@ -131,7 +133,7 @@
 						<tr>
 							<td width="600px">
 								<div class="panel color2" >
-									<div id="item_category"class="panel-heading color" >
+									<div id="item_category" class="panel-heading color" >
 										<label>main category -> subcategory </label>
 									</div>
 									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -302,19 +304,19 @@
         </div>
 <!-- HomePage -->
     <div id="home-view" class="view">
-        <div class="container">           
+        <div class="container-fluid">           
             <div class="page-header">
                 <h1 class="heading_text">HOME</h1>
             </div>
-            <div class="row-fluid">
-                <div class="col-lg-4 ">
-                    <label class="left"><input id="nameCutoffHome" type=text class="form-control color5" placeholder="Search by Name"  onchange="fridgeApp.refreshView()"></label>
+            <div class="row">
+                <div class="col-lg-4 pos">
+                    <label><input id="nameCutoffHome" type=text class="form-control color5" placeholder="Search by Name"  onchange="fridgeApp.refreshView()"></label>
                 </div>
                 <div class="col-lg-4 pos">
                     <label><input id="schoolCutoffHome" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"></label>
                 </div>
-                <div class="col-lg-4 ">
-                    <label class="right"><input id="priceCutoffHome" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
+                <div class="col-lg-4 pos">
+                    <label ><input id="priceCutoffHome" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
                 </div>
             </div>
             <div class="row-fluid">
@@ -518,7 +520,7 @@
                         <center><img  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber"></h2></center>
 
                     </div> 
-                    <div class="scroll" >                 
+                    <!--<div class="table-responsive hidden-lg visible-lg-*" >                 
                         <table class="table table-default panel panel-warning">
                             <thead class="color">
                                 <tr>
@@ -526,7 +528,7 @@
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>University</th>
-                                    <th> Condtion</th>
+                                    <th> Condition</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
@@ -535,6 +537,9 @@
                             <tbody id="homeTableBody" class="color2">
                             </tbody>
                         </table>
+                    </div>-->
+                    <div class="row" id="homeTableBody">
+                        
                     </div>
                     <div class="border_circle pull-left">
                         <div >
