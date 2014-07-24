@@ -27,7 +27,6 @@ Information.prototype.searchById = function (id){
         if(item._id == id){
             return item;
             console.log("found Item");
-            break;
         }
     }
 };

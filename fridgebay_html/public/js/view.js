@@ -200,16 +200,10 @@ var fridgeView = (function($){
     }
 
 
-    function refreshItemItems(id, myList) {
+    function refreshItemItems(element, myList) {
         var list = myList.items;
         console.log("myList[1]= " + JSON.stringify(list[1]));
-        var element;
-        for (var i = 0; i < list.length; i++) {
-            
-            if (list[i]._id == id) {
-                element = list[i];
-            }
-        }
+        var element = myList.searchById(element)
         
         fridgeApp.showView('item');
 
@@ -325,7 +319,7 @@ var fridgeView = (function($){
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<div class='col-sm-5 col-md-6 panel panel-default'>"+displayImage(item.images)+
+        "<div class='col-sm-5 col-md-6 panel panel-default' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'>"+displayImage(item.images)+
         "<div class='panel-body'>"+
         "Name: "+ item.name +
         "<div> Price: $"+ item.price +
@@ -429,9 +423,9 @@ var fridgeView = (function($){
     function displayImage(images){
             var img = "";
             if(images.length != 0){
-                img += "<img class='img-responsive' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image'/>";
+                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image'/>";
             }else{
-                img += "<img class='img-responsive' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'/>";
+                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'/>";
             }
             console.log(img)
             return img;
