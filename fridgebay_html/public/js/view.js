@@ -429,7 +429,6 @@ var fridgeView = (function($){
             }else{
                 img += "<img class='img-responsive col-sm-3 col-md-3' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'/>";
             }
-            console.log(img)
             return img;
     }
     
