@@ -23,7 +23,7 @@
     <script src="js/annyang.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row-fluid">
             <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             <div>Speech recognition state: <span class="myStateText myErrorText">Not Started Yet</span></div>
@@ -347,220 +347,227 @@
                     <label ><input id="priceCutoffHome" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
                 </div>
             </div>
-            <div class="row-fluid">
-                <div class="col-lg-2 ">
-                	<div class="panel-group place" id="category_collapse">
-                        <div class="panel dark" onclick="fridgeApp.refreshView()">
-                            Categories
-                        </div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseFurniture">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('furniture')">
-                                            Furniture
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseFurniture" class="collapse color7">
-								<ul class="panel-body list-unstyled">
-									<li onclick="fridgeApp.filterSubCategory('table')"><span class="color4"> Table </span></li>
-									<li onclick="fridgeApp.filterSubCategory('chair')"><span class="color4"> Chair</span></li>
-									<li onclick="fridgeApp.filterSubCategory('shelves')"><span class="color4"> Shelves</span></li>
-									<li onclick="fridgeApp.filterSubCategory('bookcase')"><span class="color4"> Bookcase</span></li>
-									<li onclick="fridgeApp.filterSubCategory('drawer')"><span class="color4"> Drawer</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherFurniture')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseAppliances">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('appliances')">
-                                            Appliances
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseAppliances" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstlyed">
-									<li onclick="fridgeApp.filterSubCategory('fridge')"><span class="color4"> Fridge</span></li>
-									<li onclick="fridgeApp.filterSubCategory('microwave')"><span class="color4"> Microwave</span></li>
-									<li onclick="fridgeApp.filterSubCategory('coffee_maker')"><span class="color4"> Coffee Maker</span></li>
-									<li onclick="fridgeApp.filterSubCategory('oven')"><span class="color4"> Oven</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherAppliances')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseVehicles">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('vehicles')">
-                                            Vehicles
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseVehicles" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstyled">
-									<li onclick="fridgeApp.filterSubCategory('bike')"><span class="color4"> Bike</span></li>
-									<li onclick="fridgeApp.filterSubCategory('car')"><span class="color4"> Car</span></li>
-									<li onclick="fridgeApp.filterSubCategory('motorcycle')"><span class="color4"> Motorcycle</span></li>
-									<li onclick="fridgeApp.filterSubCategory('boat')"><span class="color4"> Boat</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherVehicles')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div> 	
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseElectronics">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('electronics')">
-                                            Electronics
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseElectronics" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstyled">
-									<li onclick="fridgeApp.filterSubCategory('computer')"><span class="color4"> Computer</span></li>
-									<li onclick="fridgeApp.filterSubCategory('tv')"><span class="color4"> TV</span></li>
-									<li onclick="fridgeApp.filterSubCategory('media_player')"><span class="color4"> Media Player</span></li>
-									<li onclick="fridgeApp.filterSubCategory('phone')"><span class="color4"> Phone</span></li>
-									<li onclick="fridgeApp.filterSubCategory('charger')"><span class="color4"> Charger</span></li>
-									<li onclick="fridgeApp.filterSubCategory('gaming_systems')"><span class="color4"> Gaming Systems</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherElectronics')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseCutlery">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('cutlery')">
-                                            Cutlery
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseCutlery" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstyled">
-									<li onclick="fridgeApp.filterSubCategory('dishes')"><span class="color4"> Dishes</span></li>
-									<li onclick="fridgeApp.filterSubCategory('blender')"><span class="color4"> Blender</span></li>
-									<li onclick="fridgeApp.filterSubCategory('mixer')"><span class="color4"> Mixer</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherCutlery')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseSupplies">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('supplies')">
-                                            Supplies
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseSupplies" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstled">
-									<li onclick="fridgeApp.filterSubCategory('scissors')"><span class="color4"> Scissors</span></li>
-									<li onclick="fridgeApp.filterSubCategory('pen_pencil')"><span class="color4"> Pen/Pencil</span></li>
-									<li onclick="fridgeApp.filterSubCategory('notebook')"><span class="color4"> Notebook</span></li>
-									<li onclick="fridgeApp.filterSubCategory('binder')"><span class="color4"> Binder</span></li>
-									<li onclick="fridgeApp.filterSubCategory('folder')"><span class="color4"> Folder</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherSupplies')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseBooks">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('books')">
-                                            Books
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseBooks" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstlyed">
-									<li onclick="fridgeApp.filterSubCategory('sciences')"><span class="color4"> Sciences</span></li>
-									<li onclick="fridgeApp.filterSubCategory('arts')"><span class="color4"> Arts</span></li>
-									<li onclick="fridgeApp.filterSubCategory('math')"><span class="color4"> Math</span></li>
-									<li onclick="fridgeApp.filterSubCategory('novel')"><span class="color4"> Novel</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherBooks')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseClothes">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('clothes')">
-							  		        Clothes
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseClothes" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstyled">
-									<li onclick="fridgeApp.filterSubCategory('shoes')"><span class="color4"> Shoes</span></li>
-									<li onclick="fridgeApp.filterSubCategory('shirt')"><span class="color4"> Shirt</span></li>
-									<li onclick="fridgeApp.filterSubCategory('pants')"><span class="color4"> Pants</span></li>
-									<li onclick="fridgeApp.filterSubCategory('hat')"><span class="color4"> Hat</span></li>
-									<li onclick="fridgeApp.filterSubCategory('sweater')"><span class="color4"> Sweater</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherClothes')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					  	<div class="panel panel-warning color7">
-							<div class="panel-heading">
-						  		<h4 class="panel-title">
-									<a data-toggle="collapse" data-parent="#category_collapse" href="#collapseBed">
-                                        <span class="color4" onclick="fridgeApp.filterMainCategory('bed')">
-                                            Bed
-                                        </span>
-									</a>
-						  		</h4>
-							</div>
-							<div id="collapseBed" class="panel-collapse collapse color7">
-								<ul class="panel-body list-unstlyed">
-									<li onclick="fridgeApp.filterSubCategory('sheet')"><span class="color4"> Sheet</span></li>
-									<li onclick="fridgeApp.filterSubCategory('pillow_case')"><span class="color4"> Pillow Case</span></li>
-									<li onclick="fridgeApp.filterSubCategory('padding')"><span class="color4"> Padding</span></li>
-									<li onclick="fridgeApp.filterSubCategory('comforter')"><span class="color4"> Comforter</span></li>
-									<li onclick="fridgeApp.filterSubCategory('otherBed')"><span class="color4"> Other</span></li>
-								</ul>
-							</div>
-					  	</div>
-					</div>
 
                 </div>
-                <div  class="col-lg-10 place" > 
-                    <div class="text-center">
-                        <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37">llie's nest</p>
-                    </div>
-                    <div>
-                        <center><img id="nestImage"  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber" class="text-center"></h2></center>
-                    </div> 
-                    <div class="row" id="homeTableBody">
-                        
-                    </div>
-                    <div class="border_circle pull-left">
-                        <div >
-                            <label>
-                                <input id="showCompleteCheckbox" type="checkbox" onclick="fridgeApp.refreshView()">
-                                Show All Items
-                            </label>
+            <div class="row-fluid">
+                    <div class="col-lg-2 ">
+                        <div class="panel-group place" id="category_collapse">
+                            <div class="panel dark" onclick="fridgeApp.refreshView()">
+                                <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseAll">
+                                    Categories
+                                </a>
+                            </div>
+                            <div id="collapseAll" class="collapse">
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseFurniture">
+                                                            <span class="color4" onclick="fridgeApp.filterMainCategory('furniture')">
+                                                                Furniture
+                                                            </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseFurniture" class="collapse color7">
+                                                <ul class="panel-body list-unstyled">
+                                                        <li onclick="fridgeApp.filterSubCategory('table')"><span class="color4"> Table </span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('chair')"><span class="color4"> Chair</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('shelves')"><span class="color4"> Shelves</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('bookcase')"><span class="color4"> Bookcase</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('drawer')"><span class="color4"> Drawer</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherFurniture')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="panel panel-warning color7">
+                                                <div class="panel-heading">
+                                                    <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseAppliances">
+                                                            <span class="color4" onclick="fridgeApp.filterMainCategory('appliances')">
+                                                                Appliances
+                                                            </span>
+                                                        </a>
+                                                    </h4>
+                                                </div>
+                                                <div id="collapseAppliances" class="panel-collapse collapse color7">
+                                                        <ul class="panel-body list-unstlyed">
+                                                                <li onclick="fridgeApp.filterSubCategory('fridge')"><span class="color4"> Fridge</span></li>
+                                                                <li onclick="fridgeApp.filterSubCategory('microwave')"><span class="color4"> Microwave</span></li>
+                                                                <li onclick="fridgeApp.filterSubCategory('coffee_maker')"><span class="color4"> Coffee Maker</span></li>
+                                                                <li onclick="fridgeApp.filterSubCategory('oven')"><span class="color4"> Oven</span></li>
+                                                                <li onclick="fridgeApp.filterSubCategory('otherAppliances')"><span class="color4"> Other</span></li>
+                                                        </ul>
+                                                </div>
+                                        </div>
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseVehicles">
+                        <span class="color4" onclick="fridgeApp.filterMainCategory('vehicles')">
+                            Vehicles
+                        </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseVehicles" class="panel-collapse collapse color7">
+                                                <ul class="panel-body list-unstyled">
+                                                        <li onclick="fridgeApp.filterSubCategory('bike')"><span class="color4"> Bike</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('car')"><span class="color4"> Car</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('motorcycle')"><span class="color4"> Motorcycle</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('boat')"><span class="color4"> Boat</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherVehicles')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>  
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseElectronics">
+                        <span class="color4" onclick="fridgeApp.filterMainCategory('electronics')">
+                            Electronics
+                        </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseElectronics" class="panel-collapse collapse color7">
+                                                <ul class="panel-body list-unstyled">
+                                                        <li onclick="fridgeApp.filterSubCategory('computer')"><span class="color4"> Computer</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('tv')"><span class="color4"> TV</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('media_player')"><span class="color4"> Media Player</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('phone')"><span class="color4"> Phone</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('charger')"><span class="color4"> Charger</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('gaming_systems')"><span class="color4"> Gaming Systems</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherElectronics')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseCutlery">
+                        <span class="color4" onclick="fridgeApp.filterMainCategory('cutlery')">
+                            Cutlery
+                        </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseCutlery" class="panel-collapse collapse color7">
+                                                <ul class="panel-body list-unstyled">
+                                                        <li onclick="fridgeApp.filterSubCategory('dishes')"><span class="color4"> Dishes</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('blender')"><span class="color4"> Blender</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('mixer')"><span class="color4"> Mixer</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherCutlery')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseSupplies">
+                        <span class="color4" onclick="fridgeApp.filterMainCategory('supplies')">
+                            Supplies
+                        </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseSupplies" class="panel-collapse collapse color7">
+                                                <ul class="panel-body list-unstled">
+                                                        <li onclick="fridgeApp.filterSubCategory('scissors')"><span class="color4"> Scissors</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('pen_pencil')"><span class="color4"> Pen/Pencil</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('notebook')"><span class="color4"> Notebook</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('binder')"><span class="color4"> Binder</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('folder')"><span class="color4"> Folder</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherSupplies')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseBooks">
+                        <span class="color4" onclick="fridgeApp.filterMainCategory('books')">
+                            Books
+                        </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseBooks" class="panel-collapse collapse color7">
+                                                <ul class="panel-body list-unstlyed">
+                                                        <li onclick="fridgeApp.filterSubCategory('sciences')"><span class="color4"> Sciences</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('arts')"><span class="color4"> Arts</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('math')"><span class="color4"> Math</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('novel')"><span class="color4"> Novel</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherBooks')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="panel panel-warning color7">
+                                        <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                        <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseClothes">
+                        <span class="color4" onclick="fridgeApp.filterMainCategory('clothes')">
+                                                                Clothes
+                        </span>
+                                                        </a>
+                                                </h4>
+                                        </div>
+                                        <div id="collapseClothes" class="panel-collapse collapse color7">
+                                                <ul class="panel-body list-unstyled">
+                                                        <li onclick="fridgeApp.filterSubCategory('shoes')"><span class="color4"> Shoes</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('shirt')"><span class="color4"> Shirt</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('pants')"><span class="color4"> Pants</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('hat')"><span class="color4"> Hat</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('sweater')"><span class="color4"> Sweater</span></li>
+                                                        <li onclick="fridgeApp.filterSubCategory('otherClothes')"><span class="color4"> Other</span></li>
+                                                </ul>
+                                        </div>
+                                </div>
+                                <div class="panel panel-warning color7">
+                                <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-parent="#category_collapse" href="#collapseBed">
+                <span class="color4" onclick="fridgeApp.filterMainCategory('bed')">
+                    Bed
+                </span>
+                                                </a>
+                                        </h4>
+                                </div>
+                                    <div id="collapseBed" class="panel-collapse collapse color7">
+                                            <ul class="panel-body list-unstlyed">
+                                                    <li onclick="fridgeApp.filterSubCategory('sheet')"><span class="color4"> Sheet</span></li>
+                                                    <li onclick="fridgeApp.filterSubCategory('pillow_case')"><span class="color4"> Pillow Case</span></li>
+                                                    <li onclick="fridgeApp.filterSubCategory('padding')"><span class="color4"> Padding</span></li>
+                                                    <li onclick="fridgeApp.filterSubCategory('comforter')"><span class="color4"> Comforter</span></li>
+                                                    <li onclick="fridgeApp.filterSubCategory('otherBed')"><span class="color4"> Other</span></li>
+                                            </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                </div>
+
+            <div  class="col-lg-10 place" > 
+                <div class="text-center">
+                    <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37">llie's nest</p>
+                </div>
+                <div>
+                    <center><img id="nestImage"  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber" class="text-center"></h2></center>
+                </div>
+                <div class="row" id="homeTableBody">
+                    
+                </div>
+                <div class="border_circle pull-left">
+                    <div>
+                        <label>
+                            <input id="showCompleteCheckbox" type="checkbox" onclick="fridgeApp.refreshView()">
+                            Show All Items
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
         <div id="profile-view" class="view">
