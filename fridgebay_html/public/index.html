@@ -12,7 +12,6 @@
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>
     <script src="js/controller.js"></script>
-
     <link href="fonts/glyphicons-halflings-regular.ttf" rel="stylesheet"/>
     <link href="fonts/glyphicons-halflings-regular.svg" rel="stylesheet"/>
     <link href="fonts/glyphicons-halflings-regular.eot" rel="stylesheet"/>
@@ -25,14 +24,22 @@
 </head>
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row-fluid">
             <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
-            <div>Speech recognition state: <span class="myStateText myErrorText">Not start yet</span></div>
+            <div>Speech recognition state: <span class="myStateText myErrorText">Not Started Yet</span></div>
             <button class="myStartButton btn btn-primary btn-sm">Start speech interaction!</button>
-            <nav class="navbar navbar-warning pull-right clear" role="navigation">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
+            <nav class="navbar navbar-default pull-right" role="navigation">
+                <div class="container-fluid color7">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse pull-right color7" id="nav">
+                        <ul class="nav navbar-nav color7">
                             <li><span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span></li>
                             <li><button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button></li>
                             <li><button id="example" type="button" class="redButton">1</button></li>
