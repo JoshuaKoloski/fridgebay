@@ -1,9 +1,21 @@
 
 
 function Information(){
+  var info = this;
   this.items = [];
   this.users = [];
   this.currentUser = "Lucy";
+  
+  
+  $.ajax({
+      type: "GET",
+      url: "/api/user",
+  }).done(function(userData) {
+      info.user = userData;
+      console.log("user = "+JSON.stringify(info.user));
+      //console.log("profile="+JSON.parse(info.profile));
+  });
+
   
 };
 
