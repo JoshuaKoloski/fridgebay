@@ -689,7 +689,7 @@
 								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
 									<div>
 										<label>Main Category</label>
-										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
+										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions('main')">
 											<option value="furniture"> Furniture </option>
 											<option value="appliances"> Appliances </option>
 											<option value="vehicles"> Vehicles </option>
@@ -784,7 +784,7 @@
         <div id="edit-view" class="view">
             <div class="container">
                 <div class="page-header">
-                    <h1 class="heading_text">Post an Item</h1>
+                    <h1 class="heading_text">Editing Item</h1>
                 </div>
                 <table class="table table-default panel panel-warning">
                     <tbody class="color2">
@@ -793,7 +793,7 @@
                                 <form class="form-inline" role="form">
                                     <div class="form-group">
                                         <label>Choose Item Main Category</label>
-                                        <select class="form-control" id="editMainCategory" onchange="fridgeView.updateCategoryOptions()">
+                                        <select class="form-control" id="editMainCategory" onchange="fridgeView.updateCategoryOptions('edit')">
                                             <option value="furniture"> Furniture </option>
                                             <option value="appliances"> Appliances </option>
                                             <option value="vehicles"> Vehicles </option>
@@ -819,15 +819,15 @@
                                 </form>
                                 <br />
                                 <div class="panel color">
-                                    <div class="panel-heading color" ><label>Add up to 3 pictures for your item.</label></div>
-                                    <div class="panel-body color2">
+                                    <div class="panel-heading color" ><label>Changing Pictures is unavailable </label></div>
+                                    <!--<div class="panel-body color2">
                                         <input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg" />
                                         <div id="img_0"></div><br>
                                         <input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg" />
                                         <div id="img_1"></div><br>
                                         <input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg" />
                                         <div id="img_2"></div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </td>
                             <td>
@@ -853,28 +853,28 @@
                                     </div>
                                     <div>
                                         <label>University</label>
-                                        <input type="text" class="form-control" id="editUniversity" placeholder=""/>
+                                        <input type="text" class="form-control" id="editUniversity" value=""/>
                                     </div>
                                     <div>
                                         <label>Location</label>
-                                        <input type="text" class="form-control" id="editLocation" placeholder=""/>
+                                        <input type="text" class="form-control" id="editLocation" value=""/>
                                     </div>
                                     <div>
                                         <label>Quantity</label>
-                                        <input type="number" class="form-control" id="editQuantity" placeholder=""/>
+                                        <input type="number" class="form-control" id="editQuantity" value=""/>
                                     </div>
                                     <div>
                                         <label>Desired Sell-By Date</label>
-                                        <input type="Date" class="form-control" id="editSellBy" placeholder=""/>
+                                        <input type="Date" class="form-control" id="editSellBy" value="" placeholder="" />
                                     </div>
                                     <div>
                                         <label for="editDesc">Description</label>
                                     </div>
                                     <div>
-                                        <textarea class="form-control" rows="4" id="editDesc" placeholder=""></textarea>
+                                        <textarea class="form-control" rows="4" id="editDesc" value=""></textarea>
                                     </div>
                                     <div >
-                                        <center><button type="submit" class="dark_brown" onclick="fridgeApp.updateItem()">Submit</button></center>
+                                        <center><button type="submit" class="dark_brown" id="submission" onclick="fridgeApp.updateItem(this)">Submit</button></center>
                                     </div>
                                 </form>
                             </td>

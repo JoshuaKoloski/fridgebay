@@ -10,7 +10,7 @@ var fridgeView = (function($){
         refreshTableUsers(myData.users);
     }
 
-    function updateCategoryOptions(){
+    function updateCategoryOptions(type){
     	
     	var furniture = {
     		table : "Table",
@@ -88,7 +88,7 @@ var fridgeView = (function($){
     		comforter: "Comforter",
     		otherBed : "Other"
     	};
-		
+            if(type.match("post")){
 		var selectSub = $("#itemSubCategory");
 		$("#itemSubCategory").empty();
 		if ($("#itemMainCategory").val() == 'furniture') {
@@ -146,6 +146,65 @@ var fridgeView = (function($){
 				);
 			});
 		}
+            }else if(type.match("edit")){
+                var selectSub = $("#editSubCategory");
+                $("#editSubCategory").empty();
+                if ($("#editMainCategory").val() == 'furniture') {
+                        $.each(furniture, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'appliances') {
+                        $.each(appliances, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'vehicles') {
+                        $.each(vehicles, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'electronics') {
+                        $.each(electronics, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'cutlery') {
+                        $.each(cutlery, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'supplies') {
+                        $.each(supplies, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'books') {
+                        $.each(books, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'clothes') {
+                        $.each(clothes, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'bed') {
+                        $.each(bed, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                }
+            }
     }
 
     function sortItems(items) {
@@ -311,7 +370,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.status+
         "</td><td>"+ item.interested+
         "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
-        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
+        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.loadEdit(this)'>Edit</button>"+
         "</td></tr>";
         return row;
     }

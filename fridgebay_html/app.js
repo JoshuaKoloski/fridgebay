@@ -140,22 +140,9 @@ app.get('/model/:collection', function(req, res) {
 
 // change an item in the model
 app.put('/model/:collection/:id', function(req, res) {
-    mongoose.model(req.params.collection).findByIdAndUpdate(req.params.id, { $set: { 
-        images: req.body.images,
-        name: req.body.name,
-        price: req.body.price,
-        description: req.body.description,
-        condition: req.body.condition,
-        category: req.body.category,
-        subcategory: req.body.subcategory,
-        location: req.body.location,
-        quantity: req.body.quantity,
-        sellBy: req.body.sellBy,
-        status: req.body.status, 
-        university: req.body.university,
-    }}, function (err, item) {
-        if (err) return handleError(err);
-        res.send(item);
+    mongoose.model(req.params.collection).findByIdAndUpdate(req.params.id,req.body, function (err, raw, item) {
+        console.log('The raw response from Mongo was ', raw)
+        res.json(200, {});
     });
 });
 

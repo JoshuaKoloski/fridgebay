@@ -82,12 +82,12 @@ Information.prototype.addElement = function(newItem){
     });
 }
 
-Information.prototype.updateElement = function(id,newItem){
+Information.prototype.updateElement = function(id, item){
     var myList = this;
     $.ajax({
         type: "PUT",
         url: "/model/items/"+id,
-        data: JSON.stringify(newItem),
+        data:JSON.stringify(item),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
     }).done(function(items) {
