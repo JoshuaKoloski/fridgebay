@@ -116,6 +116,7 @@ var fridgeApp = (function($) {
         });
         reloadModel();
     }
+    
     function imageTextAlign(){
         $(document).ready(function(){
             var coordinates = $("#nestImage").offset();
@@ -126,11 +127,113 @@ var fridgeApp = (function($) {
             $("#showNumber").offset({top: coordinates.top, left: coordinates.left});
         });
     }
+    
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
         fridgeView.refreshItemItems(element.getAttribute("sid"), myList);   
     }
     
+    function defer(element) {   	
+		var obj = {
+			hello: function(element) {	
+			  	console.log("add");
+			  	$(element).addClass('home-fake-hover');
+			},
+			bye: function(element) {	
+				console.log("bye");
+				$(element).removeClass('home-fake-hover');			
+			}
+		  },
+		  // Create a Deferred
+		  defer = $.Deferred();
+ 
+		// Set object as a promise
+		defer.promise( obj );
+ 
+		// Resolve the deferred
+		defer.resolve(element);
+ 
+		return obj;
+    } 
+    
+    function a() {
+
+	  	var deferred = $.Deferred();
+ 		
+	  	setTimeout(function() {		
+			deferred.resolve();
+	  	}, 2000);
+ 
+	  	return deferred.promise();
+	}
+        
+    function homeChooseItem(index) {
+    
+    	console.log("choose item clicked!");
+    	
+    	var list=[];
+    	// Use the object as a Promise
+		$('.home-item').each(function() {
+			list.push($(this).attr('sid'));
+		})
+		
+		$('.home-item').removeClass('home-fake-hover');
+		console.log(index);
+		bringToViewpoint("div[sid="+list[index]+"]");
+		$("[sid="+list[index]+"]").addClass('home-fake-hover');
+		
+    	return index;
+    	
+    	
+    	/**
+    	var obj = friend_highlight();
+    	
+    	$('.home-item').each(function(){
+			obj.done(function() {
+			  	obj.highlight(this);
+			}); 
+    	})
+    	
+    	
+    	
+    	
+    	var list = [];
+    	$('.home-item').each(function() {
+    		list.push($(this).attr('sid'));
+    	})
+    	
+    	for (i=0; i<list.length; i++){
+    		wait(list[i]);
+    		
+    	}
+    	**/
+
+    	
+    	/**
+    	$.each($('.home-item'), function(i, el){
+			$(el).css({'opacity':0});
+			setTimeout(function(){
+			   $(el).animate({
+				'opacity':1.0
+			   }, 500);
+			   bringToViewpoint(el)
+			},500 + ( i * 500 ));
+		});  **/
+    }
+    
+    //scroll to a certain element. example call: bringToViewpoint('#tree');
+    function bringToViewpoint(element) {
+    	$("body, html").animate({ 
+            scrollTop: $(element).offset().top-30
+        }, 600);
+    }
+    
+    function bringToTop() {
+    	$("body, html").animate({ 
+            scrollTop: 0
+        }, 600);
+    }
+       
     function deleteItem(element){
         var c = confirm("Are you sure you want to delete this item?")
         if (c) {
@@ -186,6 +289,7 @@ var fridgeApp = (function($) {
         showView('home');
         imageTextAlign();
         enableSpeech();
+        bringToTop();
     }
     
     function enableSpeech() {	
@@ -194,6 +298,31 @@ var fridgeApp = (function($) {
 				'show speech instructions': function () {
 					$('#speechInstructions').removeClass("hidden");
 					tts("Speech instructions showed.")
+				},
+				'choose an item': function(){
+					var index = 0;
+					var myInterval = setInterval(function(){
+										homeChooseItem(index++);
+										if (index > 9) {
+											clearInterval(myInterval)
+										}
+									},3000);
+				},
+				'choose the :index item': function(index){
+					if (index == 'first') {
+						homeChooseItem(0);
+					} else if (index == 'second') {
+						homeChooseItem(1);
+					} else if (index == 'third') {
+						homeChooseItem(2);
+					} else if (index == 'fourth') {
+						homeChooseItem(3);
+					} else if (index == 'fifth') {
+						homeChooseItem(4);
+					}
+				},
+				'choose the next item': function(){			
+					homeChooseItem(++index);
 				},
 				'post an item': function () {		 
 					showView('form');
@@ -315,7 +444,8 @@ var fridgeApp = (function($) {
         pass:pass,
         getUser: getUser,
         deleteItem: deleteItem,
-        imageTextAlign: imageTextAlign
+        imageTextAlign: imageTextAlign,
+        homeChooseItem: homeChooseItem,
     }
 
     return (fridgeApp);

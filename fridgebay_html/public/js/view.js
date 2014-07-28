@@ -319,7 +319,7 @@ var fridgeView = (function($){
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<div class='col-sm-5 col-md-6 panel panel-default' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'>"+displayImage(item.images)+
+        "<div class='col-sm-5 col-md-6 panel panel-default home-item' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'>"+displayImage(item.images)+
         "<div class='panel-body'>"+
         "Name: "+ item.name +
         "<div> Price: $"+ item.price +
