@@ -283,6 +283,108 @@ var fridgeApp = (function($) {
 	function getUser(){
 		return myList.currentUser;
 	}
+	
+	function speechJumpToPage(pageName){
+		if (pageName == 'home' || pageName == 'login' || pageName == 'welcome' || pageName == 'profile') {	 
+			showView(pageName);
+			tts("You are on " + pageName + " page now.");
+		} else if (pageName == 'account'){
+			showView('profile');
+			tts("You are on " + pageName + " page now.")
+		} else if (pageName == 'feedback') {
+			showView('contact');
+			tts("You are on the feedback page now. You are welcome to report any issue or leave a kind message.");
+		} else {
+			tts("Sorry, we don't have "+pageName+" page. We have home page, login page, profile page and feedback page. Please try the command again.");
+		}
+	}
+	
+	//speech filters for items in the home page including name, university, price, main category
+	function homeItemsSpeechFilter(filter, content, searchPhrase){
+		if (window.location.hash == '#home') {
+			if (filter == 'university') {
+				var school = content;
+				$('#schoolCutoffHome').val(school);
+				refreshView();
+				tts("Here are items from "+school+" university.");
+			} else if (filter == 'price') {
+				var price = content;
+				if (isNaN(price)){
+					tts("I heard "+searchPhrase+" price "+price+" and price need to be a positive number. Please try again.");
+				} else {
+					$('#priceCutoffHome').val(price);
+					refreshView();
+					tts("Here are items cheaper than "+price+" dollars.");
+				}			
+			} else if (filter == 'name') {
+				var name = content;
+				$('#nameCutoffHome').val(name);
+				refreshView();
+				tts("Here are items with name containing "+name+".");
+			} else if (filter == 'category') {
+				if (content == 'furniture' || content == 'appliances' || content == 'vehicles' || content == 'electronics' || content == 'cutlery' || content == 'supplies' || content == 'books' || content == 'clothes' || content == 'bed') {
+					var category = content;
+					var categoryId = category.substring(0,1).toUpperCase()+category.substring(1);
+					$('.collapse').removeClass("in");
+					$('#collapse'+categoryId).addClass("in");
+					filterMainCategory(category);
+					tts("Here are items in the "+category+" category.");
+				} else {
+					tts("I heard "+searchPhrase+" category "+ category +" but I don't understand. Please choose a category in the category menu and try the command again.");
+				}
+			} else {
+				tts("I heard "+searchPhrase+" "+ filter +" but I don't understand. You can "+searchPhrase+" name, university, price and category.");
+			}
+		} else {
+			tts("It seems that you said a command to filter items in the home page. Please say. go to home page to go to home page first.");
+		}
+	}
+	
+	//speech filter for a sub category for the home page items
+	function subcategorySpeechFilter(subcategory){
+		if (window.location.hash == '#home') {
+			if (subcategory == 'table' || subcategory == 'chair' || subcategory == 'shelves' || subcategory == 'bookcase' || subcategory == 'drawer' || 
+				subcategory == 'fridge' || subcategory == 'microwave' || subcategory == 'oven' || subcategory == 'bike' || subcategory == 'car' || 
+				subcategory == 'motocycle' || subcategory == 'boat' || subcategory == 'computer' || subcategory == 'tv' || subcategory == 'phone' || 
+				subcategory == 'charger' || subcategory == 'dishes' || subcategory == 'blender' || subcategory == 'mixer' || subcategory == 'scissors' || 
+				subcategory == 'notebook' || subcategory == 'binder' || subcategory == 'folder' || subcategory == 'sciences' || subcategory == 'arts' || 
+				subcategory == 'math' || subcategory == 'novel' || subcategory == 'shoes' || subcategory == 'shirt' || subcategory == 'pants' || 
+				subcategory == 'hat' || subcategory == 'sweater' || subcategory == 'sheet' || subcategory == 'padding' || subcategory == 'comforter')
+				//filter subcategory
+				filterSubCategory(subcategory);
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'TV') {
+				filterSubCategory('tv');
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'coffee maker') {
+				filterSubCategory('coffee_maker');
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'media player') {
+				filterSubCategory('media_player');
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'gaming systems') {
+				filterSubCategory('gaming_systems');
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'pen or pencil') {
+				filterSubCategory('pen_pencil');
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'pillow case') {
+				filterSubCategory('pillow_case');
+				tts("Here are items in the "+subcategory+" sub category.");
+			} else if (subcategory == 'furniture' || subcategory == 'appliances' || subcategory == 'vehicles' || subcategory == 'electronics' || subcategory == 'cutlery' || 
+					subcategory == 'supplies' || subcategory == 'books' || subcategory == 'clothes' || subcategory == 'bed') {
+				var subcategoryUp = subcategory.substring(0,1).toUpperCase()+subcategory.substring(1);
+				filterSubCategory('other'+subcategoryUp);
+				tts("Here are items in the other "+subcategory+" sub category.");
+			} else if (subcategory == 'other') {
+				tts("For choosing an other sub category. You also need to specify the main category. For example, you can say. Search or sort by other furniture.")	
+			} else {
+				tts("I heard sub category "+subcategory+" which is not exist. Please choose an existing sub category and try the command again.");
+			}
+		} else {
+			tts("It seems that you said a command to choose a sub category in the home page. Please say. go to home page to go to home page first.");
+		}
+	}
 
     function start() {
         myList.loadModel();
@@ -324,43 +426,25 @@ var fridgeApp = (function($) {
 				'choose the next item': function(){			
 					homeChooseItem(++index);
 				},
-				'post an item': function () {		 
-					showView('form');
-					tts("Fill the form and click submit to post an item.") 
+				'(*junk) post *item': function (junk, item) {
+					if (item == 'an item' || item == 'a item' || item == 'new item' || item == 'item') {		 
+						showView('form');
+						tts("Fill the form and click submit to post an item.");
+					} else {
+						tts("I heard post" + item + " and I don't understand. If you want to post an item you can say post an item.")
+					}
 				},
-				'back to home page': function () {
-					showView('home');
-					tts("You are now at home page.")
+				'(*junk) go to :pageName page': function (junk, pageName) {
+					speechJumpToPage(pageName);		
 				},
-				'go to login page': function () {		 
-					showView('login');
-					tts("You can login or register now.") 
+				'(*junk) search by (item) :filter *content': function (junk, filter, content) {
+					homeItemsSpeechFilter(filter, content, 'search by');
 				},
-				'search by university *school': function (school) {
-					$('#schoolCutoffHome').val(school);
-					refreshView();
-					tts("Here are items from university "+school+".");
+				'(*junk) sort by (item) :filter *content': function (junk, filter, content) {
+					homeItemsSpeechFilter(filter, content, 'sort by');
 				},
-				'search by price *number': function (number) {
-					$('#priceCutoffHome').val(number);
-					refreshView();
-					tts("Here are items cheaper than "+number+" dollars.");
-				},
-				'search by name *name': function (name) {
-					$('#nameCutoffHome').val(name);
-					refreshView();
-					tts("Here are items containing the name "+name+".");
-				},
-				'search by category *category': function (category) {
-					var categoryId = category.substring(0,1).toUpperCase()+category.substring(1);
-					$('.collapse').removeClass("in");
-					$('#collapse'+categoryId).addClass("in");
-					filterMainCategory(category);
-					tts("Here are items in the "+category+" category.");
-				},
-				'search by sub category *subcategory': function (subcategory) {
-					filterSubCategory(subcategory);
-					tts("Here are items in the "+subcategory+" sub category.");
+				'(*junk) sub category (other) *subcategory': function (junk, subcategory) {
+					subcategorySpeechFilter(subcategory);
 				},
 			};
 			
@@ -385,6 +469,11 @@ var fridgeApp = (function($) {
 				annyang.addCallback('result', function () {
 				  $('.myStateText').text('Got a result!');
 				});
+				
+				annyang.addCallback('resultNoMatch', function () {
+				  $('.myStateText').text('Command not found!');
+				  tts("I didn't understand you. Please try again.");
+				});
 			}
 	
 			// pass a context to a global function
@@ -392,6 +481,7 @@ var fridgeApp = (function($) {
 
 			function notConnected () {
 				console.error("Help, there's no internet connection!");
+				tts("Help, there's no internet connection!");
 			}
 		}
 		

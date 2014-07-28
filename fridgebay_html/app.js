@@ -20,7 +20,6 @@ app.use(logfmt.requestLogger());
 // parse the bodies of all other queries as json
 app.use(bodyParser.json());
 
-
 //Uri allows access to the mongo database on the heroku server
 var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
 var mongooseUri = uriUtil.formatMongoose(mongodbUri);
