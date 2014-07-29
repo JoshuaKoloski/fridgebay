@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <title>FridgeBay</title>
@@ -44,7 +44,7 @@
                             <li><button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button></li>
                             <li><button id="example" type="button" class="redButton">1</button></li>
                             <li><button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button></li>
-                            <li><button class="dark_brown" href="/auth/logout">Logout</button></li>
+                            <li id="loginButton"><button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button></li>
                         </ul>
                     </div>
                 </div>
@@ -771,7 +771,7 @@
 										<input type="hidden" id="itemSeller" name="itemSeller"/>
 									</div>
 									<div class="place_right">
-										<input type="submit" class="dark_brown" type="submit" onclick="fridgeApp.reloadModel()"/>
+										<input type="submit" class="dark_brown"  onclick="fridgeApp.reloadModel()"/>
 									</div>
 								</form>
 							</td>

@@ -58,7 +58,9 @@ var usersSchema = mongoose.Schema({
 
 var userSchema = mongoose.Schema({
     openID: String,
-    profile: String,
+    profile: Object,
+    name:String,
+    email:String,
     phone: String,
     interestList: Array // of itemIDs ...
     
@@ -119,6 +121,8 @@ passport.use(new GoogleStrategy({
             user.openID = identifier;
             user.profile = JSON.stringify(profile);
             user.phone = "none";
+            user.name = profile.displayName;
+            user.email = profile.emails.value;
             user.interestList=[];               
 
             // store a new user ....

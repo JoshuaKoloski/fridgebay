@@ -8,6 +8,14 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
+        console.log("the current user is " + JSON.stringify(myData.currentUser));
+        console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
+
+        if ($.isEmptyObject(fridgeApp.getUser())) {
+            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
+        } else {
+            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+        }
     }
 
     function updateCategoryOptions(){
@@ -408,7 +416,7 @@ var fridgeView = (function($){
         
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
-		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + fridgeApp.getUserName() + "</span><label></h4>";
         return row;
     }
     //Displays all images for the item

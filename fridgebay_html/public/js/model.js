@@ -4,9 +4,9 @@ function Information(){
   var info = this;
   this.items = [];
   this.users = [];
-  this.currentUser = "Lucy";
+  this.currentUser = [];
   
-  
+ /* 
   $.ajax({
       type: "GET",
       url: "/api/user",
@@ -14,7 +14,7 @@ function Information(){
       info.user = userData;
       console.log("user = "+JSON.stringify(info.user));
       //console.log("profile="+JSON.parse(info.profile));
-  });
+  });*/
 
   
 };
@@ -47,6 +47,7 @@ Information.prototype.searchById = function (id){
 Information.prototype.loadModel = function() {
     this.loadItems();
     this.loadUsers();
+    this.loadCurrentUser();
 };
 
 Information.prototype.loadItems = function() {
@@ -77,6 +78,21 @@ Information.prototype.loadUsers = function() {
 	//Loads model information into the view
         fridgeView.refreshView(myInfo); 
     });
+}
+
+Information.prototype.loadCurrentUser = function () {
+    var myInfo = this;
+
+    $.ajax({
+        type: "GET",
+        url: "/api/user",
+    }).done(function (currentUser) {
+        myInfo.currentUser = currentUser;
+        //info.user = userData;
+        console.log("user = " + JSON.stringify(myInfo.currentUser));
+        //console.log("profile="+JSON.parse(info.profile));
+    });
+
 }
 
 //this is not being used, but reserved for possible future usage.

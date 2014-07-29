@@ -9,6 +9,9 @@ var fridgeApp = (function($) {
         console.log("VIEW IS SHOWN");
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
+
+     
+       
     };
     
     function showAlert() {
@@ -23,7 +26,14 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
-    
+
+    function accessLogoutPage() {
+        window.location = 'auth/logout';
+    }
+    function accessLoginPage() {
+        window.location = 'auth/google/'
+    }
+
 
     $(function () {
         $('#notify').popover(
@@ -177,10 +187,21 @@ var fridgeApp = (function($) {
         });
     }
 
-	function getUser(){
+    function getUser() {
+        var profile = JSON.stringify(myList.currentUser.profile)
+        var name = JSON.stringify(myList.currentUser.name);
+        var newName = "" + name;
+        var email = JSON.stringify(myList.currentUser.email);
+        //console.log("the name returned by getUser is " + newName.substring(1,newName.length-1));
+        console.log("the email returned by getUser is " + email);
 		return myList.currentUser;
 	}
-
+    function getUserName() {
+        var name = JSON.stringify(myList.currentUser.name);
+        var newName = "" + name;
+        console.log("the name returned by getUserName is " + newName.substring(1, newName.length - 1));
+        return newName.substring(1, newName.length - 1);
+    }
     function start() {
         myList.loadModel();
         showView('home');
@@ -300,8 +321,11 @@ var fridgeApp = (function($) {
     fridgeApp = {
         start: start,
         getUser: getUser,
+        getUserName: getUserName,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,
+        accessLogoutPage: accessLogoutPage,
+        accessLoginPage: accessLoginPage,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
         encodeImageFileAsURL: encodeImageFileAsURL,
@@ -313,7 +337,6 @@ var fridgeApp = (function($) {
         deleteItem: deleteItem,
         updateItem: updateItem,
         pass:pass,
-        getUser: getUser,
         deleteItem: deleteItem,
         imageTextAlign: imageTextAlign
     }
