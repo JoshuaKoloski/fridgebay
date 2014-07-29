@@ -237,7 +237,19 @@
 	text-transform: uppercase;
     padding-bottom:10px;
 }
-.place div p{
+.thumbnail img { min-height:130px; height:130px; }
+.thumbnail { 
+    min-height:100px; 
+    max-height:300px; 
+    background-color: #572f04;
+}
+.caption p{ 
+    color:white;
+}
+.caption h1{ 
+    color:white;
+}
+#ollie {
     font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	font-weight: normal;
     font-size: 2.5em;
