@@ -138,7 +138,8 @@ var fridgeApp = (function($) {
     }
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
-        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);   
+        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
+       // return myList.searchById(element.getAttribute("sid"));
     }
     
     function deleteItem(element){
@@ -190,10 +191,8 @@ var fridgeApp = (function($) {
     function getUser() {
         var profile = JSON.stringify(myList.currentUser.profile)
         var name = JSON.stringify(myList.currentUser.name);
-        var newName = "" + name;
-        var email = JSON.stringify(myList.currentUser.email);
-        //console.log("the name returned by getUser is " + newName.substring(1,newName.length-1));
-        console.log("the email returned by getUser is " + email);
+        var email = JSON.stringify(myList.currentUser.email) + "";
+        console.log("the email returned by getUser is " + email.substring(11,email.length-3));
 		return myList.currentUser;
 	}
     function getUserName() {
@@ -201,6 +200,20 @@ var fridgeApp = (function($) {
         var newName = "" + name;
         console.log("the name returned by getUserName is " + newName.substring(1, newName.length - 1));
         return newName.substring(1, newName.length - 1);
+    }
+    function getUserEmail() {
+        var email = JSON.stringify(myList.currentUser.email) + "";
+        return email.substring(11, email.length - 3);
+    }
+    function getNestNumber() {
+        return myList.currentUser.interestList.length;
+    }
+    function addToNest(element) {
+        var userNest = getUser().interestList;
+        userNest.push();
+    }
+    function refreshProfile() {
+        fridgeView.refreshProfile(myList.currentUser);
     }
     function start() {
         myList.loadModel();
@@ -322,6 +335,10 @@ var fridgeApp = (function($) {
         start: start,
         getUser: getUser,
         getUserName: getUserName,
+        getUserEmail: getUserEmail,
+        getNestNmber: getNestNumber,
+        addToNest:addToNest,
+        refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,
         accessLogoutPage: accessLogoutPage,

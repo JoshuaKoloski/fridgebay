@@ -122,7 +122,8 @@ passport.use(new GoogleStrategy({
             user.profile = JSON.stringify(profile);
             user.phone = "none";
             user.name = profile.displayName;
-            user.email = profile.emails.value;
+            var emails = profile.emails;
+            user.email = emails;
             user.interestList=[];               
 
             // store a new user ....

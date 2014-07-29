@@ -78,7 +78,7 @@
 
         <div id="welcome-view" class="view">
             <button class="btn btn-default" onclick="fridgeApp.showView('home')">Home page of fridge-bay </button>
-            <button class="btn btn-default" onclick="fridgeApp.showView('profile')">Profile page of fridge-bay </button>
+            <button class="btn btn-default" onclick="fridgeApp.showView('profile'), fridgeApp.refreshProfile()">Profile page of fridge-bay </button>
             <button class="btn btn-default" onclick="fridgeApp.showView('form')">Form for fridge-bay </button>
             <button class="btn btn-default" onclick="fridgeApp.showView('login')">Login for fridge-bay </button>
             <button class="btn btn-default" onclick="fridgeApp.showView('item')">Items for fridge-bay </button>
@@ -211,6 +211,7 @@
 													
 												</tbody>	
 											</table>
+                                            <button class="btn btn-warning color4"  id="addToNest" onclick="fridgeApp.addToNest()">Add to Nest</button>
 										</p>
 								  	</div>
 								</div>							
@@ -588,24 +589,7 @@
 
 
                         <table class="table table-default profileInfo">
-                            <tbody>
-                                <tr>
-                                    <td><b>Username</b></td>
-                                    <td class ="white">joshuakoloski1234
-                                    	<a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><b>Email</b></td>
-                                    <td class="white">j@brandeis.edu
-                                        <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Phone</b></td>
-                                    <td class="white">765-978-1234
-                                        <a class="pull-right"><span class="glyphicon glyphicon-pencil" onclick="fridgeApp.showView('item')"></span></a></td>
-                                </tr>
-                            </tbody>
+                            
                         </table>
                     <div>
                         <form action="">
@@ -620,7 +604,7 @@
                             <p>Your Nest</p>
                         </div>
                         <div>
-                            <center><img src="nest1.png" alt="owl" width="200" height="100"><h2>3</h2></center>
+                            <center><img src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNestNumber"></h2></center>
                         </div>
                         <div class="dropdown pull-right">
                             <button data-toggle="dropdown" class="dropdown-toggle dark_brown pull-right">

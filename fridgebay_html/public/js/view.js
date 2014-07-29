@@ -211,7 +211,7 @@ var fridgeView = (function($){
     function refreshItemItems(element, myList) {
         var list = myList.items;
         console.log("myList[1]= " + JSON.stringify(list[1]));
-        var element = myList.searchById(element)
+        var element = myList.searchById(element);
         
         fridgeApp.showView('item');
 
@@ -223,9 +223,18 @@ var fridgeView = (function($){
         $("#item_sellBy").html(sellText(element));
 
     }
+
+    function refreshProfile(currentUser) {
+        $(".profileInfo").html(profileToRow(currentUser));
+        showNestNumber(currentUser.interestList.length);
+        //showNestNumber(2);
+    }
    
     function showNumber(length) {  
         $("#showNumber").html(length);
+    }
+    function showNestNumber(length) {
+        $("#showNestNumber").html(length);
     }
 
     function filterModelItems(items) {
@@ -348,6 +357,28 @@ var fridgeView = (function($){
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
+
+    function profileToRow(currentUser) {
+        var row =
+ 
+         "<tbody> <tr>"+
+               "<td><b>Username</b></td>"+
+                "<td class ='white'>"+fridgeApp.getUserName() +
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a>"+
+               " </td></tr>"+
+           "<tr>"+
+                "<td><b>Email</b></td>"+
+                "<td class='white'>" + fridgeApp.getUserEmail() +
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a></td>"+
+            "</tr>"+
+            "<tr>" +
+                "<td><b>Phone</b></td>"+
+                "<td class='white'>765-978-1234"+
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a></td>"+
+            "</tr>"+
+        "</tbody>";
+        return row;
+    }
     
     function imagesText(item){    
     	if (item.images.length == 0) {
@@ -464,6 +495,7 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
+        refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,
