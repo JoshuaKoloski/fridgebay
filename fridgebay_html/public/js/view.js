@@ -378,11 +378,11 @@ var fridgeView = (function($){
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<div class='col-xs-6 col-s-6 col-md-6' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail col-s-15 col-md-15'>"+displayImage(item.images)+ 
+        "<div class='col-xs-6 col-s-6 col-md-6' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail'>"+displayImage(item.images)+ 
         "<div class='caption' align='left'>"+
         "<h1>"+ item.name +
-        "</h1><p> Price: $"+ item.price +
-        "</p><p> University: " + item.university +
+        "</h1><p> $"+ item.price +
+        "</p><p> Campus: " + item.university +
         "</p></div></div></div>"
         return row;
     }

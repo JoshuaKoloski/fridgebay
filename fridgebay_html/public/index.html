@@ -681,15 +681,15 @@
                     <h1 class="heading_text">Post an Item</h1>
                 </div>
 
-   
-                <table class="table table-default panel panel-warning" >
+            <div class='table-responsive'>
+                <table class="table table-default panel panel-warning col-xs-4 col-s-4" >
                 	<tbody class="color2">
 						<tr>
-							<td width="600px">	
+							<td width='10%'>	
 								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
 									<div>
 										<label>Main Category</label>
-										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions('main')">
+										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions('p')">
 											<option value="furniture"> Furniture </option>
 											<option value="appliances"> Appliances </option>
 											<option value="vehicles"> Vehicles </option>
@@ -716,11 +716,12 @@
 								<div class="panel" >
 									<div class="panel-heading color"><label class="color">Add up to 3 pictures for your item.</label></div>
 									<div class="panel-body color6">										
-										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(1)">
+										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" capture="camera" onchange="fridgeApp.encodeImageFileAsURL(1)">
 										<div id="img_1"></div>
-										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(2)">
+										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" capture=
+                                                                                "camera" onchange="fridgeApp.encodeImageFileAsURL(2)">
 										<div id="img_2"></div>
-										<input type="file" id="inputFileToLoad_3" name="image_3" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(3)">
+										<input type="file" id="inputFileToLoad_3" name="image_3" accept="image/jpeg" capture="camera" onchange="fridgeApp.encodeImageFileAsURL(3)">
 										<div id="img_3"></div>										
 									</div>
 								</div>
@@ -776,8 +777,9 @@
 								</form>
 							</td>
 						</tr>
-                	</tbody>
-                </table>
+                                        </tbody>
+                                </table>
+                            </div>
             </div>
         </div>
 <!--Edit Item Page -->
