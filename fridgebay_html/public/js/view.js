@@ -8,6 +8,14 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
+        console.log("the current user is " + JSON.stringify(myData.currentUser));
+        console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
+
+        if ($.isEmptyObject(fridgeApp.getUser())) {
+            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
+        } else {
+            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+        }
     }
 
     function updateCategoryOptions(){
@@ -203,21 +211,31 @@ var fridgeView = (function($){
     function refreshItemItems(element, myList) {
         var list = myList.items;
         console.log("myList[1]= " + JSON.stringify(list[1]));
-        var element = myList.searchById(element)
+        var element = myList.searchById(element);
         
         fridgeApp.showView('item');
 
 
         $("#item_tableBody").html(itemItemToRow(element));
+        $("#addToNest").html(itemAddToNest(element));
         $("#item_category").html(headingText(element));
         $("#item_images").html(imagesText(element));
         $("#item_status").html(statusText(element));
         $("#item_sellBy").html(sellText(element));
 
     }
+
+    function refreshProfile(currentUser) {
+        $(".profileInfo").html(profileToRow(currentUser));
+        showNestNumber(currentUser.interestList.length);
+        //showNestNumber(2);
+    }
    
     function showNumber(length) {  
         $("#showNumber").html(length);
+    }
+    function showNestNumber(length) {
+        $("#showNestNumber").html(length);
     }
 
     function filterModelItems(items) {
@@ -340,6 +358,31 @@ var fridgeView = (function($){
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
+    function itemAddToNest(item) {
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this)'>Add to Nest</button>";
+    }
+
+    function profileToRow(currentUser) {
+        var row =
+ 
+         "<tbody> <tr>"+
+               "<td><b>Username</b></td>"+
+                "<td class ='white'>"+fridgeApp.getUserName() +
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a>"+
+               " </td></tr>"+
+           "<tr>"+
+                "<td><b>Email</b></td>"+
+                "<td class='white'>" + fridgeApp.getUserEmail() +
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a></td>"+
+            "</tr>"+
+            "<tr>" +
+                "<td><b>Phone</b></td>"+
+                "<td class='white'>765-978-1234"+
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a></td>"+
+            "</tr>"+
+        "</tbody>";
+        return row;
+    }
     
     function imagesText(item){    
     	if (item.images.length == 0) {
@@ -408,7 +451,7 @@ var fridgeView = (function($){
         
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
-		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + fridgeApp.getUserName() + "</span><label></h4>";
         return row;
     }
     //Displays all images for the item
@@ -456,6 +499,7 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
+        refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,

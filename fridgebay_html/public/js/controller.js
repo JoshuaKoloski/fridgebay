@@ -9,7 +9,17 @@ var fridgeApp = (function($) {
         console.log("VIEW IS SHOWN");
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
+
+     
+       
     };
+    
+    var setView = function(){
+        var v = window.location.hash.substring(1);
+        if (v=="")
+          v="home";
+        showView(v);
+    }
     
     function showAlert() {
         console.log("clicked");
@@ -23,7 +33,14 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
-    
+
+    function accessLogoutPage() {
+        window.location = 'auth/logout';
+    }
+    function accessLoginPage() {
+        window.location = 'auth/google/'
+    }
+
 
     $(function () {
         $('#notify').popover(
@@ -128,7 +145,8 @@ var fridgeApp = (function($) {
     }
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
-        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);   
+        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
+       // return myList.searchById(element.getAttribute("sid"));
     }
     
     function deleteItem(element){
@@ -177,13 +195,43 @@ var fridgeApp = (function($) {
         });
     }
 
-	function getUser(){
+    function getUser() {
+        var profile = JSON.stringify(myList.currentUser.profile)
+        var name = JSON.stringify(myList.currentUser.name);
+        var email = JSON.stringify(myList.currentUser.email) + "";
+        console.log("the email returned by getUser is " + email.substring(11,email.length-3));
 		return myList.currentUser;
 	}
+    function getUserName() {
+        return myList.currentUser.name;
+    }
+    function getUserEmail() {
 
+        return myList.currentUser.email;
+    }
+    function getNestNumber() {
+        return myList.currentUser.interestList.length;
+    }
+    function addToNest(element) {
+        var item = myList.searchById(element.getAttribute("sid"));
+        console.log("searching for item returns " + JSON.stringify(item))
+        var user = getUser();
+        var id = getUser()._id;
+        console.log("id: " + id);
+        var userNest = user.interestList;
+        userNest.push(item);
+        myList.updateCurrentUser(id, user)
+        console.log("user nest: " + userNest.length);
+
+        //userNest.push();
+    }
+    function refreshProfile() {
+        fridgeView.refreshProfile(myList.currentUser);
+    }
     function start() {
+        setView();
         myList.loadModel();
-        showView('home');
+        //showView('home');
         imageTextAlign();
         enableSpeech();
     }
@@ -300,8 +348,15 @@ var fridgeApp = (function($) {
     fridgeApp = {
         start: start,
         getUser: getUser,
+        getUserName: getUserName,
+        getUserEmail: getUserEmail,
+        getNestNmber: getNestNumber,
+        addToNest:addToNest,
+        refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,
+        accessLogoutPage: accessLogoutPage,
+        accessLoginPage: accessLoginPage,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
         encodeImageFileAsURL: encodeImageFileAsURL,
@@ -313,7 +368,6 @@ var fridgeApp = (function($) {
         deleteItem: deleteItem,
         updateItem: updateItem,
         pass:pass,
-        getUser: getUser,
         deleteItem: deleteItem,
         imageTextAlign: imageTextAlign
     }
