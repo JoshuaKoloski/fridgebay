@@ -247,9 +247,10 @@
     color:white;
 }
 .caption h1{ 
+    font-size:20px;
     color:white;
 }
-#ollie {
+.ollie {
     font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	font-weight: normal;
     font-size: 2.5em;
@@ -261,6 +262,7 @@
 	text-transform: uppercase;
     padding-bottom:10px;
 }
+
 .changeImageColor:hover{
     background-color:#d4990d;
     
@@ -279,7 +281,7 @@
     font-weight:bold;
     font-style:italic;
 }
-.place div h2{
+#showNumber{
     position:absolute;
     color:red;
     clear:none;

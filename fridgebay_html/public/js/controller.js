@@ -118,7 +118,7 @@ var fridgeApp = (function($) {
         alert("Item has been successfully edited.")
     }
     function imageTextAlign(){
-        $(document).onload(function(){
+        $(document).ready(function(){
             var coordinates = $("#nestImage").offset();
             console.log("Image Coordinates:{Top: "+ coordinates.top + ", Left: " + coordinates.left + "} ");
             coordinates.top += 17;

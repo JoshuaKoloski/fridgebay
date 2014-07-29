@@ -380,7 +380,7 @@ var fridgeView = (function($){
         var row=
         "<div class='col-xs-6 col-s-6 col-md-6' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail col-s-15 col-md-15'>"+displayImage(item.images)+ 
         "<div class='caption' align='left'>"+
-        "<h1> Name"+/*+ item.name +*/
+        "<h1>"+ item.name +
         "</h1><p> Price: $"+ item.price +
         "</p><p> University: " + item.university +
         "</p></div></div></div>"
