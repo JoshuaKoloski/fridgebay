@@ -549,9 +549,9 @@
                     </div>
                 </div>
 
-            <div  class="col-lg-10 place" > 
+            <div  class="col-lg-10" > 
                 <div class="text-center">
-                    <p><img  src="cartoon_owl.png" alt="owl" width="45" height="37">llie's nest</p>
+                    <p class="ollie"><img  src="cartoon_owl.png" alt="owl" width="45" height="37">llie's nest</p>
                 </div>
                 <div>
                     <center><img id="nestImage"  src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNumber" class="text-center"></h2></center>
@@ -666,15 +666,15 @@
                     <h1 class="heading_text">Post an Item</h1>
                 </div>
 
-   
-                <table class="table table-default panel panel-warning" >
+            <div class='table-responsive'>
+                <table class="table table-default panel panel-warning col-xs-4 col-s-4" >
                 	<tbody class="color2">
 						<tr>
-							<td width="600px">	
+							<td width='10%'>	
 								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
 									<div>
 										<label>Main Category</label>
-										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions()">
+										<select class="form-control" id="itemMainCategory" name="itemMainCategory" onchange="fridgeView.updateCategoryOptions('p')">
 											<option value="furniture"> Furniture </option>
 											<option value="appliances"> Appliances </option>
 											<option value="vehicles"> Vehicles </option>
@@ -701,11 +701,12 @@
 								<div class="panel" >
 									<div class="panel-heading color"><label class="color">Add up to 3 pictures for your item.</label></div>
 									<div class="panel-body color6">										
-										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(1)">
+										<input type="file" id="inputFileToLoad_1" name="image_1" accept="image/jpeg" capture="camera" onchange="fridgeApp.encodeImageFileAsURL(1)">
 										<div id="img_1"></div>
-										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(2)">
+										<input type="file" id="inputFileToLoad_2" name="image_2" accept="image/jpeg" capture=
+                                                                                "camera" onchange="fridgeApp.encodeImageFileAsURL(2)">
 										<div id="img_2"></div>
-										<input type="file" id="inputFileToLoad_3" name="image_3" accept="image/jpeg" onchange="fridgeApp.encodeImageFileAsURL(3)">
+										<input type="file" id="inputFileToLoad_3" name="image_3" accept="image/jpeg" capture="camera" onchange="fridgeApp.encodeImageFileAsURL(3)">
 										<div id="img_3"></div>										
 									</div>
 								</div>
@@ -761,15 +762,16 @@
 								</form>
 							</td>
 						</tr>
-                	</tbody>
-                </table>
+                                        </tbody>
+                                </table>
+                            </div>
             </div>
         </div>
 <!--Edit Item Page -->
         <div id="edit-view" class="view">
             <div class="container">
                 <div class="page-header">
-                    <h1 class="heading_text">Post an Item</h1>
+                    <h1 class="heading_text">Editing Item</h1>
                 </div>
                 <table class="table table-default panel panel-warning">
                     <tbody class="color2">
@@ -778,7 +780,7 @@
                                 <form class="form-inline" role="form">
                                     <div class="form-group">
                                         <label>Choose Item Main Category</label>
-                                        <select class="form-control" id="editMainCategory" onchange="fridgeView.updateCategoryOptions()">
+                                        <select class="form-control" id="editMainCategory" onchange="fridgeView.updateCategoryOptions('edit')">
                                             <option value="furniture"> Furniture </option>
                                             <option value="appliances"> Appliances </option>
                                             <option value="vehicles"> Vehicles </option>
@@ -804,15 +806,15 @@
                                 </form>
                                 <br />
                                 <div class="panel color">
-                                    <div class="panel-heading color" ><label>Add up to 3 pictures for your item.</label></div>
-                                    <div class="panel-body color2">
+                                    <div class="panel-heading color" ><label>Changing Pictures is unavailable </label></div>
+                                    <!--<div class="panel-body color2">
                                         <input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg" />
                                         <div id="img_0"></div><br>
                                         <input id="inputFileToLoad_1" type="file" onchange="fridgeApp.encodeImageFileAsURL(1);" accept="image/jpeg" />
                                         <div id="img_1"></div><br>
                                         <input id="inputFileToLoad_2" type="file" onchange="fridgeApp.encodeImageFileAsURL(2);" accept="image/jpeg" />
                                         <div id="img_2"></div>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </td>
                             <td>
@@ -838,28 +840,28 @@
                                     </div>
                                     <div>
                                         <label>University</label>
-                                        <input type="text" class="form-control" id="editUniversity" placeholder=""/>
+                                        <input type="text" class="form-control" id="editUniversity" value=""/>
                                     </div>
                                     <div>
                                         <label>Location</label>
-                                        <input type="text" class="form-control" id="editLocation" placeholder=""/>
+                                        <input type="text" class="form-control" id="editLocation" value=""/>
                                     </div>
                                     <div>
                                         <label>Quantity</label>
-                                        <input type="number" class="form-control" id="editQuantity" placeholder=""/>
+                                        <input type="number" class="form-control" id="editQuantity" value=""/>
                                     </div>
                                     <div>
                                         <label>Desired Sell-By Date</label>
-                                        <input type="Date" class="form-control" id="editSellBy" placeholder=""/>
+                                        <input type="Date" class="form-control" id="editSellBy" value="" placeholder="" />
                                     </div>
                                     <div>
                                         <label for="editDesc">Description</label>
                                     </div>
                                     <div>
-                                        <textarea class="form-control" rows="4" id="editDesc" placeholder=""></textarea>
+                                        <textarea class="form-control" rows="4" id="editDesc" value=""></textarea>
                                     </div>
                                     <div >
-                                        <center><button type="submit" class="dark_brown" onclick="fridgeApp.updateItem()">Submit</button></center>
+                                        <center><button type="submit" class="dark_brown" id="submission" onclick="fridgeApp.updateItem(this)">Submit</button></center>
                                     </div>
                                 </form>
                             </td>

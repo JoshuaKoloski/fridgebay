@@ -18,7 +18,7 @@ var fridgeView = (function($){
         }
     }
 
-    function updateCategoryOptions(){
+    function updateCategoryOptions(type){
     	
     	var furniture = {
     		table : "Table",
@@ -96,7 +96,7 @@ var fridgeView = (function($){
     		comforter: "Comforter",
     		otherBed : "Other"
     	};
-		
+            if(type.match("post")){
 		var selectSub = $("#itemSubCategory");
 		$("#itemSubCategory").empty();
 		if ($("#itemMainCategory").val() == 'furniture') {
@@ -154,6 +154,65 @@ var fridgeView = (function($){
 				);
 			});
 		}
+            }else if(type.match("edit")){
+                var selectSub = $("#editSubCategory");
+                $("#editSubCategory").empty();
+                if ($("#editMainCategory").val() == 'furniture') {
+                        $.each(furniture, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'appliances') {
+                        $.each(appliances, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'vehicles') {
+                        $.each(vehicles, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'electronics') {
+                        $.each(electronics, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'cutlery') {
+                        $.each(cutlery, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'supplies') {
+                        $.each(supplies, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'books') {
+                        $.each(books, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'clothes') {
+                        $.each(clothes, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'bed') {
+                        $.each(bed, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                }
+            }
     }
 
     function sortItems(items) {
@@ -329,7 +388,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.status+
         "</td><td>"+ item.interested+
         "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
-        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
+        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.loadEdit(this)'>Edit</button>"+
         "</td></tr>";
         return row;
     }
@@ -337,12 +396,12 @@ var fridgeView = (function($){
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<div class='col-sm-5 col-md-6 panel panel-default' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'>"+displayImage(item.images)+
-        "<div class='panel-body'>"+
-        "Name: "+ item.name +
-        "<div> Price: $"+ item.price +
-        "</div><div>University: " + item.university +
-        "</div></div></div>"
+        "<div class='col-xs-6 col-s-6 col-md-6' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail'>"+displayImage(item.images)+ 
+        "<div class='caption' align='left'>"+
+        "<h1>"+ item.name +
+        "</h1><p> $"+ item.price +
+        "</p><p> Campus: " + item.university +
+        "</p></div></div></div>"
         return row;
     }
     
@@ -466,9 +525,9 @@ var fridgeView = (function($){
     function displayImage(images){
             var img = "";
             if(images.length != 0){
-                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image'/>";
+                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image' id='homeimg'/>";
             }else{
-                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'/>";
+                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'  width=100 height=100/>";
             }
             return img;
     }

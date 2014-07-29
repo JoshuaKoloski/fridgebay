@@ -100,26 +100,24 @@ var fridgeApp = (function($) {
 
     //loads edit page for an item
     function loadEdit(element){
-        console.log("Loading Edit Page");
-        id = element.getAttribute("sid");
-        item = myList.searchById(id);
-        document.getElementById("#editMainCategory").innerHTML = item.category;
-        document.getElementById("#editSubCategory")= item.subCategory;
-        document.getElementById("#editName") = item.name;
-        document.getElementById("#editPrice") = item.price;
-        document.getElementById("#editQuantity") = item.quantity;
-        document.getElementById("#editCondition")= item.condition;
-        document.getElementById("#ediSellBy") = item.sellBy;
-        document.getElementById("#editUniversity") = item.university;
-        document.getElementById("#editLocation") = item.location;
-        document.getElementById("#editDesc") = item.description;
+        var id = element.getAttribute("sid");
+        var item = myList.searchById(id);
+         $("#submission").attr("sid",id);
+        document.getElementById("editMainCategory").value = item.category;
+        $(document).ready(fridgeView.updateCategoryOptions('edit'));
+        document.getElementById("editSubCategory").value = item.subcategory;
+        document.getElementById("editName").value  = item.name;
+        document.getElementById("editPrice").value  = item.price;
+        document.getElementById("editQuantity").value  = item.quantity;
+        document.getElementById("editCondition").value = item.condition;
+        document.getElementById("editSellBy").value = item.sellBy;
+        document.getElementById("editUniversity").value  = item.university;
+        document.getElementById("editLocation").value  = item.location;
+        document.getElementById("editDesc").innerHTML  = item.description;
         showView("edit");
     }
     function updateItem(element){
-        console.log("CTRL Activated: Updating item with id " + element.getAttribute("sid"));
-        loadEdit(element);
-        myList.updateElement({
-            images: imageArray,
+        var item = {
             category: $("#editMainCategory").val(),
             subcategory: $("#editSubCategory").val(),
             name: $("#editName").val(),
@@ -130,8 +128,11 @@ var fridgeApp = (function($) {
             university: $("#editUniversity").val(),
             location: $("#editLocation").val(),
             description: $("#editDesc").val() 
-        });
+        };
+        myList.updateElement(element.getAttribute("sid"), item);
         reloadModel();
+        showView("home");
+        alert("Item has been successfully edited.")
     }
     function imageTextAlign(){
         $(document).ready(function(){
@@ -369,7 +370,8 @@ var fridgeApp = (function($) {
         updateItem: updateItem,
         pass:pass,
         deleteItem: deleteItem,
-        imageTextAlign: imageTextAlign
+        imageTextAlign: imageTextAlign,
+        loadEdit: loadEdit
     }
 
     return (fridgeApp);

@@ -237,7 +237,20 @@
 	text-transform: uppercase;
     padding-bottom:10px;
 }
-.place div p{
+.thumbnail img { height:120px; }
+.thumbnail { 
+    min-height:130px; 
+    max-height:300px;
+    background-color: #572f04;
+}
+.caption p{ 
+    color:white;
+}
+.caption h1{ 
+    font-size:20px;
+    color:white;
+}
+.ollie {
     font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	font-weight: normal;
     font-size: 2.5em;
@@ -249,6 +262,7 @@
 	text-transform: uppercase;
     padding-bottom:10px;
 }
+
 .changeImageColor:hover{
     background-color:#d4990d;
     
@@ -267,7 +281,7 @@
     font-weight:bold;
     font-style:italic;
 }
-.place div h2{
+#showNumber{
     position:absolute;
     color:red;
     clear:none;
