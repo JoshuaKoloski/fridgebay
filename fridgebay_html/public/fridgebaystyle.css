@@ -368,7 +368,13 @@ div div div .dark{
   background-color:#572f04;
 }
 
-
+.white{
+    color:white;
+}
+.white:hover{
+    color:#efcd9e;
+    text-decoration:underline;
+}
 
 
 
