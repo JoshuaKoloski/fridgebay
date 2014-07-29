@@ -216,7 +216,7 @@ var fridgeApp = (function($) {
         console.log("id: " + id);
         var userNest = user.interestList;
         userNest.push(item);
-        myList.updateCurrentUser(user._id, user)
+        myList.updateCurrentUser(id, user)
         console.log("user nest: " + userNest.length);
 
         //userNest.push();
