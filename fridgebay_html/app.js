@@ -1,153 +1,141 @@
 #!/usr/bin/env node --harmony
 
 /***
- firstServer.js
- This is a simple server illustrating middleware and basic REST functionality
- This demo also adds the mongo database connection, but everything is in one file
- on the server side. We will break this out so that it has model/view/controller on
- the server and client in the next demo...
  ***/
 
 'use strict';
 var express = require('express');
 var bodyParser = require('body-parser'); // this allows us to pass JSON values to the server (see app.put below)
 var app = express();
-
-var monk = require('monk');
-var db = monk('localhost:27017/shopping');
-
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-
-var redisClient = require('redis').createClient();
-var RedisStore = require('connect-redis')(session);
+var logfmt = require("logfmt");
+var mongoose = require('mongoose');
+var uriUtil = require('mongodb-uri');
+var cloudinary = require('cloudinary');
 
 
-var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
-
-var authed = function(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    } else {
-        res.redirect('/login.html');
-    }
-    /*
-    if (redisClient.ready) {
-        res.json(403, {
-            error: "forbidden",
-            reason: "not_authenticated"
-        });
-    } else {
-        res.json(503, {
-            error: "service_unavailable",
-            reason: "authentication_unavailable"
-        });
-    }
-    */
-};
-
-passport.serializeUser(function(user, done) {
-    done(null, user.identifier);
-});
-
-passport.deserializeUser(function(id, done) {
-    done(null, {
-        identifier: id
-    });
-});
-
-
-passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:3000/auth/google/return',
-    realm: 'http://localhost:3000/'
-}, function(identifier, profile, done) {
-    profile.identifier = identifier;
-    return done(null, profile);
-}));
-
-
-
-
+app.use(express.bodyParser());
+// serve static content from the public folder 
+app.use("/", express.static(__dirname + '/public'));
+app.use(logfmt.requestLogger());
 // parse the bodies of all other queries as json
 app.use(bodyParser.json());
 
 
+//Uri allows access to the mongo database on the heroku server
+var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
+var mongooseUri = uriUtil.formatMongoose(mongodbUri);
+
+mongoose.connect(mongooseUri);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+
+db.once('open', function callback () {
+    console.log("Database connected");
+});
+
+//Define Schemas for model 
+var itemsSchema = mongoose.Schema({
+        images: Array,
+        name: String,
+        price: Number,
+        description: String,
+        condition: String,
+        category: String,
+        subcategory: String,
+        location: String,
+        quantity: Number,
+        sellBy: Date,
+        status: Boolean, 
+        seller: String,
+        university: String,
+        interested: Number
+});
+
+var usersSchema = mongoose.Schema({
+    email: String,
+    phone: String,
+    username: String,
+    nest: Array,
+    contact: Boolean,
+    sell: Array
+});
+
+var item = mongoose.model('items', itemsSchema);
+var user = mongoose.model('users', usersSchema);
+
 // log the requests
 app.use(function(req, res, next) {
     console.log('%s %s %s', req.method, req.url, JSON.stringify(req.body));
-    //console.log("myData = "+JSON.stringify(myData));
     next();
 });
 
-
-// start using sessions...
-//app.use(session({ secret: 'jfjfjfjf89fd89sd90s4j32kl' }));
-app.use(cookieParser());
-app.use(session({
-    secret: 'unguessable',
-    store: new RedisStore({
-        client: redisClient
-    })
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-// serve static content from the public folder 
-app.use("/",  express.static(__dirname + '/public'));
-
-app.use("/secret",authed, function(req,res){
-    res.redirect("http://www.brandeis.edu");
-})
-
-app.get('/auth/google/:return?', passport.authenticate('google', {
-    successRedirect: '/'
-}));
-app.get('/auth/logout', function(req, res) {
-    req.logout();
-    res.redirect('/');
+//configure cloudinary
+cloudinary.config({ 
+  cloud_name: 'hllzrkglg', 
+  api_key: '518419884741297', 
+  api_secret: 'NRLgdFtnpweF3h0OFa63s0a0BbU' 
 });
 
-app.use(authed, function(req,res,next){
-    next()    
+//this post uploads an item and saves it
+app.post('/uploadItem', function(req, res) {
+
+        var images = [];
+        
+        cloudinary.uploader.upload(req.files.image_1.path, function(result) { 
+                if (req.files.image_1.size != 0) {
+                        images[images.length] = result.public_id;
+                }
+
+                        cloudinary.uploader.upload(req.files.image_2.path, function(result) { 
+                                if (req.files.image_2.size != 0) {
+                                        images[images.length] = result.public_id;
+                                }
+
+                                cloudinary.uploader.upload(req.files.image_3.path, function(result) { 
+                                        if (req.files.image_3.size != 0) {
+                                                images[images.length] = result.public_id;
+                                        }
+
+                                        new item({
+                                                images: images,
+                                                name: req.body.itemName,
+                                                price: req.body.itemPrice,
+                                                description: req.body.itemDesc,
+                                                condition: req.body.itemCondition,
+                                                category: req.body.itemMainCategory,
+                                                subcategory: req.body.itemSubCategory,
+                                                location: req.body.itemLocation,
+                                                quantity: req.body.itemQuantity,
+                                                sellBy: req.body.itemSellBy,
+                                                status: false,
+                                                seller: req.body.itemSeller,
+                                                university: req.body.itemUniversity,
+                                                interested: 0
+                                        }).save();
+                
+                                        res.redirect('/');
+                        })
+                })                      
+        });
 });
 
-
-
-
-app.get('/api/user', authed, function(req, res) {
-    res.json(req.user);
-});
-
-app.get('/api/:name', function(req, res) {
-    res.json(200, {
-        "hello": req.params.name,
-        "userid": req.user
-    });
-});
 
 
 // get a particular item from the model
 app.get('/model/:collection/:id', function(req, res) {
-    var collection = db.get(req.params.collection);
-    collection.find({
-        _id: req.params.id
-    }, {}, function(e, docs) {
-        console.log(JSON.stringify(docs));
-        if (docs.length > 0) res.json(200, docs[0]);
-        else res.json(404, {});
-    })
+    mongoose.model(req.params.collection).find({_id:req.params.id}, function(err, item){
+        res.send(item);
+    });
 });
-
 
 // get all items from the model
 app.get('/model/:collection', function(req, res) {
-    var collection = db.get(req.params.collection);
-    collection.find({}, {}, function(e, docs) {
-        console.log(JSON.stringify(docs));
-        res.json(200, docs);
-    })
+    mongoose.model(req.params.collection).find(function(err,items){
+        res.send(items)
+    });
 });
 
 // change an item in the model
@@ -158,35 +146,47 @@ app.put('/model/:collection/:id', function(req, res) {
     });
 });
 
-// add new item to the model
-// in this example we show how to use javascript promises
-// to simply asynchronous calls
+
+//Add new item to database
 app.post('/model/:collection', function(req, res) {
     console.log("post ... " + JSON.stringify(req.body));
-    var collection = db.get(req.params.collection);
-    var promise = collection.insert(req.body);
-    promise.success(function(doc) {
-        res.json(200, doc)
-    });
-    promise.error(function(error) {
-        res.json(404, error)
-    });
+    console.log(images);    
+    new item({
+        images: [],
+        name: req.body.itemName,
+        price: req.body.itemPrice,
+        description: req.body.itemDesc,
+        condition: req.body.itemCondition,
+        category: req.body.itemMainCategory,
+        subcategory: req.body.itemSubCategory,
+        location: req.body.itemLocation,
+        quantity: req.body.itemQuantity,
+        sellBy: req.body.itemSellBy,
+        status: false,
+        seller: req.body.itemSeller,
+        university: req.body.itemUniversity,
+        interested: 0
+    }).save();
 });
 
 // delete a particular item from the model
-app.delete('/model/:collection/:id', function(req, res) {
+app.delete('/model/:collection/:id', function (req, res) {
     var id = req.params.id;
-    console.log("deleting " + id);
-    var collection = db.get(req.params.collection);
-    collection.remove({
-        _id: id
-    });
+    //delete item images from cloudinary
+    mongoose.model(req.params.collection).find({_id:id}, function( err, item ){
+        for (var i=0; i<item[0].images.length; i++) {
+                cloudinary.uploader.destroy(item[0].images[i], function(result) { console.log(result) });
+        }
+    })
+    //delete item from database
+    mongoose.model(req.params.collection).remove({_id:id}, function( err, item ){
+                if(err) throw err;
+                else console.log("Deleting Item: ID_" + req.params.id);
+        })
     res.json(200, {});
 });
-
-
-// listen on port 3000
-var port = 3000;
-app.listen(port, function() {
-    console.log("server is listening on port " + port);
+  
+//Sets port to 3000 for local host while using the port that heroku dynamically sets 
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
