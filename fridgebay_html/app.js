@@ -123,7 +123,7 @@ passport.use(new GoogleStrategy({
             user.phone = "none";
             user.name = profile.displayName;
             var emails = profile.emails;
-            user.email = emails;
+            user.email = emails[0].value;
             user.interestList=[];               
 
             // store a new user ....
@@ -134,7 +134,7 @@ passport.use(new GoogleStrategy({
             // the user has been here before and there should only be one user
             // matching the query (user[0]) so pass user[0] as user ...
             console.log("Google Strategy .. user = " + JSON.stringify(user));
-            done(err, user[0]);
+            done(err, userList[0]);
         }
     });
 }));
@@ -167,7 +167,7 @@ app.use(passport.session());
 
 app.get('/auth/google/:return?', passport.authenticate('google', {
     successRedirect: '/',
-    failureRedirect: '/login.html'
+    failureRedirect: '/'
 }));
 
 

@@ -14,6 +14,13 @@ var fridgeApp = (function($) {
        
     };
     
+    var setView = function(){
+        var v = window.location.hash.substring(1);
+        if (v=="")
+          v="home";
+        showView(v);
+    }
+    
     function showAlert() {
         console.log("clicked");
         alert("You have 2 new messages");
@@ -196,14 +203,11 @@ var fridgeApp = (function($) {
 		return myList.currentUser;
 	}
     function getUserName() {
-        var name = JSON.stringify(myList.currentUser.name);
-        var newName = "" + name;
-        console.log("the name returned by getUserName is " + newName.substring(1, newName.length - 1));
-        return newName.substring(1, newName.length - 1);
+        return myList.currentUser.name;
     }
     function getUserEmail() {
-        var email = JSON.stringify(myList.currentUser.email) + "";
-        return email.substring(11, email.length - 3);
+
+        return myList.currentUser.email;
     }
     function getNestNumber() {
         return myList.currentUser.interestList.length;
@@ -225,8 +229,9 @@ var fridgeApp = (function($) {
         fridgeView.refreshProfile(myList.currentUser);
     }
     function start() {
+        setView();
         myList.loadModel();
-        showView('home');
+        //showView('home');
         imageTextAlign();
         enableSpeech();
     }
