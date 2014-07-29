@@ -217,6 +217,7 @@ var fridgeView = (function($){
 
 
         $("#item_tableBody").html(itemItemToRow(element));
+        $("#addToNest").html(itemAddToNest(element));
         $("#item_category").html(headingText(element));
         $("#item_images").html(imagesText(element));
         $("#item_status").html(statusText(element));
@@ -356,6 +357,9 @@ var fridgeView = (function($){
         "<tr><td><label>Condition</label></td><td><label>" + item.condition + "</label></td></tr>"+
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
+    }
+    function itemAddToNest(item) {
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this)'>Add to Nest</button>";
     }
 
     function profileToRow(currentUser) {

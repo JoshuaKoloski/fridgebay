@@ -209,8 +209,17 @@ var fridgeApp = (function($) {
         return myList.currentUser.interestList.length;
     }
     function addToNest(element) {
-        var userNest = getUser().interestList;
-        userNest.push();
+        var item = myList.searchById(element.getAttribute("sid"));
+        console.log("searching for item returns " + JSON.stringify(item))
+        var user = getUser();
+        var id = getUser()._id;
+        console.log("id: " + id);
+        var userNest = user.interestList;
+        userNest.push(item);
+        myList.updateCurrentUser(user._id, user)
+        console.log("user nest: " + userNest.length);
+
+        //userNest.push();
     }
     function refreshProfile() {
         fridgeView.refreshProfile(myList.currentUser);

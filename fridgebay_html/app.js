@@ -215,6 +215,7 @@ app.get('/auth/logout', function(req, res) {
 app.get('/api/user', function(req, res) {
     res.json(req.user);
 });
+
 //**********************************************************
 
 //this post uploads an item and saves it
@@ -275,6 +276,22 @@ app.get('/model/:collection/:id', function(req, res) {
 app.get('/model/:collection', function(req, res) {
     mongoose.model(req.params.collection).find(function(err, items) {
         res.send(items)
+    });
+});
+
+app.put('/model/user2/:id', function(req, res) {
+    mongoose.model(req.params.collection).findByIdAndUpdate(req.params.id, {
+        $set: {
+            openID: req.body.openID,
+            profile: req.body.profile,
+            name:req.body.name,
+            email:req.body.email,
+            phone: req.body.phone,
+            interestList: req.body.interestList
+        }
+    }, function(err, user2) {
+        if (err) return handleError(err);
+        res.send(user2);
     });
 });
 

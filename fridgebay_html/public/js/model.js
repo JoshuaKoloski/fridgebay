@@ -31,6 +31,17 @@ Information.prototype.getElement = function(id){
     }
 };
 
+Information.prototype.getCurrentUser = function (openID) {
+    var user;
+    var i;
+    for (i = 0; i < this.currentUser.length; i++) {
+        user = this.currentUser[i];
+        if (user.openID == openID) {
+            return (user);
+        }
+    }
+};
+
 Information.prototype.searchById = function (id){
     var myList = this;
     var len = myList.items.length;
@@ -120,6 +131,19 @@ Information.prototype.updateElement = function(id,newItem){
         dataType: "json"
     }).done(function(items) {
         myList.loadItems();
+    });
+}
+
+Information.prototype.updateCurrentUser = function (id,currentUser) {
+    var myList = this;
+    $.ajax({
+        type: "PUT",
+        url: "/model/user2"+id,
+        data: JSON.stringify(currentUser),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function (items) {
+        myList.loadCurrentUser();
     });
 }
 
