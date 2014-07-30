@@ -62,7 +62,7 @@ var userSchema = mongoose.Schema({
     name:String,
     email:String,
     phone: String,
-    interestList: Array // of itemIDs ...
+    interestList: Array,
     
 });
 
@@ -125,7 +125,7 @@ passport.use(new GoogleStrategy({
             var emails = profile.emails;
             user.email = emails[0].value;
             user.interestList=[];               
-
+            user.sellingList=[];
             // store a new user ....
             new user2(user).save();
             //console.log("inserted user");
@@ -279,19 +279,10 @@ app.get('/model/:collection', function(req, res) {
     });
 });
 
-app.put('/model/user2/:id', function(req, res) {
-    mongoose.model(req.params.collection).findByIdAndUpdate(req.params.id, {
-        $set: {
-            openID: req.body.openID,
-            profile: req.body.profile,
-            name:req.body.name,
-            email:req.body.email,
-            phone: req.body.phone,
-            interestList: req.body.interestList
-        }
-    }, function(err, user2) {
-        if (err) return handleError(err);
-        res.send(user2);
+app.put('/model/:user2/:id', function(req, res) {
+    mongoose.model(req.params.user2).findByIdAndUpdate(req.params.id,req.body, function (err, raw, user) {
+        console.log('The raw response from Mongo was ', raw)
+        res.json(200, {});
     });
 });
 

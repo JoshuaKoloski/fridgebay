@@ -284,6 +284,8 @@ var fridgeView = (function($){
 
     }
 
+    
+
     function refreshProfile(currentUser) {
         $(".profileInfo").html(profileToRow(currentUser));
         showNestNumber(currentUser.interestList.length);
@@ -420,6 +422,7 @@ var fridgeView = (function($){
     function itemAddToNest(item) {
         return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this)'>Add to Nest</button>";
     }
+   
 
     function profileToRow(currentUser) {
         var row =
