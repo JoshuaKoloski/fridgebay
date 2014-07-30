@@ -200,10 +200,10 @@ var fridgeView = (function($){
     }
 
 
-    function refreshItemItems(element, myList) {
+    function refreshItemItems(elementId, myList) {
         var list = myList.items;
-        console.log("myList[1]= " + JSON.stringify(list[1]));
-        var element = myList.searchById(element)
+        var element = myList.searchById(elementId);
+         console.log("View Item= " + JSON.stringify(element));
         
         fridgeApp.showView('item');
 

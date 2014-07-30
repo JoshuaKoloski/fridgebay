@@ -11,6 +11,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/model.js"></script>
     <script src="js/view.js"></script>
+    <script src="js/fridgeSpeech.js"></script>
     <script src="js/controller.js"></script>
 
     <link href="fonts/glyphicons-halflings-regular.ttf" rel="stylesheet"/>
@@ -20,7 +21,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <script src="js/annyang.js"></script>
 </head>
 <body>
@@ -29,7 +29,6 @@
             <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             <div>Speech recognition state: <span class="myStateText myErrorText">Not start yet</span></div>
             <button class="myStartButton btn btn-primary btn-sm">Start speech interaction!</button>
-            <button class="btn btn-default btn-sm" onclick="fridgeApp.homeChooseItem(0)">Choose Item</button>
             <nav class="navbar navbar-warning pull-right clear" role="navigation">
                 <div class="container-fluid">
                     <div class="collapse navbar-collapse">
@@ -47,17 +46,22 @@
         <div class="row">
 			<div id="speechInstructions" class="alert alert-warning hidden alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<h4>Ollie's Speech Instructions: </h4>
+				<h4>Ollie's KEY COMMANDS</h4>
 				<ol>
-					<li>"Show speech instructions" to see speech instructions</li>
-					<li>"Post an item" to post an item</li>
-					<li>"Back to home page" to go back to home page</li>
-					<li>"Go to login page" to login or register</li>
-					<li>"Search by university" + [university] to filter by university [university]</li>
-					<li>"Search by price" + [price] to see items cheaper than $[price]</li>
-					<li>"Search by name" + [item name] to see items with their name containing [item name]</li>
-					<li>"Search by category" + [category] to see items in the category</li>
-					<li>"search by sub category" + [subcategory] to see items in the subcategory</li>
+					<li>The '*' stands for a variable</li>
+					<li>The '/' stands for or</li>
+					<li>The '()' stands for a optional choice</li>
+					<li>show/hide speech instructions</li>
+					<li>go to * page</li>
+					<li>browse/browsing/look at/go over items (with information read)</li>
+					<li>sort/search by name/university/price/category/sub-category *</li>
+					<li>clear name/university/price/category filter</li>
+					<li>all category</li>			
+					<li>stop browsing</li>
+					<li>continue/resume browsing</li>
+					<li>end browsing</li>
+					<li>next/previous item</li>
+					<li>view/open/click item</li>
 				</ol>
 			</div>
 		</div>
@@ -338,7 +342,7 @@
                     <label><input id="schoolCutoffHome" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"></label>
                 </div>
                 <div class="col-lg-4 pos">
-                    <label ><input id="priceCutoffHome" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
+                    <label ><input id="priceCutoffHome" type=number min=0 class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
                 </div>
             </div>
             <div class="row-fluid">
