@@ -44,8 +44,13 @@ var fridgeApp = (function($) {
         fridgeView.refreshNestTable(getUser().interestList);
         $("#dropdown_button").text("Interested In");
     }
-    function showViewItem() {
-        showView('item');
+
+    function refreshSellingTable() {
+        $("#dropdown_button").text("Selling");
+    }
+    function showViewProfile() {
+        showView('profile');
+        refreshProfile();
     }
 
     $(function () {
@@ -372,7 +377,9 @@ var fridgeApp = (function($) {
         getNestNmber: getNestNumber,
         getUserId:getUserId,
         addToNest: addToNest,
-        refreshNestTable:refreshNestTable,
+        showViewProfile: showViewProfile,
+        refreshNestTable: refreshNestTable,
+        refreshSellingTable: refreshSellingTable,
         refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,

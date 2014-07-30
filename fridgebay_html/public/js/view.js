@@ -446,7 +446,7 @@ var fridgeView = (function($){
         return row;
     }
     function itemAddToNest(item) {
-        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this)'>Add to Nest</button>";
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.showViewProfile()'>Add to Nest</button>";
     }
    
 
