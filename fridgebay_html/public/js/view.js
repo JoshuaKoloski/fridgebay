@@ -509,7 +509,7 @@ var fridgeView = (function($){
     }
     
     function showImage(item, i){
-        return "<div class='border' >"+
+        return "<div class='border' data-toggle=tooltip" data-placement="left" title="Tooltip on left">"+
             "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
             "</div>"
     }
