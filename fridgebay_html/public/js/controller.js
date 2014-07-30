@@ -4,14 +4,16 @@ var fridgeApp = (function($) {
 
     // first create the model
     var myList = new Information();
+    //Checks if browser was opened on a laptop or phone
+    var mediaCheck = function(){
+        var mq = window.matchMedia( "(max-width: 500px)" );
+        return mq;
+    }
     
     var showView = function (selected) {
         console.log("VIEW IS SHOWN");
       window.location.hash = '#' + selected;
       $('.view').hide().filter('#' + selected + '-view').show();
-
-     
-       
     };
     
     var setView = function(){
@@ -230,6 +232,7 @@ var fridgeApp = (function($) {
         fridgeView.refreshProfile(myList.currentUser);
     }
     function start() {
+        mediaCheck();
         setView();
         myList.loadModel();
         //showView('home');
@@ -371,7 +374,8 @@ var fridgeApp = (function($) {
         pass:pass,
         deleteItem: deleteItem,
         imageTextAlign: imageTextAlign,
-        loadEdit: loadEdit
+        loadEdit: loadEdit, 
+        mediaCheck: mediaCheck
     }
 
     return (fridgeApp);
