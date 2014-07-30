@@ -251,6 +251,7 @@ var fridgeApp = (function($) {
 
         myList.updateCurrentUser(id, newUser);
         refreshView();
+        refreshNestTable();
         console.log("user nest: " + user.interestList.length);
     }
  
