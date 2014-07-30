@@ -101,7 +101,7 @@ Information.prototype.loadCurrentUser = function () {
         myInfo.currentUser = currentUser;
         //info.user = userData;
         console.log("user = " + JSON.stringify(myInfo.currentUser));
-        fridgeView.refreshView(myInfo); 
+        fridgeView.refreshView(myInfo);
         //console.log("profile="+JSON.parse(info.profile));
     });
 

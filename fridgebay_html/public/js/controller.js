@@ -93,7 +93,7 @@ var fridgeApp = (function($) {
     	}
     	console.log("images = "+ imageArray);
     	
-        myList.addElement({
+        var el= myList.addElement({
             seller: myList.currentUser,
             images: imageArray,
             category: $("#itemMainCategory").val(),
@@ -107,6 +107,9 @@ var fridgeApp = (function($) {
             location: $("#itemLocation").val(),
             description: $("#itemDesc").val() 
         });
+
+        console.log("el: " + JSON.stringify(el));
+        //getUser().sellingList.push()
     }
 
     //loads edit page for an item
