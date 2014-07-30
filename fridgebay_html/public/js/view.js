@@ -275,8 +275,8 @@ var fridgeView = (function($){
         
         fridgeApp.showView('item');
         if(!mq.matches){
-            $("#carouselControls").html(carousel())
-        }
+            $("#carouselControls").html(carousel());
+        };
         
         $("#item_tableBody").html(itemItemToRow(element));
         $("#addToNest").html(itemAddToNest(element));
@@ -538,7 +538,7 @@ var fridgeView = (function($){
     }
     
     function showImage(item, i){
-        return "<div class='border' data-toggle=tooltip" data-placement="left" title="Tooltip on left">"+
+        return "<div class='border' data-toggle='tooltip' data-placement='left' title='Tooltip on left'>"+
             "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
             "</div>"
     }
