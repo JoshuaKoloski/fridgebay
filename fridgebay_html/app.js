@@ -213,7 +213,17 @@ app.get('/auth/logout', function(req, res) {
 
 // this returns the user info
 app.get('/api/user', function(req, res) {
-    res.json(req.user);
+
+    mongoose.model("user2").find({
+        _id: req.user["_id"]
+    }, function(err, items) {
+        console.log("user is "+JSON.stringify(item));
+        if (item.length > 0)
+          res.send(items[0]);
+        else
+          res.json(404,{});
+    });
+    //res.json(req.user);
 });
 
 //**********************************************************

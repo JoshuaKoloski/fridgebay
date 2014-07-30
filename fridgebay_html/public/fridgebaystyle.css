@@ -376,7 +376,11 @@ div div div .dark{
     text-decoration:underline;
 }
 
-
+/*@media (max-height:600px) and (max-width:680px) {
+    #itemImage{
+        width:30%;
+    }
+}*/
 
 
 

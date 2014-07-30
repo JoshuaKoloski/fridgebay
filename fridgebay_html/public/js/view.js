@@ -266,15 +266,18 @@ var fridgeView = (function($){
         showNumber(len);
     }
 
-
+    //Loads the item page with an items information
     function refreshItemItems(element, myList) {
+        var mq = fridgeApp.mediaCheck();
         var list = myList.items;
         console.log("myList[1]= " + JSON.stringify(list[1]));
         var element = myList.searchById(element);
         
         fridgeApp.showView('item');
-
-
+        if(!mq.matches){
+            $("#carouselControls").html(carousel());
+        };
+        
         $("#item_tableBody").html(itemItemToRow(element));
         $("#addToNest").html(itemAddToNest(element));
         $("#item_category").html(headingText(element));
@@ -282,6 +285,15 @@ var fridgeView = (function($){
         $("#item_status").html(statusText(element));
         $("#item_sellBy").html(sellText(element));
 
+    }
+    //Loads the carousel controls onto item page
+    function carousel(){
+        return "<a class='left carousel-control' href='#carousel-example-generic' role='button' data-slide='prev'>" +
+                "<span class='glyphicon glyphicon-chevron-left'></span>" +
+                "</a>" +
+                "<a class='right carousel-control' href='#carousel-example-generic' role='button' data-slide='next'>"+
+                "<span class='glyphicon glyphicon-chevron-right'></span>"+
+                "</a>"
     }
 
     
@@ -473,43 +485,62 @@ var fridgeView = (function($){
     }
     
     function imagesText(item){    
-    	if (item.images.length == 0) {
-    		return "<img src='http://atrium.ipet.gr/atrium_catalogue/images/large_noImage.gif' alt='No picture' width=600 height=450>";
-    	} else if (item.images.length == 1) {
-    		return "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>";
-    	} else if (item.images.length == 2) {
-    		return ""+
-    		"<ol class='carousel-indicators'>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
-			"</ol>"+
-			"<div class='carousel-inner'>"+
-				"<div class='item active'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-				"<div class='item'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-			"</div>";
-    	} else { //item.images.length == 3
-    		return ""+
-    		"<ol class='carousel-indicators'>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=2></li>"+
-			"</ol>"+
-			"<div class='carousel-inner'>"+
-				"<div class='item active'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
-				"</div>"+ 
-				"<div class='item'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-				"<div class='item'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[2]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-			"</div>";
-    	}
+        var mq= fridgeApp.mediaCheck();
+        if(!mq.matches){
+            if (item.images.length == 0) {
+                    return "<img src='http://atrium.ipet.gr/atrium_catalogue/images/large_noImage.gif' alt='No picture' width=600 height=450>";
+            } else if (item.images.length == 1) {
+                    return "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>";
+            } else if (item.images.length == 2) {
+                    return ""+
+                    "<ol class='carousel-indicators'>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+                            "</ol>"+
+                            "<div class='carousel-inner'>"+
+                                    "<div class='item active'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                                    "<div class='item'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                            "</div>";
+            } else { //item.images.length == 3
+                    return ""+
+                    "<ol class='carousel-indicators'>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=2></li>"+
+                            "</ol>"+
+                            "<div class='carousel-inner'>"+
+                                    "<div class='item active'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+ 
+                                    "<div class='item'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                                    "<div class='item'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[2]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                            "</div>";
+            }
+        }else if(mq.matches){
+            if(item.images.length != 0){
+                images ="";
+                for(i=0; i< item.images.length; i++){
+                    images += showImage(item, i);
+                }
+                return images;
+            }else{
+                return "<p> No Images Available </p>"
+            }
+        }
+    }
+    
+    function showImage(item, i){
+        return "<div class='border' data-toggle='tooltip' data-placement='left' title='Tooltip on left'>"+
+            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
+            "</div>"
     }
     
     function headingText(item) {
