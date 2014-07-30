@@ -296,10 +296,16 @@ var fridgeView = (function($){
                 "</a>"
     }
 
+    
+
     function refreshProfile(currentUser) {
         $(".profileInfo").html(profileToRow(currentUser));
         showNestNumber(currentUser.interestList.length);
         //showNestNumber(2);
+    }
+
+    function refreshNestTable(nest) {
+        $("#profileTable").html(nestToRow(nest));
     }
    
     function showNumber(length) {  
@@ -429,9 +435,32 @@ var fridgeView = (function($){
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
-    function itemAddToNest(item) {
-        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this)'>Add to Nest</button>";
+
+    function nestToRow(nest) {
+        var row="";
+        console.log("the length of the nest is: " + nest.length);
+        for (var i=0;i<nest.length;i++){
+            var itemName = nest[i].name;
+            var photo = nest[i].images[0];
+            var price = nest[i].price;
+            var university = nest[i].university;
+            var id = nest[i].id;
+            console.log("id = " + id);
+            row=row+
+            "<tr class='changeImageColor'>"+
+            "<td><label>"+itemName+"</label></td>"+
+            "<td><label>"+photo+"</label></td>"+
+            "<td><label>$"+price+"</label></td>"+
+            "<td><label>"+university+"</label></td>"+
+            "<td><button class='dark_brown' sid='"+id+"' onclick=fridgeApp.pass(this)>view</button></td></tr>"
+        }
+
+        return row;
     }
+    function itemAddToNest(item) {
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.showViewProfile()'>Add to Nest</button>";
+    }
+   
 
     function profileToRow(currentUser) {
         var row =
@@ -590,6 +619,7 @@ var fridgeView = (function($){
     fridgeView={
         refreshView: refreshView,
         refreshProfile: refreshProfile,
+        refreshNestTable:refreshNestTable,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,

@@ -42,7 +42,18 @@ var fridgeApp = (function($) {
     function accessLoginPage() {
         window.location = 'auth/google/'
     }
+    function refreshNestTable() {
+        fridgeView.refreshNestTable(getUser().interestList);
+        $("#dropdown_button").text("Interested In");
+    }
 
+    function refreshSellingTable() {
+        $("#dropdown_button").text("Selling");
+    }
+    function showViewProfile() {
+        showView('profile');
+        refreshProfile();
+    }
 
     $(function () {
         $('#notify').popover(
@@ -202,15 +213,18 @@ var fridgeApp = (function($) {
         var profile = JSON.stringify(myList.currentUser.profile)
         var name = JSON.stringify(myList.currentUser.name);
         var email = JSON.stringify(myList.currentUser.email) + "";
-        console.log("the email returned by getUser is " + email.substring(11,email.length-3));
+        console.log("the email returned by getUserEmail is " + getUserEmail());
 		return myList.currentUser;
 	}
     function getUserName() {
         return myList.currentUser.name;
     }
     function getUserEmail() {
-
         return myList.currentUser.email;
+    }
+    function getUserId() {
+        console.log("id: "+ myList.currentUser._id);
+        return myList.currentUser._id;
     }
     function getNestNumber() {
         return myList.currentUser.interestList.length;
@@ -219,15 +233,24 @@ var fridgeApp = (function($) {
         var item = myList.searchById(element.getAttribute("sid"));
         console.log("searching for item returns " + JSON.stringify(item))
         var user = getUser();
-        var id = getUser()._id;
-        console.log("id: " + id);
-        var userNest = user.interestList;
-        userNest.push(item);
-        myList.updateCurrentUser(id, user)
-        console.log("user nest: " + userNest.length);
+        var id = getUserId();
+        user.interestList.push(item);
+        var nest=user.interestList;
 
-        //userNest.push();
+        var newUser= {
+            openID: user.openID,
+            profile: user.profile,
+            name:getUserName(),
+            email:getUserEmail(),
+            phone: user.phone,
+            interestList: nest,
+        };
+
+        myList.updateCurrentUser(id, newUser);
+        refreshView();
+        console.log("user nest: " + user.interestList.length);
     }
+ 
     function refreshProfile() {
         fridgeView.refreshProfile(myList.currentUser);
     }
@@ -355,7 +378,11 @@ var fridgeApp = (function($) {
         getUserName: getUserName,
         getUserEmail: getUserEmail,
         getNestNmber: getNestNumber,
-        addToNest:addToNest,
+        getUserId:getUserId,
+        addToNest: addToNest,
+        showViewProfile: showViewProfile,
+        refreshNestTable: refreshNestTable,
+        refreshSellingTable: refreshSellingTable,
         refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,

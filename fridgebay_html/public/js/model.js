@@ -82,7 +82,7 @@ Information.prototype.loadUsers = function() {
 	// add users
     $.ajax({
         type: "GET",
-        url: "/model/users",
+        url: "/model/user2",
     }).done(function(users) {
         myInfo.users = users;
         users.map(function(x){x.id=x["_id"];});
@@ -101,6 +101,7 @@ Information.prototype.loadCurrentUser = function () {
         myInfo.currentUser = currentUser;
         //info.user = userData;
         console.log("user = " + JSON.stringify(myInfo.currentUser));
+        fridgeView.refreshView(myInfo); 
         //console.log("profile="+JSON.parse(info.profile));
     });
 
@@ -134,16 +135,17 @@ Information.prototype.updateElement = function(id, item){
     });
 }
 
-Information.prototype.updateCurrentUser = function (id,currentUser) {
+Information.prototype.updateCurrentUser = function (id,user) {
     var myList = this;
     $.ajax({
         type: "PUT",
-        url: "/model/user2"+id,
-        data: JSON.stringify(currentUser),
+        url: "/model/user2/"+id,
+        data: JSON.stringify(user),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
-    }).done(function (items) {
+    }).done(function (currentUser) {
         myList.loadCurrentUser();
+        myList.loadUsers();
     });
 }
 

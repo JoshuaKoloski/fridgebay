@@ -192,8 +192,7 @@
 													
 												</tbody>	
 											</table>
-                                            <div id="addToNest"></div>
-                                            
+                                            <div id="addToNest"></div>                                            
 										</p>
 								  	</div>
 								</div>							
@@ -563,7 +562,7 @@
                     <button class="btn btn-warning">New Post</button>
                 </div>
                
-                </div>
+                
                 <div class="row">
                     <div class="col-lg-4">
                         <div  class="checkbox-line doublePadding">
@@ -590,13 +589,13 @@
                             <center><img src="nest1.png" alt="owl" width="200" height="100"><h2 id="showNestNumber"></h2></center>
                         </div>
                         <div class="dropdown pull-right">
-                            <button data-toggle="dropdown" class="dropdown-toggle dark_brown pull-right">
-                                Interested In
+                            <button id="dropdown_button" data-toggle="dropdown" class="dropdown-toggle dark_brown pull-right">
+                                Sort Nest
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu pull-right">
-                                <li><a href="#">Interested In</a></li>
-                                <li><a href="#">Selling</a></li>
+                                <li><a href="#" onclick="fridgeApp.refreshNestTable()">Interested In</a></li>
+                                <li><a href="#" onclick="fridgeApp.refreshSellingTable()">Selling</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Your History</a></li>
                             </ul>
@@ -607,31 +606,13 @@
                                     <th>Name</th>
                                     <th>Photo</th>
                                     <th>Price</th>
-                                    <th>Location</th>
+                                    <th>University</th>
+                                    <th></th>
                                 </tr>
 
                             </thead>
-                            <tbody class="color2">
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><label>Fridge</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>$50</label></td>
-                                    <td><label>East</label></td>
-
-                                </tr>
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><label>Abnormal Psych Textbook</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>$60</label></td>
-                                    <td><label>Village</label></td>
-                                </tr>
-                                <tr class="changeImageColor" onclick="fridgeApp.showView('item')">
-                                    <td><label>Bike</label></td>
-                                    <td><label>Upload Photo</label></td>
-                                    <td><label>$70</label></td>
-                                    <td><label>Gosman</label></td>
-                                </tr>
-
+                            <tbody id="profileTable" class="color2">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -639,7 +620,7 @@
                </div>
 	
             </div>
-        
+        </div>
                 
         <div id="form-view" class="view">
             
@@ -652,7 +633,7 @@
                 <table class="table table-default panel panel-warning col-xs-4 col-s-4" >
                 	<tbody class="color2">
 						<tr>
-							<td width='10%'>	
+							<td id ="form_table" width='10%'>	
 								<form id="myForm" action="/uploadItem" method="POST" enctype="multipart/form-data">
 									<div>
 										<label>Main Category</label>
