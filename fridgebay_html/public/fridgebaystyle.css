@@ -237,7 +237,20 @@
 	text-transform: uppercase;
     padding-bottom:10px;
 }
-.place div p{
+.thumbnail img { height:120px; }
+.thumbnail { 
+    min-height:130px; 
+    max-height:300px;
+    background-color: #572f04;
+}
+.caption p{ 
+    color:white;
+}
+.caption h1{ 
+    font-size:20px;
+    color:white;
+}
+.ollie {
     font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
 	font-weight: normal;
     font-size: 2.5em;
@@ -249,6 +262,7 @@
 	text-transform: uppercase;
     padding-bottom:10px;
 }
+
 .changeImageColor:hover{
     background-color:#d4990d;
     
@@ -267,7 +281,7 @@
     font-weight:bold;
     font-style:italic;
 }
-.place div h2{
+#showNumber{
     position:absolute;
     color:red;
     clear:none;
@@ -296,11 +310,11 @@ div div div div div h4 a span:hover{
     cursor:pointer;
 }
 
-.home-item:hover{
+.home-item div div:hover{
 	background-color:#d4871d;
 	cursor:pointer;
 }
-.home-fake-hover{
+.home-fake-hover div div{
 	background-color:#d4871d;
 }
 .scroll{
@@ -344,7 +358,6 @@ div div div div div h4 a span:hover{
 }
 
 div div div .dark{
-    
   padding: 6px 12px;
   margin-bottom: 0;
   font-size: 20px;
@@ -362,9 +375,19 @@ div div div .dark{
   background-color:#572f04;
 }
 
+.white{
+    color:white;
+}
+.white:hover{
+    color:#efcd9e;
+    text-decoration:underline;
+}
 
-
-
+/*@media (max-height:600px) and (max-width:680px) {
+    #itemImage{
+        width:30%;
+    }
+}*/
 
 
 

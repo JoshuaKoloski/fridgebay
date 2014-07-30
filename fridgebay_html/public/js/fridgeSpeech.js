@@ -191,6 +191,7 @@ var fridgeSpeech = (function($) {
 			}
 			
 			var isRecording = false;
+			var speechButton = false;
 			$('.myStartButton').click(function () {
 				console.log("start button clicked!");
 				if (annyang) {
@@ -203,13 +204,29 @@ var fridgeSpeech = (function($) {
 						stopFlag = false;
 						trying = 0;
 						isRecording = false;
+						speechButton = false;
 						$('.myStartButton').text("Start speech interaction!");
 						$('.myStartButton').removeClass('btn-danger');		// turn off red class
 						$('.myStartButton').addClass('btn-primary');
 					} else {
-						annyang.start({autoRestart: true}); //start listening
+						speechButton = true;
+						var annyangInterval = setInterval(function(){
+							if (!speechButton){
+								clearInterval(annyangInterval);
+								alert("annyang interval cleared");
+							}
+							if (speechSynthesis.speaking){
+								annyang.abort();
+								isRecording = false;
+							} else {
+								if (!isRecording){
+									annyang.start({autoRestart: true});
+									isRecording = true;
+								}
+							}
+						}, 1000)
+
 						tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
-						isRecording = true;
 						$('.myStartButton').text("End speech interaction!");
 						$('.myStartButton').removeClass('btn-primary');		// turn on red class
 						$('.myStartButton').addClass('btn-danger');

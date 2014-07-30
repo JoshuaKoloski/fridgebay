@@ -1,9 +1,21 @@
 
 
 function Information(){
+  var info = this;
   this.items = [];
   this.users = [];
-  this.currentUser = "Lucy";
+  this.currentUser = [];
+  
+ /* 
+  $.ajax({
+      type: "GET",
+      url: "/api/user",
+  }).done(function(userData) {
+      info.user = userData;
+      console.log("user = "+JSON.stringify(info.user));
+      //console.log("profile="+JSON.parse(info.profile));
+  });*/
+
   
 };
 
@@ -15,6 +27,17 @@ Information.prototype.getElement = function(id){
         item = this.items[i];
         if(item.id == id){
             return(item);
+        }
+    }
+};
+
+Information.prototype.getCurrentUser = function (openID) {
+    var user;
+    var i;
+    for (i = 0; i < this.currentUser.length; i++) {
+        user = this.currentUser[i];
+        if (user.openID == openID) {
+            return (user);
         }
     }
 };
@@ -35,6 +58,7 @@ Information.prototype.searchById = function (id){
 Information.prototype.loadModel = function() {
     this.loadItems();
     this.loadUsers();
+    this.loadCurrentUser();
 };
 
 Information.prototype.loadItems = function() {
@@ -58,13 +82,29 @@ Information.prototype.loadUsers = function() {
 	// add users
     $.ajax({
         type: "GET",
-        url: "/model/users",
+        url: "/model/user2",
     }).done(function(users) {
         myInfo.users = users;
         users.map(function(x){x.id=x["_id"];});
 	//Loads model information into the view
         fridgeView.refreshView(myInfo); 
     });
+}
+
+Information.prototype.loadCurrentUser = function () {
+    var myInfo = this;
+
+    $.ajax({
+        type: "GET",
+        url: "/api/user",
+    }).done(function (currentUser) {
+        myInfo.currentUser = currentUser;
+        //info.user = userData;
+        console.log("user = " + JSON.stringify(myInfo.currentUser));
+        fridgeView.refreshView(myInfo); 
+        //console.log("profile="+JSON.parse(info.profile));
+    });
+
 }
 
 //this is not being used, but reserved for possible future usage.
@@ -82,16 +122,30 @@ Information.prototype.addElement = function(newItem){
     });
 }
 
-Information.prototype.updateElement = function(id,newItem){
+Information.prototype.updateElement = function(id, item){
     var myList = this;
     $.ajax({
         type: "PUT",
         url: "/model/items/"+id,
-        data: JSON.stringify(newItem),
+        data:JSON.stringify(item),
         contentType: "application/json; charset=utf-8",
         dataType: "json"
     }).done(function(items) {
         myList.loadItems();
+    });
+}
+
+Information.prototype.updateCurrentUser = function (id,user) {
+    var myList = this;
+    $.ajax({
+        type: "PUT",
+        url: "/model/user2/"+id,
+        data: JSON.stringify(user),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function (currentUser) {
+        myList.loadCurrentUser();
+        myList.loadUsers();
     });
 }
 

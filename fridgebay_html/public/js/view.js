@@ -8,9 +8,17 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
+        console.log("the current user is " + JSON.stringify(myData.currentUser));
+        console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
+
+        if ($.isEmptyObject(fridgeApp.getUser())) {
+            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
+        } else {
+            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+        }
     }
 
-    function updateCategoryOptions(){
+    function updateCategoryOptions(type){
     	
     	var furniture = {
     		table : "Table",
@@ -88,7 +96,7 @@ var fridgeView = (function($){
     		comforter: "Comforter",
     		otherBed : "Other"
     	};
-		
+            if(type.match("post")){
 		var selectSub = $("#itemSubCategory");
 		$("#itemSubCategory").empty();
 		if ($("#itemMainCategory").val() == 'furniture') {
@@ -146,6 +154,65 @@ var fridgeView = (function($){
 				);
 			});
 		}
+            }else if(type.match("edit")){
+                var selectSub = $("#editSubCategory");
+                $("#editSubCategory").empty();
+                if ($("#editMainCategory").val() == 'furniture') {
+                        $.each(furniture, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'appliances') {
+                        $.each(appliances, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'vehicles') {
+                        $.each(vehicles, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'electronics') {
+                        $.each(electronics, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'cutlery') {
+                        $.each(cutlery, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'supplies') {
+                        $.each(supplies, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'books') {
+                        $.each(books, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'clothes') {
+                        $.each(clothes, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                } else if ($("#editMainCategory").val() == 'bed') {
+                        $.each(bed, function(val, text) {
+                                selectSub.append(
+                                        $('<option></option>').val(val).html(text)
+                                );
+                        });
+                }
+            }
     }
 
     function sortItems(items) {
@@ -199,25 +266,53 @@ var fridgeView = (function($){
         showNumber(len);
     }
 
-
+	//Loads the item page with an items information
     function refreshItemItems(elementId, myList) {
+    	var mq = fridgeApp.mediaCheck();
         var list = myList.items;
         var element = myList.searchById(elementId);
-         console.log("View Item= " + JSON.stringify(element));
+        console.log("View Item= " + JSON.stringify(element));
         
         fridgeApp.showView('item');
-
-
+        if(!mq.matches){
+            $("#carouselControls").html(carousel());
+        };
+        
         $("#item_tableBody").html(itemItemToRow(element));
+        $("#addToNest").html(itemAddToNest(element));
         $("#item_category").html(headingText(element));
         $("#item_images").html(imagesText(element));
         $("#item_status").html(statusText(element));
         $("#item_sellBy").html(sellText(element));
 
     }
+    //Loads the carousel controls onto item page
+    function carousel(){
+        return "<a class='left carousel-control' href='#carousel-example-generic' role='button' data-slide='prev'>" +
+                "<span class='glyphicon glyphicon-chevron-left'></span>" +
+                "</a>" +
+                "<a class='right carousel-control' href='#carousel-example-generic' role='button' data-slide='next'>"+
+                "<span class='glyphicon glyphicon-chevron-right'></span>"+
+                "</a>"
+    }
+
+    
+
+    function refreshProfile(currentUser) {
+        $(".profileInfo").html(profileToRow(currentUser));
+        showNestNumber(currentUser.interestList.length);
+        //showNestNumber(2);
+    }
+
+    function refreshNestTable(nest) {
+        $("#profileTable").html(nestToRow(nest));
+    }
    
     function showNumber(length) {  
         $("#showNumber").html(length);
+    }
+    function showNestNumber(length) {
+        $("#showNestNumber").html(length);
     }
 
     function filterModelItems(items) {
@@ -311,7 +406,7 @@ var fridgeView = (function($){
         "</td><td>"+ item.status+
         "</td><td>"+ item.interested+
         "</td><td>" + "<button class='btn btn-default' type='button' sid='" + item._id + "' onclick='fridgeApp.deleteItem(this)'>Delete</button>" +
-        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.updateItem(this)'>Edit</button>"+
+        "</td><td>"+"<button class='btn btn-default' type='button' sid='"+item._id+"' onclick='fridgeApp.loadEdit(this)'>Edit</button>"+
         "</td></tr>";
         return row;
     }
@@ -319,12 +414,12 @@ var fridgeView = (function($){
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<div class='col-sm-5 col-md-6 panel panel-default home-item' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'>"+displayImage(item.images)+
-        "<div class='panel-body'>"+
-        "Name: "+ item.name +
-        "<div> Price: $"+ item.price +
-        "</div><div>University: " + item.university +
-        "</div></div></div>"
+        "<div class='col-xs-6 col-s-6 col-md-6 home-item' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail'>"+displayImage(item.images)+ 
+        "<div class='caption' align='left'>"+
+        "<h1>"+ item.name +
+        "</h1><p> $"+ item.price +
+        "</p><p> Campus: " + item.university +
+        "</p></div></div></div>"
         return row;
     }
     
@@ -340,45 +435,112 @@ var fridgeView = (function($){
         "<tr><td><label>Description</label></td><td><label>" + item.description + "</label></td></tr>";
         return row;
     }
+
+    function nestToRow(nest) {
+        var row="";
+        console.log("the length of the nest is: " + nest.length);
+        for (var i=0;i<nest.length;i++){
+            var itemName = nest[i].name;
+            var photo = nest[i].images[0];
+            var price = nest[i].price;
+            var university = nest[i].university;
+            var id = nest[i].id;
+            console.log("id = " + id);
+            row=row+
+            "<tr class='changeImageColor'>"+
+            "<td><label>"+itemName+"</label></td>"+
+            "<td><label>"+photo+"</label></td>"+
+            "<td><label>$"+price+"</label></td>"+
+            "<td><label>"+university+"</label></td>"+
+            "<td><button class='dark_brown' sid='"+id+"' onclick=fridgeApp.pass(this)>view</button></td></tr>"
+        }
+
+        return row;
+    }
+    function itemAddToNest(item) {
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.showViewProfile()'>Add to Nest</button>";
+    }
+   
+
+    function profileToRow(currentUser) {
+        var row =
+ 
+         "<tbody> <tr>"+
+               "<td><b>Username</b></td>"+
+                "<td class ='white'>"+fridgeApp.getUserName() +
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a>"+
+               " </td></tr>"+
+           "<tr>"+
+                "<td><b>Email</b></td>"+
+                "<td class='white'>" + fridgeApp.getUserEmail() +
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a></td>"+
+            "</tr>"+
+            "<tr>" +
+                "<td><b>Phone</b></td>"+
+                "<td class='white'>765-978-1234"+
+                    "<a class='pull-right'><span class='glyphicon glyphicon-pencil' onclick='fridgeApp.showView('item')'></span></a></td>"+
+            "</tr>"+
+        "</tbody>";
+        return row;
+    }
     
     function imagesText(item){    
-    	if (item.images.length == 0) {
-    		return "<img src='http://atrium.ipet.gr/atrium_catalogue/images/large_noImage.gif' alt='No picture' width=600 height=450>";
-    	} else if (item.images.length == 1) {
-    		return "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>";
-    	} else if (item.images.length == 2) {
-    		return ""+
-    		"<ol class='carousel-indicators'>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
-			"</ol>"+
-			"<div class='carousel-inner'>"+
-				"<div class='item active'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-				"<div class='item'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-			"</div>";
-    	} else { //item.images.length == 3
-    		return ""+
-    		"<ol class='carousel-indicators'>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
-				"<li data-target='#carousel-example-generic' data-slide-to=2></li>"+
-			"</ol>"+
-			"<div class='carousel-inner'>"+
-				"<div class='item active'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
-				"</div>"+ 
-				"<div class='item'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-				"<div class='item'>"+
-					"<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[2]+".jpg alt='No picture' width=600>"+
-				"</div>"+
-			"</div>";
-    	}
+        var mq= fridgeApp.mediaCheck();
+        if(!mq.matches){
+            if (item.images.length == 0) {
+                    return "<img src='http://atrium.ipet.gr/atrium_catalogue/images/large_noImage.gif' alt='No picture' width=600 height=450>";
+            } else if (item.images.length == 1) {
+                    return "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>";
+            } else if (item.images.length == 2) {
+                    return ""+
+                    "<ol class='carousel-indicators'>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+                            "</ol>"+
+                            "<div class='carousel-inner'>"+
+                                    "<div class='item active'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                                    "<div class='item'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                            "</div>";
+            } else { //item.images.length == 3
+                    return ""+
+                    "<ol class='carousel-indicators'>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=0 class='active'></li>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=1></li>"+
+                                    "<li data-target='#carousel-example-generic' data-slide-to=2></li>"+
+                            "</ol>"+
+                            "<div class='carousel-inner'>"+
+                                    "<div class='item active'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[0]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+ 
+                                    "<div class='item'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[1]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                                    "<div class='item'>"+
+                                            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[2]+".jpg alt='No picture' width=600>"+
+                                    "</div>"+
+                            "</div>";
+            }
+        }else if(mq.matches){
+            if(item.images.length != 0){
+                images ="";
+                for(i=0; i< item.images.length; i++){
+                    images += showImage(item, i);
+                }
+                return images;
+            }else{
+                return "<p> No Images Available </p>"
+            }
+        }
+    }
+    
+    function showImage(item, i){
+        return "<div class='border' data-toggle='tooltip' data-placement='left' title='Tooltip on left'>"+
+            "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
+            "</div>"
     }
     
     function headingText(item) {
@@ -408,7 +570,7 @@ var fridgeView = (function($){
         
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
-		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>"+item.seller+"</span><label></h4>";
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + fridgeApp.getUserName() + "</span><label></h4>";
         return row;
     }
     
@@ -425,9 +587,9 @@ var fridgeView = (function($){
     function displayImage(images){
             var img = "";
             if(images.length != 0){
-                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image'/>";
+                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://res.cloudinary.com/hllzrkglg/image/upload/"+images[0]+".jpg' alt='No Image' id='homeimg'/>";
             }else{
-                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'/>";
+                img += "<img class='img-responsive col-sm-3 col-md-3' src='http://www.martyranodes.com/sites/default/files/images/kits/no_0.jpg' alt='No Image'  width=100 height=100/>";
             }
             return img;
     }
@@ -458,6 +620,8 @@ var fridgeView = (function($){
     
     fridgeView={
         refreshView: refreshView,
+        refreshProfile: refreshProfile,
+        refreshNestTable:refreshNestTable,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,

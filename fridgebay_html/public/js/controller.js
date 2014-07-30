@@ -4,12 +4,24 @@ var fridgeApp = (function($) {
 
     // first create the model
     var myList = new Information();
+    //Checks if browser was opened on a laptop or phone
+    var mediaCheck = function(){
+        var mq = window.matchMedia( "(max-width: 500px)" );
+        return mq;
+    }
     
     var showView = function (selected) {
         console.log("VIEW IS SHOWN");
       	window.location.hash = '#' + selected;
       	$('.view').hide().filter('#' + selected + '-view').show();
     };
+    
+    var setView = function(){
+        var v = window.location.hash.substring(1);
+        if (v=="")
+          v="home";
+        showView(v);
+    }
     
     function showAlert() {
         console.log("clicked");
@@ -23,7 +35,25 @@ var fridgeApp = (function($) {
         showView("home");
         alert("Your Message has been submitted");
     }
-    
+
+    function accessLogoutPage() {
+        window.location = 'auth/logout';
+    }
+    function accessLoginPage() {
+        window.location = 'auth/google/'
+    }
+    function refreshNestTable() {
+        fridgeView.refreshNestTable(getUser().interestList);
+        $("#dropdown_button").text("Interested In");
+    }
+
+    function refreshSellingTable() {
+        $("#dropdown_button").text("Selling");
+    }
+    function showViewProfile() {
+        showView('profile');
+        refreshProfile();
+    }
 
     $(function () {
         $('#notify').popover(
@@ -83,26 +113,24 @@ var fridgeApp = (function($) {
 
     //loads edit page for an item
     function loadEdit(element){
-        console.log("Loading Edit Page");
-        id = element.getAttribute("sid");
-        item = myList.searchById(id);
-        document.getElementById("#editMainCategory").innerHTML = item.category;
-        document.getElementById("#editSubCategory")= item.subCategory;
-        document.getElementById("#editName") = item.name;
-        document.getElementById("#editPrice") = item.price;
-        document.getElementById("#editQuantity") = item.quantity;
-        document.getElementById("#editCondition")= item.condition;
-        document.getElementById("#ediSellBy") = item.sellBy;
-        document.getElementById("#editUniversity") = item.university;
-        document.getElementById("#editLocation") = item.location;
-        document.getElementById("#editDesc") = item.description;
+        var id = element.getAttribute("sid");
+        var item = myList.searchById(id);
+         $("#submission").attr("sid",id);
+        document.getElementById("editMainCategory").value = item.category;
+        $(document).ready(fridgeView.updateCategoryOptions('edit'));
+        document.getElementById("editSubCategory").value = item.subcategory;
+        document.getElementById("editName").value  = item.name;
+        document.getElementById("editPrice").value  = item.price;
+        document.getElementById("editQuantity").value  = item.quantity;
+        document.getElementById("editCondition").value = item.condition;
+        document.getElementById("editSellBy").value = item.sellBy;
+        document.getElementById("editUniversity").value  = item.university;
+        document.getElementById("editLocation").value  = item.location;
+        document.getElementById("editDesc").innerHTML  = item.description;
         showView("edit");
     }
     function updateItem(element){
-        console.log("CTRL Activated: Updating item with id " + element.getAttribute("sid"));
-        loadEdit(element);
-        myList.updateElement({
-            images: imageArray,
+        var item = {
             category: $("#editMainCategory").val(),
             subcategory: $("#editSubCategory").val(),
             name: $("#editName").val(),
@@ -113,8 +141,11 @@ var fridgeApp = (function($) {
             university: $("#editUniversity").val(),
             location: $("#editLocation").val(),
             description: $("#editDesc").val() 
-        });
+        };
+        myList.updateElement(element.getAttribute("sid"), item);
         reloadModel();
+        showView("home");
+        alert("Item has been successfully edited.")
     }
     
     function imageTextAlign(){
@@ -130,7 +161,8 @@ var fridgeApp = (function($) {
     
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
-        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);   
+        fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
+       // return myList.searchById(element.getAttribute("sid"));
     }
     
     function passById(id) {
@@ -190,17 +222,62 @@ var fridgeApp = (function($) {
         });
     }
 
-	function getUser(){
+    function getUser() {
+        var profile = JSON.stringify(myList.currentUser.profile)
+        var name = JSON.stringify(myList.currentUser.name);
+        var email = JSON.stringify(myList.currentUser.email) + "";
+        console.log("the email returned by getUserEmail is " + getUserEmail());
 		return myList.currentUser;
 	}
 	
 	function searchById(id){
 		return myList.searchById(id);
 	}
-	
+
+    function getUserName() {
+        return myList.currentUser.name;
+    }
+    function getUserEmail() {
+        return myList.currentUser.email;
+    }
+    function getUserId() {
+        console.log("id: "+ myList.currentUser._id);
+        return myList.currentUser._id;
+    }
+    function getNestNumber() {
+        return myList.currentUser.interestList.length;
+    }
+    function addToNest(element) {
+        var item = myList.searchById(element.getAttribute("sid"));
+        console.log("searching for item returns " + JSON.stringify(item))
+        var user = getUser();
+        var id = getUserId();
+        user.interestList.push(item);
+        var nest=user.interestList;
+
+        var newUser= {
+            openID: user.openID,
+            profile: user.profile,
+            name:getUserName(),
+            email:getUserEmail(),
+            phone: user.phone,
+            interestList: nest,
+        };
+
+        myList.updateCurrentUser(id, newUser);
+        refreshView();
+        refreshNestTable();
+        console.log("user nest: " + user.interestList.length);
+    }
+ 
+    function refreshProfile() {
+        fridgeView.refreshProfile(myList.currentUser);
+    }
+
     function start() {
+        mediaCheck();
+        setView();
         myList.loadModel();
-        showView('home');
         imageTextAlign();
         fridgeSpeech.enableSpeech("speech loaded");
         bringToTop();
@@ -210,8 +287,19 @@ var fridgeApp = (function($) {
     fridgeApp = {
         start: start,
         getUser: getUser,
+        getUserName: getUserName,
+        getUserEmail: getUserEmail,
+        getNestNmber: getNestNumber,
+        getUserId:getUserId,
+        addToNest: addToNest,
+        showViewProfile: showViewProfile,
+        refreshNestTable: refreshNestTable,
+        refreshSellingTable: refreshSellingTable,
+        refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,
+        accessLogoutPage: accessLogoutPage,
+        accessLoginPage: accessLoginPage,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
         encodeImageFileAsURL: encodeImageFileAsURL,
@@ -224,10 +312,10 @@ var fridgeApp = (function($) {
         updateItem: updateItem,
         pass: pass,
         passById: passById,
-        getUser: getUser,
         searchById: searchById,
-        deleteItem: deleteItem,
         imageTextAlign: imageTextAlign,
+        loadEdit: loadEdit, 
+        mediaCheck: mediaCheck
     }
 
     return (fridgeApp);
