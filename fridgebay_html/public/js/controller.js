@@ -40,7 +40,13 @@ var fridgeApp = (function($) {
     function accessLoginPage() {
         window.location = 'auth/google/'
     }
-
+    function refreshNestTable() {
+        fridgeView.refreshNestTable(getUser().interestList);
+        $("#dropdown_button").text("Interested In");
+    }
+    function showViewItem() {
+        showView('item');
+    }
 
     $(function () {
         $('#notify').popover(
@@ -365,7 +371,8 @@ var fridgeApp = (function($) {
         getUserEmail: getUserEmail,
         getNestNmber: getNestNumber,
         getUserId:getUserId,
-        addToNest:addToNest,
+        addToNest: addToNest,
+        refreshNestTable:refreshNestTable,
         refreshProfile: refreshProfile,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,
