@@ -540,9 +540,9 @@ var fridgeView = (function($){
 //       <img data-src="holder.js/100%x180" alt="...">
 //     </a>
     function showImage(item, i){
-        return "<button class=' btn btn-default thumbnail popover-dismiss'data-toggle='popover' title='Popover title' data-content='And here's some amazing content. It's very engaging. Right?'>"+
+        return "<div class='border thumbnail'><a href http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg>"+
             "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
-            "</button>"
+            "</a></div>"
     }
     
     function headingText(item) {
