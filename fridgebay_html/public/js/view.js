@@ -299,8 +299,11 @@ var fridgeView = (function($){
         $(".profileInfo").html(profileToRow(currentUser));
     }
 
-    function refreshNestTable(nest) {
-        $("#profileTable").html(nestToRow(nest));
+    function refreshNestTable(myList, nest) {
+        $("#profileTable").html(nestToRow(myList, nest));
+    }
+    function refreshSellingTable(nest) {
+        $("#profileTable").html(sellNestToRow(nest))
     }
    
     function refreshSellingTable(nest) {
@@ -430,7 +433,7 @@ var fridgeView = (function($){
         return row;
     }
 
-    function nestToRow(nest) {
+    function nestToRow(myList, nest) {
         var row="";
         for (var i=0;i<nest.length;i++){
             var itemName = nest[i].name;
@@ -449,6 +452,29 @@ var fridgeView = (function($){
 
         return row;
     }
+    function sellNestToRow(nest) {
+        var row = "";
+        console.log("the length of the nest is: " + nest.length);
+        for (var i = 0; i < nest.length; i++) {
+            var item = nest[i];
+            var itemName = item.name;
+            var photo = displayImage(item.images);
+            var price = item.price;
+            var university = item.university;
+            var id = nest[i]._id;
+            console.log("id = " + id);
+            row = row +
+            "<tr class='changeImageColor'>" +
+            "<td><label>" + itemName + "</label></td>" +
+            "<td><label>" + photo + "</label></td>" +
+            "<td><label>$" + price + "</label></td>" +
+            "<td><label>" + university + "</label></td>" +
+            "<td><button class='dark_brown' sid='" + id + "' onclick=fridgeApp.pass(this)>view</button></td></tr>"
+        }
+
+        return row;
+    }
+
     function itemAddToNest(item) {
         return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.message(this)'>Add to Nest</button>";
     }
@@ -622,7 +648,8 @@ var fridgeView = (function($){
     fridgeView={
         refreshView: refreshView,
         refreshProfile: refreshProfile,
-        refreshNestTable:refreshNestTable,
+        refreshNestTable: refreshNestTable,
+        refreshSellingTable: refreshSellingTable,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,

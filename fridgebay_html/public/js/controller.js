@@ -42,13 +42,13 @@ var fridgeApp = (function ($) {
         window.location = 'auth/google/'
     }
     function refreshNestTable() {
-        fridgeView.refreshNestTable(getUser().interestList);
+        fridgeView.refreshNestTable(myList, getUser().interestList);
         $("#showNestNumber").html(getUser().interestList.length);
         $("#dropdown_button").text("Interested In");
     }
 
     function refreshSellingTable() {
-        fridgeView.refreshNestTable(getUser().sellingList);
+        fridgeView.refreshNestTable(myList, getUser().sellingList);
         $("#showNestNumber").html(getUser().sellingList.length);
         $("#dropdown_button").text("Selling");
     }
@@ -82,6 +82,7 @@ var fridgeApp = (function ($) {
         myList.loadModel();
         refreshView();
     }
+
     function addItem() {
 
         var imageArray = [];
@@ -132,6 +133,9 @@ var fridgeApp = (function ($) {
         document.getElementById("editUniversity").value = item.university;
         document.getElementById("editLocation").value = item.location;
         document.getElementById("editDesc").innerHTML = item.description;
+
+        reloadModel();
+        updateSellingList();
         showView("edit");
     }
     function updateItem(element) {
@@ -253,10 +257,11 @@ var fridgeApp = (function ($) {
     }
     function addToNest(element) {
         var item = myList.searchById(element.getAttribute("sid"));
+        var itemId = item._id;
         console.log("searching for item returns " + JSON.stringify(item))
         var user = getUser();
         var id = getUserId();
-        user.interestList.push(item);
+        user.interestList.push(itemId);
         var nest = user.interestList;
 
         var newUser = {
@@ -279,14 +284,27 @@ var fridgeApp = (function ($) {
         //console.log("vale: " + $("#itemSeller").val());
     }
 
+    //checks to see if the item is already contained in the sellingList 
+    function checkItems(user, item) {
+
+        var count = 0;
+        for (var i = 0; i < user.sellingList.length;i++){
+            if (user.sellingList[i] == item._id) {
+                count++;
+            }
+        }
+       // alert("count is equal to: " + count);
+        return count;
+    }
+
     function updateSellingList() {
         var user = getUser();
         var id = getUserId();
 
         for (var i = 0; i < myList.items.length; i++) {
             //var item = myList.searchById(myList.items[i].seller);
-            if (id == myList.items[i].seller) {
-                user.sellingList.push(myList.items[i]);
+            if (id == myList.items[i].seller && checkItems(user, myList.items[i])<1) {
+                user.sellingList.push(myList.items[i]._id);
                 var nest = user.sellingList;
                 var newUser = {
                     openID: user.openID,
@@ -353,6 +371,7 @@ var fridgeApp = (function ($) {
         getNestNmber: getNestNumber,
         getUserId: getUserId,
         addToNest: addToNest,
+        checkItems: checkItems,
         showViewProfile: showViewProfile,
         refreshNestTable: refreshNestTable,
         refreshSellingTable: refreshSellingTable,
