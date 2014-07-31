@@ -63,7 +63,7 @@ var userSchema = mongoose.Schema({
     email:String,
     phone: String,
     interestList: Array,
-    
+    sellingList: Array
 });
 
 var item = mongoose.model('items', itemsSchema);
