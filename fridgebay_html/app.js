@@ -63,6 +63,7 @@ var userSchema = mongoose.Schema({
     email:String,
     phone: String,
     interestList: Array,
+    message:Object,  // {message: String, new: Boolean, sentBy: String (User Id)
     sellingList: Array
 });
 

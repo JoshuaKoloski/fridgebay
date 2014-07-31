@@ -535,11 +535,14 @@ var fridgeView = (function($){
             }
         }
     }
-    
+//      <div class="col-xs-6 col-md-3">
+//     <a href="#" class="thumbnail">
+//       <img data-src="holder.js/100%x180" alt="...">
+//     </a>
     function showImage(item, i){
-        return "<div class='border' data-toggle='tooltip' data-placement='left' title='Tooltip on left'>"+
+        return "<div class='border thumbnail'><a href http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg>"+
             "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
-            "</div>"
+            "</a></div>"
     }
     
     function headingText(item) {
