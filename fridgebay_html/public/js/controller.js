@@ -22,7 +22,6 @@ var fridgeApp = (function($) {
           v="home";
         showView(v);
     }
-    
     function showAlert() {
         console.log("clicked");
         alert("You have 2 new messages");
