@@ -283,7 +283,7 @@ var fridgeView = (function($){
         $("#item_category").html(headingText(element));
         $("#item_images").html(imagesText(element));
         $("#item_status").html(statusText(element));
-        $("#item_sellBy").html(sellText(element));
+        $("#item_sellBy").html(sellText(element, myList));
 
     }
     //Loads the carousel controls onto item page
@@ -565,14 +565,16 @@ var fridgeView = (function($){
     }
 
     
-    function sellText(item) {
+    function sellText(item, myList) {
         var sellBy = new Date(item.sellBy);
         var temp = sellBy.toString();
         var date = temp.slice(0, 15);
-        
+        var user = myList.searchByUserId(item.seller);
+        var username = user.name;
+        console.log("username= " + username);
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
-		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + fridgeApp.getUserName() + "</span><label></h4>";
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + username + "</span><label></h4>";
         return row;
     }
     
