@@ -52,6 +52,18 @@ Information.prototype.searchById = function (id) {
     }
 };
 
+Information.prototype.searchByUserId = function (id) {
+    var myList = this;
+    var len = myList.users.length;
+    for (i = 0; i < len; i++) {
+        var user = myList.users[i];
+        if (user._id == id) {
+            return user;
+            console.log("found user");
+        }
+    }
+};
+
 
 Information.prototype.loadModel = function () {
     this.loadItems();
