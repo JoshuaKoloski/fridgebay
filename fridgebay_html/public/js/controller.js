@@ -82,6 +82,7 @@ var fridgeApp = (function ($) {
         myList.loadModel();
         refreshView();
     }
+
     function addItem() {
 
         var imageArray = [];
@@ -279,13 +280,24 @@ var fridgeApp = (function ($) {
         //console.log("vale: " + $("#itemSeller").val());
     }
 
+    function checkItems(user, item) {
+        var count = 0;
+        for (var i = 0; i < user.sellingList.length;i++){
+            if (user.sellingList[i]._id == item._id) {
+                count++;
+            }
+        }
+       // alert("count is equal to: " + count);
+        return count;
+    }
+
     function updateSellingList() {
         var user = getUser();
         var id = getUserId();
 
         for (var i = 0; i < myList.items.length; i++) {
             //var item = myList.searchById(myList.items[i].seller);
-            if (id == myList.items[i].seller) {
+            if (id == myList.items[i].seller && checkItems(user, myList.items[i])<1) {
                 user.sellingList.push(myList.items[i]);
                 var nest = user.sellingList;
                 var newUser = {
@@ -327,6 +339,7 @@ var fridgeApp = (function ($) {
         getNestNmber: getNestNumber,
         getUserId: getUserId,
         addToNest: addToNest,
+        checkItems: checkItems,
         showViewProfile: showViewProfile,
         refreshNestTable: refreshNestTable,
         refreshSellingTable: refreshSellingTable,
