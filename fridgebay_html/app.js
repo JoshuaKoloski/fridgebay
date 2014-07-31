@@ -12,13 +12,6 @@ var mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
 var cloudinary = require('cloudinary');
 
-app.use(express.bodyParser());
-// serve static content from the public folder 
-app.use("/", express.static(__dirname + '/public'));
-app.use(logfmt.requestLogger());
-// parse the bodies of all other queries as json
-app.use(bodyParser.json());
-
 //***************************  DATABASE INITIALIZATION *******
 //Uri allows access to the mongo database on the heroku server
 var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
@@ -70,7 +63,7 @@ var userSchema = mongoose.Schema({
     email:String,
     phone: String,
     interestList: Array,
-    sellingList: Array
+    
 });
 
 var item = mongoose.model('items', itemsSchema);
@@ -226,9 +219,9 @@ app.get('/api/user', function(req, res) {
     }, function(err, items) {
         console.log("user is "+JSON.stringify(item));
         if (item.length > 0)
-          res.send(items[0]);
+            res.send(items[0]);
         else
-          res.json(404,{});
+            res.json(404,{});
     });
     //res.json(req.user);
 });
@@ -254,6 +247,7 @@ app.post('/uploadItem', function(req, res) {
                 if (req.files.image_3.size != 0) {
                     images[images.length] = result.public_id;
                 }
+
                 new item({
                     images: images,
                     name: req.body.itemName,
@@ -295,7 +289,7 @@ app.get('/model/:collection', function(req, res) {
     });
 });
 
-app.put('/modelzzzzzzz/:user2/:id', function(req, res) {
+app.put('/model/:user2/:id', function(req, res) {
     mongoose.model(req.params.user2).findByIdAndUpdate(req.params.id,req.body, function (err, raw, user) {
         console.log('The raw response from Mongo was ', raw)
         res.json(200, {});

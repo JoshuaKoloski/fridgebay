@@ -259,11 +259,20 @@ var fridgeApp = (function($) {
         var user = getUser();
         var id = getUserId();
         user.interestList.push(item);
+        var nest = user.interestList;
 
-        myList.updateCurrentUser(id, user);
+        var newUser = {
+            openID: user.openID,
+            profile: user.profile,
+            name: getUserName(),
+            email: getUserEmail(),
+            phone: user.phone,
+            interestList: nest,
+        };
+
+        myList.updateCurrentUser(id, newUser);
         refreshView();
         refreshNestTable();
-        
         console.log("user nest: " + user.interestList.length);
     }
 
@@ -297,7 +306,6 @@ var fridgeApp = (function($) {
  
     function refreshProfile() {
         fridgeView.refreshProfile(myList.currentUser);
-        updateSellingList();
     }
 
     function start() {
