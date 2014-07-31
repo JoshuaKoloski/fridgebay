@@ -8,8 +8,8 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
-        console.log("the current user is " + JSON.stringify(myData.currentUser));
-        console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
+//         console.log("the current user is " + JSON.stringify(myData.currentUser));
+//         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
 
         if ($.isEmptyObject(fridgeApp.getUser())) {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
@@ -228,10 +228,8 @@ var fridgeView = (function($){
         }
         var showComplete = $("#showCompleteCheckbox").prop("checked");
         if(showComplete){
-            console.log("returning all items");
             return sortedItems;
         } else {
-            console.log("returning recent items");
             return recentItems;
         }
     }
@@ -271,7 +269,6 @@ var fridgeView = (function($){
     	var mq = fridgeApp.mediaCheck();
         var list = myList.items;
         var element = myList.searchById(elementId);
-        console.log("View Item= " + JSON.stringify(element));
         
         fridgeApp.showView('item');
         if(!mq.matches){
@@ -341,7 +338,6 @@ var fridgeView = (function($){
     function filterMainCategory(myData, maincategory){
     	var items = myData.items;
     	var newItems = [];
-    	console.log("filtering main category= " + maincategory);
     	for (var n = 0; n < items.length; n++) {
     		if (items[n].category.match(maincategory)) {
     			newItems.push(items[n]);
@@ -353,7 +349,6 @@ var fridgeView = (function($){
     function filterSubCategory(myData, subcategory) {
     	var items = myData.items;
         var newItems = [];
-        console.log("filtering subcategory= " + subcategory);
         for (var n = 0; n < items.length; n++) {
             if (items[n].subcategory.match(subcategory)) {
                 newItems.push(items[n]);
@@ -437,14 +432,12 @@ var fridgeView = (function($){
 
     function nestToRow(nest) {
         var row="";
-        console.log("the length of the nest is: " + nest.length);
         for (var i=0;i<nest.length;i++){
             var itemName = nest[i].name;
             var photo = displayImage(nest[i].images);
             var price = nest[i].price;
             var university = nest[i].university;
             var id = nest[i].id;
-            console.log("id = " + id);
             row=row+
             "<tr class='changeImageColor'>"+
             "<td><label>"+itemName+"</label></td>"+
@@ -460,10 +453,10 @@ var fridgeView = (function($){
         return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.message(this)'>Add to Nest</button>";
     }
     
-    function messageBox(seller){
-        console.log("FORMATING MESSAGE AREA");
-        var messageArea = "<div><textarea class='form-control' rows='3' id='messageBox' placeholder='Want to send a message to the seller?' ></textarea></div> <button type='submit' class='dark_brown' id='submitMessageUser' onclick='fridgeApp.submitMessage(this)'>Submit</button>";
+    function messageBox(id){
+        var messageArea = "<div><textarea class='form-control' rows='3' id='submitMessageUser' placeholder='Want to send a message to the seller?' value=''></textarea></div> <button type='submit' class='dark_brown' sid='"+id+"' onclick='fridgeApp.submitMessage(this)'>Submit</button>";
         $("#addToNest").html(messageArea);
+        console.log(messageArea);
     }
 
     function profileToRow(currentUser) {
@@ -576,7 +569,6 @@ var fridgeView = (function($){
         var date = temp.slice(0, 15);
         var user = myList.searchByUserId(item.seller);
         var username = user.name;
-        console.log("username= " + username);
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + username + "</span><label></h4>";

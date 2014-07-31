@@ -310,9 +310,29 @@ var fridgeApp = (function ($) {
     
     function message(element){
         item = myList.searchById(element.getAttribute('sid'));
-        seller = myList.searchByUserId(item.seller);
+        fridgeView.messageBox(item.seller);
+    }
+    function submitMessage(element){
+        seller = myList.searchByUserId(element.getAttribute('sid'));
         console.log("Seller: " + JSON.stringify(seller));
-        fridgeView.messageBox(seller);
+        user = getUser();
+        n = seller.number++;
+        sellerMessage = { 
+            messageNumber: n,
+            text: $("#submitMessageUser").val(), 
+            user:user._id, 
+            checked: false, 
+            date: Date()
+        }; 
+        seller.messages.push(sellerMessage);
+        m = seller.messages;
+        newSeller={
+            number: n,
+            messages: m
+        };
+        console.log("Messages: " + JSON.stringify(seller.messages))
+        alert("Message has been sent to " + seller.email);
+        myList.sendMessage(seller.id, newSeller);
     }
     function start() {
         mediaCheck();
@@ -357,7 +377,8 @@ var fridgeApp = (function ($) {
         imageTextAlign: imageTextAlign,
         loadEdit: loadEdit,
         mediaCheck: mediaCheck,
-        message: message
+        message: message,
+        submitMessage:submitMessage
     }
 
     return (fridgeApp);
