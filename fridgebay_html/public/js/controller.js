@@ -44,10 +44,13 @@ var fridgeApp = (function($) {
     }
     function refreshNestTable() {
         fridgeView.refreshNestTable(getUser().interestList);
+        $("#showNestNumber").html(getUser().interestList.length);
         $("#dropdown_button").text("Interested In");
     }
 
     function refreshSellingTable() {
+        fridgeView.refreshNestTable(getUser().sellingList);
+        $("#showNestNumber").html(getUser().sellingList.length);
         $("#dropdown_button").text("Selling");
     }
     function showViewProfile() {
@@ -110,7 +113,7 @@ var fridgeApp = (function($) {
             description: $("#itemDesc").val() 
         });
 
-        console.log("el: " + JSON.stringify(el));
+        alert("el: " + JSON.stringify(el));
         //getUser().sellingList.push()
     }
 
@@ -238,25 +241,45 @@ var fridgeApp = (function($) {
         var user = getUser();
         var id = getUserId();
         user.interestList.push(item);
-        var nest=user.interestList;
 
-        var newUser= {
-            openID: user.openID,
-            profile: user.profile,
-            name:getUserName(),
-            email:getUserEmail(),
-            phone: user.phone,
-            interestList: nest,
-        };
-
-        myList.updateCurrentUser(id, newUser);
+        myList.updateCurrentUser(id, user);
         refreshView();
         refreshNestTable();
+        
         console.log("user nest: " + user.interestList.length);
+    }
+
+    function setSeller() {
+        $("#itemSeller").val(getUserId());
+        //console.log("vale: " + $("#itemSeller").val());
+    }
+    
+   function updateSellingList() {
+        var user = getUser();
+        var id = getUserId();
+        alert("selling list is being updated with length " + myList.items.length);
+        for (var i = 0; i < myList.items.length; i++) {
+            alert("inside loop");
+            //var item = myList.searchById(myList.items[i].seller);
+            if (id == myList.items[i].seller) {
+                alert("ids match!");
+                user.sellingList.push(myList.items[i]);
+                alert("user's selling list: " + JSON.stringify(user.sellingList));
+            }
+            //alert("the item is : " + JSON.stringify(item));
+            //if()
+        }
+        alert("user's selling list after loop: " + JSON.stringify(user.sellingList));
+        myList.updateCurrentUser(id, user);
+        alert("user's selling list with getUser() after loop: " + JSON.stringify(getUser().sellingList));
+        refreshView();
+        refreshSellingTable();
+
     }
  
     function refreshProfile() {
         fridgeView.refreshProfile(myList.currentUser);
+        updateSellingList();
     }
     function start() {
         mediaCheck();
@@ -379,6 +402,7 @@ var fridgeApp = (function($) {
     fridgeApp = {
         start: start,
         getUser: getUser,
+        setSeller: setSeller,
         getUserName: getUserName,
         getUserEmail: getUserEmail,
         getNestNmber: getNestNumber,
@@ -388,6 +412,7 @@ var fridgeApp = (function($) {
         refreshNestTable: refreshNestTable,
         refreshSellingTable: refreshSellingTable,
         refreshProfile: refreshProfile,
+        updateSellingList: updateSellingList,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory,
         accessLogoutPage: accessLogoutPage,

@@ -247,7 +247,6 @@ app.post('/uploadItem', function(req, res) {
                 if (req.files.image_3.size != 0) {
                     images[images.length] = result.public_id;
                 }
-
                 new item({
                     images: images,
                     name: req.body.itemName,
@@ -289,7 +288,7 @@ app.get('/model/:collection', function(req, res) {
     });
 });
 
-app.put('/model/:user2/:id', function(req, res) {
+app.put('/modelzzzzzzz/:user2/:id', function(req, res) {
     mongoose.model(req.params.user2).findByIdAndUpdate(req.params.id,req.body, function (err, raw, user) {
         console.log('The raw response from Mongo was ', raw)
         res.json(200, {});

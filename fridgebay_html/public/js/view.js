@@ -300,19 +300,18 @@ var fridgeView = (function($){
 
     function refreshProfile(currentUser) {
         $(".profileInfo").html(profileToRow(currentUser));
-        showNestNumber(currentUser.interestList.length);
-        //showNestNumber(2);
     }
 
     function refreshNestTable(nest) {
         $("#profileTable").html(nestToRow(nest));
     }
    
+    function refreshSellingTable(nest) {
+        $("#profileTable").html()
+    }
+
     function showNumber(length) {  
         $("#showNumber").html(length);
-    }
-    function showNestNumber(length) {
-        $("#showNestNumber").html(length);
     }
 
     function filterModelItems(items) {
