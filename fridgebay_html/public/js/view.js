@@ -266,12 +266,12 @@ var fridgeView = (function($){
         showNumber(len);
     }
 
-    //Loads the item page with an items information
-    function refreshItemItems(element, myList) {
-        var mq = fridgeApp.mediaCheck();
+	//Loads the item page with an items information
+    function refreshItemItems(elementId, myList) {
+    	var mq = fridgeApp.mediaCheck();
         var list = myList.items;
-        console.log("myList[1]= " + JSON.stringify(list[1]));
-        var element = myList.searchById(element);
+        var element = myList.searchById(elementId);
+        console.log("View Item= " + JSON.stringify(element));
         
         fridgeApp.showView('item');
         if(!mq.matches){
@@ -413,7 +413,7 @@ var fridgeView = (function($){
     //converts item into html on home table
     function homeItemToRow(item) {
         var row=
-        "<div class='col-xs-6 col-s-6 col-md-6' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail'>"+displayImage(item.images)+ 
+        "<div class='col-xs-6 col-s-6 col-md-6 home-item' sid ='"+item._id+"' onclick='fridgeApp.pass(this)'><div class ='thumbnail'>"+displayImage(item.images)+ 
         "<div class='caption' align='left'>"+
         "<h1>"+ item.name +
         "</h1><p> $"+ item.price +
@@ -572,6 +572,7 @@ var fridgeView = (function($){
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + fridgeApp.getUserName() + "</span><label></h4>";
         return row;
     }
+    
     //Displays all images for the item
     function displayImages(images){
             var imgs = "";
@@ -580,6 +581,7 @@ var fridgeView = (function($){
             }
             return imgs;
     }
+    
     //Displays a single image of the item
     function displayImage(images){
             var img = "";

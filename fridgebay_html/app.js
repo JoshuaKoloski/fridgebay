@@ -12,6 +12,13 @@ var mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
 var cloudinary = require('cloudinary');
 
+app.use(express.bodyParser());
+// serve static content from the public folder 
+app.use("/", express.static(__dirname + '/public'));
+app.use(logfmt.requestLogger());
+// parse the bodies of all other queries as json
+app.use(bodyParser.json());
+
 //***************************  DATABASE INITIALIZATION *******
 //Uri allows access to the mongo database on the heroku server
 var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
