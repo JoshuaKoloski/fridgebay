@@ -440,7 +440,7 @@ var fridgeView = (function($){
         console.log("the length of the nest is: " + nest.length);
         for (var i=0;i<nest.length;i++){
             var itemName = nest[i].name;
-            var photo = nest[i].images[0];
+            var photo = displayImage(nest[i].images);
             var price = nest[i].price;
             var university = nest[i].university;
             var id = nest[i].id;

@@ -284,21 +284,23 @@ var fridgeApp = (function($) {
    function updateSellingList() {
         var user = getUser();
         var id = getUserId();
-        alert("selling list is being updated with length " + myList.items.length);
+ 
         for (var i = 0; i < myList.items.length; i++) {
-            alert("inside loop");
             //var item = myList.searchById(myList.items[i].seller);
             if (id == myList.items[i].seller) {
-                alert("ids match!");
                 user.sellingList.push(myList.items[i]);
-                alert("user's selling list: " + JSON.stringify(user.sellingList));
+                var nest = user.sellingList;
+                var newUser = {
+                    openID: user.openID,
+                    profile: user.profile,
+                    name: getUserName(),
+                    email: getUserEmail(),
+                    phone: user.phone,
+                    sellingList: nest,
+                };
+                myList.updateCurrentUser(id, newUser);
             }
-            //alert("the item is : " + JSON.stringify(item));
-            //if()
         }
-        alert("user's selling list after loop: " + JSON.stringify(user.sellingList));
-        myList.updateCurrentUser(id, user);
-        alert("user's selling list with getUser() after loop: " + JSON.stringify(getUser().sellingList));
         refreshView();
         refreshSellingTable();
 
@@ -338,7 +340,6 @@ var fridgeApp = (function($) {
         accessLoginPage: accessLoginPage,
         encodeImageFileAsURL: encodeImageFileAsURL,
         showAlert: showAlert,
-        encodeImageFileAsURL: encodeImageFileAsURL,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,
