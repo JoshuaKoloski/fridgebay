@@ -15,9 +15,11 @@ var fridgeView = (function($){
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
         } else {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+            $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
+            $("#notificationButton").html('<button type="button" class="redButton"><span class="glyphicon glyphicon-comment"></span>1</button>');
+            $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+')", "fridgeApp.refreshProfile()"><span class="glyphicon glyphicon-user"></span></button>');
         }
     }
-
     function updateCategoryOptions(type){
     	
     	var furniture = {

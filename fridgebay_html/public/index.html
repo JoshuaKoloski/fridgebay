@@ -27,7 +27,7 @@
         <div class="row-fluid">
             <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             <div>Speech recognition state: <span class="myStateText myErrorText">Not Started Yet</span></div>
-            <button class="myStartButton btn btn-primary btn-sm">Start speech interaction!</button>
+            <button class="myStartButton btn btn-primary btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Start Speech</button>
             <nav class="navbar navbar-default pull-right" role="navigation">
                 <div class="container-fluid color7">
                     <div class="navbar-header">
@@ -40,10 +40,10 @@
                     </div>
                     <div class="collapse navbar-collapse pull-right color7" id="nav">
                         <ul class="nav navbar-nav color7">
-                            <li><span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span></li>
-                            <li><button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button></li>
-                            <li><button id="example" type="button" class="redButton">1</button></li>
-                            <li><button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button></li>
+                            <li><span class="dark_brown glyphicon glyphicon-info-sign" onclick="fridgeApp.showHelp()"></span></li>
+                            <li id="notificationButton"></li>
+                            <li id="postButton"></li>
+                            <li id="profileButton"></li>
                             <li id="loginButton"><button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button></li>
                         </ul>
                     </div>
