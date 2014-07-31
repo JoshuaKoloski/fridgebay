@@ -307,7 +307,13 @@ var fridgeApp = (function ($) {
     function refreshProfile() {
         fridgeView.refreshProfile(myList.currentUser);
     }
-
+    
+    function message(element){
+        item = myList.searchById(element.getAttribute('sid'));
+        seller = myList.searchByUserId(item.seller);
+        console.log("Seller: " + JSON.stringify(seller));
+        fridgeView.messageBox(seller);
+    }
     function start() {
         mediaCheck();
         setView();
@@ -350,7 +356,8 @@ var fridgeApp = (function ($) {
         searchById: searchById,
         imageTextAlign: imageTextAlign,
         loadEdit: loadEdit,
-        mediaCheck: mediaCheck
+        mediaCheck: mediaCheck,
+        message: message
     }
 
     return (fridgeApp);

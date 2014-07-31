@@ -457,9 +457,14 @@ var fridgeView = (function($){
         return row;
     }
     function itemAddToNest(item) {
-        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.showViewProfile()'>Add to Nest</button>";
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.message(this)'>Add to Nest</button>";
     }
-   
+    
+    function messageBox(seller){
+        console.log("FORMATING MESSAGE AREA");
+        var messageArea = "<div><textarea class='form-control' rows='3' id='messageBox' placeholder='Want to send a message to the seller?' ></textarea></div> <button type='submit' class='dark_brown' id='submitMessageUser' onclick='fridgeApp.submitMessage(this)'>Submit</button>";
+        $("#addToNest").html(messageArea);
+    }
 
     function profileToRow(currentUser) {
         var row =
@@ -630,7 +635,8 @@ var fridgeView = (function($){
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,
         refreshItemItems:refreshItemItems,
-        displayImage: displayImage
+        displayImage: displayImage,
+        messageBox: messageBox
     };
     
     return(fridgeView);
