@@ -21,7 +21,7 @@ var fridgeView = (function($){
             $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'message'"+')", "fridgeApp.refreshMessage('+'"'+newM+'"'+')"><span class="glyphicon glyphicon-comment" ></span></button>');
 			refreshMessages(newM);
             fridgeApp.notificationPopover(newM);
-            $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+'), fridgeApp.refreshProfile()">'+ user.email+'<span class="glyphicon glyphicon-user"></span></button>');
+            $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+'), fridgeApp.refreshProfile()">'+ user.email+'  <span class="glyphicon glyphicon-user"></span></button>');
         }
     }
     function updateCategoryOptions(type){
