@@ -5,8 +5,8 @@ Fridge bay speech interaction using annyang (stt) and web speech synthesis (tts)
 
 var fridgeSpeech = (function($) {
 
-	function enableSpeech(text) {
-		console.log(text);
+	function enableSpeech() {
+		console.log("SPEECH LOADED!!!");
 		if (annyang) {
 			var trying = 0;
 			var commands = {
@@ -21,19 +21,19 @@ var fridgeSpeech = (function($) {
 					tts("Speech instructions hidden.")
 				},
 				//*************
-				'(*junk) browse *item': function(junk, item){
+				'(*junk) start browse *item': function(junk, item){
 					trying = 0;
 					speechBrowseOption(item.toLowerCase(), 'browse');
 				},
-				'(*junk) browsing *item': function(junk, item){
+				'(*junk) start browsing *item': function(junk, item){
 					trying = 0;
 					speechBrowseOption(item.toLowerCase(), 'browsing');
 				},
-				'(*junk) look at *item': function(junk, item){
+				'(*junk) start look at *item': function(junk, item){
 					trying = 0;
 					speechBrowseOption(item.toLowerCase(), 'look at');
 				},
-				'(*junk) go over *item': function(junk, item){
+				'(*junk) start go over *item': function(junk, item){
 					trying = 0;
 					speechBrowseOption(item.toLowerCase(), 'go over');
 				},
@@ -41,34 +41,33 @@ var fridgeSpeech = (function($) {
 				'(*junk) next (*item)': function(junk, item){
 					trying = 0;	
 					if (typeof item == 'undefined') {
-						tts("I heard next and I didn't understand. You can say next item or next one to go to the next item.");	
-					} else {
-						speechNextItem(item.toLowerCase());
+						item = 'item';	
 					}
+					speechNextItem(item.toLowerCase());
+					
 				},
 				'(*junk) previous (*item)': function(junk, item){
 					trying = 0;			
 					if (typeof item == 'undefined') {
-						tts("I heard previous. You can say previous item or previous one to go to the previous item.");	
-					} else {
-						speechPreviousItem(item.toLowerCase());
+						item = 'item';	
 					}
+					speechPreviousItem(item.toLowerCase());
+					
 				},
 				'(*junk) resume (browsing) (*item)': function (junk, item) {
 					trying = 0;
 					if (typeof item == 'undefined') {
-						tts("I heard resume. You can say resume browsing items to resume browsing items.");	
-					} else {
-						speechContinueBrowseItems(item.toLowerCase());
+						item = 'item';	
 					}
+					speechContinueBrowseItems(item.toLowerCase());
+					
 				},
-				'(*junk) continue (browsing) (*item)': function (junk, item) {
+				'(*junk) continue (browsing) (*junk2)': function (junk, junk2) {
 					trying = 0;
-					if (typeof item == 'undefined') {
-						tts("I heard continue. You can say continue browsing items to continue browsing items.");	
-					} else {
-						speechContinueBrowseItems(item.toLowerCase());
+					if (typeof junk2 == 'undefined'){
+						junk2 = 'items';
 					}
+					speechContinueBrowseItems(junk2);
 				},
 				'(*junk) end browsing (*junk2)': function (junk, junk2) {
 					trying = 0;
@@ -107,13 +106,19 @@ var fridgeSpeech = (function($) {
 					trying = 0;
 					speechPostItem(item.toLowerCase(), 'sell');
 				},
-				'(*junk) go to :pageName page': function (junk, pageName) {
+				'(*junk) go to *page': function (junk, page) {
 					trying = 0;
-					speechJumpToPage(pageName.toLowerCase());		
+					speechJumpToPage(page.toLowerCase());		
 				},
 				'(*junk) clear *filter': function (junk, filter) {
 					trying = 0;
-					speechClearFilter(filter.toLowerCase());
+					console.log("0000000");
+					homepageCheck(speechClearFilter, 'clear '+filter, filter.toLowerCase());
+				},
+				'(*junk) delete *filter': function (junk, filter) {
+					trying = 0;
+					console.log("0000000");
+					homepageCheck(speechClearFilter, 'delete '+filter, filter.toLowerCase());
 				},
 				'(*junk) search (by) (item) :filter *content': function (junk, filter, content) {
 					trying = 0;
@@ -190,12 +195,13 @@ var fridgeSpeech = (function($) {
 				tts("Help, there's no internet connection!");
 			}
 			
-			var isRecording = false;
+			var isListening = false;
 			var speechButton = false;
 			$('.myStartButton').click(function () {
 				console.log("start button clicked!");
+				
 				if (annyang) {
-					if (isRecording) {			
+					if (speechButton) {	
 						annyang.abort(); //stop listening
 						tts("Speech interaction ended. See you next time!");
 						$('.home-item').removeClass('home-fake-hover');
@@ -203,12 +209,13 @@ var fridgeSpeech = (function($) {
 						itemList = [];
 						stopFlag = false;
 						trying = 0;
-						isRecording = false;
+						isListening = false;
 						speechButton = false;
 						$('.myStartButton').text("Start speech interaction!");
 						$('.myStartButton').removeClass('btn-danger');		// turn off red class
 						$('.myStartButton').addClass('btn-primary');
 					} else {
+						//homePageCheck();
 						speechButton = true;
 						var annyangInterval = setInterval(function(){
 							if (!speechButton){
@@ -217,14 +224,14 @@ var fridgeSpeech = (function($) {
 							}
 							if (speechSynthesis.speaking){
 								annyang.abort();
-								isRecording = false;
+								isListening = false;
 							} else {
-								if (!isRecording){
-									annyang.start({autoRestart: true});
-									isRecording = true;
+								if (!isListening){
+									isListening = true;
+									annyang.start();
 								}
 							}
-						}, 1000)
+						}, 2000)
 
 						tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
 						$('.myStartButton').text("End speech interaction!");
@@ -239,16 +246,19 @@ var fridgeSpeech = (function($) {
 	}	
 
 	function speechJumpToPage(pageName){
-		if (pageName == 'home' || pageName == 'login' || pageName == 'welcome' || pageName == 'profile') {	 
-			fridgeApp.showView(pageName);
-			tts("You are on " + pageName + " page now.");
-		} else if (pageName == 'post'){
+		if (pageName.indexOf('home')>-1) {	 
+			fridgeApp.showView('home');
+			tts("You are on home page now.");
+		} else if (pageName.indexOf('login')>-1){
+			fridgeApp.showView('login');
+			tts("You are on the login page now.");
+		} else if (pageName.indexOf('post')>-1){
 			fridgeApp.showView('form');
 			tts("You are on the post new item page now.");
-		} else if (pageName == 'account'){
+		} else if (pageName.indexOf('account')>-1 || pageName.indexOf('profile')>-1){
 			fridgeApp.showView('profile');
-			tts("You are on " + pageName + " page now.");
-		} else if (pageName == 'feedback') {
+			tts("You are on your account page now.");
+		} else if (pageName.indexOf('feedback')>-1) {
 			fridgeApp.showView('contact');
 			tts("You are on the feedback page now. You are welcome to report any issue or leave a kind message.");
 		} else {
@@ -265,8 +275,16 @@ var fridgeSpeech = (function($) {
 		}
 	}
 	
-	function speechClearFilter(filter) {
+	function homepageCheck(fun, text, para1, para2) {
 		if (window.location.hash == '#home') {
+			fun(para1, para2);
+		} else {
+			tts("I heard "+text+" and it's a homepage command. Say. go to homepage to go to homepage first.");
+		}
+	}
+
+	function speechClearFilter( filter) {
+	//	if (window.location.hash == '#home') {
 			if (filter.indexOf('university')>-1) {
 				$('#schoolCutoffHome').val('');
 				fridgeApp.refreshView();
@@ -285,9 +303,9 @@ var fridgeSpeech = (function($) {
 			} else {
 				tts("I heard clear "+ filter +" but I don't understand. You can clear a filter field by saying clear name, clear university, clear price or clear filter.");
 			}
-		} else {
-			tts("It seems that you said a command to clear filter in the home page. Please say. go to home page to go to home page first.");
-		}
+	//	} else {
+	//		tts("I heard "+text+", which seems like a command for home page. If you want to go to home page say go to home page.");
+	//	}
 	}
 	
 	//speech filters for items in the home page including name, university, price, main category
@@ -383,7 +401,8 @@ var fridgeSpeech = (function($) {
 				} else if (index >= itemList.length){
 					itemList = homeCollectItemList();
 					if (index >= itemList.length) {
-						tts("This is the end of item list. Please go back or end browsing");
+						console.log("ITEM INDEX = "+index);
+						tts("This is the end of item list. Please go back or end browsing.");
 					} else {
 						homeChooseItem(itemList, index++, true);
 					}
@@ -404,11 +423,12 @@ var fridgeSpeech = (function($) {
 				index -= 2;
 				if (itemList == []) {
 					itemList = homeCollectItemList();
-				} else if (index <= 0){
+				}
+				if (index < 0){
 					tts("Item is out of range. Please go next or end browsing items");
-				} else {
-					homeChooseItem(itemList, index, true);
 					index += 2;
+				} else {
+					homeChooseItem(itemList, index++, true);
 				}
 			} else {
 				tts("I heard previous "+item+" and I didn't understand. You can say previous item or previous one to go to the previous item.")
@@ -434,20 +454,23 @@ var fridgeSpeech = (function($) {
 	}
 	
 	function browseItems(item, text) {
+		stopFlag = false;
 		if (itemList.length == 0) {
 			tts('Sorry, there are no items to go over.');
 		} else if (itemList.length == 1) {
 			tts("There is only one item in the item list. No automatic browsing provided. Please check the item by saying next item.");
+		} else if (index >= itemList.length) {
+			tts("This is the end of item list. Please go back or end browsing.");
 		} else { //more than one item
 			tts(text);
 			if (item.indexOf("information") > -1){				
-				var myInterval = setInterval(function(){
+				var infoInterval = setInterval(function(){
 					console.log(speechSynthesis.speaking);
 					if (!speechSynthesis.speaking) {
 						console.log(speechSynthesis.speaking);
 						homeChooseItem(itemList, index++, true);
 						if (index >= itemList.length || stopFlag) {						
-							clearInterval(myInterval);
+							clearInterval(infoInterval);
 							tts("Item browsing stopped. You can view this item, continue browsing items, go to next item, go to previous item or end browsing.");
 						}
 					}
@@ -456,7 +479,7 @@ var fridgeSpeech = (function($) {
 				// doesn't request reading information while browsing		
 				var myInterval = setInterval(function(){
 					homeChooseItem(itemList, index++, false);
-					if (index >= itemList.length || stopFlag) {						
+					if (index >= itemList.length || stopFlag) {					
 						clearInterval(myInterval);
 						tts("Item browsing stopped. You can view this item, continue browsing items, go to next item, go to previous item or end browsing.");
 					}
