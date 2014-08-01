@@ -18,17 +18,13 @@ var fridgeApp = (function ($) {
     var setView = function () {
         var v = window.location.hash.substring(1);
         if (v == "")
-            v = "home";
+            v = "home";	
         showView(v);
     }
 
-    function showAlert() {
-        console.log("clicked");
-        alert("You have 2 new messages");
-    }
     function showHelp() {
         console.log("clicked");
-        alert("If you want to make a new post, click 'New Post'\nIf you want to buy an item, search through the list of items and sort by categories.");
+        alert("If you want to make a new post, click the plus sign \n If you want to buy an item, search through the list of items and sort by categories.");
     }
     function verifySubmission() {
         showView("home");
@@ -378,6 +374,11 @@ var fridgeApp = (function ($) {
      		});
      	});    
     }
+    
+    function findUser(id){
+		return myList.searchByUserId(id);    
+    }
+    
     function start() {
         mediaCheck();
         setView();
@@ -408,7 +409,6 @@ var fridgeApp = (function ($) {
         accessLogoutPage: accessLogoutPage,
         accessLoginPage: accessLoginPage,
         encodeImageFileAsURL: encodeImageFileAsURL,
-        showAlert: showAlert,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,
@@ -425,7 +425,8 @@ var fridgeApp = (function ($) {
         message: message,
         submitMessage:submitMessage,
         newMessageCheck: newMessageCheck,
-        notificationPopover: notificationPopover
+        notificationPopover: notificationPopover,
+        findUser: findUser
     }
 
     return (fridgeApp);

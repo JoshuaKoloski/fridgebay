@@ -575,7 +575,7 @@
                         </div>
 
 
-                        <table class="table table-default profileInfo">
+                        <table class="table table-default profileInfo" id="profileInfo">
                             
                         </table>
                     <div>
@@ -849,6 +849,24 @@
             </div>
             
         </div>
+        
+<!--Message page -->
+		<div id="message-view" class="view">
+			<h1 class="heading_text"> Messages</h1>
+			<div class="container table-responsive">
+			 	<table class="table table-default">
+			 		<thead class="color">
+						<th>User</th>
+						<th>Date</th>
+						<th>Message</th>	
+						<th></th>
+						<th>Mark as Read?</th>		 	
+			 		</thead>
+			 		<tbody id="messageTable">
+			 		</tbody>
+			 	</table>
+			</div>
+		</div>
 <!--Contact Us Button-->
         <div class="text-center bottom">
             <button  class="dark_brown middle" onclick="fridgeApp.showView('contact')">Contact Us</button>

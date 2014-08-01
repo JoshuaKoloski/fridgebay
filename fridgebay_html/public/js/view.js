@@ -18,7 +18,8 @@ var fridgeView = (function($){
         	var newM = fridgeApp.newMessageCheck(user);
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
             $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
-            $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'profile'"+')", "fridgeApp.refreshProfile()"><span class="glyphicon glyphicon-comment" ></span></button>');
+            $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'message'"+')", "fridgeApp.refreshMessage('+'"'+newM+'"'+')"><span class="glyphicon glyphicon-comment" ></span></button>');
+			refreshMessages(newM);
             fridgeApp.notificationPopover(newM);
             $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+')", "fridgeApp.refreshProfile()">'+ user.email+'<span class="glyphicon glyphicon-user"></span></button>');
         }
@@ -301,7 +302,7 @@ var fridgeView = (function($){
     
 
     function refreshProfile(currentUser) {
-        $(".profileInfo").html(profileToRow(currentUser));
+        $("#profileInfo").html(profileToRow(currentUser));
     }
 
     function refreshNestTable(myList, nest) {
@@ -649,6 +650,35 @@ var fridgeView = (function($){
         "</td></tr>";
         return row;
     }
+    function refreshMessages(newMessages){
+		var mTable="";
+		console.log("New Messages: " + newMessages.length);
+		for (var i = 0 ;i < newMessages.length; i++) {
+			var m = newMessages[i];
+			var mRow = messageToRow(m);
+			mTable  += mRow;
+			console.log("I =" + i);
+		}
+		console.log("TABLE: " + mTable);
+		$("#messageTable").html(mTable);
+    }
+    
+    function messageToRow(m) {
+    	user= fridgeApp.findUser(m.user);
+		return "<tr class='color'><td>"+ user.email + "</td><td>" + m.date + "</td><td>"+m.text+"</td><td><span sid='"+user.id+"' onclick='fridgeView.replyMessage(this)'><button type='button' class='btn btn-default '>Reply</button></span><span id='reply'><span></td><td><button type='checkbox' onclick='fridgeView.markRead(this)'><span class='glyphicon glyphicon-envelope'></span></button></td></tr>";
+    }
+    function replyMessage(element) {
+    	$(element).html("");
+    	$("#reply").html("<textarea class='form-control' placeholder='What is your reply?' id='submitMessageUser' value=''></textarea>"+
+    	"<button type='submit' class='color7' id='submission' sid='"+element.getAttribute('sid')+"' onclick='fridgeApp.submitMessage(this)'>"+
+    	"Submit</button>");
+   	}
+    function markRead(element){
+		if(! $(element).checked)
+			$(element).html("<span class='glyphicon glyphicon-ok'></span>");    
+		else if ($(element).checked)
+			$(element).html("<span class='glyphicon glyphicon-envelope'></span>");   
+    }
     
     fridgeView={
         refreshView: refreshView,
@@ -660,7 +690,10 @@ var fridgeView = (function($){
         updateCategoryOptions: updateCategoryOptions,
         refreshItemItems:refreshItemItems,
         displayImage: displayImage,
-        messageBox: messageBox
+        messageBox: messageBox,
+        refreshMessages: refreshMessages,
+        markRead:markRead,
+        replyMessage: replyMessage
     };
     
     return(fridgeView);
