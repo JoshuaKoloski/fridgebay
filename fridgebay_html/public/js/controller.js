@@ -323,6 +323,39 @@ var fridgeApp = (function ($) {
     }
 
     function refreshProfile() {
+        /*var interestList = getUser().interestList; //ids of items
+        var sellingList = getUser().sellingList; //ids of items
+        var check = false;
+        var check2 = false;
+
+        //check if item has been deleted from interest list
+        for (var i = 0; i < interestList.length;i++){
+            for (var j = 0; j < myList.items.length; j++) {
+                if (myList.items[j]._id==interestList[i]){
+                    check = true;
+                }
+            }
+            if (check == false) {
+                //remove item from interested list
+            }
+            check==false
+        }
+
+        //check if item has been deleted from selling list
+        for (var i = 0; i < sellingList.length; i++) {
+            for (var j = 0; j < myList.items.length; j++) {
+                if (myList.items[j]._id == sellingList[i]) {
+                    check2 = true;
+                }
+            }
+            if (check2 == false) {
+                //remove item from selling list
+            }
+            check2 == false
+        }
+
+        */
+
         fridgeView.refreshProfile(myList.currentUser);
     }
 
