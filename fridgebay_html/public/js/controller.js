@@ -51,6 +51,7 @@ var fridgeApp = (function ($) {
     function showViewProfile() {
         showView('profile');
         refreshProfile();
+
     }
 
     $(function () {
