@@ -144,7 +144,7 @@ Information.prototype.updateElement = function (id, item) {
         myList.loadItems();
     });
 }
-
+//Pass in the id of the user and user object
 Information.prototype.updateCurrentUser = function (id, user) {
     var myList = this;
     $.ajax({
@@ -168,4 +168,17 @@ Information.prototype.deleteElement = function (id) {
         myList.loadItems();
     });
 }
+
+Information.prototype.sendMessage= function(id, seller){
+    var myList = this;
+    $.ajax({
+        type: "PUT",
+        url: "/model/user2/" + id,
+        data: JSON.stringify(seller),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+    console.log("Message has been sent!");
+}
+
 

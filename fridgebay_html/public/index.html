@@ -4,6 +4,7 @@
     <title>FridgeBay</title>
     <link href="css/bootstrap.css" rel="stylesheet" />
     <link href="css/bootstrap-theme.css" rel="stylesheet" />
+    
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="fridgebaystyle.css">
     <link rel="shortcut icon"  href="cartoon_owl.png">
@@ -27,7 +28,7 @@
         <div class="row-fluid">
             <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             <div>Speech recognition state: <span class="myStateText myErrorText">Not Started Yet</span></div>
-            <button class="myStartButton btn btn-primary btn-sm">Start speech interaction!</button>
+            <button class="myStartButton btn btn-primary btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Start Speech</button>
             <nav class="navbar navbar-default pull-right" role="navigation">
                 <div class="container-fluid color7">
                     <div class="navbar-header">
@@ -40,10 +41,10 @@
                     </div>
                     <div class="collapse navbar-collapse pull-right color7" id="nav">
                         <ul class="nav navbar-nav color7">
-                            <li><span class="dark_brown" onclick="fridgeApp.showHelp()">Help</span></li>
-                            <li><button class="dark_brown" onclick="fridgeApp.showView('welcome')">Welcome Page</button></li>
-                            <li><button id="example" type="button" class="redButton">1</button></li>
-                            <li><button class="dark_brown" onclick="fridgeApp.showView('form')">Post</button></li>
+                            <li><span class="dark_brown glyphicon glyphicon-info-sign" onclick="fridgeApp.showHelp()"></span></li>
+                            <li id="notificationButton"></li>
+                            <li id="postButton"></li>
+                            <li id="profileButton"></li>
                             <li id="loginButton"><button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button></li>
                         </ul>
                     </div>
@@ -197,7 +198,7 @@
 													
 												</tbody>	
 											</table>
-                                            <div id="addToNest"></div>                                            
+                                            <div id="addToNest"></div>                          
 										</p>
 								  	</div>
 								</div>							
@@ -574,7 +575,7 @@
                         </div>
 
 
-                        <table class="table table-default profileInfo">
+                        <table class="table table-default profileInfo" id="profileInfo">
                             
                         </table>
                     <div>
@@ -848,6 +849,24 @@
             </div>
             
         </div>
+        
+<!--Message page -->
+		<div id="message-view" class="view">
+			<h1 class="heading_text"> Messages</h1>
+			<div class="container table-responsive">
+			 	<table class="table table-default">
+			 		<thead class="color">
+						<th>User</th>
+						<th>Date</th>
+						<th>Message</th>	
+						<th></th>
+						<th>Mark as Read?</th>		 	
+			 		</thead>
+			 		<tbody id="messageTable">
+			 		</tbody>
+			 	</table>
+			</div>
+		</div>
 <!--Contact Us Button-->
         <div class="text-center bottom">
             <button  class="dark_brown middle" onclick="fridgeApp.showView('contact')">Contact Us</button>

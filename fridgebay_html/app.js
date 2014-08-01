@@ -53,6 +53,7 @@ var usersSchema = mongoose.Schema({
     username: String,
     nest: Array,
     contact: Boolean,
+    message:Object, 
     sell: Array
 });
 
@@ -63,7 +64,8 @@ var userSchema = mongoose.Schema({
     email:String,
     phone: String,
     interestList: Array,
-    message:Object,  // {message: String, new: Boolean, sentBy: String (User Id)
+    number: Number,
+    messages: Array,  // {message: String, new: Boolean, sentBy: String (User Id)
     sellingList: Array
 });
 
@@ -127,6 +129,8 @@ passport.use(new GoogleStrategy({
             user.email = emails[0].value;
             user.interestList=[];               
             user.sellingList=[];
+            user.number=0;
+            user.messages=[];
             // store a new user ....
             new user2(user).save();
             //console.log("inserted user");

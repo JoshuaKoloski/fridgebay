@@ -18,17 +18,13 @@ var fridgeApp = (function ($) {
     var setView = function () {
         var v = window.location.hash.substring(1);
         if (v == "")
-            v = "home";
+            v = "home";	
         showView(v);
     }
 
-    function showAlert() {
-        console.log("clicked");
-        alert("You have 2 new messages");
-    }
     function showHelp() {
         console.log("clicked");
-        alert("If you want to make a new post, click 'New Post'\nIf you want to buy an item, search through the list of items and sort by categories.");
+        alert("If you want to make a new post, click the plus sign \n If you want to buy an item, search through the list of items and sort by categories.");
     }
     function verifySubmission() {
         showView("home");
@@ -358,7 +354,64 @@ var fridgeApp = (function ($) {
 
         fridgeView.refreshProfile(myList.currentUser);
     }
-
+    
+    function message(element){
+        item = myList.searchById(element.getAttribute('sid'));
+        fridgeView.messageBox(item.seller);
+    }
+    function submitMessage(element){
+        seller = myList.searchByUserId(element.getAttribute('sid'));
+        console.log("Seller: " + JSON.stringify(seller));
+        user = getUser();
+        n = seller.number++;
+        sellerMessage = { 
+            messageNumber: n,
+            text: $("#submitMessageUser").val(), 
+            user:user._id, 
+            checked: false, 
+            date: Date()
+        }; 
+        seller.messages.push(sellerMessage);
+        m = seller.messages;
+        newSeller={
+            number: n,
+            messages: m
+        };
+        console.log("Messages: " + JSON.stringify(seller.messages))
+        alert("Message has been sent to " + seller.email);
+        myList.sendMessage(seller.id, newSeller);
+    }
+    //Checks for new Messages and returns an array of the new messages
+    function newMessageCheck(user) {
+    	var newMessages = [];
+    	for(i = 0; i< user.messages.length; i++){
+			m = user.messages[i];
+			console.log(m);
+			if(m.checked==false){
+				newMessages.push(m);
+			}
+    	}
+    	return newMessages;
+    }
+    function notificationPopover(newMessages){
+		if(newMessages.length != 0)
+			var data = newMessages.length + " new messages!";
+		else
+			var data = "No New Messages"
+		$(function () {
+        	$("#notificationBtn").popover({
+     			trigger: 'hover',
+     			html: true,
+     			placement: 'bottom',
+     			content: data
+     		});
+     	});    
+    }
+    
+    function findUser(id){
+		return myList.searchByUserId(id);    
+    }
+    
     function start() {
         mediaCheck();
         setView();
@@ -389,7 +442,6 @@ var fridgeApp = (function ($) {
         accessLogoutPage: accessLogoutPage,
         accessLoginPage: accessLoginPage,
         encodeImageFileAsURL: encodeImageFileAsURL,
-        showAlert: showAlert,
         showHelp: showHelp,
         verifySubmission: verifySubmission,
         refreshView: refreshView,
@@ -402,7 +454,12 @@ var fridgeApp = (function ($) {
         searchById: searchById,
         imageTextAlign: imageTextAlign,
         loadEdit: loadEdit,
-        mediaCheck: mediaCheck
+        mediaCheck: mediaCheck,
+        message: message,
+        submitMessage:submitMessage,
+        newMessageCheck: newMessageCheck,
+        notificationPopover: notificationPopover,
+        findUser: findUser
     }
 
     return (fridgeApp);
