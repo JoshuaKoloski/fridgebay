@@ -8,16 +8,22 @@ var fridgeView = (function($){
     function refreshView(myData){    	
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
-        console.log("the current user is " + JSON.stringify(myData.currentUser));
-        console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
+//         console.log("the current user is " + JSON.stringify(myData.currentUser));
+//         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
 
         if ($.isEmptyObject(fridgeApp.getUser())) {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
         } else {
+        	var user = fridgeApp.getUser();
+        	var newM = fridgeApp.newMessageCheck(user);
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+            $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
+            $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'message'"+')", "fridgeApp.refreshMessage('+'"'+newM+'"'+')"><span class="glyphicon glyphicon-comment" ></span></button>');
+			refreshMessages(newM);
+            fridgeApp.notificationPopover(newM);
+            $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+'), fridgeApp.refreshProfile()">'+ user.email+'<span class="glyphicon glyphicon-user"></span></button>');
         }
     }
-
     function updateCategoryOptions(type){
     	
     	var furniture = {
@@ -228,10 +234,8 @@ var fridgeView = (function($){
         }
         var showComplete = $("#showCompleteCheckbox").prop("checked");
         if(showComplete){
-            console.log("returning all items");
             return sortedItems;
         } else {
-            console.log("returning recent items");
             return recentItems;
         }
     }
@@ -271,7 +275,6 @@ var fridgeView = (function($){
     	var mq = fridgeApp.mediaCheck();
         var list = myList.items;
         var element = myList.searchById(elementId);
-        console.log("View Item= " + JSON.stringify(element));
         
         fridgeApp.showView('item');
         if(!mq.matches){
@@ -283,7 +286,7 @@ var fridgeView = (function($){
         $("#item_category").html(headingText(element));
         $("#item_images").html(imagesText(element));
         $("#item_status").html(statusText(element));
-        $("#item_sellBy").html(sellText(element));
+        $("#item_sellBy").html(sellText(element, myList));
 
     }
     //Loads the carousel controls onto item page
@@ -299,20 +302,15 @@ var fridgeView = (function($){
     
 
     function refreshProfile(currentUser) {
-        $(".profileInfo").html(profileToRow(currentUser));
-        showNestNumber(currentUser.interestList.length);
-        //showNestNumber(2);
+        $("#profileInfo").html(profileToRow(currentUser));
     }
 
-    function refreshNestTable(nest) {
-        $("#profileTable").html(nestToRow(nest));
+    function refreshNestTable(myList, nest) {
+        $("#profileTable").html(nestToRow(myList, nest));
     }
-   
+
     function showNumber(length) {  
         $("#showNumber").html(length);
-    }
-    function showNestNumber(length) {
-        $("#showNestNumber").html(length);
     }
 
     function filterModelItems(items) {
@@ -342,7 +340,6 @@ var fridgeView = (function($){
     function filterMainCategory(myData, maincategory){
     	var items = myData.items;
     	var newItems = [];
-    	console.log("filtering main category= " + maincategory);
     	for (var n = 0; n < items.length; n++) {
     		if (items[n].category.match(maincategory)) {
     			newItems.push(items[n]);
@@ -354,7 +351,6 @@ var fridgeView = (function($){
     function filterSubCategory(myData, subcategory) {
     	var items = myData.items;
         var newItems = [];
-        console.log("filtering subcategory= " + subcategory);
         for (var n = 0; n < items.length; n++) {
             if (items[n].subcategory.match(subcategory)) {
                 newItems.push(items[n]);
@@ -436,16 +432,15 @@ var fridgeView = (function($){
         return row;
     }
 
-    function nestToRow(nest) {
+    function nestToRow(myList, nest) {
         var row="";
-        console.log("the length of the nest is: " + nest.length);
-        for (var i=0;i<nest.length;i++){
-            var itemName = nest[i].name;
-            var photo = nest[i].images[0];
-            var price = nest[i].price;
-            var university = nest[i].university;
-            var id = nest[i].id;
-            console.log("id = " + id);
+        for (var i = 0; i < nest.length; i++) {
+            var item = myList.searchById(nest[i]);
+            var itemName = item.name;
+            var photo = displayImage(item.images);
+            var price = item.price;
+            var university = item.university;
+            var id = nest[i];
             row=row+
             "<tr class='changeImageColor'>"+
             "<td><label>"+itemName+"</label></td>"+
@@ -457,10 +452,17 @@ var fridgeView = (function($){
 
         return row;
     }
+
+
     function itemAddToNest(item) {
-        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.showViewProfile()'>Add to Nest</button>";
+        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.message(this)'>Add to Nest</button>";
     }
-   
+    
+    function messageBox(id){
+        var messageArea = "<div><textarea class='form-control' rows='3' id='submitMessageUser' placeholder='Want to send a message to the seller?' value=''></textarea></div> <button type='submit' class='dark_brown' sid='"+id+"' onclick='fridgeApp.submitMessage(this)'>Submit</button>";
+        $("#addToNest").html(messageArea);
+        console.log(messageArea);
+    }
 
     function profileToRow(currentUser) {
         var row =
@@ -536,11 +538,14 @@ var fridgeView = (function($){
             }
         }
     }
-    
+//      <div class="col-xs-6 col-md-3">
+//     <a href="#" class="thumbnail">
+//       <img data-src="holder.js/100%x180" alt="...">
+//     </a>
     function showImage(item, i){
-        return "<div class='border' data-toggle='tooltip' data-placement='left' title='Tooltip on left'>"+
+        return "<div class='border thumbnail'><a href http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg>"+
             "<img src=http://res.cloudinary.com/hllzrkglg/image/upload/"+item.images[i]+".jpg alt='No picture' class='img-responsive'>"+
-            "</div>"
+            "</a></div>"
     }
     
     function headingText(item) {
@@ -563,14 +568,15 @@ var fridgeView = (function($){
     }
 
     
-    function sellText(item) {
+    function sellText(item, myList) {
         var sellBy = new Date(item.sellBy);
         var temp = sellBy.toString();
         var date = temp.slice(0, 15);
-        
+        var user = myList.searchByUserId(item.seller);
+        var username = user.name;
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
-		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + fridgeApp.getUserName() + "</span><label></h4>";
+		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + username + "</span><label></h4>";
         return row;
     }
     
@@ -617,16 +623,49 @@ var fridgeView = (function($){
         "</td></tr>";
         return row;
     }
+    function refreshMessages(newMessages){
+		var mTable="";
+		console.log("New Messages: " + newMessages.length);
+		for (var i = 0 ;i < newMessages.length; i++) {
+			var m = newMessages[i];
+			var mRow = messageToRow(m);
+			mTable  += mRow;
+			console.log("I =" + i);
+		}
+		console.log("TABLE: " + mTable);
+		$("#messageTable").html(mTable);
+    }
+    
+    function messageToRow(m) {
+    	user= fridgeApp.findUser(m.user);
+		return "<tr class='color'><td>"+ user.email + "</td><td>" + m.date + "</td><td>"+m.text+"</td><td><span sid='"+user.id+"' onclick='fridgeView.replyMessage(this)'><button type='button' class='btn btn-default '>Reply</button></span><span id='reply'><span></td><td><button type='checkbox' onclick='fridgeView.markRead(this)'><span class='glyphicon glyphicon-envelope'></span></button></td></tr>";
+    }
+    function replyMessage(element) {
+    	$(element).html("");
+    	$("#reply").html("<textarea class='form-control' placeholder='What is your reply?' id='submitMessageUser' value=''></textarea>"+
+    	"<button type='submit' class='color7' id='submission' sid='"+element.getAttribute('sid')+"' onclick='fridgeApp.submitMessage(this)'>"+
+    	"Submit</button>");
+   	}
+    function markRead(element){
+		if(! $(element).checked)
+			$(element).html("<span class='glyphicon glyphicon-ok'></span>");    
+		else if ($(element).checked)
+			$(element).html("<span class='glyphicon glyphicon-envelope'></span>");   
+    }
     
     fridgeView={
         refreshView: refreshView,
         refreshProfile: refreshProfile,
-        refreshNestTable:refreshNestTable,
+        refreshNestTable: refreshNestTable,
         filterMainCategory: filterMainCategory,
         filterSubCategory: filterSubCategory, 
         updateCategoryOptions: updateCategoryOptions,
         refreshItemItems:refreshItemItems,
-        displayImage: displayImage
+        displayImage: displayImage,
+        messageBox: messageBox,
+        refreshMessages: refreshMessages,
+        markRead:markRead,
+        replyMessage: replyMessage
     };
     
     return(fridgeView);

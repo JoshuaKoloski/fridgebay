@@ -12,13 +12,6 @@ var mongoose = require('mongoose');
 var uriUtil = require('mongodb-uri');
 var cloudinary = require('cloudinary');
 
-app.use(express.bodyParser());
-// serve static content from the public folder 
-app.use("/", express.static(__dirname + '/public'));
-app.use(logfmt.requestLogger());
-// parse the bodies of all other queries as json
-app.use(bodyParser.json());
-
 //***************************  DATABASE INITIALIZATION *******
 //Uri allows access to the mongo database on the heroku server
 var mongodbUri = 'mongodb://generic:Brandeisjbs2014@ds029217.mongolab.com:29217/heroku_app27280814';
@@ -60,6 +53,7 @@ var usersSchema = mongoose.Schema({
     username: String,
     nest: Array,
     contact: Boolean,
+    message:Object, 
     sell: Array
 });
 
@@ -70,7 +64,9 @@ var userSchema = mongoose.Schema({
     email:String,
     phone: String,
     interestList: Array,
-    
+    number: Number,
+    messages: Array,  // {message: String, new: Boolean, sentBy: String (User Id)
+    sellingList: Array
 });
 
 var item = mongoose.model('items', itemsSchema);
@@ -133,6 +129,8 @@ passport.use(new GoogleStrategy({
             user.email = emails[0].value;
             user.interestList=[];               
             user.sellingList=[];
+            user.number=0;
+            user.messages=[];
             // store a new user ....
             new user2(user).save();
             //console.log("inserted user");
@@ -226,9 +224,9 @@ app.get('/api/user', function(req, res) {
     }, function(err, items) {
         console.log("user is "+JSON.stringify(item));
         if (item.length > 0)
-          res.send(items[0]);
+            res.send(items[0]);
         else
-          res.json(404,{});
+            res.json(404,{});
     });
     //res.json(req.user);
 });
