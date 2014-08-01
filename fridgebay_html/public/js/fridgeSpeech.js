@@ -120,7 +120,7 @@ var fridgeSpeech = (function($) {
 					console.log("0000000");
 					homepageCheck(speechClearFilter, 'delete '+filter, filter.toLowerCase());
 				},
-				'(*junk) search (by) (item) :filter *content': function (junk, filter, content) {
+				'(*junk) search (by) :filter *content': function (junk, filter, content) {
 					trying = 0;
 					homeItemsSpeechFilter(filter.toLowerCase(), content.toLowerCase(), 'search by');
 				},
@@ -128,7 +128,7 @@ var fridgeSpeech = (function($) {
 					trying = 0;
 					homeItemsSpeechFilter(filter.toLowerCase(), content.toLowerCase(), 'show');
 				},
-				'(*junk) sort (by) (item) :filter *content': function (junk, filter, content) {
+				'(*junk) sort (by) :filter *content': function (junk, filter, content) {
 					trying = 0;
 					homeItemsSpeechFilter(filter.toLowerCase(), content.toLowerCase(), 'sort by');
 				},
@@ -289,15 +289,15 @@ var fridgeSpeech = (function($) {
 				$('#schoolCutoffHome').val('');
 				fridgeApp.refreshView();
 				tts("University filter cleared.");
-			} else if (filter == 'price') {
+			} else if (filter.indexOf('price')>-1) {
 				$('#priceCutoffHome').val(0);
 				fridgeApp.refreshView();
 				tts("Price filter cleared.");		
-			} else if (filter == 'name') {
+			} else if (filter.indexOf('name')>-1) {
 				$('#nameCutoffHome').val('');
 				fridgeApp.refreshView();
 				tts("Name filter cleared.");
-			} else if (filter == 'category') {
+			} else if (filter.indexOf('category')>-1) {
 				fridgeApp.refreshView();
 				tts("Category filter cleared.");
 			} else {

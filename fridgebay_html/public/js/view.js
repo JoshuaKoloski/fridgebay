@@ -459,7 +459,7 @@ var fridgeView = (function($){
     }
     
     function messageBox(id){
-        var messageArea = "<div><textarea class='form-control' rows='3' id='submitMessageUser' placeholder='Want to send a message to the seller?' value=''></textarea></div> <button type='submit' class='dark_brown' sid='"+id+"' onclick='fridgeApp.submitMessage(this), fridgeApp.showViewProfile()'>Submit</button>";
+        var messageArea = "<div><textarea class='form-control' rows='3' id='submitMessageUser' placeholder='Want to send a message to the seller?' value=''></textarea></div> <button type='submit' class='dark_brown' sid='"+id+"' onclick='fridgeApp.submitMessage(this)'>Submit</button>";
         $("#addToNest").html(messageArea);
         console.log(messageArea);
     }
