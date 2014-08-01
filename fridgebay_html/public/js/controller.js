@@ -279,7 +279,6 @@ var fridgeApp = (function($) {
         setView();
         myList.loadModel();
         imageTextAlign();
-        fridgeSpeech.enableSpeech("speech loaded");
         bringToTop();
     }
     
