@@ -14,10 +14,13 @@ var fridgeView = (function($){
         if ($.isEmptyObject(fridgeApp.getUser())) {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
         } else {
+        	var user = fridgeApp.getUser();
+        	var newM = fridgeApp.newMessageCheck(user);
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
             $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
-            $("#notificationButton").html('<button type="button" class="redButton"><span class="glyphicon glyphicon-comment"></span>1</button>');
-            $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+')", "fridgeApp.refreshProfile()"><span class="glyphicon glyphicon-user"></span></button>');
+            $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'profile'"+')", "fridgeApp.refreshProfile()"><span class="glyphicon glyphicon-comment" ></span></button>');
+            fridgeApp.notificationPopover(newM);
+            $("#profileButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'profile'"+')", "fridgeApp.refreshProfile()">'+ user.email+'<span class="glyphicon glyphicon-user"></span></button>');
         }
     }
     function updateCategoryOptions(type){

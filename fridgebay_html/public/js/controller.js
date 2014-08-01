@@ -352,6 +352,32 @@ var fridgeApp = (function ($) {
         alert("Message has been sent to " + seller.email);
         myList.sendMessage(seller.id, newSeller);
     }
+    //Checks for new Messages and returns an array of the new messages
+    function newMessageCheck(user) {
+    	var newMessages = [];
+    	for(i = 0; i< user.messages.length; i++){
+			m = user.messages[i];
+			console.log(m);
+			if(m.checked==false){
+				newMessages.push(m);
+			}
+    	}
+    	return newMessages;
+    }
+    function notificationPopover(newMessages){
+		if(newMessages.length != 0)
+			var data = newMessages.length + " new messages!";
+		else
+			var data = "No New Messages"
+		$(function () {
+        	$("#notificationBtn").popover({
+     			trigger: 'hover',
+     			html: true,
+     			placement: 'bottom',
+     			content: data
+     		});
+     	});    
+    }
     function start() {
         mediaCheck();
         setView();
@@ -397,7 +423,9 @@ var fridgeApp = (function ($) {
         loadEdit: loadEdit,
         mediaCheck: mediaCheck,
         message: message,
-        submitMessage:submitMessage
+        submitMessage:submitMessage,
+        newMessageCheck: newMessageCheck,
+        notificationPopover: notificationPopover
     }
 
     return (fridgeApp);
