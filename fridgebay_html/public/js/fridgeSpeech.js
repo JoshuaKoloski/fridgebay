@@ -219,7 +219,21 @@ var fridgeSpeech = (function($) {
 					homepageCheck(subcategorySpeechFilter, 'sub category', subcategory.toLowerCase());
 				},
 				//**** add filter end *****
-				
+				'(*junk) add (*item) nest (*junk2)': function (junk, item, junk2) {
+					if (window.location.hash == '#item'){
+						console.log($('#addToNestButton').length);
+						if ($('#addToNestButton').length == 0) {
+							console.log("No item is opened");
+							tts("Sorry, no item is opened. You cannot add to nest.");
+						} else {
+							tts("Item is added to your nest. You can now sent a message and then click submit to notify the seller.");
+							$('#addToNestButton').click();
+						}
+					} else {
+						console.log("You cannot add anything unless you are on an item page.");
+						tts("You cannot add anything unless you are on an item page.");
+					}
+				},
 				'*dontUnderstand': function (dontUnderstand) {
 					$('.myStateText').text('Command not found!');
 					if (trying<2) {
