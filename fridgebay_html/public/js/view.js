@@ -532,7 +532,7 @@ var fridgeView = (function($){
     }
 
     function itemAddToNest(item) {
-        return "<button class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.message(this)'>Add to Nest</button>";
+        return "<button id='addToNestButton' class='btn btn-warning color4' sid='"+item._id+"' onclick='fridgeApp.addToNest(this), fridgeApp.message(this)'>Add to Nest</button>";
     }
     
     function messageBox(id){
