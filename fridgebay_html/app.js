@@ -336,6 +336,7 @@ app.post('/model/:collection', function(req, res) {
 app.delete('/model/:collection/:id', function(req, res) {
     var id = req.params.id;
     //delete item images from cloudinary
+    /*
     mongoose.model(req.params.collection).find({
         _id: id
     }, function(err, item) {
@@ -344,7 +345,7 @@ app.delete('/model/:collection/:id', function(req, res) {
                 console.log(result)
             });
         }
-    })
+    })*/
     //delete item from database
     mongoose.model(req.params.collection).remove({
         _id: id
