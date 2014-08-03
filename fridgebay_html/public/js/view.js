@@ -11,14 +11,17 @@ var fridgeView = (function($){
 //         console.log("the current user is " + JSON.stringify(myData.currentUser));
         //         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
         refreshProfile(myData.currentUser);
-        refreshItemItems(fridgeApp.getUser().currentItem[0], myData);
+        
 
         if ($.isEmptyObject(fridgeApp.getUser())) {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
         } else {
-        	var user = fridgeApp.getUser();
+            var user = fridgeApp.getUser();
+            if (fridgeApp.getUser().currentItem[0]) {
+                refreshItemItems(fridgeApp.getUser().currentItem[0], myData);
+            }
         	var newM = fridgeApp.newMessageCheck(user);
-            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+        	$("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
             $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
             $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'message'"+')", "fridgeApp.refreshMessage('+'"'+newM+'"'+')"><span class="glyphicon glyphicon-comment" ></span></button>');
 			refreshMessages(newM);
