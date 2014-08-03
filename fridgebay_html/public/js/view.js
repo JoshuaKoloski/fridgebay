@@ -469,14 +469,17 @@ var fridgeView = (function($){
             var price = item.price;
             var university = item.university;
             var id = nest[i];
-            row = row +
-             "<thead class='color'><tr>" +
-                    "<th>Name</th>" +
-                    "<th>Photo</th>" +
-                    "<th>Price</th>" +
-                    "<th>University</th>" +
-                    "<th></th></tr>" +
-            "</thead>"+
+            if (i == 0) {
+                row = row +
+                 "<thead class='color'><tr>" +
+                        "<th>Name</th>" +
+                        "<th>Photo</th>" +
+                        "<th>Price</th>" +
+                        "<th>University</th>" +
+                        "<th></th></tr>" +
+                "</thead>"
+            }
+            row=row+
             "<tbody class='color2'>"+
             "<tr class='changeImageColor'>"+
             "<td><label>"+itemName+"</label></td>"+
@@ -499,17 +502,19 @@ var fridgeView = (function($){
             var price = item.price;
             var university = item.university;
             var id = nest[i];
-            row = row +
-
-            "<thead class='color'><tr>" +
-                    "<th>Name</th>" +
-                    "<th>Photo</th>" +
-                    "<th>Price</th>" +
-                    "<th>University</th>" +
-                    "<th></th>" +
-                    "<th></th>" +
-                    "<th></th></tr>" +
-            "</thead>" +
+            if(i==0){
+                row=row+
+                "<thead class='color'><tr>" +
+                        "<th>Name</th>" +
+                        "<th>Photo</th>" +
+                        "<th>Price</th>" +
+                        "<th>University</th>" +
+                        "<th></th>" +
+                        "<th></th>" +
+                        "<th></th></tr>" +
+                "</thead>" 
+            }
+            row=row+
             "<tbody class='color2'>" +
             "<tr class='changeImageColor'>" +
             "<td><label>" + itemName + "</label></td>" +

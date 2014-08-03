@@ -13,6 +13,10 @@ var fridgeApp = (function ($) {
         console.log("VIEW IS SHOWN");
         window.location.hash = '#' + selected;
         $('.view').hide().filter('#' + selected + '-view').show();
+
+        if (selected == "home") {
+            refreshView();
+        }
     };
 
     var setView = function () {
