@@ -27,6 +27,14 @@
    text-align: center;  
 }
 
+a{
+    color:#572f04;
+}
+
+a:hover{
+    color:#efcd9e;
+}
+
 .color
 {
     background-color:#572f04;

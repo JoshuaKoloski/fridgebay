@@ -41,7 +41,7 @@
                     </div>
                     <div class="collapse navbar-collapse pull-right color7" id="nav">
                         <ul class="nav navbar-nav color7">
-                            <li><span class="dark_brown glyphicon glyphicon-info-sign" onclick="fridgeApp.showHelp()"></span></li>
+                            <li><button class="dark_brown" onclick="fridgeApp.showHelp()"><span class="glyphicon glyphicon-info-sign"></span></button></li>
                             <li id="notificationButton"></li>
                             <li id="postButton"></li>
                             <li id="profileButton"></li>
@@ -583,12 +583,6 @@
                         <table class="table table-default profileInfo" id="profileInfo">
                             
                         </table>
-                    <div>
-                        <form action="">
-                            <label><input type="radio" name="option" value="email">  Email</label><br>
-                            <label><input type="radio" name="option" value="phone">  Phone</label>
-                        </form>
-                     </div>
                     </div>
                     <div class="col-lg-8 doublePadding">
 
@@ -610,13 +604,15 @@
                                 <li><a href="#">Your History</a></li>
                             </ul>
                         </div>
-                        <table class="table table-default panel panel-warning">
+                        <table id="profile_table" class="table table-default panel panel-warning">
                             <thead class="color">
                                 <tr>
                                     <th>Name</th>
                                     <th>Photo</th>
                                     <th>Price</th>
                                     <th>University</th>
+                                    <th></th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
 
@@ -687,7 +683,7 @@
 							<td>
 									<div>
 										<label>Item Name</label>
-                                        <input type="text" onmouseout="fridgeApp.setSeller()" class="form-control" id="itemName" name="itemName" />
+                                        <input type="text" onmouseover="fridgeApp.setSeller()" class="form-control" id="itemName" name="itemName" />
 									</div>
 									<div>
 										<label>Price</label>
@@ -752,7 +748,7 @@
                             <td width="600px">
                                 <form class="form-inline" role="form">
                                     <div class="form-group">
-                                        <label>Choose Item Main Category</label>
+                                        <label>Main Category</label>
                                         <select class="form-control" id="editMainCategory" onchange="fridgeView.updateCategoryOptions('edit')">
                                             <option value="furniture"> Furniture </option>
                                             <option value="appliances"> Appliances </option>
@@ -766,7 +762,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label>and Sub Category</label>
+                                        <label>Sub Category</label>
                                         <select class="form-control" id="editSubCategory">
                                             <option value="table"> Table </option>
                                             <option value="chair"> Chair </option>
