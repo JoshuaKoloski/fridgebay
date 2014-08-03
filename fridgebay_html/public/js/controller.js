@@ -185,13 +185,8 @@ var fridgeApp = (function ($) {
     }
 
     function deleteItem(element) {
-        var c = confirm("Are you sure you want to delete this item?")
-        if (c) {
-            console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
-            myList.deleteElement(element.getAttribute("sid"));
-        } else {
-            console.log("delete canceled");
-        }
+        console.log("CTRL Activated: Deleting item with id " + element.getAttribute("sid"));
+        myList.deleteElement(element.getAttribute("sid"));
         refreshProfile();
     }
 
@@ -324,45 +319,50 @@ var fridgeApp = (function ($) {
 
     function updateNest(element) {
 
-        var user = getUser();
-        var id = element.getAttribute("sid");
-        var userID = getUserId();
-        alert("id after getting attribute is " + id);
-        var interestList = user.interestList; //ids of items
-        var sellingList = getUser().sellingList; //ids of items
-        alert("interestList before deleting element: " + JSON.stringify(interestList));
-        alert("sellingList before deleting element: " + JSON.stringify(sellingList));
+        var c = confirm("Are you sure you want to delete this item?")
 
-        //check interestList for id of deleted item and delete from list
-        for (var i = 0; i < interestList.length; i++) {
-            if (interestList[i] == id) {
-                interestList.splice(i, 1);
+        if (c) {
+
+            var user = getUser();
+            var id = element.getAttribute("sid");
+            var userID = getUserId();
+            //alert("id after getting attribute is " + id);
+            var interestList = user.interestList; //ids of items
+            var sellingList = getUser().sellingList; //ids of items
+            //alert("interestList before deleting element: " + JSON.stringify(interestList));
+            //alert("sellingList before deleting element: " + JSON.stringify(sellingList));
+
+            //check interestList for id of deleted item and delete from list
+            for (var i = 0; i < interestList.length; i++) {
+                if (interestList[i] == id) {
+                    interestList.splice(i, 1);
+                }
             }
-        }
 
-        //check sellingList for id of deleted item and delete from list
-        for (var i = 0; i < sellingList.length; i++) {
-            if (sellingList[i] == id) {
-                sellingList.splice(i, 1);
+            //check sellingList for id of deleted item and delete from list
+            for (var i = 0; i < sellingList.length; i++) {
+                if (sellingList[i] == id) {
+                    sellingList.splice(i, 1);
+                }
             }
+
+
+            var newUser = {
+                openID: user.openID,
+                profile: user.profile,
+                name: getUserName(),
+                email: getUserEmail(),
+                phone: user.phone,
+                interestList: interestList,
+                sellingList: sellingList
+            };
+
+            myList.updateCurrentUser(userID, newUser);
+            refreshView();
+            refreshNestTable();
+            //alert("interestList after deleteing element: " + JSON.stringify(getUser().interestList));
+            //alert("sellingList after deleteing element: " + JSON.stringify(getUser().sellingList));
         }
-
-
-        var newUser = {
-            openID: user.openID,
-            profile: user.profile,
-            name: getUserName(),
-            email: getUserEmail(),
-            phone: user.phone,
-            interestList: interestList,
-            sellingList: sellingList
-        };
-
-        myList.updateCurrentUser(userID, newUser);
-        refreshView();
-        refreshNestTable();
-        alert("interestList after deleteing element: " + JSON.stringify(getUser().interestList));
-        alert("sellingList after deleteing element: " + JSON.stringify(getUser().sellingList));
 
     }
 
