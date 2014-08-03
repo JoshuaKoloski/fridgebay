@@ -11,6 +11,7 @@ var fridgeView = (function($){
 //         console.log("the current user is " + JSON.stringify(myData.currentUser));
         //         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
         refreshProfile(myData.currentUser);
+        refreshItemItems(fridgeApp.getUser().currentItem[0], myData);
 
         if ($.isEmptyObject(fridgeApp.getUser())) {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
@@ -277,7 +278,7 @@ var fridgeView = (function($){
         var list = myList.items;
         var element = myList.searchById(elementId);
         
-        fridgeApp.showView('item');
+        //fridgeApp.showView('item');
         if(!mq.matches){
             $("#carouselControls").html(carousel());
         };
@@ -642,7 +643,7 @@ var fridgeView = (function($){
         var temp = sellBy.toString();
         var date = temp.slice(0, 15);
         var user = myList.searchByUserId(item.seller);
-        var username = item.name;
+        var username = user.name;
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + username + "</span><label></h4>";

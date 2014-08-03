@@ -66,7 +66,8 @@ var userSchema = mongoose.Schema({
     interestList: Array,
     number: Number,
     messages: Array,  // {message: String, new: Boolean, sentBy: String (User Id)
-    sellingList: Array
+    sellingList: Array,
+    currentItem: Array
 });
 
 var item = mongoose.model('items', itemsSchema);
@@ -129,6 +130,7 @@ passport.use(new GoogleStrategy({
             user.email = emails[0].value;
             user.interestList=[];               
             user.sellingList=[];
+            user.currentItem=[];
             user.number=0;
             user.messages=[];
             // store a new user ....

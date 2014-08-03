@@ -10,13 +10,8 @@ var fridgeApp = (function ($) {
     }
 
     var showView = function (selected) {
-        console.log("VIEW IS SHOWN");
         window.location.hash = '#' + selected;
         $('.view').hide().filter('#' + selected + '-view').show();
-
-        if (selected == "home") {
-            refreshView();
-        }
     };
 
     var setView = function () {
@@ -173,7 +168,20 @@ var fridgeApp = (function ($) {
 
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
+        var user = getUser();
+        var id = getUserId();
+        var itemID = element.getAttribute("sid");
+        
+        var newItem = {
+           currentItem: itemID 
+        };
+
+
+        myList.updateCurrentUser(id, newItem);
+
+        showView('item');
         fridgeView.refreshItemItems(element.getAttribute("sid"), myList);
+        
         // return myList.searchById(element.getAttribute("sid"));
     }
 
