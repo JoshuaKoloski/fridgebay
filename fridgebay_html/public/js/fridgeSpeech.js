@@ -10,32 +10,81 @@ var fridgeSpeech = (function($) {
 		if (annyang) {
 			var trying = 0;
 			var commands = {
-				'(*junk) show speech instructions': function (junk) {
+				'(*junk) speech (*junk2)': function (junk, junk2) {
 					trying = 0;
-					$('#speechInstructions').removeClass("hidden");
-					tts("Speech instructions showed.")
+					if (typeof junk == 'undefined'){
+						tts("I heard speech. You can show speech instructions or hide speech instructions.");
+					} else if (junk.indexOf('show')>-1 || junk.indexOf('open')>-1 || junk.indexOf('see')>-1 || junk.indexOf('pop')>-1){
+						$('#speechInstructions').removeClass("hidden");
+						tts("Speech instructions showed.")
+					} else if (junk.indexOf('hide')>-1 || junk.indexOf('close')>-1 || junk.indexOf('remove')>-1){
+						$('#speechInstructions').addClass("hidden");
+						tts("Speech instructions hidden.")
+					} else {
+						tts("I heard speech. You can show speech instructions or hide speech instructions.");
+					}
 				},
-				'(*junk) hide speech instructions': function (junk) {
+				'(*junk) down (*junk2)': function(junk, junk2){
+					window.scrollBy(0,100);
+					/**
+					$("body, html").animate({ 
+						scrollTop: $("body, html").offset().top+30
+					}, 600);
+					**/
+					tts("page scrolled down");
+				},
+				'(*junk) up (*junk2)': function(junk, junk2){
+					window.scrollBy(0,-100);
+					/**
+					$("body, html").animate({ 
+						scrollTop: $("body, html").offset().top-30
+					}, 600);
+					**/
+					tts("page scrolled up");
+				},
+				//*****
+				'(*junk) post (*item)': function (junk, item) {
 					trying = 0;
-					$('#speechInstructions').addClass("hidden");
-					tts("Speech instructions hidden.")
+					if (typeof item == 'undefined'){
+						item = 'item';
+					}
+					speechPostItem(item.toLowerCase(), 'post');
+				},	
+				'(*junk) sell (*item)': function (junk, item) {
+					trying = 0;
+					if (typeof item == 'undefined'){
+						item = 'item';
+					}
+					speechPostItem(item.toLowerCase(), 'post');
+				},
+				//*****
+				'(*junk) go (back) to *page': function (junk, page) {
+					trying = 0;
+					speechJumpToPage(page.toLowerCase());
 				},
 				//*************
-				'(*junk) start browse *item': function(junk, item){
+
+				'(*junk) (start) browsing (*info)': function(junk, info){
 					trying = 0;
-					speechBrowseOption(item.toLowerCase(), 'browse');
+					if (typeof info == 'undefined'){
+						info = 'item';
+					}
+					homepageCheck(speechStartBrowseItems, 'browsing', info.toLowerCase());
 				},
-				'(*junk) start browsing *item': function(junk, item){
+				
+				'(*junk) browse (*info)': function(junk, info){
 					trying = 0;
-					speechBrowseOption(item.toLowerCase(), 'browsing');
+					if (typeof info == 'undefined'){
+						info = 'item';
+					}
+					homepageCheck(speechStartBrowseItems, 'browse', info.toLowerCase());
 				},
-				'(*junk) start look at *item': function(junk, item){
+				'(*junk) go over (*info)': function(junk, info){
 					trying = 0;
-					speechBrowseOption(item.toLowerCase(), 'look at');
-				},
-				'(*junk) start go over *item': function(junk, item){
-					trying = 0;
-					speechBrowseOption(item.toLowerCase(), 'go over');
+					if (typeof info == 'undefined'){
+						info = 'item';
+					}
+					homepageCheck(speechStartBrowseItems, 'go over', info.toLowerCase());
 				},
 				//*************
 				'(*junk) next (*item)': function(junk, item){
@@ -43,31 +92,28 @@ var fridgeSpeech = (function($) {
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
-					speechNextItem(item.toLowerCase());
-					
+					homepageCheck(speechNextItem, 'next', item.toLowerCase());	
 				},
 				'(*junk) previous (*item)': function(junk, item){
 					trying = 0;			
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
-					speechPreviousItem(item.toLowerCase());
-					
+					homepageCheck(speechPreviousItem, 'previous', item.toLowerCase());			
 				},
 				'(*junk) resume (browsing) (*item)': function (junk, item) {
 					trying = 0;
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
-					speechContinueBrowseItems(item.toLowerCase());
-					
+					homepageCheck(speechContinueBrowseItems, 'resume', item.toLowerCase());					
 				},
-				'(*junk) continue (browsing) (*junk2)': function (junk, junk2) {
+				'(*junk) continue (browsing) (*item)': function (junk, item) {
 					trying = 0;
-					if (typeof junk2 == 'undefined'){
-						junk2 = 'items';
+					if (typeof item == 'undefined'){
+						item = 'items';
 					}
-					speechContinueBrowseItems(junk2);
+					homepageCheck(speechContinueBrowseItems, 'continue', item.toLowerCase());
 				},
 				'(*junk) end browsing (*junk2)': function (junk, junk2) {
 					trying = 0;
@@ -76,78 +122,104 @@ var fridgeSpeech = (function($) {
 				},
 				'(*junk) view (*junk2)': function (junk, junk2) {
 					trying = 0;
-					viewItem();
+					homepageCheck(viewItem(), 'view');
 				},
 				'(*junk) open (*junk2)': function (junk, junk2) {
 					trying = 0;
-					viewItem();
+					homepageCheck(viewItem(), 'open');
 				},
 				'(*junk) click (*junk2)': function (junk, junk2) {
 					trying = 0;
-					viewItem();
+					homepageCheck(viewItem(), 'click');
 				},
-				'(*junk) stop *term': function (junk, term) {
+				'(*junk) stop (*junk2)': function (junk, junk2) {
 					trying = 0;
 					if (window.location.hash == '#home') {
-						if (term.indexOf('browsing')>-1 || term.indexOf('going')>-1 || term.indexOf('item')>-1) {
-							stopFlag = true;
-						} else {
-							tts("I heard stop "+term+". If you are browsing items and you want to stop. Say. Stop browsing.");
-						}
+						stopFlag = true;
 					} else {
-						tts("I heard stop and I didn't understand. You cannot stop anything unless you are browsing items in the home page.");
+						tts("I heard stop. You cannot stop anything unless you are browsing items in the home page.");
 					}
 				},
-				'(*junk) post *item': function (junk, item) {
+				//**** filter deletion *****
+				'(*junk) clear (*filter)': function (junk, filter) {
 					trying = 0;
-					speechPostItem(item.toLowerCase(), 'post');
-				},
-				'(*junk) sell *item': function (junk, item) {
-					trying = 0;
-					speechPostItem(item.toLowerCase(), 'sell');
-				},
-				'(*junk) go to *page': function (junk, page) {
-					trying = 0;
-					speechJumpToPage(page.toLowerCase());		
-				},
-				'(*junk) clear *filter': function (junk, filter) {
-					trying = 0;
-					console.log("0000000");
-					homepageCheck(speechClearFilter, 'clear '+filter, filter.toLowerCase());
+					if (typeof filter == 'undefined'){
+						tts("You can clear a filter such as name, university, price or category.");
+					} else {
+						homepageCheck(speechClearFilter, 'clear', filter.toLowerCase());
+					}
 				},
 				'(*junk) delete *filter': function (junk, filter) {
 					trying = 0;
-					console.log("0000000");
-					homepageCheck(speechClearFilter, 'delete '+filter, filter.toLowerCase());
-				},
-				'(*junk) search (by) :filter *content': function (junk, filter, content) {
-					trying = 0;
-					homeItemsSpeechFilter(filter.toLowerCase(), content.toLowerCase(), 'search by');
-				},
-				'(*junk) show (me) :filter *content': function (junk, filter, content) {
-					trying = 0;
-					homeItemsSpeechFilter(filter.toLowerCase(), content.toLowerCase(), 'show');
-				},
-				'(*junk) sort (by) :filter *content': function (junk, filter, content) {
-					trying = 0;
-					homeItemsSpeechFilter(filter.toLowerCase(), content.toLowerCase(), 'sort by');
-				},
-				'(*junk) sub category (other) *subcategory': function (junk, subcategory) {
-					trying = 0;
-					subcategorySpeechFilter(subcategory.toLowerCase());
+					if (typeof filter == 'undefined'){
+						tts("You can delete a filter such as name, university, price or category.");
+					} else {
+						homepageCheck(speechClearFilter, 'delete', filter.toLowerCase());
+					}
 				},
 				'(*junk) all :category (*junk2)': function (junk, category, junk2) {
 					trying = 0;
 					if (window.location.hash == '#home') {
-						if (category.toLowerCase() == "category" || category.toLowerCase() == "categories") {
+						if (category.toLowerCase().indexOf('category')>-1) {
 							fridgeApp.refreshView();
 						} else {
 							tts("I heard all "+category+". You can say all categories to see items from all categories.");
 						}
 					} else {
-						tts("I heard all "+category+" but I didn't understand. You may need to go to home page to execute a command. To go to home page, say. go to home page.");
+						tts("I heard all "+category+", which looks like a homepage command. To go to home page, say. go to home page.");
 					}
 				},
+				//**** filter deletion end *****
+				
+				//**** add filter *****
+				'(*junk) search (by) (:filter) (*content)': function (junk, filter, content) {
+					trying = 0;
+					if (typeof filter == 'undefined'){
+						filter = 'nothing';
+					}
+					if (typeof content == 'undefined'){
+						content = '';
+					}
+					if (filter.indexOf('buy')>-1){
+						filter = content.substring(1);
+						content = '';
+					}
+					homepageCheck(homeItemsSpeechFilter, 'search', filter.toLowerCase(), content.toLowerCase());
+				},
+				'(*junk) sort (by) (:filter) (*content)': function (junk, filter, content) {
+					trying = 0;
+					if (typeof filter == 'undefined'){
+						filter = 'nothing';
+					}
+					if (typeof content == 'undefined'){
+						content = '';
+					}
+					if (filter.indexOf('buy')>-1){
+						filter = content.substring(1);
+						content = '';
+					}
+					homepageCheck(homeItemsSpeechFilter, 'sort', filter.toLowerCase(), content.toLowerCase());
+				},			
+				'(*junk) show (me) (:filter) (*content)': function (junk, filter, content) {
+					trying = 0;
+					if (typeof filter == 'undefined'){
+						filter = 'nothing';
+					}
+					if (typeof content == 'undefined'){
+						content = '';
+					}
+					if (filter.indexOf('buy')>-1){
+						filter = content.substring(1);
+						content = '';
+					}
+					homepageCheck(homeItemsSpeechFilter, 'show', filter.toLowerCase(), content.toLowerCase());
+				},
+				'(*junk) sub category (other) *subcategory': function (junk, subcategory) {
+					trying = 0;
+					homepageCheck(subcategorySpeechFilter, 'sub category', subcategory.toLowerCase());
+				},
+				//**** add filter end *****
+				
 				'*dontUnderstand': function (dontUnderstand) {
 					$('.myStateText').text('Command not found!');
 					if (trying<2) {
@@ -157,6 +229,7 @@ var fridgeSpeech = (function($) {
 						tts("Sorry I didn't understand the command "+dontUnderstand+". You may want to try keyboard.");
 					}
 				}
+				
 			};
 			
 			annyang.addCommands(commands);
@@ -222,15 +295,14 @@ var fridgeSpeech = (function($) {
 								clearInterval(annyangInterval);
 								alert("annyang interval cleared");
 							}
-							if (speechSynthesis.speaking){
+							if (isListening && speechSynthesis.speaking){
 								annyang.abort();
 								isListening = false;
-							} else {
-								if (!isListening){
-									isListening = true;
-									annyang.start();
-								}
+							} else if (!isListening && !speechSynthesis.speaking) {
+								isListening = true;
+								annyang.start();
 							}
+							console.log("speechSynthesis.speaking = "+speechSynthesis.speaking+" isListening = "+isListening);
 						}, 2000)
 
 						tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
@@ -258,7 +330,7 @@ var fridgeSpeech = (function($) {
 		} else if (pageName.indexOf('account')>-1 || pageName.indexOf('profile')>-1){
 			fridgeApp.showView('profile');
 			tts("You are on your account page now.");
-		} else if (pageName.indexOf('feedback')>-1) {
+		} else if (pageName.indexOf('feedback')>-1 || pageName.indexOf('contact')>-1) {
 			fridgeApp.showView('contact');
 			tts("You are on the feedback page now. You are welcome to report any issue or leave a kind message.");
 		} else {
@@ -279,73 +351,141 @@ var fridgeSpeech = (function($) {
 		if (window.location.hash == '#home') {
 			fun(para1, para2);
 		} else {
-			tts("I heard "+text+" and it's a homepage command. Say. go to homepage to go to homepage first.");
+			tts("I heard "+text+" and it seems like a homepage command. You can say. go to homepage to go to homepage first.");
 		}
 	}
 
-	function speechClearFilter( filter) {
-	//	if (window.location.hash == '#home') {
-			if (filter.indexOf('university')>-1) {
-				$('#schoolCutoffHome').val('');
-				fridgeApp.refreshView();
-				tts("University filter cleared.");
-			} else if (filter.indexOf('price')>-1) {
-				$('#priceCutoffHome').val(0);
-				fridgeApp.refreshView();
-				tts("Price filter cleared.");		
-			} else if (filter.indexOf('name')>-1) {
-				$('#nameCutoffHome').val('');
-				fridgeApp.refreshView();
-				tts("Name filter cleared.");
-			} else if (filter.indexOf('category')>-1) {
-				fridgeApp.refreshView();
-				tts("Category filter cleared.");
-			} else {
-				tts("I heard clear "+ filter +" but I don't understand. You can clear a filter field by saying clear name, clear university, clear price or clear filter.");
-			}
-	//	} else {
-	//		tts("I heard "+text+", which seems like a command for home page. If you want to go to home page say go to home page.");
-	//	}
+	function speechClearFilter(filter) {
+		if (filter.indexOf('university')>-1) {
+			$('#schoolCutoffHome').val('');
+			fridgeApp.refreshView();
+			tts("University filter cleared.");
+		} else if (filter.indexOf('price')>-1) {
+			$('#priceCutoffHome').val(0);
+			fridgeApp.refreshView();
+			tts("Price filter cleared.");		
+		} else if (filter.indexOf('name')>-1) {
+			$('#nameCutoffHome').val('');
+			fridgeApp.refreshView();
+			tts("Name filter cleared.");
+		} else if (filter.indexOf('category')>-1) {
+			fridgeApp.refreshView();
+			tts("Category filter cleared.");
+		} else {
+			tts("I heard clear "+ filter +" but I don't understand. You can clear a filter field by saying clear name, clear university, clear price or clear filter.");
+		}
 	}
 	
 	//speech filters for items in the home page including name, university, price, main category
-	function homeItemsSpeechFilter(filter, content, searchPhrase){
-		if (window.location.hash == '#home') {
-			if (filter == 'university') {
-				var school = content;
-				$('#schoolCutoffHome').val(school);
-				fridgeApp.refreshView();
-				tts("Here are items from "+school+" university.");
-			} else if (filter == 'price') {
-				var price = content;
-				if (isNaN(price)){
-					tts("I heard "+searchPhrase+" price "+price+" and price need to be a positive number. Please try again.");
-				} else {
-					$('#priceCutoffHome').val(price);
-					fridgeApp.refreshView();
-					tts("Here are items cheaper than "+price+" dollars.");
-				}			
-			} else if (filter == 'name') {
-				var name = content;
-				$('#nameCutoffHome').val(name);
-				fridgeApp.refreshView();
-				tts("Here are items with name containing "+name+".");
-			} else if (filter == 'category') {
-				if (content == 'furniture' || content == 'appliances' || content == 'vehicles' || content == 'electronics' || content == 'cutlery' || content == 'supplies' || content == 'books' || content == 'clothes' || content == 'bed') {
-					var category = content;
-					var categoryId = category.substring(0,1).toUpperCase()+category.substring(1);
-					$('.collapse').removeClass("in");
-					$('#collapse'+categoryId).addClass("in");
-					fridgeApp.filterMainCategory(category);
-					tts("Here are items in the "+category+" category.");
-				} else {
-					tts("I heard "+searchPhrase+" category "+ category +" but I don't understand. Please choose a category in the category menu and try the command again.");
-				}
+	function homeItemsSpeechFilter(filter, content){
+		if (filter == 'nothing') {
+			tts("You can search by name, university, price and category.");
+		} else if (filter == 'university') {
+			var school = content;
+			$('#schoolCutoffHome').val(school);
+			fridgeApp.refreshView();
+			tts("Here are items from "+school+" university.");
+		} else if (filter == 'price') {
+			var price = content;
+			if (isNaN(price)){
+				tts("You are entering the price filter but "+price+" is not a number. Please try again.");
 			} else {
-				tts("I heard "+searchPhrase+" "+ filter +" but I don't understand. You can "+searchPhrase+" name, university, price and category.");
+				$('#priceCutoffHome').val(price);
+				fridgeApp.refreshView();
+				tts("Here are items cheaper than "+price+" dollars.");
+			}			
+		} else if (filter == 'name') {
+			var name = content;
+			$('#nameCutoffHome').val(name);
+			fridgeApp.refreshView();
+			tts("Here are items with name containing "+name+".");
+		} else if (filter == 'category') {
+			if (content == 'furniture' || content == 'appliances' || content == 'vehicles' || content == 'electronics' || content == 'cutlery' || content == 'supplies' || content == 'books' || content == 'clothes' || content == 'bed') {
+				var category = content;
+				fridgeApp.filterMainCategory(category);
+				tts("Here are items in the "+category+" category.");
+			} else {
+				subcategorySpeechFilter(content);
 			}
 		} else {
-			tts("It seems that you said a command to filter items in the home page. Please say. go to home page to go to home page first.");
+			if (filter == 'furniture' || filter == 'appliances' || filter == 'vehicles' || filter == 'electronics' || filter == 'cutlery' || filter == 'supplies' || filter == 'books' || filter == 'clothes' || filter == 'bed') {
+				var category = filter;
+				fridgeApp.filterMainCategory(category);
+				tts("Here are items in the "+category+" category.");
+			} else {
+				subcategorySpeechFilter(filter+content);
+			}
+		}
+	}
+	
+	function categorySpeechFilter(category){
+		if (category == 'furniture' || category == 'appliances' || category == 'vehicles' || category == 'electronics' || category == 'cutlery' || category == 'supplies' || category == 'books' || category == 'clothes' || category == 'bed') {
+			fridgeApp.filterMainCategory(category);
+			tts("Here are items in the "+category+" category.");
+		} else {
+			subcategorySpeechFilter(category);
+		}
+	}
+	
+	//speech filter for a sub category for the home page items
+	function subcategorySpeechFilter(subcategory){
+		if (subcategory == 'table' || subcategory == 'chair' || subcategory == 'shelves' || subcategory == 'bookcase' || subcategory == 'drawer' || 
+			subcategory == 'fridge' || subcategory == 'microwave' || subcategory == 'oven' || subcategory == 'bike' || subcategory == 'car' || 
+			subcategory == 'motocycle' || subcategory == 'boat' || subcategory == 'computer' || subcategory == 'tv' || subcategory == 'phone' || 
+			subcategory == 'charger' || subcategory == 'dishes' || subcategory == 'blender' || subcategory == 'mixer' || subcategory == 'scissors' || 
+			subcategory == 'notebook' || subcategory == 'binder' || subcategory == 'folder' || subcategory == 'sciences' || subcategory == 'arts' || 
+			subcategory == 'math' || subcategory == 'novel' || subcategory == 'shoes' || subcategory == 'shirt' || subcategory == 'pants' || 
+			subcategory == 'hat' || subcategory == 'sweater' || subcategory == 'sheet' || subcategory == 'padding' || subcategory == 'comforter') {
+			//filter subcategory
+			fridgeApp.filterSubCategory(subcategory);
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory == 'TV') {
+			fridgeApp.filterSubCategory('tv');
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory == 'coffee maker') {
+			fridgeApp.filterSubCategory('coffee_maker');
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory.indexOf('media')>-1) {
+			fridgeApp.filterSubCategory('media_player');
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory == 'gaming systems') {
+			fridgeApp.filterSubCategory('gaming_systems');
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory.indexOf('pen')>-1) {
+			fridgeApp.filterSubCategory('pen_pencil');
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory.indexOf('pillow')>-1) {
+			fridgeApp.filterSubCategory('pillow_case');
+			tts("Here are items in the "+subcategory+" sub category.");
+		} else if (subcategory == 'furniture' || subcategory == 'appliances' || subcategory == 'vehicles' || subcategory == 'electronics' || subcategory == 'cutlery' || 
+				subcategory == 'supplies' || subcategory == 'books' || subcategory == 'clothes' || subcategory == 'bed') {
+			var subcategoryUp = subcategory.substring(0,1).toUpperCase()+subcategory.substring(1);
+			fridgeApp.filterSubCategory('other'+subcategoryUp);
+			tts("Here are items in the other "+subcategory+" sub category.");
+		} else if (subcategory.indexOf('other')>-1) {
+			tts("I heard other. For choosing an other sub category. You also need to specify the main category. For example, you can say. Search or sort by other furniture.")	
+		} else {
+			tts(subcategory+" is not a category. Please choose a category in the category menu and try the command again.");
+		}
+	}
+	
+	function categoryCheck(term){
+		subcategory = term.toLowerCase();
+		if (subcategory == 'table' || subcategory == 'chair' || subcategory == 'shelves' || subcategory == 'bookcase' || subcategory == 'drawer' || 
+			subcategory == 'fridge' || subcategory == 'microwave' || subcategory == 'oven' || subcategory == 'bike' || subcategory == 'car' || 
+			subcategory == 'motocycle' || subcategory == 'boat' || subcategory == 'computer' || subcategory == 'tv' || subcategory == 'phone' || 
+			subcategory == 'charger' || subcategory == 'dishes' || subcategory == 'blender' || subcategory == 'mixer' || subcategory == 'scissors' || 
+			subcategory == 'notebook' || subcategory == 'binder' || subcategory == 'folder' || subcategory == 'sciences' || subcategory == 'arts' || 
+			subcategory == 'math' || subcategory == 'novel' || subcategory == 'shoes' || subcategory == 'shirt' || subcategory == 'pants' || 
+			subcategory == 'hat' || subcategory == 'sweater' || subcategory == 'sheet' || subcategory == 'padding' || subcategory == 'comforter' ||
+			subcategory == 'TV' || subcategory == 'coffee maker' || subcategory.indexOf('media')>-1 || subcategory == 'gaming systems' ||
+			subcategory.indexOf('pen')>-1 ||subcategory.indexOf('pillow')>-1 || subcategory == 'furniture' || subcategory == 'appliances' || 
+			subcategory == 'vehicles' || subcategory == 'electronics' || subcategory == 'cutlery' || subcategory == 'supplies' || 
+			subcategory == 'books' || subcategory == 'clothes' || subcategory == 'bed'){
+			
+			return true;
+		} else {
+			return false;
 		}
 	}
 	
@@ -354,106 +494,81 @@ var fridgeSpeech = (function($) {
 	var stopFlag = false;
 	
 	function viewItem(){
-		if (window.location.hash == '#home') {
-			if (itemList == []){
-				itemList = homeCollectItemList();
-			}
-			if (index<=itemList.length){
-				console.log("VIEWING THIS ITEM "+itemList[--index]);
-				fridgeApp.passById(itemList[index]);
-				var thisItem = fridgeApp.searchById(itemList[index]);
-				tts("Item name is "+thisItem.name+"."+
-				"It is in category "+thisItem.category+" and sub category "+thisItem.subcategory+"."+
-				"It is sell by "+thisItem.sellBy+"."+
-				"University is "+thisItem.university+"."+
-				"Location is "+thisItem.location+"."+
-				"Price is "+thisItem.price+"."+
-				"Quantity is "+thisItem.quantity+"."+
-				"Condition is "+thisItem.condition+"."+
-				"Seller is "+thisItem.seller+"."+
-				thisItem.interested+" people is interested in this item.")
-				index++;
-			} else {
-				tts("No item to view.");
-			}
-		} else {
-			tts("It seems that you want to view an item. You can only view item on the home page. Please say go to home page to go to home page first.");
+		if (itemList == []){
+			itemList = homeCollectItemList();
 		}
-	}
-	
-	function speechBrowseOption(item, browsePhrase){
-		if (window.location.hash == '#home') {
-			if (item.indexOf("item") > -1) {
-				speechAutoBrowseItems(item);
-			} else {
-				tts("I heard "+browsePhrase+" "+item+" and I didn't understand. To "+browsePhrase+" items, you can say. "+browsePhrase+" items or "+browsePhrase+" items with information reading.");
-			}	
+		if (index<=itemList.length){
+			console.log("VIEWING THIS ITEM "+itemList[--index]);
+			fridgeApp.passById(itemList[index]);
+			var thisItem = fridgeApp.searchById(itemList[index]);
+
+			tts("Item name is "+thisItem.name+"."+
+			" It belongs to "+thisItem.category+". "+thisItem.subcategory+"."+
+			" Sell by date is "+thisItem.sellBy.substring(0,10)+"."+
+			" At school "+thisItem.university+"."+
+			" Specific location is "+thisItem.location+".")
+			tts(" Item condition is "+thisItem.condition+"."+
+			" It costs "+thisItem.price+" dollars"+"."+
+			" Available Quantity is "+thisItem.quantity+"."+
+			thisItem.interested+" people is interested.")
+			index++;
 		} else {
-			tts("I heard "+browsePhrase+". If you want to "+browsePhrase+" the items on the home page. Please say. go to home page to go to home page first.");
+			tts("No item to view.");
 		}
 	}
 	
 	function speechNextItem(item){
-		if (window.location.hash == '#home'){
-			if (item.indexOf('item')>-1 || item.indexOf('one')>-1){
-				if (itemList == []) {
-					itemList = homeCollectItemList();
-				} else if (index >= itemList.length){
-					itemList = homeCollectItemList();
-					if (index >= itemList.length) {
-						console.log("ITEM INDEX = "+index);
-						tts("This is the end of item list. Please go back or end browsing.");
-					} else {
-						homeChooseItem(itemList, index++, true);
-					}
+		if (item.indexOf('item')>-1 || item.indexOf('one')>-1){
+			if (itemList == []) {
+				itemList = homeCollectItemList();
+			} else if (index >= itemList.length){
+				itemList = homeCollectItemList();
+				if (index >= itemList.length) {
+					console.log("ITEM INDEX = "+index);
+					tts("This is the end of item list. Please go to previous item or end browsing.");
 				} else {
 					homeChooseItem(itemList, index++, true);
 				}
 			} else {
-				tts("I heard next "+item+" and I didn't understand. You can say next item or next one to go to the next item.")
+				homeChooseItem(itemList, index++, true);
 			}
 		} else {
-			tts("It seems you want to browse the next item in the home page. Please say go to home page to go to home page first.");
+			tts("I heard next "+item+" and I didn't understand. You can say next item or next one to go to the next item.")
 		}
 	}
 	
 	function speechPreviousItem(item){
-		if (window.location.hash == '#home'){
-			if (item.indexOf('item')>-1 || item.indexOf('one')>-1){
-				index -= 2;
-				if (itemList == []) {
-					itemList = homeCollectItemList();
-				}
-				if (index < 0){
-					tts("Item is out of range. Please go next or end browsing items");
-					index += 2;
-				} else {
-					homeChooseItem(itemList, index++, true);
-				}
+		if (item.indexOf('item')>-1 || item.indexOf('one')>-1){
+			index -= 2;
+			if (itemList == []) {
+				itemList = homeCollectItemList();
+			}
+			if (index < 0){
+				tts("Item is out of range. Please go next or end browsing items");
+				index += 2;
 			} else {
-				tts("I heard previous "+item+" and I didn't understand. You can say previous item or previous one to go to the previous item.")
+				homeChooseItem(itemList, index++, true);
 			}
 		} else {
-			tts("It seems you want to browse the previous item in the home page. Please say go to home page to go to home page first.");
+			tts("I heard previous "+item+" and I didn't understand. You can say previous item or previous one to go to the previous item.")
 		}
 	}
 	
 	function speechContinueBrowseItems(item){
-		if (window.location.hash == '#home'){
-			itemList = homeCollectItemList();
-			browseItems(item, "Browsing continued. You can always say stop browsing to stop at a certain item.");
-		} else {
-			tts("It seems you want to continue browse items in the home page. Please say go to home page to go to home page first.");
-		}
+		itemList = homeCollectItemList();
+		browseItems(item, "Browsing continued. You can always say stop browsing to stop at a certain item.");
 	}
 	
-	function speechAutoBrowseItems(item){
+	function speechStartBrowseItems(infoOrNot){
+		if (categoryCheck(infoOrNot.substring(1))){
+			categorySpeechFilter(infoOrNot.substring(1));
+		}
 		itemList = homeCollectItemList();
 		index = 0;
-		browseItems(item, "Browsing started. You can always say stop browsing to stop at a certain item.");	
+		browseItems(infoOrNot);	
 	}
 	
-	function browseItems(item, text) {
+	function browseItems(infoOrNot) {
 		stopFlag = false;
 		if (itemList.length == 0) {
 			tts('Sorry, there are no items to go over.');
@@ -461,9 +576,10 @@ var fridgeSpeech = (function($) {
 			tts("There is only one item in the item list. No automatic browsing provided. Please check the item by saying next item.");
 		} else if (index >= itemList.length) {
 			tts("This is the end of item list. Please go back or end browsing.");
-		} else { //more than one item
-			tts(text);
-			if (item.indexOf("information") > -1){				
+		} else { 
+			//more than one item
+			if (infoOrNot.indexOf('information') > -1 || infoOrNot.indexOf('info') > -1){	
+				tts("Browsing with information started. You cannot give commands during the browsing.");				
 				var infoInterval = setInterval(function(){
 					console.log(speechSynthesis.speaking);
 					if (!speechSynthesis.speaking) {
@@ -471,69 +587,24 @@ var fridgeSpeech = (function($) {
 						homeChooseItem(itemList, index++, true);
 						if (index >= itemList.length || stopFlag) {						
 							clearInterval(infoInterval);
-							tts("Item browsing stopped. You can view this item, continue browsing items, go to next item, go to previous item or end browsing.");
+							tts("Item browsing stopped. You can continue browsing items, view this item, go to next item, go to previous item or end browsing.");
 						}
 					}
 				},2000);							
 			} else {					
-				// doesn't request reading information while browsing		
+				// doesn't request reading information while browsing
+				tts("Browsing started. You can say stop browsing to stop at a certain item.");		
 				var myInterval = setInterval(function(){
 					homeChooseItem(itemList, index++, false);
 					if (index >= itemList.length || stopFlag) {					
 						clearInterval(myInterval);
-						tts("Item browsing stopped. You can view this item, continue browsing items, go to next item, go to previous item or end browsing.");
+						tts("Item browsing stopped. You can continue browsing items, view this item, go to next item, go to previous item or end browsing.");
 					}
 				},3000);
 			}
 		}	
 	}
-		
-	//speech filter for a sub category for the home page items
-	function subcategorySpeechFilter(subcategory){
-		if (window.location.hash == '#home') {
-			if (subcategory == 'table' || subcategory == 'chair' || subcategory == 'shelves' || subcategory == 'bookcase' || subcategory == 'drawer' || 
-				subcategory == 'fridge' || subcategory == 'microwave' || subcategory == 'oven' || subcategory == 'bike' || subcategory == 'car' || 
-				subcategory == 'motocycle' || subcategory == 'boat' || subcategory == 'computer' || subcategory == 'tv' || subcategory == 'phone' || 
-				subcategory == 'charger' || subcategory == 'dishes' || subcategory == 'blender' || subcategory == 'mixer' || subcategory == 'scissors' || 
-				subcategory == 'notebook' || subcategory == 'binder' || subcategory == 'folder' || subcategory == 'sciences' || subcategory == 'arts' || 
-				subcategory == 'math' || subcategory == 'novel' || subcategory == 'shoes' || subcategory == 'shirt' || subcategory == 'pants' || 
-				subcategory == 'hat' || subcategory == 'sweater' || subcategory == 'sheet' || subcategory == 'padding' || subcategory == 'comforter') {
-				//filter subcategory
-				fridgeApp.filterSubCategory(subcategory);
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory == 'TV') {
-				fridgeApp.filterSubCategory('tv');
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory == 'coffee maker') {
-				fridgeApp.filterSubCategory('coffee_maker');
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory.indexOf('media')>-1) {
-				fridgeApp.filterSubCategory('media_player');
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory == 'gaming systems') {
-				fridgeApp.filterSubCategory('gaming_systems');
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory.indexOf('pencil')>-1) {
-				fridgeApp.filterSubCategory('pen_pencil');
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory.indexOf('pillow')>-1) {
-				fridgeApp.filterSubCategory('pillow_case');
-				tts("Here are items in the "+subcategory+" sub category.");
-			} else if (subcategory == 'furniture' || subcategory == 'appliances' || subcategory == 'vehicles' || subcategory == 'electronics' || subcategory == 'cutlery' || 
-					subcategory == 'supplies' || subcategory == 'books' || subcategory == 'clothes' || subcategory == 'bed') {
-				var subcategoryUp = subcategory.substring(0,1).toUpperCase()+subcategory.substring(1);
-				fridgeApp.filterSubCategory('other'+subcategoryUp);
-				tts("Here are items in the other "+subcategory+" sub category.");
-			} else if (subcategory.indexOf('other')>-1) {
-				tts("I heard other. For choosing an other sub category. You also need to specify the main category. For example, you can say. Search or sort by other furniture.")	
-			} else {
-				tts("I heard sub category "+subcategory+" which is not exist. Please choose an existing sub category and try the command again.");
-			}
-		} else {
-			tts("It seems that you said a command to choose a sub category in the home page. Please say. go to home page to go to home page first.");
-		}
-	}
-	
+			
 	function homeCollectItemList(){
     	var list=[];
     	// Use the object as a Promise

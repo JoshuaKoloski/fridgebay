@@ -573,7 +573,7 @@ var fridgeView = (function($){
         var temp = sellBy.toString();
         var date = temp.slice(0, 15);
         var user = myList.searchByUserId(item.seller);
-        var username = user.name;
+        var username = item.name;
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + username + "</span><label></h4>";
