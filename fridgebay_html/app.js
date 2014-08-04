@@ -57,6 +57,10 @@ var usersSchema = mongoose.Schema({
     sell: Array
 });
 
+var messageSchema = mongoose.Schema({
+	text: String,
+	date: Date
+})
 var userSchema = mongoose.Schema({
     openID: String,
     profile: Object,
@@ -73,6 +77,7 @@ var userSchema = mongoose.Schema({
 var item = mongoose.model('items', itemsSchema);
 var user = mongoose.model('users', usersSchema);
 var user2 = mongoose.model('user2', userSchema);
+var text= mongoose.model('messages', messageSchema);
 
 //***************************  END OF DATABASE INITIALIZATION *******
 
@@ -170,44 +175,6 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
-
-/*passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:4000/auth/google/return',
-    realm: 'http://localhost:4000/'
-}, function(identifier, profile, done) {
-    console.log("\nGoogleStrategy:\nidentifier=" + JSON.stringify(identifier) + "  profile=" + JSON.stringify(profile));
-
-    mongoose.model('user2').find({
-        openID: identifier
-    }, function(err, userList) {
-        console.log("err = " + JSON.stringify(err) + "\n  user=" + JSON.stringify(user));
-        if (userList.length == 0) {
-            // if this is the first visit for the user, then insert him/her into the database
-            user = {};
-            user.openID = identifier;
-            user.profile = JSON.stringify(profile);
-            user.phone = "none";
-            user.name = profile.displayName;
-            var emails = profile.emails;
-            user.email = emails[0].value;
-            user.interestList=[];               
-            user.sellingList=[];
-            user.currentItem=[];
-            user.number=0;
-            user.messages=[];
-            // store a new user ....
-            new user2(user).save();
-            //console.log("inserted user");
-            done(null, user);
-        } else {
-            // the user has been here before and there should only be one user
-            // matching the query (user[0]) so pass user[0] as user ...
-            console.log("Google Strategy .. user = " + JSON.stringify(user));
-            done(err, userList[0]);
-        }
-    });
-}));
-*/
 //**********************************************************
 
 app.use(express.bodyParser());
@@ -241,17 +208,12 @@ app.get('/auth/google',
 
 
 app.get('/oauth2callback', 
-	passport.authenticate('google', { failureRedirect: '/login' }),
+	passport.authenticate('google', { failureRedirect: '/' }),
 	function(req, res) {
 	    // Successful authentication, redirect home.
 	    res.redirect('/');
 	});
 
-/*
-app.get('/auth/google/:return?', passport.authenticate('google', {
-    successRedirect: '/',
-    failureRedirect: '/'
-}));*/
 
 
 // serve static content from the public folder 
@@ -354,7 +316,13 @@ app.post('/uploadItem', function(req, res) {
     });
 });
 
-
+app.post('/model/messages', function(req,res){
+	new text({
+		text: req.body.text,
+		date: req.body.date
+	}).save();
+	console.log("Message has been submitted");
+})
 
 // get a particular item from the model
 app.get('/model/:collection/:id', function(req, res) {
