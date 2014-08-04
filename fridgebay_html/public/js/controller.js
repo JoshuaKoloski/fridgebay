@@ -187,6 +187,7 @@ var fridgeApp = (function ($) {
 
     function passById(id) {
         console.log("element= " + id);
+        showView('item');
         fridgeView.refreshItemItems(id, myList);
     }
 
@@ -282,7 +283,7 @@ var fridgeApp = (function ($) {
 
         myList.updateCurrentUser(id, newUser);
         refreshView();
-        refreshNestTable();
+        refreshNestTable();m
         console.log("user nest: " + user.interestList.length);
     }
 

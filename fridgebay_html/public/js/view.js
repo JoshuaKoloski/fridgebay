@@ -18,9 +18,10 @@ var fridgeView = (function($){
         } else {
             var user = fridgeApp.getUser();
             
-            if (fridgeApp.getUser().currentItem[0] && myData.searchById(fridgeApp.getUser().currentItem[0]) != null) {
+           /* if (fridgeApp.getUser().currentItem[0] && myData.searchById(fridgeApp.getUser().currentItem[0]) != null) {
                 refreshItemItems(fridgeApp.getUser().currentItem[0], myData);
-            }
+            }*/
+
         	var newM = fridgeApp.newMessageCheck(user);
         	$("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
             $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
@@ -281,7 +282,7 @@ var fridgeView = (function($){
     	var mq = fridgeApp.mediaCheck();
         var list = myList.items;
         var element = myList.searchById(elementId);
-        
+
         //fridgeApp.showView('item');
         if(!mq.matches){
             $("#carouselControls").html(carousel());
