@@ -99,7 +99,7 @@ var ensureAuthenticated = function(req, res, next) {
         //console.log("req.user=" + JSON.stringify(req.user));
         return next();
     } else {
-        res.redirect('/login.html');
+        res.redirect('/');
     }
 };
 
@@ -117,7 +117,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GoogleStrategy({
     clientID: '590986965614-k8mij5ml9sg33urltfhql84ga8mh56uf.apps.googleusercontent.com',
     clientSecret: 'CaQZayiEHhPnKDrEsuYKaIp4',
-    callbackURL: "https://fridgebay.herokuapp.com/oauth2callback"
+    callbackURL: "http://fridgebay.herokuapp.com/oauth2callback"
 },
 	function(accessToken, refreshToken, profile, done) {
 	    console.log("aT = " + JSON.stringify(accessToken) + 
