@@ -42,6 +42,9 @@ var fridgeSpeech = (function($) {
 					**/
 					tts("page scrolled up");
 				},
+				'(*junk) show all items (*junk2)': function(junk, junk2) {
+					homepageCheck(speechShowAllItems, 'show all items');
+				},
 				//*****
 				'(*junk) post (*item)': function (junk, item) {
 					trying = 0;
@@ -149,7 +152,7 @@ var fridgeSpeech = (function($) {
 						homepageCheck(speechClearFilter, 'clear', filter.toLowerCase());
 					}
 				},
-				'(*junk) delete *filter': function (junk, filter) {
+				'(*junk) delete (*filter)': function (junk, filter) {
 					trying = 0;
 					if (typeof filter == 'undefined'){
 						tts("You can delete a filter such as name, university, price or category.");
@@ -187,6 +190,20 @@ var fridgeSpeech = (function($) {
 					homepageCheck(homeItemsSpeechFilter, 'search', filter.toLowerCase(), content.toLowerCase());
 				},
 				'(*junk) sort (by) (:filter) (*content)': function (junk, filter, content) {
+					trying = 0;
+					if (typeof filter == 'undefined'){
+						filter = 'nothing';
+					}
+					if (typeof content == 'undefined'){
+						content = '';
+					}
+					if (filter.indexOf('buy')>-1){
+						filter = content.substring(1);
+						content = '';
+					}
+					homepageCheck(homeItemsSpeechFilter, 'sort', filter.toLowerCase(), content.toLowerCase());
+				},
+				'(*junk) filter (by) (:filter) (*content)': function (junk, filter, content) {
 					trying = 0;
 					if (typeof filter == 'undefined'){
 						filter = 'nothing';
@@ -298,7 +315,7 @@ var fridgeSpeech = (function($) {
 						trying = 0;
 						isListening = false;
 						speechButton = false;
-						$('.myStartButton').text("Start speech interaction!");
+						$('.myStartButton').html("<span class='glyphicon glyphicon-play'></span>");
 						$('.myStartButton').removeClass('btn-danger');		// turn off red class
 						$('.myStartButton').addClass('btn-primary');
 					} else {
@@ -307,7 +324,7 @@ var fridgeSpeech = (function($) {
 						var annyangInterval = setInterval(function(){
 							if (!speechButton){
 								clearInterval(annyangInterval);
-								alert("annyang interval cleared");
+								alert('speech interaction ended!');
 							}
 							if (isListening && speechSynthesis.speaking){
 								annyang.abort();
@@ -320,7 +337,7 @@ var fridgeSpeech = (function($) {
 						}, 2000)
 
 						tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
-						$('.myStartButton').text("End speech interaction!");
+						$('.myStartButton').html("<span class='glyphicon glyphicon-pause'></span>");
 						$('.myStartButton').removeClass('btn-primary');		// turn on red class
 						$('.myStartButton').addClass('btn-danger');
 					}
@@ -403,8 +420,10 @@ var fridgeSpeech = (function($) {
 			var price = content;
 			if (isNaN(price)){
 				tts("You are entering the price filter but "+price+" is not a number. Please try again.");
+			} else if(content == '') {
+				tts("Sorry I didn't get the price. Please say the command again with a specified price.");
 			} else {
-				$('#priceCutoffHome').val(price);
+				$('#priceCutoffHome').val(price.substring(1));
 				fridgeApp.refreshView();
 				tts("Here are items cheaper than "+price+" dollars.");
 			}			
@@ -501,6 +520,13 @@ var fridgeSpeech = (function($) {
 		} else {
 			return false;
 		}
+	}
+	
+	function speechShowAllItems(){
+		$("#showCompleteCheckbox").prop('checked', true);
+		console.log("Show all items checkbox checked!");
+		fridgeApp.refreshView();
+		tts('all items showed.');
 	}
 	
 	var index = 0;

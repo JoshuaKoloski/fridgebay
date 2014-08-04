@@ -28,7 +28,7 @@
         <div class="row-fluid">
             <img class="changeImage left" src="cartoon_owl.png" alt="owl" width="50" height="42" onclick="fridgeApp.showView('home')">
             <div>Speech recognition state: <span class="myStateText myErrorText">Not Started Yet</span></div>
-            <button class="myStartButton btn btn-primary btn-sm"><span class="glyphicon glyphicon-bullhorn"></span> Start Speech</button>
+            <button class="myStartButton btn btn-primary btn-sm"><span class="glyphicon glyphicon-play"></span></button>
             <nav class="pull-right" role="navigation">
                 <div class="container-fluid color7">
                     <div class="navbar-header">
@@ -52,27 +52,39 @@
             </nav>
         </div>
         <div class="row">
-     <!--   	<div id="speechInstructions" class="alert alert-warning hidden alert-dismissable">   -->
-			<div id="speechInstructions" class="alert alert-warning alert-dismissable">
+     		<div id="speechInstructions" class="alert alert-warning hidden alert-dismissable">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<h3>Ollie's SPEECH INSTRUCTIONS</h3>
 				<ul>
 					<li>
-						<h4>Filter instructions</h4>
+						<h4>General instructions</h4>
 						<ol>
-							<li>------</li>
+							<li>show/hide speech instructions</li>
+							<li>go to page</li>
+							<li>post item</li>
+							<li>scroll down</li>
+							<li>scroll up</li>
 						</ol>
 					</li>
 					<li>
-						<h4>Browsing instructions</h4>
+						<h4>Homepage instructions</h4>
 						<ol>
-							<li>------</li>
+							<li>filter/search/sort by name/university/price/category</li>
+							<li>clear name/university/price/category</li>
+							<li>browse items or browse a category (with information)</li>
+							<li>click show all items checkbox</li>
+							<li>stop browsing</li>
+							<li>continue browsing</li>
+							<li>next item</li>
+							<li>previous item</li>
+							<li>open/view/click item</li>
+							<li>end browsing</li>
 						</ol>
 					</li>
 					<li>
-						<h4></h4>
+						<h4>Item page instructions</h4>
 						<ol>
-							<li>------</li>
+							<li>Add to nest</li>
 						</ol>
 					</li>
 				</ul>
@@ -338,7 +350,7 @@
                     <label><input id="schoolCutoffHome" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"></label>
                 </div>
                 <div class="col-lg-4 pos">
-                    <label ><input id="priceCutoffHome" type=number min=0 class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
+                    <label><input id="priceCutoffHome" type=number min=0 class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()"></label>
                 </div>
             </div>
 
@@ -874,7 +886,7 @@
         </div>
     </div>
 </body>
-<script>	
+<script>
     // this is the code that actually starts the JavaScript application!!
     // when the document has been fully loaded, all the fridgeApp.start() method
     $(document).ready(fridgeApp.start(), fridgeSpeech.enableSpeech());
