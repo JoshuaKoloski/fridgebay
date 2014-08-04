@@ -87,7 +87,7 @@ var redisClient = require('redis').createClient();
 var RedisStore = require('connect-redis')(session);
 
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var ensureAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
@@ -110,6 +110,68 @@ passport.deserializeUser(function(obj, done) {
 
 
 passport.use(new GoogleStrategy({
+    clientID: '590986965614-k8mij5ml9sg33urltfhql84ga8mh56uf.apps.googleusercontent.com',
+    clientSecret: 'CaQZayiEHhPnKDrEsuYKaIp4',
+    callbackURL: "https://fridgebay.herokuapp.com/oauth2callback"
+},
+	function(accessToken, refreshToken, profile, done) {
+	    console.log("aT = " + JSON.stringify(accessToken) + 
+		    "\n  rt=" + JSON.stringify(refreshToken) +
+		    "\n  pr=" + JSON.stringify(profile));
+	    mongoose.model('user2').find({
+	        openID: profile.id
+	    }, function(err, userList) {
+	        console.log("err = " + JSON.stringify(err) + "\n  user=" + JSON.stringify(user));
+	        if (userList.length == 0) {
+	            // if this is the first visit for the user, then insert him/her into the database
+	            user = {};
+	            user.openID = profile.id;
+	            user.profile = JSON.stringify(profile);
+	            user.phone = "none";
+	            user.name = profile.displayName;
+	            var emails = profile.emails;
+	            user.email = emails[0].value;
+	            user.interestList=[];               
+	            user.sellingList=[];
+	            user.currentItem=[];
+	            user.number=0;
+	            user.messages=[];
+	            // store a new user ....
+	            new user2(user).save();
+	            //console.log("inserted user");
+	            done(null, user);
+	        } else {
+	            // the user has been here before and there should only be one user
+	            // matching the query (user[0]) so pass user[0] as user ...
+	            console.log("Google Strategy .. user = " + JSON.stringify(user));
+	            done(err, userList[0]);
+	        }
+	    });
+	}));
+
+//**********************************************************
+
+var ensureAuthenticated = function(req, res, next) {
+    if (req.isAuthenticated()) {
+        //console.log("req.user=" + JSON.stringify(req.user));
+        return next();
+    } else {
+        res.redirect('/login.html');
+    }
+};
+
+passport.serializeUser(function(user, done) {
+    //console.log("serializeUser: "+JSON.stringify(user));
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    //console.log("deserializeUser: "+JSON.stringify(obj));
+    done(null, obj);
+});
+
+
+/*passport.use(new GoogleStrategy({
     returnURL: 'http://localhost:4000/auth/google/return',
     realm: 'http://localhost:4000/'
 }, function(identifier, profile, done) {
@@ -145,7 +207,7 @@ passport.use(new GoogleStrategy({
         }
     });
 }));
-
+*/
 //**********************************************************
 
 app.use(express.bodyParser());
@@ -171,11 +233,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.get('/auth/google',
+	passport.authenticate('google', 
 
+			      {scope: 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'}));
+
+
+
+app.get('/oauth2callback', 
+	passport.authenticate('google', { failureRedirect: '/login' }),
+	function(req, res) {
+	    // Successful authentication, redirect home.
+	    res.redirect('/');
+	});
+
+/*
 app.get('/auth/google/:return?', passport.authenticate('google', {
     successRedirect: '/',
     failureRedirect: '/'
-}));
+}));*/
 
 
 // serve static content from the public folder 
