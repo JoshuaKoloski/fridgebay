@@ -17,7 +17,8 @@ var fridgeView = (function($){
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
         } else {
             var user = fridgeApp.getUser();
-            if (fridgeApp.getUser().currentItem[0]) {
+            
+            if (fridgeApp.getUser().currentItem[0] && myData.searchById(fridgeApp.getUser().currentItem[0]) != null) {
                 refreshItemItems(fridgeApp.getUser().currentItem[0], myData);
             }
         	var newM = fridgeApp.newMessageCheck(user);
