@@ -57,6 +57,10 @@ var usersSchema = mongoose.Schema({
     sell: Array
 });
 
+var messageSchema = mongoose.Schema({
+	text: String,
+	date: Date
+})
 var userSchema = mongoose.Schema({
     openID: String,
     profile: Object,
@@ -73,6 +77,7 @@ var userSchema = mongoose.Schema({
 var item = mongoose.model('items', itemsSchema);
 var user = mongoose.model('users', usersSchema);
 var user2 = mongoose.model('user2', userSchema);
+var text= mongoose.model('messages', messageSchema);
 
 //***************************  END OF DATABASE INITIALIZATION *******
 
@@ -110,8 +115,8 @@ passport.deserializeUser(function(obj, done) {
 
 
 passport.use(new GoogleStrategy({
-    returnURL: 'http://localhost:4000/auth/google/return',
-    realm: 'http://localhost:4000/'
+    returnURL: 'http://fridgebay.herokuapp.com/auth/google/return',
+    realm: 'http://fridgebay.herokuapp.com/'
 }, function(identifier, profile, done) {
     console.log("\nGoogleStrategy:\nidentifier=" + JSON.stringify(identifier) + "  profile=" + JSON.stringify(profile));
 
@@ -278,7 +283,13 @@ app.post('/uploadItem', function(req, res) {
     });
 });
 
-
+app.post('/model/messages', function(req,res){
+	new text({
+		text: req.body.text,
+		date: req.body.date
+	}).save();
+	console.log("Message has been submitted");
+})
 
 // get a particular item from the model
 app.get('/model/:collection/:id', function(req, res) {

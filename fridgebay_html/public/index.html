@@ -855,9 +855,9 @@
         <div id="contact-view" class="view">
             <h1 class="heading_text">Anything to Say?</h1>
             <div class="container">
-                <textarea class="form-control" cols="10" rows="10" id="message" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
+                <textarea class="form-control" cols="10" rows="10" id="bugMessage" placeholder="Please describe any issues you have encountered or feel free to leave a kind message."></textarea>
                 <div>
-                    <button class="dark_brown" onclick="fridgeApp.verifySubmission()"> Submit </button>
+                    <button class="dark_brown" onclick="fridgeApp.verifySubmission(), fridgeApp.submitBug()"> Submit </button>
                 </div>
             </div>
             

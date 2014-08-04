@@ -439,6 +439,15 @@ var fridgeApp = (function ($) {
 		return myList.searchByUserId(id);    
     }
     
+    function submitBug(){
+		bug = {
+			text: $("#bugMessage").val(),
+			date: new Date()
+		}
+		
+		myList.submitBug(bug);    
+    }
+    
     function start() {
         mediaCheck();
         setView();
@@ -486,7 +495,8 @@ var fridgeApp = (function ($) {
         submitMessage:submitMessage,
         newMessageCheck: newMessageCheck,
         notificationPopover: notificationPopover,
-        findUser: findUser
+        findUser: findUser,
+        submitBug: submitBug
     }
 
     return (fridgeApp);

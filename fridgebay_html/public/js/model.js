@@ -182,4 +182,14 @@ Information.prototype.sendMessage= function(id, seller){
     console.log("Message has been sent!");
 }
 
+Information.prototype.submitBug = function(text){
+	 console.log("sending " + JSON.stringify(text));
+    $.ajax({
+        type: "POST",
+        url: "/model/messages",
+        data: JSON.stringify(text),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    });
+}
 
