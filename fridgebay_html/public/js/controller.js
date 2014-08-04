@@ -31,10 +31,10 @@ var fridgeApp = (function ($) {
     }
 
     function accessLogoutPage() {
-        window.location = 'auth/logout';
+        window.location = 'http://fridgebay.herokuapp.com/auth/logout';
     }
     function accessLoginPage() {
-        window.location = 'auth/google/'
+        window.location = 'http://fridgebay.herokuapp.com/auth/google/'
     }
     function refreshNestTable() {
         fridgeView.refreshNestTable(myList, getUser().interestList);
