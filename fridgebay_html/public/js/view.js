@@ -11,13 +11,18 @@ var fridgeView = (function($){
 //         console.log("the current user is " + JSON.stringify(myData.currentUser));
         //         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
         refreshProfile(myData.currentUser);
+        
 
         if ($.isEmptyObject(fridgeApp.getUser())) {
             $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLoginPage()">Login</button>');
         } else {
-        	var user = fridgeApp.getUser();
+            var user = fridgeApp.getUser();
+            
+            if (fridgeApp.getUser().currentItem[0] && myData.searchById(fridgeApp.getUser().currentItem[0]) != null) {
+                refreshItemItems(fridgeApp.getUser().currentItem[0], myData);
+            }
         	var newM = fridgeApp.newMessageCheck(user);
-            $("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
+        	$("#loginButton").html('<button class="dark_brown" onclick="fridgeApp.accessLogoutPage()">Logout</button>');
             $("#postButton").html('<button class="dark_brown" onclick="fridgeApp.showView('+"'form'"+')"><span class="glyphicon glyphicon-plus"></span></button>');
             $("#notificationButton").html('<button type="button"  class="redButton" data-toggle="popover" id="notificationBtn" onclick="fridgeApp.showView('+"'message'"+')", "fridgeApp.refreshMessage('+'"'+newM+'"'+')"><span class="glyphicon glyphicon-comment" ></span></button>');
 			refreshMessages(newM);
@@ -277,7 +282,7 @@ var fridgeView = (function($){
         var list = myList.items;
         var element = myList.searchById(elementId);
         
-        fridgeApp.showView('item');
+        //fridgeApp.showView('item');
         if(!mq.matches){
             $("#carouselControls").html(carousel());
         };
@@ -642,7 +647,7 @@ var fridgeView = (function($){
         var temp = sellBy.toString();
         var date = temp.slice(0, 15);
         var user = myList.searchByUserId(item.seller);
-        var username = item.name;
+        var username = user.name;
         var row =
         "<h4 class='list-group-item-heading pos border'><label>Sell by: <span class='font'>"+date+"</span></label></h4>"+
 		"<h4 class='list-group-item-heading pos border'><label>Seller: <span class='font'>" + username + "</span><label></h4>";

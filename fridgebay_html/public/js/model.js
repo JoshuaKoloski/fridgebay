@@ -50,6 +50,7 @@ Information.prototype.searchById = function (id) {
             console.log("found Item");
         }
     }
+    return null;
 };
 
 Information.prototype.searchByUserId = function (id) {
