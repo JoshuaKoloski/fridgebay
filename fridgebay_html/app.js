@@ -75,7 +75,9 @@ var userSchema = mongoose.Schema({
 });
 
 var item = mongoose.model('items', itemsSchema);
-var user = mongoose.model('users', usersSchema);
+
+
+//var user = mongoose.model('users', usersSchema);
 var user2 = mongoose.model('user2', userSchema);
 var text= mongoose.model('messages', messageSchema);
 
@@ -96,7 +98,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 var ensureAuthenticated = function(req, res, next) {
     if (req.isAuthenticated()) {
-        //console.log("req.user=" + JSON.stringify(req.user));
+        console.log("\n\n$$$$$$$$$$\n\n req.user=" + JSON.stringify(req.user));
         return next();
     } else {
         res.redirect('/');
@@ -117,19 +119,20 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GoogleStrategy({
     clientID: '590986965614-k8mij5ml9sg33urltfhql84ga8mh56uf.apps.googleusercontent.com',
     clientSecret: 'CaQZayiEHhPnKDrEsuYKaIp4',
-    callbackURL: "http://fridgebay.herokuapp.com/oauth2callback"
+		//    callbackURL: "http://fridgebay.herokuapp.com/oauth2callback"
+    callbackURL: "http://leiner.cs-i.brandeis.edu:8000/oauth2callback"
 },
 	function(accessToken, refreshToken, profile, done) {
-	    console.log("aT = " + JSON.stringify(accessToken) + 
+	    console.log("\n \n \n \n *********** aT = " + JSON.stringify(accessToken) + 
 		    "\n  rt=" + JSON.stringify(refreshToken) +
 		    "\n  pr=" + JSON.stringify(profile));
 	    mongoose.model('user2').find({
 	        openID: profile.id
 	    }, function(err, userList) {
-	        console.log("err = " + JSON.stringify(err) + "\n  user=" + JSON.stringify(user));
+	        console.log("err = " + JSON.stringify(err) + "\n  user=" + JSON.stringify(userList));
 	        if (userList.length == 0) {
 	            // if this is the first visit for the user, then insert him/her into the database
-	            user = {};
+	            var user = {};
 	            user.openID = profile.id;
 	            user.profile = JSON.stringify(profile);
 	            user.phone = "none";
@@ -148,7 +151,7 @@ passport.use(new GoogleStrategy({
 	        } else {
 	            // the user has been here before and there should only be one user
 	            // matching the query (user[0]) so pass user[0] as user ...
-	            console.log("Google Strategy .. user = " + JSON.stringify(user));
+	            console.log("Google Strategy .. user = " + JSON.stringify(userList[0]));
 	            done(err, userList[0]);
 	        }
 	    });
@@ -156,14 +159,6 @@ passport.use(new GoogleStrategy({
 
 //**********************************************************
 
-var ensureAuthenticated = function(req, res, next) {
-    if (req.isAuthenticated()) {
-        //console.log("req.user=" + JSON.stringify(req.user));
-        return next();
-    } else {
-        res.redirect('/login.html');
-    }
-};
 
 passport.serializeUser(function(user, done) {
     //console.log("serializeUser: "+JSON.stringify(user));
@@ -230,10 +225,10 @@ app.use(ensureAuthenticated, function(req, res, next) {
 
 
 // log the requests
-app.use(function(req, res, next) {
+/*app.use(function(req, res, next) {
     console.log('%s %s %s', req.method, req.url, JSON.stringify(req.body));
     next();
-});
+});*/
 
 //configure cloudinary
 cloudinary.config({
@@ -258,9 +253,9 @@ app.get('/auth/logout', function(req, res) {
 
 // this returns the user info
 app.get('/api/user', function(req, res) {
-
+	console.log("User: " + JSON.stringify(req.user));
     mongoose.model("user2").find({
-        _id: req.user["_id"]
+        openID: req.user.openID
     }, function(err, items) {
         console.log("user is "+JSON.stringify(item));
         if (item.length > 0)
@@ -403,6 +398,6 @@ app.delete('/model/:collection/:id', function(req, res) {
 });
 
 //Sets port to 3000 for local host while using the port that heroku dynamically sets 
-app.listen(process.env.PORT || 4000, function() {
+app.listen(process.env.PORT || 8000, function() {
     console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
