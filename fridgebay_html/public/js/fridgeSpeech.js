@@ -125,15 +125,15 @@ var fridgeSpeech = (function($) {
 				},
 				'(*junk) view (*junk2)': function (junk, junk2) {
 					trying = 0;
-					homepageCheck(viewItem(), 'view');
+					homepageCheck(viewItem, 'view');
 				},
 				'(*junk) open (*junk2)': function (junk, junk2) {
 					trying = 0;
-					homepageCheck(viewItem(), 'open');
+					homepageCheck(viewItem, 'open');
 				},
 				'(*junk) click (*junk2)': function (junk, junk2) {
 					trying = 0;
-					homepageCheck(viewItem(), 'click');
+					homepageCheck(viewItem, 'click');
 				},
 				'(*junk) stop (*junk2)': function (junk, junk2) {
 					trying = 0;
