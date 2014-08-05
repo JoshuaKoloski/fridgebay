@@ -6,8 +6,8 @@ Fridge bay speech interaction using annyang (stt) and web speech synthesis (tts)
 var fridgeSpeech = (function($) {
 
 	function enableSpeech() {
-		console.log("SPEECH LOADED!!!");
 		if (annyang) {
+			console.log("SPEECH LOADED!!!");
 			var trying = 0;
 			var commands = {
 				'(*junk) speech (*junk2)': function (junk, junk2) {
@@ -16,7 +16,7 @@ var fridgeSpeech = (function($) {
 						tts("I heard speech. You can show speech instructions or hide speech instructions.");
 					} else if (junk.indexOf('show')>-1 || junk.indexOf('open')>-1 || junk.indexOf('see')>-1 || junk.indexOf('pop')>-1){
 						$('#speechInstructions').removeClass("hidden");
-						tts("Speech instructions showed.")
+						tts("Speech instructions showed. You can close the speech instruction panel by saying close speech instructions.")
 					} else if (junk.indexOf('hide')>-1 || junk.indexOf('close')>-1 || junk.indexOf('remove')>-1){
 						$('#speechInstructions').addClass("hidden");
 						tts("Speech instructions hidden.")
@@ -67,7 +67,7 @@ var fridgeSpeech = (function($) {
 				},
 				//*************
 
-				'(*junk) (start) browsing (*info)': function(junk, info){
+				'(*junk) start browsing (*info)': function(junk, info){
 					trying = 0;
 					if (typeof info == 'undefined'){
 						info = 'item';
@@ -104,14 +104,14 @@ var fridgeSpeech = (function($) {
 					}
 					homepageCheck(speechPreviousItem, 'previous', item.toLowerCase());			
 				},
-				'(*junk) resume (browsing) (*item)': function (junk, item) {
+				'(*junk) resume (*item)': function (junk, item) {
 					trying = 0;
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
 					homepageCheck(speechContinueBrowseItems, 'resume', item.toLowerCase());					
 				},
-				'(*junk) continue (browsing) (*item)': function (junk, item) {
+				'(*junk) continue (*item)': function (junk, item) {
 					trying = 0;
 					if (typeof item == 'undefined'){
 						item = 'items';
@@ -231,6 +231,20 @@ var fridgeSpeech = (function($) {
 					}
 					homepageCheck(homeItemsSpeechFilter, 'show', filter.toLowerCase(), content.toLowerCase());
 				},
+				'(*junk) look (at) (:filter) (*content)': function (junk, filter, content) {
+					trying = 0;
+					if (typeof filter == 'undefined'){
+						filter = 'nothing';
+					}
+					if (typeof content == 'undefined'){
+						content = '';
+					}
+					if (filter.indexOf('buy')>-1){
+						filter = content.substring(1);
+						content = '';
+					}
+					homepageCheck(homeItemsSpeechFilter, 'look at', filter.toLowerCase(), content.toLowerCase());
+				},
 				'(*junk) sub category (other) *subcategory': function (junk, subcategory) {
 					trying = 0;
 					homepageCheck(subcategorySpeechFilter, 'sub category', subcategory.toLowerCase());
@@ -259,8 +273,7 @@ var fridgeSpeech = (function($) {
 					} else {
 						tts("Sorry I didn't understand the command "+dontUnderstand+". You may want to try keyboard.");
 					}
-				}
-				
+				}		
 			};
 			
 			annyang.addCommands(commands);
@@ -298,55 +311,56 @@ var fridgeSpeech = (function($) {
 				console.error("Help, there's no internet connection!");
 				tts("Help, there's no internet connection!");
 			}
-			
-			var isListening = false;
-			var speechButton = false;
-			$('.myStartButton').click(function () {
-				console.log("start button clicked!");
-				
-				if (annyang) {
-					if (speechButton) {	
-						annyang.abort(); //stop listening
-						tts("Speech interaction ended. See you next time!");
-						$('.home-item').removeClass('home-fake-hover');
-						index = 0;
-						itemList = [];
-						stopFlag = false;
-						trying = 0;
-						isListening = false;
-						speechButton = false;
-						$('.myStartButton').html("<span class='glyphicon glyphicon-play'></span>");
-						$('.myStartButton').removeClass('btn-danger');		// turn off red class
-						$('.myStartButton').addClass('btn-primary');
-					} else {
-						//homePageCheck();
-						speechButton = true;
-						var annyangInterval = setInterval(function(){
-							if (!speechButton){
-								clearInterval(annyangInterval);
-								alert('speech interaction ended!');
-							}
-							if (isListening && speechSynthesis.speaking){
-								annyang.abort();
-								isListening = false;
-							} else if (!isListening && !speechSynthesis.speaking) {
-								isListening = true;
-								annyang.start();
-							}
-							console.log("speechSynthesis.speaking = "+speechSynthesis.speaking+" isListening = "+isListening);
-						}, 2000)
-
-						tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
-						$('.myStartButton').html("<span class='glyphicon glyphicon-pause'></span>");
-						$('.myStartButton').removeClass('btn-primary');		// turn on red class
-						$('.myStartButton').addClass('btn-danger');
-					}
-				} else {
-					$('#unsupported').removeClass("hidden");
-				}
-			})
 		}
-	}	
+			
+		var isListening = false;
+		var speechButton = false;
+		$('.myStartButton').click(function () {
+			console.log("start button clicked!");
+			
+			if (annyang) {
+				if (speechButton) {	
+					annyang.abort(); //stop listening
+					tts("Speech interaction ended. See you next time!");
+					$('.home-item').removeClass('home-fake-hover');
+					index = 0;
+					itemList = [];
+					stopFlag = false;
+					trying = 0;
+					isListening = false;
+					speechButton = false;
+					$('.myStartButton').html("<span class='glyphicon glyphicon-play'></span>");
+					$('.myStartButton').removeClass('btn-danger');		// turn off red class
+					$('.myStartButton').addClass('btn-primary');
+				} else {
+					//homePageCheck();
+					speechButton = true;
+					var annyangInterval = setInterval(function(){
+						if (!speechButton){
+							clearInterval(annyangInterval);
+							alert('speech interaction ended!');
+						}
+						if (isListening && speechSynthesis.speaking){
+							annyang.abort();
+							isListening = false;
+						} else if (!isListening && !speechSynthesis.speaking) {
+							isListening = true;
+							annyang.start();
+						}
+						console.log("speechSynthesis.speaking = "+speechSynthesis.speaking+" isListening = "+isListening);
+					}, 2000)
+
+					tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
+					$('.myStartButton').html("<span class='glyphicon glyphicon-pause'></span>");
+					$('.myStartButton').removeClass('btn-primary');		// turn on red class
+					$('.myStartButton').addClass('btn-danger');
+				}
+			} else {
+				$('#unsupported').removeClass("hidden");
+			}
+		})	
+	}
+		
 
 	function speechJumpToPage(pageName){
 		if (pageName.indexOf('home')>-1) {	 
@@ -546,11 +560,11 @@ var fridgeSpeech = (function($) {
 			" It belongs to "+thisItem.category+". "+thisItem.subcategory+"."+
 			" Sell by date is "+thisItem.sellBy.substring(0,10)+"."+
 			" At school "+thisItem.university+"."+
-			" Specific location is "+thisItem.location+".")
+			" Specific location is "+thisItem.location+".");
 			tts(" Item condition is "+thisItem.condition+"."+
 			" It costs "+thisItem.price+" dollars"+"."+
 			" Available Quantity is "+thisItem.quantity+"."+
-			thisItem.interested+" people is interested.")
+			" You can now add this item to your nest by saying add to nest.");
 			index++;
 		} else {
 			tts("No item to view.");
@@ -596,7 +610,7 @@ var fridgeSpeech = (function($) {
 	
 	function speechContinueBrowseItems(item){
 		itemList = homeCollectItemList();
-		browseItems(item, "Browsing continued. You can always say stop browsing to stop at a certain item.");
+		browseItems(item);
 	}
 	
 	function speechStartBrowseItems(infoOrNot){
@@ -664,7 +678,7 @@ var fridgeSpeech = (function($) {
 		if (readInformation) {
 			var thisItem = fridgeApp.searchById(list[index]);
 			console.log(thisItem);
-			tts("Item name is "+thisItem.name+". Price is "+thisItem.price+". University is "+thisItem.university+".")
+			tts("Item name is "+thisItem.name+". Price is "+thisItem.price+". Campus is "+thisItem.university+".")
 		}
     }
     
