@@ -564,8 +564,7 @@ var fridgeSpeech = (function($) {
 			tts(" Item condition is "+thisItem.condition+"."+
 			" It costs "+thisItem.price+" dollars"+"."+
 			" Available Quantity is "+thisItem.quantity+"."+
-			" Currently, "+thisItem.interested+" people is interested in this item.");
-			tts("You can now add this item to your nest by saying add to nest.");
+			" You can now add this item to your nest by saying add to nest.");
 			index++;
 		} else {
 			tts("No item to view.");
