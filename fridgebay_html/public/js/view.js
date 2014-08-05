@@ -713,13 +713,17 @@ var fridgeView = (function($){
     
     function messageToRow(m) {
     	user= fridgeApp.findUser(m.user);
-		return "<tr class='color'><td>"+ user.email + "</td><td>" + m.date + "</td><td>"+m.text+"</td><td><span sid='"+user.id+"' onclick='fridgeView.replyMessage(this)'><button type='button' class='btn btn-default '>Reply</button></span><span id='"+user.id+"'><span></td><td><button type='checkbox' onclick='fridgeView.markRead(this)'><span class='glyphicon glyphicon-envelope'></span></button></td></tr>";
+		return "<tr class='color'><td>"+ user.name + "</td><td>" + m.date + "</td><td>"+m.text+"</td><td><span name='"+user.name+"' sid='"+user.id+"' onclick='fridgeView.replyMessage(this)' id='"+user.id+"'><button type='button' class='btn btn-default '>Reply</button></span><span><span></td><td><button type='checkbox' onclick='fridgeView.markRead(this)'><span class='glyphicon glyphicon-envelope'></span></button></td></tr>";
     }
+
     function replyMessage(element) {
-    	$(element).html("");
-    	$("#" +element.getAttribute('sid')).html("<textarea class='form-control' placeholder='What is your reply?' id='"+ element.getAttribute('sid')+"' value=''></textarea>"+
-    	"<button type='submit' class='color7' id='submission' sid='"+element.getAttribute('sid')+"' onclick='fridgeApp.submitMessage(this)'>"+
-    	"Submit</button>");
+		var rMessage = prompt("Reply Message to " + element.getAttribute('name'));
+		if(rMessage === null){
+			alert("Message cancelled");
+		}else{
+			fridgeApp.submitReply(rMessage, element.getAttribute('sid'));
+			alert("Message sent to " + element.getAttribute('name'));
+		}
    	}
     function markRead(element){
 		if(! $(element).checked)
