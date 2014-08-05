@@ -352,9 +352,6 @@ var fridgeSpeech = (function($) {
 		if (pageName.indexOf('home')>-1) {	 
 			fridgeApp.showView('home');
 			tts("You are on home page now.");
-		} else if (pageName.indexOf('login')>-1){
-			fridgeApp.showView('login');
-			tts("You are on the login page now.");
 		} else if (pageName.indexOf('post')>-1){
 			fridgeApp.showView('form');
 			tts("You are on the post new item page now.");
@@ -364,8 +361,11 @@ var fridgeSpeech = (function($) {
 		} else if (pageName.indexOf('feedback')>-1 || pageName.indexOf('contact')>-1) {
 			fridgeApp.showView('contact');
 			tts("You are on the feedback page now. You are welcome to report any issue or leave a kind message.");
+		} else if (pageName.indexOf('about')>-1 || pageName.indexOf('information')>-1){
+			fridgeApp.showView('about');
+			tts("You are on the about page now. Here is the information about fridge bay website. Enjoy surfing FridgeBay!");
 		} else {
-			tts("Sorry, we don't have "+pageName+" page. We have home page, login page, profile page, post page and feedback page. Please try the command again.");
+			tts("Sorry, we don't have "+pageName+" page. We have home page, about page, post page, profile page, and feedback page. Please try the command again.");
 		}
 	}
 	

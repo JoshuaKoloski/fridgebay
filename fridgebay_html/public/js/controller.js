@@ -395,7 +395,7 @@ var fridgeApp = (function ($) {
         n = seller.number++;
         sellerMessage = { 
             messageNumber: n,
-            text: $("#" + sid).val(), 
+            text: $("#reply").val(), 
             user:user._id, 
             checked: false, 
             date: Date()
