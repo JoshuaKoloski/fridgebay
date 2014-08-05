@@ -9,7 +9,7 @@ var fridgeView = (function($){
         refreshTableItems(myData.items);
         refreshTableUsers(myData.users);
 //         console.log("the current user is " + JSON.stringify(myData.currentUser));
-        //         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
+//         console.log("the current user using getUser is " + JSON.stringify(fridgeApp.getUser()));
         refreshProfile(myData.currentUser);
         
 
@@ -252,29 +252,35 @@ var fridgeView = (function($){
     function refreshTableItems(myItems){    
         var rows = "";
         var rowsHome = "";
-        var len = myItems.length;
+    
+    /*
+    *****These methods are for the MODEL PAGE*****
+    
         var filteredModelItems = filterModelItems(myItems);
-        var filteredHomeItems = filterHomeItems(myItems);
-        var sortedModelItems = sortItems(filteredModelItems);
-        var sortedHomeItems = sortItems(filteredHomeItems);
-        
-        //console.log("filteredItems = " + JSON.stringify(filteredModelItems));
-        //console.log("filteredItems = " + JSON.stringify(filteredHomeItems));
+		var sortedModelItems = sortItems(filteredModelItems);
+   		console.log("filteredItems = " + JSON.stringify(filteredModelItems));
+        console.log("filteredItems = " + JSON.stringify(filteredHomeItems));
+
         for(var n=0; n<sortedModelItems.length; n++){ 
             var item = sortedModelItems[n];
             rows = rows + itemToRow(item);
         }
         console.log("model length= " + filteredHomeItems.length);
+
+		var itemTableBody = $("#itemTableBodyItems").html(rows);
+	*/
+   
+        var sortedHomeItems = sortItems(filterHomeItems(myItems));
+
         for (var n = 0; n < sortedHomeItems.length; n++) {
             var item = sortedHomeItems[n];
             //console.log("item = " + JSON.stringify(item));
             rowsHome = rowsHome + homeItemToRow(item);
         }
-        
-        var itemTableBody = $("#itemTableBodyItems").html(rows);
+
         var itemTablebody = $("#homeTableBody").html(rowsHome);
-        
-        showNumber(len);
+        console.log("Length of current home item list = "+sortedHomeItems.length);
+        showNumber(sortedHomeItems.length);
     }
 
 	//Loads the item page with an items information
@@ -347,6 +353,9 @@ var fridgeView = (function($){
         $("#showNumber").html(length);
     }
 
+/*
+	*****This method is for the MODEL PAGE*****
+	
     function filterModelItems(items) {
         
         var n;
@@ -370,7 +379,8 @@ var fridgeView = (function($){
         }
         return newItems;
     }
-    
+*/
+   
     function filterMainCategory(myData, maincategory){
     	var items = myData.items;
     	var newItems = [];
@@ -403,16 +413,19 @@ var fridgeView = (function($){
         
 
         for (n = 0; n < items.length; n++) {
+        	
             item = items[n];
-            if (item.price <= price || price==0) {
-                if ((item.name.toLowerCase()).match((name))) {
-                    if ((item.university.toLowerCase()).match((university))) {
-                        newItems.push(item)
-                    }
-                }
+		//	console.log(n+" "+Date.parse(item.sellBy)+" "+Date.parse(new Date()))
+		//	console.log(Date.parse(item.sellBy) >= Date.parse(new Date()));
+            if (!item.status&&  //item is unsold
+            	Date.parse(item.sellBy) >= Date.parse(new Date())&& //item is not expired
+            	(item.price <= price || price==0)&& //item is filtered by price
+            	item.name.toLowerCase().match(name.toLowerCase())&& //item is filtered by name
+            	item.university.toLowerCase().match(university.toLowerCase())) { //item is filtered by university
+
+                newItems.push(item);
             } 
         }
-        
         return newItems;
     }
     

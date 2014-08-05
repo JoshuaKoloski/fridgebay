@@ -108,73 +108,8 @@
             <button class="btn btn-default" onclick="fridgeApp.showView('item')">Items for fridge-bay </button>
             <button class="btn btn-default" onclick="fridgeApp.showView('model')">fridge-bay sample model </button>
         </div>
-
-        <div id="model-view" class="view">
-            <div class="container">
-                <div class="page-header">
-                    <h1 class="heading_text">Model</h1>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <label class="left"><input id="nameCutoff" type=text class="form-control color5" placeholder="Search by Name" onchange="fridgeApp.refreshView()"></label>
-                    </div>
-                    <div  class="col-lg-4 pos">
-                        <label><input id="schoolCutoff" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"  /></label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label class="right"><input id="priceCutoff" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()" /></label>
-                    </div>
-                </div>
-
-				<div class="panel panel-default">
-					<div class="panel-heading">Items</div>
-					<div class="panel-body">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Seller</th>
-									<th>Price</th>
-									<th>Quantity</th>
-									<th>University</th>
-									<th>Location</th>
-									<th>Sell by</th>
-									<th>Condition</th>
-									<th>Main Category</th>
-									<th>Sub Category</th>
-									<th>Images</th>
-									<th>Desc</th>
-									<th>Status</th>
-									<th>Interested</th>
-									<th>Delete</th>
-								</tr>
-							</thead>
-		
-							<tbody id="itemTableBodyItems">
-							</tbody>
-						</table>
-					</div>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-heading">Users</div>
-					<div class="panel-body">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Phone</th>
-									<th>Email</th>
-								</tr>
-							</thead>
-							<tbody id="itemTableBodyUsers">
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
+        
+<!--Item View-->
         <div id="item-view" class="view">        
             <div class="container">
                 <div class="page-header">
@@ -227,122 +162,7 @@
             </div>
             </div>
         </div>
-        
-        
-<!--login view is not in use. We currently use google authentification.
-        <div id="login-view" class="view">
-            <div class="container">
-                <div class="page-header">
-                    <h1 class="heading_text">Account</h1>
-                </div>
-                <table class="table table-default">
-                    
-                    <thead class="color">
-                        <tr class="text-center">
-                            <td><h3>Login</h3></td>
-                            <td><h3>Register</h3></td>
-                        </tr>
-                    </thead>
-
-                    <tbody class="color2">
-                        <tr>
-                            <td>
-                                <form class="form-horizontal" action="/login" method="post" enctype="multipart/form-data" role="form">
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <div class="input-group">
-                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
-                                                <span class="input-group-addon">.edu</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="Password">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox"> Remember me
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <button type="submit" class="dark_brown">Sign in</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </td>
-                            <td>
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="4-20 characters">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-                                        <div class="col-sm-10">
-                                            <div class="input-group">
-                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
-                                                <span class="input-group-addon">.edu</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Cell Phone</label>
-                                        <div class="col-sm-10">
-                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="optional">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control color5" id="inputEmail3" placeholder="6-20 characters">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputPassword3" class="col-sm-2 control-label">Verify Password</label>
-                                        <div class="col-sm-10">
-                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="6-20 characters">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions">Use Email as my Public Contact Information
-                                            </label>
-                                        </div>
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            <label class="radio-inline">
-                                                <input type="radio" name="inlineRadioOptions">Use Phone Number as my Public Contact Information
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="col-sm-offset-2 col-sm-10">
-                                            
-                                            <button type="submit" class="dark_brown">Register</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-end of login view-->
-        
-        
-        
+              
 <!-- HomePage -->
     <div id="home-view" class="view">
         <div class="container">           
@@ -582,6 +402,7 @@ end of login view-->
         </div>
     </div>
 
+<!--Profile View-->
         <div id="profile-view" class="view">
         	<div class="container"> 
                 <div class="page-header">
@@ -646,7 +467,8 @@ end of login view-->
 	
             </div>
         </div>
-                
+
+<!--POST ITEM View-->             
         <div id="form-view" class="view">
             
             <div class="container">
@@ -756,6 +578,7 @@ end of login view-->
             </div>
         </div>
     </div>
+
 <!--About Page -->
     <div id="about-view" class="view">
         <div class="container">
@@ -898,6 +721,7 @@ end of login view-->
                 </table>
             </div>
         </div>
+        
 <!--Contact Us Page -->
         <div id="contact-view" class="view">
             <h1 class="heading_text">Anything to Say?</h1>
@@ -927,6 +751,187 @@ end of login view-->
 			 	</table>
 			</div>
 		</div>
+
+<!--	
+*** MODEL PAGE ***
+        <div id="model-view" class="view">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="heading_text">Model</h1>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <label class="left"><input id="nameCutoff" type=text class="form-control color5" placeholder="Search by Name" onchange="fridgeApp.refreshView()"></label>
+                    </div>
+                    <div  class="col-lg-4 pos">
+                        <label><input id="schoolCutoff" type=text class="form-control color5" placeholder="Search by University" onchange="fridgeApp.refreshView()"  /></label>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="right"><input id="priceCutoff" type=number class="form-control color5" placeholder="Search by Price" onchange="fridgeApp.refreshView()" /></label>
+                    </div>
+                </div>
+
+				<div class="panel panel-default">
+					<div class="panel-heading">Items</div>
+					<div class="panel-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Seller</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>University</th>
+									<th>Location</th>
+									<th>Sell by</th>
+									<th>Condition</th>
+									<th>Main Category</th>
+									<th>Sub Category</th>
+									<th>Images</th>
+									<th>Desc</th>
+									<th>Status</th>
+									<th>Interested</th>
+									<th>Delete</th>
+								</tr>
+							</thead>
+		
+							<tbody id="itemTableBodyItems">
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">Users</div>
+					<div class="panel-body">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Phone</th>
+									<th>Email</th>
+								</tr>
+							</thead>
+							<tbody id="itemTableBodyUsers">
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+***login view is not in use. We currently use google authentification.***
+        <div id="login-view" class="view">
+            <div class="container">
+                <div class="page-header">
+                    <h1 class="heading_text">Account</h1>
+                </div>
+                <table class="table table-default">
+                    
+                    <thead class="color">
+                        <tr class="text-center">
+                            <td><h3>Login</h3></td>
+                            <td><h3>Register</h3></td>
+                        </tr>
+                    </thead>
+
+                    <tbody class="color2">
+                        <tr>
+                            <td>
+                                <form class="form-horizontal" action="/login" method="post" enctype="multipart/form-data" role="form">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
+                                                <span class="input-group-addon">.edu</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button type="submit" class="dark_brown">Sign in</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <form class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="4-20 characters">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <div class="input-group">
+                                                <input type="email" class="form-control color5" id="inputEmail3" placeholder="Email">
+                                                <span class="input-group-addon">.edu</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Cell Phone</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control color5" id="inputEmail3" placeholder="optional">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3" class="col-sm-2 control-label">Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control color5" id="inputEmail3" placeholder="6-20 characters">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword3" class="col-sm-2 control-label">Verify Password</label>
+                                        <div class="col-sm-10">
+                                            <input type="password" class="form-control color5" id="inputPassword3" placeholder="6-20 characters">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions">Use Email as my Public Contact Information
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="inlineRadioOptions">Use Phone Number as my Public Contact Information
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            
+                                            <button type="submit" class="dark_brown">Register</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+-->
+
+
 <!--Contact Us Button-->
         <div class="text-center bottom">
             <button  class="dark_brown middle" onclick="fridgeApp.showView('contact')">Contact Us</button>
