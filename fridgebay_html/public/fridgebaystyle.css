@@ -34,6 +34,16 @@ a{
 a:hover{
     color:#efcd9e;
 }
+.bottom-text{
+    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
+    font-weight: normal;
+    font-size: 15px;
+    color:#572f04;
+    letter-spacing: .1em;
+    line-height: 1.1em;
+    margin:0px;
+    text-align: center;
+}
 
 .color
 {
