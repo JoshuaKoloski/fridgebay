@@ -408,11 +408,30 @@ var fridgeApp = (function ($) {
             number: n,
             messages: m
         };
-        console.log("Messages: " + JSON.stringify(seller.messages))
         alert("Message has been sent to " + seller.name);
         showView('home');
         myList.sendMessage(seller.id, newSeller);
     }
+
+	function submitReply(message, id){
+        seller = myList.searchByUserId(id);
+        user = getUser();
+        n = seller.number++;
+        sellerMessage = { 
+            messageNumber: n,
+            text: message,
+            user:user._id, 
+            checked: false, 
+            date: Date()
+        }; 
+        seller.messages.push(sellerMessage);
+        m = seller.messages;
+        newSeller={
+            number: n,
+            messages: m
+        };
+        myList.sendMessage(seller.id, newSeller);
+	}
     //Checks for new Messages and returns an array of the new messages
     function newMessageCheck(user) {
     	var newMessages = [];
@@ -429,7 +448,7 @@ var fridgeApp = (function ($) {
 		if(newMessages.length != 0)
 			var data = newMessages.length + " messages!";
 		else
-			var data = "No New Messages"
+			var data = "No Messages"
 		$(function () {
         	$("#notificationBtn").popover({
      			trigger: 'hover',
@@ -501,7 +520,8 @@ var fridgeApp = (function ($) {
         newMessageCheck: newMessageCheck,
         notificationPopover: notificationPopover,
         findUser: findUser,
-        submitBug: submitBug
+        submitBug: submitBug,
+		submitReply: submitReply
     }
 
     return (fridgeApp);
