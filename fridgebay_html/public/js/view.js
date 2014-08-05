@@ -712,7 +712,7 @@ var fridgeView = (function($){
     }
     
     function messageToRow(m) {
-    	user= fridgeApp.findUser(m.user);
+        user = fridgeApp.findUser(m.user);
 		return "<tr class='color'><td>"+ user.email + "</td><td>" + m.date + "</td><td>"+m.text+"</td><td><span sid='"+user.id+"' onclick='fridgeView.replyMessage(this)'><button type='button' class='btn btn-default '>Reply</button></span><span id='"+user.id+"'><span></td><td><button type='checkbox' onclick='fridgeView.markRead(this)'><span class='glyphicon glyphicon-envelope'></span></button></td></tr>";
     }
     function replyMessage(element) {

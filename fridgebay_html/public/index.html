@@ -685,7 +685,7 @@ end of login view-->
 											<option value="otherFurniture"> Other </option>
 										</select>
 									</div>
-								<br/>
+								<br>
 								<div class="panel" >
 									<div class="panel-heading color"><label class="color">Add up to 3 pictures for your item.</label></div>
 									<div class="panel-body color6">										
@@ -702,11 +702,11 @@ end of login view-->
 							<td>
 									<div>
 										<label>Item Name</label>
-                                        <input type="text" onmouseover="fridgeApp.setSeller()" class="form-control" id="itemName" name="itemName" />
+                                        <input type="text" onmouseover="fridgeApp.setSeller()" class="form-control" id="itemName" name="itemName" required/>
 									</div>
 									<div>
 										<label>Price</label>
-										<input type="number" class="form-control" id="itemPrice" name="itemPrice" min="0"/>
+										<input type="number" class="form-control" id="itemPrice" name="itemPrice" min="0" required/>
 									</div>
 									<div>
 										<label>Condition</label>
@@ -721,19 +721,19 @@ end of login view-->
 									</div>
 									<div>
 										<label>University</label>
-										<input type="text" class="form-control" id="itemUniversity" name="itemUniversity"/>
+										<input type="text" class="form-control" id="itemUniversity" name="itemUniversity" required/>
 									</div>
 									<div>
 										<label>Location</label>
-										<input type="text" class="form-control" id="itemLocation" name="itemLocation"/>
+										<input type="text" class="form-control" id="itemLocation" name="itemLocation" required/>
 									</div>
 									<div>
 										<label>Quantity</label>
-										<input type="number" class="form-control" id="itemQuantity" name="itemQuantity" min="1"/>
+										<input type="number" class="form-control" id="itemQuantity" name="itemQuantity" min="1" required/>
 									</div>
 									<div>
 										<label>Desired Sell-By Date</label>
-										<input type="date" class="form-control" id="itemSellBy" name="itemSellBy"/>
+										<input type="date" class="form-control" id="itemSellBy" name="itemSellBy" required/>
 									</div>
 									<div>
 										<label for="itemDesc">Description</label>
@@ -748,13 +748,14 @@ end of login view-->
 										<input type="submit" class="dark_brown" onclick="fridgeApp.reloadModel()"/>
 									</div>
 								</form>
+
 							</td>
 						</tr>
-                                        </tbody>
-                                </table>
-                            </div>
+                    </tbody>
+                </table>
             </div>
         </div>
+    </div>
 <!--About Page -->
     <div id="about-view" class="view">
         <div class="container">
@@ -841,7 +842,7 @@ end of login view-->
                                 </div>
                             </td>
                             <td>
-                                <form role="form">
+                                <form id="editForm"role="form">
                                     <div>
                                         <label>Item Name</label>
                                         <input type="text" class="form-control" id="editName" />

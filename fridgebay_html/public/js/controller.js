@@ -166,6 +166,7 @@ var fridgeApp = (function ($) {
         });
     }
 
+
     function pass(element) {
         console.log("element= " + element.getAttribute("sid"));
         var user = getUser();
