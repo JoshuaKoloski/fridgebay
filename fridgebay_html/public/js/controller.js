@@ -388,13 +388,14 @@ var fridgeApp = (function ($) {
         fridgeView.messageBox(item.seller);
     }
     function submitMessage(element){
+		sid = element.getAttribute('sid');
         seller = myList.searchByUserId(element.getAttribute('sid'));
         console.log("Seller: " + JSON.stringify(seller));
         user = getUser();
         n = seller.number++;
         sellerMessage = { 
             messageNumber: n,
-            text: $("#submitMessageUser").val(), 
+            text: $("#submitMessageUser" + sid).val(), 
             user:user._id, 
             checked: false, 
             date: Date()

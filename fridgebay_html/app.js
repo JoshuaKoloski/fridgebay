@@ -1,7 +1,5 @@
 #!/usr/bin/env node --harmony
 
-/***
- ***/
 
 'use strict';
 var express = require('express');
