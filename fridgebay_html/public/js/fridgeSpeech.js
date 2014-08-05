@@ -560,11 +560,12 @@ var fridgeSpeech = (function($) {
 			" It belongs to "+thisItem.category+". "+thisItem.subcategory+"."+
 			" Sell by date is "+thisItem.sellBy.substring(0,10)+"."+
 			" At school "+thisItem.university+"."+
-			" Specific location is "+thisItem.location+".")
+			" Specific location is "+thisItem.location+".");
 			tts(" Item condition is "+thisItem.condition+"."+
 			" It costs "+thisItem.price+" dollars"+"."+
 			" Available Quantity is "+thisItem.quantity+"."+
-			thisItem.interested+" people is interested.")
+			" Currently, "+thisItem.interested+" people is interested in this item.");
+			tts("You can now add this item to your nest by saying add to nest.");
 			index++;
 		} else {
 			tts("No item to view.");
@@ -678,7 +679,7 @@ var fridgeSpeech = (function($) {
 		if (readInformation) {
 			var thisItem = fridgeApp.searchById(list[index]);
 			console.log(thisItem);
-			tts("Item name is "+thisItem.name+". Price is "+thisItem.price+". University is "+thisItem.university+".")
+			tts("Item name is "+thisItem.name+". Price is "+thisItem.price+". Campus is "+thisItem.university+".")
 		}
     }
     
