@@ -406,7 +406,8 @@ var fridgeApp = (function ($) {
             messages: m
         };
         console.log("Messages: " + JSON.stringify(seller.messages))
-        alert("Message has been sent to " + seller.email);
+        alert("Message has been sent to " + seller.name);
+        showView('home');
         myList.sendMessage(seller.id, newSeller);
     }
     //Checks for new Messages and returns an array of the new messages
@@ -423,7 +424,7 @@ var fridgeApp = (function ($) {
     }
     function notificationPopover(newMessages){
 		if(newMessages.length != 0)
-			var data = newMessages.length + " new messages!";
+			var data = newMessages.length + " messages!";
 		else
 			var data = "No New Messages"
 		$(function () {
