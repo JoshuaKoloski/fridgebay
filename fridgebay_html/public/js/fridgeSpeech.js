@@ -67,7 +67,7 @@ var fridgeSpeech = (function($) {
 				},
 				//*************
 
-				'(*junk) (start) browsing (*info)': function(junk, info){
+				'(*junk) start browsing (*info)': function(junk, info){
 					trying = 0;
 					if (typeof info == 'undefined'){
 						info = 'item';
@@ -104,14 +104,14 @@ var fridgeSpeech = (function($) {
 					}
 					homepageCheck(speechPreviousItem, 'previous', item.toLowerCase());			
 				},
-				'(*junk) resume (browsing) (*item)': function (junk, item) {
+				'(*junk) resume (*item)': function (junk, item) {
 					trying = 0;
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
 					homepageCheck(speechContinueBrowseItems, 'resume', item.toLowerCase());					
 				},
-				'(*junk) continue (browsing) (*item)': function (junk, item) {
+				'(*junk) continue (*item)': function (junk, item) {
 					trying = 0;
 					if (typeof item == 'undefined'){
 						item = 'items';
@@ -611,7 +611,7 @@ var fridgeSpeech = (function($) {
 	
 	function speechContinueBrowseItems(item){
 		itemList = homeCollectItemList();
-		browseItems(item, "Browsing continued. You can always say stop browsing to stop at a certain item.");
+		browseItems(item);
 	}
 	
 	function speechStartBrowseItems(infoOrNot){
