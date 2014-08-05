@@ -117,8 +117,8 @@ passport.use(new GoogleStrategy({
     clientID: '590986965614-k8mij5ml9sg33urltfhql84ga8mh56uf.apps.googleusercontent.com',
     clientSecret: 'CaQZayiEHhPnKDrEsuYKaIp4',
 		//    callbackURL: "http://fridgebay.herokuapp.com/oauth2callback"
-    //callbackURL: "http://localhost:8000/oauth2callback"
-	callbackURL: "http://leiner.cs-i.brandeis.edu:8000/oauth2callback"
+    callbackURL: "http://localhost:8000/oauth2callback"
+	//callbackURL: "http://leiner.cs-i.brandeis.edu:8000/oauth2callback"
 },
 	function(accessToken, refreshToken, profile, done) {
 	    console.log("\n \n \n \n *********** aT = " + JSON.stringify(accessToken) + 

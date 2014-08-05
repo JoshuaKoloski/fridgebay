@@ -405,6 +405,11 @@ div div div .dark{
     text-decoration:underline;
 }
 
+.bigCheckbox{
+    width:28px;
+    height:28px;
+}
+
 /*@media (max-height:600px) and (max-width:680px) {
     #itemImage{
         width:30%;

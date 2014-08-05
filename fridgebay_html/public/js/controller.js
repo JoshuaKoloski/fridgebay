@@ -145,6 +145,7 @@ var fridgeApp = (function ($) {
             quantity: $("#editQuantity").val(),
             condition: $("#editCondition").val(),
             sellBy: $("#editSellBy").val(),
+            status: $("#editStatus").attr('checked'),
             university: $("#editUniversity").val(),
             location: $("#editLocation").val(),
             description: $("#editDesc").val()

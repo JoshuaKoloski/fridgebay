@@ -190,14 +190,14 @@
 										<label> main category -> subcategory </label>
 									</div>
 									<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-									  <!-- Indicators -->
-									  <span id="item_images">
+									  	<!-- Indicators -->
+									  	<span id="item_images">
 										  
-									  </span>			  
-									  <!-- Controls -->
-                                                                            <span id='carouselControls'>
-                                                                            
-                                                                            </span>
+									  	</span>			  
+									  	<!-- Controls -->
+										<span id='carouselControls'>
+									
+										</span>
 									</div>
 								</div>
 							</td>
@@ -830,7 +830,7 @@ end of login view-->
                                 </form>
                                 <br />
                                 <div class="panel color">
-                                    <div class="panel-heading color" ><label>Changing Pictures is unavailable </label></div>
+                                    <div class="panel-heading color" ><label>Changing Pictures is unavailable at this point.</label></div>
                                     <!--<div class="panel-body color2">
                                         <input id="inputFileToLoad_0" type="file" onchange="fridgeApp.encodeImageFileAsURL(0);" accept="image/jpeg" />
                                         <div id="img_0"></div><br>
@@ -840,9 +840,13 @@ end of login view-->
                                         <div id="img_2"></div>
                                     </div>-->
                                 </div>
+                                
                             </td>
                             <td>
                                 <form id="editForm"role="form">
+                                	<label class="checkbox-inline">          	
+								 		<input type="checkbox" class="bigCheckbox" id="editStatus"/><font size=5><b>Check if Sold!</b></font>
+									</label>
                                     <div>
                                         <label>Item Name</label>
                                         <input type="text" class="form-control" id="editName" />
@@ -933,6 +937,6 @@ end of login view-->
     // this is the code that actually starts the JavaScript application!!
     // when the document has been fully loaded, all the fridgeApp.start() method
     $(document).ready(fridgeApp.start(), fridgeSpeech.enableSpeech());
-    
+ 
 </script>
 </html>
