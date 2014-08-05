@@ -95,14 +95,14 @@ var fridgeSpeech = (function($) {
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
-					homepageCheck(speechNextItem, 'next', item.toLowerCase());	
+					homepageCheck(speechNextItem, 'next');	
 				},
 				'(*junk) previous (*item)': function(junk, item){
 					trying = 0;			
 					if (typeof item == 'undefined') {
 						item = 'item';	
 					}
-					homepageCheck(speechPreviousItem, 'previous', item.toLowerCase());			
+					homepageCheck(speechPreviousItem, 'previous');			
 				},
 				'(*junk) resume (*item)': function (junk, item) {
 					trying = 0;
@@ -571,40 +571,32 @@ var fridgeSpeech = (function($) {
 		}
 	}
 	
-	function speechNextItem(item){
-		if (item.indexOf('item')>-1 || item.indexOf('one')>-1){
-			if (itemList == []) {
-				itemList = homeCollectItemList();
-			} else if (index >= itemList.length){
-				itemList = homeCollectItemList();
-				if (index >= itemList.length) {
-					console.log("ITEM INDEX = "+index);
-					tts("This is the end of item list. Please go to previous item or end browsing.");
-				} else {
-					homeChooseItem(itemList, index++, true);
-				}
+	function speechNextItem(){
+		if (itemList == []) {
+			itemList = homeCollectItemList();
+		} else if (index >= itemList.length){
+			itemList = homeCollectItemList();
+			if (index >= itemList.length) {
+				console.log("ITEM INDEX = "+index);
+				tts("This is the end of item list. Please go to previous item or end browsing.");
 			} else {
 				homeChooseItem(itemList, index++, true);
 			}
 		} else {
-			tts("I heard next "+item+" and I didn't understand. You can say next item or next one to go to the next item.")
+			homeChooseItem(itemList, index++, true);
 		}
 	}
 	
-	function speechPreviousItem(item){
-		if (item.indexOf('item')>-1 || item.indexOf('one')>-1){
-			index -= 2;
-			if (itemList == []) {
-				itemList = homeCollectItemList();
-			}
-			if (index < 0){
-				tts("Item is out of range. Please go next or end browsing items");
-				index += 2;
-			} else {
-				homeChooseItem(itemList, index++, true);
-			}
+	function speechPreviousItem(){		
+		index -= 2;
+		if (itemList == []) {
+			itemList = homeCollectItemList();
+		}
+		if (index < 0){
+			tts("Item is out of range. Please go next or end browsing items");
+			index += 2;
 		} else {
-			tts("I heard previous "+item+" and I didn't understand. You can say previous item or previous one to go to the previous item.")
+			homeChooseItem(itemList, index++, true);
 		}
 	}
 	
@@ -678,7 +670,7 @@ var fridgeSpeech = (function($) {
 		if (readInformation) {
 			var thisItem = fridgeApp.searchById(list[index]);
 			console.log(thisItem);
-			tts("Item name is "+thisItem.name+". Price is "+thisItem.price+". Campus is "+thisItem.university+".")
+			tts("Item name is "+thisItem.name+". Price is "+thisItem.price+" dollars. University is "+thisItem.university+".")
 		}
     }
     

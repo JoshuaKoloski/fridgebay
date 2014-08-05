@@ -448,7 +448,7 @@ var fridgeView = (function($){
         "<div class='caption' align='left'>"+
         "<h1>"+ item.name +
         "</h1><p> $"+ item.price +
-        "</p><p> Campus: " + item.university +
+        "</p><p> University: " + item.university +
         "</p></div></div></div>"
         return row;
     }
