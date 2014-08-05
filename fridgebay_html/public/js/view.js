@@ -717,7 +717,7 @@ var fridgeView = (function($){
     }
     function replyMessage(element) {
     	$(element).html("");
-    	$("#reply").html("<textarea class='form-control' placeholder='What is your reply?' id='submitMessageUser" + element.getAttribute('sid')+"' value=''></textarea>"+
+    	$("#reply").html("<textarea class='form-control' placeholder='What is your reply?' id='"+ element.getAttribute('sid')+"' value=''></textarea>"+
     	"<button type='submit' class='color7' id='submission' sid='"+element.getAttribute('sid')+"' onclick='fridgeApp.submitMessage(this)'>"+
     	"Submit</button>");
    	}
