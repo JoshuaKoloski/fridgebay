@@ -1,8 +1,5 @@
 #!/usr/bin/env node --harmony
 
-/***
- ***/
-
 'use strict';
 var express = require('express');
 var bodyParser = require('body-parser'); // this allows us to pass JSON values to the server (see app.put below)
