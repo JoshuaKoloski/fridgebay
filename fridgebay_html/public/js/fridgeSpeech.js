@@ -350,7 +350,7 @@ var fridgeSpeech = (function($) {
 						console.log("speechSynthesis.speaking = "+speechSynthesis.speaking+" isListening = "+isListening);
 					}, 2000)
 
-					tts("Hi, I am ollie speech assistant. Please say your command or say show speech instructions to see command guide.");
+					tts("Hi, I am ollie speech assistant. On homepage you can say search, browse or show speech instructions to see more command guide.");
 					$('.myStartButton').html("<span class='glyphicon glyphicon-pause'></span>");
 					$('.myStartButton').removeClass('btn-primary');		// turn on red class
 					$('.myStartButton').addClass('btn-danger');
